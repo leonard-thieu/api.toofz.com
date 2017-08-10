@@ -3,6 +3,8 @@ image: Visual Studio 2017
 
 configuration:
   - Release
+environment:
+  - PROJECT: toofz.NecroDancer.Web.Api
 cache:
   - packages -> **\packages.config
 notifications:
@@ -13,9 +15,15 @@ notifications:
 before_build:
   - appveyor-retry nuget restore -DisableParallelProcessing
 build:
-  project: toofz.NecroDancer.Web.Api.sln
+  project: $(PROJECT).sln
   publish_wap: true
   verbosity: minimal
 
 test_script:
-  - vstest.console /logger:Appveyor "toofz.NecroDancer.Web.Api.Tests\bin\%CONFIGURATION%\toofz.NecroDancer.Web.Api.Tests.dll"
+  - vstest.console /logger:Appveyor "%PROJECT%.Tests\bin\%CONFIGURATION%\%PROJECT%.Tests.dll"
+
+deploy:
+  - provider: Environment
+    name: production
+    on:
+      appveyor_repo_tag: true
