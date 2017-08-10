@@ -4,7 +4,7 @@ image: Visual Studio 2017
 configuration:
   - Release
 environment:
-  - PROJECT: toofz.NecroDancer.Web.Api
+  PROJECT: toofz.NecroDancer.Web.Api
 cache:
   - packages -> **\packages.config
 notifications:
