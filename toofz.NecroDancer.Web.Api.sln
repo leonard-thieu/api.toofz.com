@@ -7,6 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "toofz.NecroDancer.Web.Api",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "toofz.NecroDancer.Web.Api.Tests", "toofz.NecroDancer.Web.Api.Tests\toofz.NecroDancer.Web.Api.Tests.csproj", "{AF85C3C1-6A21-43E4-B9B6-E0D2707D9A9E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution files", "Solution files", "{F3A3A6C1-5145-4C11-91D1-FE16ECF4A9FA}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+		NuGet.Config = NuGet.Config
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
