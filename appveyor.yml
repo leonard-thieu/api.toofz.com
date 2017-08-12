@@ -5,6 +5,10 @@ configuration:
   - Release
 environment:
   PROJECT: toofz.NecroDancer.Web.Api
+  COVERALLS_REPO_TOKEN:
+    secure: Ai6MFECmpOwXY/YWeYyisOX1ysC/zYdRWmO5QmCWURkulMVKjRw54MxT5nMCt7rY
+  COVERALLS_SERVICE_NAME: appveyor
+  COVERALLS_SERVICE_JOB_ID: '%APPVEYOR_JOB_ID%'
 cache:
   - packages -> **\packages.config
 notifications:
@@ -20,7 +24,9 @@ build:
   verbosity: minimal
 
 test_script:
-  - vstest.console /logger:Appveyor "%PROJECT%.Tests\bin\%CONFIGURATION%\%PROJECT%.Tests.dll"
+  - ps: .\Test-Project.ps1 -Assembly $env:PROJECT
+after_test:
+  - ps: .\Submit-CodeCoverageResults.ps1
 
 deploy:
   - provider: Environment
