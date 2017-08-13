@@ -27,6 +27,10 @@
     <ApplicationInsightsResourceId>/subscriptions/c9ac3656-5d47-43ae-89ce-777d29f47fe4/resourcegroups/toofz/providers/microsoft.insights/components/api.toofz.com</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/c9ac3656-5d47-43ae-89ce-777d29f47fe4/resourcegroups/toofz/providers/microsoft.insights/components/api.toofz.com</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
+  <PropertyGroup>
+    <GenerateBuildInfoConfigFile>true</GenerateBuildInfoConfigFile>
+    <IncludeServerNameInBuildInfo>true</IncludeServerNameInBuildInfo>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
