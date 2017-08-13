@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("toofz NecroDancer")]
 [assembly: AssemblyCopyright("Copyright © Leonard Thieu 2015")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("3.0.0.0")]
-[assembly: AssemblyFileVersion("3.0.0.0")]
+[assembly: AssemblyVersion("3.1.0.0")]
 
 [assembly: InternalsVisibleTo("toofz.NecroDancer.Web.Api.Tests")]
