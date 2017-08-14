@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -9,7 +8,7 @@ using System.Web.Http.Filters;
 
 namespace toofz.NecroDancer.Web.Api.Areas.HelpPage
 {
-    [ExcludeFromCodeCoverage]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class ApiDescriptionExtensions
     {
         /// <summary>

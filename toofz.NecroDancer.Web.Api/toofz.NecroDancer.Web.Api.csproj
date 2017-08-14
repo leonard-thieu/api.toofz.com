@@ -374,7 +374,6 @@
     <Content Include="Views\Shared\_FaviconPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Compile Include="Views\CodeCoverageExclusions.cs" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Compile Include="AiExceptionLogger.cs" />
