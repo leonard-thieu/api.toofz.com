@@ -22,20 +22,20 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// Initializes a new instance of the <see cref="LeaderboardsController"/> class.
         /// </summary>
         /// <param name="db">The leaderboards context.</param>
-        /// <param name="categories">Leaderboard categories.</param>
+        /// <param name="leaderboardCategories">Leaderboard categories.</param>
         /// <param name="leaderboardHeaders">Leaderboard headers.</param>
         public LeaderboardsController(
             LeaderboardsContext db,
-            Categories categories,
+            Categories leaderboardCategories,
             LeaderboardHeaders leaderboardHeaders)
         {
             this.db = db;
-            this.categories = categories;
+            this.leaderboardCategories = leaderboardCategories;
             this.leaderboardHeaders = leaderboardHeaders;
         }
 
         readonly LeaderboardsContext db;
-        readonly Categories categories;
+        readonly Categories leaderboardCategories;
         readonly LeaderboardHeaders leaderboardHeaders;
 
         /// <summary>
@@ -64,27 +64,17 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [ResponseType(typeof(Models.Leaderboards))]
         [Route("")]
         public async Task<IHttpActionResult> GetLeaderboards(
-            string products = null,
-            string modes = null,
-            string runs = null,
-            string characters = null,
+            Products products,
+            Modes modes,
+            Runs runs,
+            Characters characters,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            products = products ?? categories.GetAllItemNames("products");
-            modes = modes ?? categories.GetAllItemNames("modes");
-            runs = runs ?? categories.GetAllItemNames("runs");
-            characters = characters ?? categories.GetAllItemNames("characters");
-
-            var product_names = products.Split(',');
-            var mode_names = modes.Split(',');
-            var run_names = runs.Split(',');
-            var character_names = characters.Split(',');
-
             var lbids = (from h in leaderboardHeaders
-                         where product_names.Contains(h.product)
-                         where mode_names.Contains(h.mode)
-                         where run_names.Contains(h.run)
-                         where character_names.Contains(h.character)
+                         where products.Contains(h.product)
+                         where modes.Contains(h.mode)
+                         where runs.Contains(h.run)
+                         where characters.Contains(h.character)
                          select h.id).ToList();
 
             var query = await (from l in db.Leaderboards
@@ -125,8 +115,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <summary>
         /// Gets a list of Crypt of the NecroDancer leaderboard entries.
         /// </summary>
-        /// <param name="lbid">The leaderboard ID.</param>
         /// <param name="pagination">Pagination parameters.</param>
+        /// <param name="lbid">The leaderboard ID.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns a list of Crypt of the NecroDancer leaderboard entries.</returns>
         /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
@@ -135,12 +125,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [ResponseType(typeof(LeaderboardEntries))]
         [Route("{lbid:int}/entries")]
         public async Task<IHttpActionResult> GetLeaderboardEntries(
+            LeaderboardsPagination pagination,
             int lbid,
-            [FromUri] LeaderboardsPagination pagination,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            pagination = pagination ?? new LeaderboardsPagination();
-
             var leaderboard = await db.Leaderboards.FirstOrDefaultAsync(l => l.LeaderboardId == lbid, cancellationToken);
             if (leaderboard == null)
             {
@@ -252,19 +240,16 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [ResponseType(typeof(DailyLeaderboards))]
         [Route("dailies")]
         public async Task<IHttpActionResult> GetDailies(
-            [FromUri] LeaderboardsPagination pagination,
-            string products = null,
+            LeaderboardsPagination pagination,
+            Products products,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            pagination = pagination ?? new LeaderboardsPagination();
-            products = products ?? categories.GetAllItemNames("products");
-
             var productIds = new List<int>();
-            foreach (var p in products.Split(','))
+            foreach (var p in products)
             {
                 try
                 {
-                    productIds.Add(categories.GetItemId("products", p));
+                    productIds.Add(leaderboardCategories.GetItemId("products", p));
                 }
                 // TODO: When GetId is changed to throw a more specific Exception, this should also be updated.
                 catch (Exception)
@@ -294,7 +279,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                     id = l.LeaderboardId,
                                     date = l.Date,
                                     updated_at = l.LastUpdate,
-                                    product = categories.GetItemName("products", l.ProductId),
+                                    product = leaderboardCategories.GetItemName("products", l.ProductId),
                                     production = l.IsProduction,
                                 })
                                 .ToList();
@@ -311,8 +296,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <summary>
         /// Gets a list of Crypt of the NecroDancer daily leaderboard entries.
         /// </summary>
-        /// <param name="lbid">The daily leaderboard ID.</param>
         /// <param name="pagination">Pagination parameters.</param>
+        /// <param name="lbid">The daily leaderboard ID.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns a list of Crypt of the NecroDancer daily leaderboard entries.</returns>
         /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
@@ -321,12 +306,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [ResponseType(typeof(DailyLeaderboardEntries))]
         [Route("dailies/{lbid:int}/entries")]
         public async Task<IHttpActionResult> GetDailyLeaderboardEntries(
+            LeaderboardsPagination pagination,
             int lbid,
-            [FromUri] LeaderboardsPagination pagination,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var p = pagination ?? new LeaderboardsPagination();
-
             var leaderboard = await db.DailyLeaderboards.FirstOrDefaultAsync(l => l.LeaderboardId == lbid, cancellationToken);
             if (leaderboard == null)
             {
@@ -358,8 +341,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var total = await query.CountAsync(cancellationToken);
 
             var entriesPage = await query
-                .Skip(p.offset)
-                .Take(p.limit)
+                .Skip(pagination.offset)
+                .Take(pagination.limit)
                 .ToListAsync(cancellationToken);
 
             var replayIds = entriesPage.Select(entry => entry.ReplayId);
@@ -402,7 +385,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                     id = leaderboard.LeaderboardId,
                     date = leaderboard.Date,
                     updated_at = leaderboard.LastUpdate,
-                    product = categories.GetItemName("products", leaderboard.ProductId),
+                    product = leaderboardCategories.GetItemName("products", leaderboard.ProductId),
                     production = leaderboard.IsProduction,
                 },
                 total = total,

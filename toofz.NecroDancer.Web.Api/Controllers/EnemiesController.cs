@@ -38,10 +38,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [ResponseType(typeof(Enemies))]
         [Route("")]
         public async Task<IHttpActionResult> GetEnemies(
-            [FromUri] EnemiesPagination pagination,
+            EnemiesPagination pagination,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var content = await GetEnemiesAsync(null, pagination, cancellationToken);
+            var content = await GetEnemiesAsync(pagination, null, cancellationToken);
 
             return Ok(content);
         }
@@ -49,11 +49,11 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <summary>
         /// Gets a list of Crypt of the NecroDancer enemies with a specific attribute.
         /// </summary>
+        /// <param name="pagination">Pagination parameters.</param>
         /// <param name="attribute">
         /// The enemy's attribute.
         /// Valid values are 'boss', 'bounce-on-movement-fail', 'floating', 'ignore-liquids', 'ignore-walls', 'is-monkey-like', 'massive', and 'miniboss'.
         /// </param>
-        /// <param name="pagination">Pagination parameters.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer enemies with the attribute.
@@ -64,13 +64,13 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [ResponseType(typeof(Enemies))]
         [Route("{attribute}")]
         public async Task<IHttpActionResult> GetEnemies(
+            EnemiesPagination pagination,
             string attribute,
-            [FromUri] EnemiesPagination pagination,
             CancellationToken cancellationToken = default(CancellationToken))
         {
             try
             {
-                var content = await GetEnemiesAsync(attribute, pagination, cancellationToken);
+                var content = await GetEnemiesAsync(pagination, attribute, cancellationToken);
 
                 return Ok(content);
             }
@@ -81,14 +81,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         }
 
         internal async Task<Enemies> GetEnemiesAsync(
-            string attribute,
             EnemiesPagination pagination,
+            string attribute,
             CancellationToken cancellationToken)
         {
-            var p = pagination ?? new EnemiesPagination();
-            var offset = p.offset;
-            var limit = p.limit;
-
             var baseQuery = from e in db.Enemies
                             select e;
             if (attribute != null)
@@ -122,8 +118,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var total = await query.CountAsync(cancellationToken);
 
             var enemies = await query
-                .Skip(offset)
-                .Take(limit)
+                .Skip(pagination.offset)
+                .Take(pagination.limit)
                 .ToListAsync(cancellationToken);
 
             return new Enemies

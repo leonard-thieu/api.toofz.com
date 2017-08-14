@@ -39,10 +39,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [ResponseType(typeof(Items))]
         [Route("")]
         public async Task<IHttpActionResult> GetItems(
-            [FromUri] ItemsPagination pagination,
+            ItemsPagination pagination,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var content = await GetItemsAsync(i => true, pagination, cancellationToken);
+            var content = await GetItemsAsync(pagination, i => true, cancellationToken);
 
             return Ok(content);
         }
@@ -50,8 +50,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <summary>
         /// Gets a list of Crypt of the NecroDancer items in a specific category.
         /// </summary>
-        /// <param name="category">The category of items to return.</param>
         /// <param name="pagination">Pagination parameters.</param>
+        /// <param name="category">The category of items to return.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer items in the category.
@@ -59,12 +59,12 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [ResponseType(typeof(Items))]
         [Route("{category}")]
         public async Task<IHttpActionResult> GetItems(
+            ItemsPagination pagination,
             string category,
-            [FromUri] ItemsPagination pagination,
             CancellationToken cancellationToken = default(CancellationToken))
         {
             var filter = Items(category, null);
-            var content = await GetItemsAsync(filter, pagination, cancellationToken);
+            var content = await GetItemsAsync(pagination, filter, cancellationToken);
 
             return Ok(content);
         }
@@ -72,9 +72,9 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <summary>
         /// Gets a list of Crypt of the NecroDancer items in a specific subcategory.
         /// </summary>
+        /// <param name="pagination">Pagination parameters.</param>
         /// <param name="category">The category of items to return.</param>
         /// <param name="subcategory">The subcategory within the category.</param>
-        /// <param name="pagination">Pagination parameters.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer items in the subcategory.
@@ -82,23 +82,22 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [ResponseType(typeof(Items))]
         [Route("{category}/{subcategory}")]
         public async Task<IHttpActionResult> GetItems(
+            ItemsPagination pagination,
             string category,
             string subcategory,
-            [FromUri] ItemsPagination pagination,
             CancellationToken cancellationToken = default(CancellationToken))
         {
             var filter = Items(category, subcategory);
-            var content = await GetItemsAsync(filter, pagination, cancellationToken);
+            var content = await GetItemsAsync(pagination, filter, cancellationToken);
 
             return Ok(content);
         }
 
-        async Task<Items> GetItemsAsync(Expression<Func<Data.Item, bool>> filter, ItemsPagination pagination, CancellationToken cancellationToken)
+        async Task<Items> GetItemsAsync(
+            ItemsPagination pagination,
+            Expression<Func<Data.Item, bool>> filter,
+            CancellationToken cancellationToken)
         {
-            var p = pagination ?? new ItemsPagination();
-            var offset = p.offset;
-            var limit = p.limit;
-
             var query = db.Items
                 .Where(filter)
                 .OrderBy(i => i.ElementName)
@@ -114,14 +113,14 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var total = await query.CountAsync(cancellationToken);
 
             var items = await query
-                .Skip(offset)
-                .Take(limit)
+                .Skip(pagination.offset)
+                .Take(pagination.limit)
                 .ToListAsync(cancellationToken);
 
             return new Items
             {
                 total = total,
-                items = items
+                items = items,
             };
         }
 

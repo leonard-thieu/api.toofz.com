@@ -283,7 +283,13 @@
     <Compile Include="Identity\ApplicationDbContext.Views.cs">
       <DependentUpon>ApplicationDbContext.cs</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\LeaderboardCategoryBaseBinder.cs" />
+    <Compile Include="Infrastructure\LeaderboardCategoryBinders.cs" />
+    <Compile Include="Infrastructure\PaginationBinder.cs" />
     <Compile Include="IQueryableExtensions.cs" />
+    <Compile Include="Models\IPagination.cs" />
+    <Compile Include="Models\LeaderboardCategories.cs" />
+    <Compile Include="Models\LeaderboardCategoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <WCFMetadata Include="Service References\" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />

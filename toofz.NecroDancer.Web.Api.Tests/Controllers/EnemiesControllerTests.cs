@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using toofz.NecroDancer.Data;
 using toofz.NecroDancer.EntityFramework;
 using toofz.NecroDancer.Web.Api.Controllers;
+using toofz.NecroDancer.Web.Api.Models;
 using toofz.TestsShared;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
@@ -19,7 +19,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task GetEnemiesAsync_ReturnsEnemiesDTO()
             {
                 // Arrange
-                var mockSet = MockHelper.MockSet<Enemy>();
+                var mockSet = MockHelper.MockSet<Data.Enemy>();
 
                 var mockRepository = new Mock<NecroDancerContext>();
                 mockRepository.Setup(x => x.Enemies).Returns(mockSet.Object);
@@ -27,10 +27,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var controller = new EnemiesController(mockRepository.Object);
 
                 // Act
-                var enemiesDTO = await controller.GetEnemiesAsync(null, new Models.EnemiesPagination(), CancellationToken.None);
+                var enemiesDTO = await controller.GetEnemiesAsync(new EnemiesPagination(), null, CancellationToken.None);
 
                 // Assert
-                Assert.IsInstanceOfType(enemiesDTO, typeof(Models.Enemies));
+                Assert.IsInstanceOfType(enemiesDTO, typeof(Enemies));
             }
         }
 
@@ -41,7 +41,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsOk()
             {
                 // Arrange
-                var mockSet = MockHelper.MockSet<Enemy>();
+                var mockSet = MockHelper.MockSet<Data.Enemy>();
 
                 var mockRepository = new Mock<NecroDancerContext>();
                 mockRepository.Setup(x => x.Enemies).Returns(mockSet.Object);
@@ -49,8 +49,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var controller = new EnemiesController(mockRepository.Object);
 
                 // Act
-                var actionResult = await controller.GetEnemies(new Models.EnemiesPagination());
-                var contentResult = actionResult as OkNegotiatedContentResult<Models.Enemies>;
+                var actionResult = await controller.GetEnemies(new EnemiesPagination());
+                var contentResult = actionResult as OkNegotiatedContentResult<Enemies>;
 
                 // Assert
                 Assert.IsNotNull(contentResult);
@@ -65,7 +65,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsOk()
             {
                 // Arrange
-                var mockSet = MockHelper.MockSet<Enemy>();
+                var mockSet = MockHelper.MockSet<Data.Enemy>();
 
                 var mockRepository = new Mock<NecroDancerContext>();
                 mockRepository.Setup(x => x.Enemies).Returns(mockSet.Object);
@@ -73,8 +73,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var controller = new EnemiesController(mockRepository.Object);
 
                 // Act
-                var actionResult = await controller.GetEnemies(null, new Models.EnemiesPagination());
-                var contentResult = actionResult as OkNegotiatedContentResult<Models.Enemies>;
+                var actionResult = await controller.GetEnemies(new EnemiesPagination(), null);
+                var contentResult = actionResult as OkNegotiatedContentResult<Enemies>;
 
                 // Assert
                 Assert.IsNotNull(contentResult);

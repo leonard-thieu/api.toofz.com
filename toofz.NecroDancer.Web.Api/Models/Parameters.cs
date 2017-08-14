@@ -1,8 +1,11 @@
 ﻿using System.ComponentModel;
+using System.Web.Http.ModelBinding;
+using toofz.NecroDancer.Web.Api.Infrastructure;
 
 namespace toofz.NecroDancer.Web.Api.Models
 {
-    public class ItemsPagination
+    [ModelBinder(BinderType = typeof(PaginationBinder<ItemsPagination>))]
+    public sealed class ItemsPagination : IPagination
     {
         [MinValue(0)]
         [MaxValue(int.MaxValue)]
@@ -14,7 +17,8 @@ namespace toofz.NecroDancer.Web.Api.Models
         public int limit { get; set; } = 10;
     }
 
-    public class EnemiesPagination
+    [ModelBinder(BinderType = typeof(PaginationBinder<EnemiesPagination>))]
+    public sealed class EnemiesPagination : IPagination
     {
         [MinValue(0)]
         [MaxValue(int.MaxValue)]
@@ -26,7 +30,8 @@ namespace toofz.NecroDancer.Web.Api.Models
         public int limit { get; set; } = 10;
     }
 
-    public class LeaderboardsPagination
+    [ModelBinder(BinderType = typeof(PaginationBinder<LeaderboardsPagination>))]
+    public sealed class LeaderboardsPagination : IPagination
     {
         [MinValue(0)]
         [MaxValue(int.MaxValue)]
@@ -38,7 +43,8 @@ namespace toofz.NecroDancer.Web.Api.Models
         public int limit { get; set; } = 20;
     }
 
-    public class PlayersPagination
+    [ModelBinder(BinderType = typeof(PaginationBinder<PlayersPagination>))]
+    public sealed class PlayersPagination : IPagination
     {
         [MinValue(0)]
         [MaxValue(int.MaxValue)]
@@ -50,7 +56,8 @@ namespace toofz.NecroDancer.Web.Api.Models
         public int limit { get; set; } = 100;
     }
 
-    public class ReplaysPagination
+    [ModelBinder(BinderType = typeof(PaginationBinder<ReplaysPagination>))]
+    public sealed class ReplaysPagination : IPagination
     {
         [MinValue(0)]
         [MaxValue(int.MaxValue)]

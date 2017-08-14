@@ -6,6 +6,7 @@ using Moq;
 using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Leaderboards.EntityFramework;
 using toofz.NecroDancer.Web.Api.Controllers;
+using toofz.NecroDancer.Web.Api.Models;
 using toofz.TestsShared;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
@@ -19,7 +20,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task NoParams_ReturnsPlayers()
             {
                 // Arrange
-                var mockSet = MockHelper.MockSet<Player>();
+                var mockSet = MockHelper.MockSet<Leaderboards.Player>();
 
                 var mockRepository = new Mock<LeaderboardsContext>();
                 mockRepository.Setup(x => x.Players).Returns(mockSet.Object);
@@ -32,8 +33,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     LeaderboardsResources.ReadLeaderboardHeaders());
 
                 // Act
-                var actionResult = await controller.GetPlayers("", new Models.PlayersPagination());
-                var contentResult = actionResult as OkNegotiatedContentResult<Models.Players>;
+                var actionResult = await controller.GetPlayers(new PlayersPagination());
+                var contentResult = actionResult as OkNegotiatedContentResult<Players>;
 
                 // Assert
                 Assert.IsNotNull(contentResult);
@@ -48,9 +49,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ValidParams_ReturnsPlayerEntries()
             {
                 // Arrange
-                var mockSetPlayer = MockHelper.MockSet(new Player { SteamId = 76561197960481221 });
-                var mockSetEntry = MockHelper.MockSet<Entry>();
-                var mockSetReplay = MockHelper.MockSet<Replay>();
+                var mockSetPlayer = MockHelper.MockSet(new Leaderboards.Player { SteamId = 76561197960481221 });
+                var mockSetEntry = MockHelper.MockSet<Leaderboards.Entry>();
+                var mockSetReplay = MockHelper.MockSet<Leaderboards.Replay>();
 
                 var mockRepository = new Mock<LeaderboardsContext>();
                 mockRepository.Setup(x => x.Players).Returns(mockSetPlayer.Object);
@@ -66,8 +67,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Act
                 var actionResult = await controller.GetPlayer(76561197960481221);
-                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<Models.PlayerEntries>));
-                var contentResult = actionResult as OkNegotiatedContentResult<Models.PlayerEntries>;
+                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<PlayerEntries>));
+                var contentResult = actionResult as OkNegotiatedContentResult<PlayerEntries>;
 
                 // Assert
                 Assert.IsNotNull(contentResult);
@@ -92,8 +93,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     LeaderboardsResources.ReadLeaderboardHeaders());
 
                 // Act
-                var actionResult = await controller.PostPlayers(new List<Models.PlayerModel>());
-                var contentResult = actionResult as OkNegotiatedContentResult<Models.BulkStore>;
+                var actionResult = await controller.PostPlayers(new List<PlayerModel>());
+                var contentResult = actionResult as OkNegotiatedContentResult<BulkStore>;
 
                 // Assert
                 Assert.IsNotNull(contentResult);
@@ -115,7 +116,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 controller.ModelState.AddModelError("fakeError", "fakeError");
 
                 // Act
-                var actionResult = await controller.PostPlayers(new List<Models.PlayerModel>());
+                var actionResult = await controller.PostPlayers(new List<PlayerModel>());
 
                 // Assert
                 Assert.IsInstanceOfType(actionResult, typeof(InvalidModelStateResult));

@@ -62,13 +62,11 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [ResponseType(typeof(Players))]
         [Route("")]
         public async Task<IHttpActionResult> GetPlayers(
+            PlayersPagination pagination,
             string q = null,
-            [FromUri] PlayersPagination pagination = null,
             string sort = "-entries,display_name,id",
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            pagination = pagination ?? new PlayersPagination();
-
             IQueryable<Leaderboards.Player> queryBase = db.Players;
             if (!string.IsNullOrEmpty(q))
             {

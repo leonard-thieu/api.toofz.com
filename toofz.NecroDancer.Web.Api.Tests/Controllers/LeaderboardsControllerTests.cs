@@ -5,6 +5,7 @@ using Moq;
 using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Leaderboards.EntityFramework;
 using toofz.NecroDancer.Web.Api.Controllers;
+using toofz.NecroDancer.Web.Api.Models;
 using toofz.TestsShared;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
@@ -18,21 +19,23 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsOk()
             {
                 // Arrange
-                var mockSetDailyLeaderboard = MockHelper.MockSet<DailyLeaderboard>();
+                var mockSetDailyLeaderboard = MockHelper.MockSet<Leaderboards.DailyLeaderboard>();
 
                 var mockRepository = new Mock<LeaderboardsContext>();
                 mockRepository.Setup(x => x.DailyLeaderboards).Returns(mockSetDailyLeaderboard.Object);
 
                 var controller = new LeaderboardsController(
                     mockRepository.Object,
-                    LeaderboardsResources.ReadLeaderboardCategories(),
-                    LeaderboardsResources.ReadLeaderboardHeaders());
+                    new Categories(),
+                    new LeaderboardHeaders());
+
+                var products = new Products(new Category());
 
                 // Act
-                var actionResult = await controller.GetDailies(null);
+                var actionResult = await controller.GetDailies(new LeaderboardsPagination(), products);
 
                 // Assert
-                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<Models.DailyLeaderboards>));
+                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<DailyLeaderboards>));
             }
         }
 
@@ -43,11 +46,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsOk()
             {
                 // Arrange
-                var mockLeaderboardSet = MockHelper.MockSet(new Leaderboard { LeaderboardId = 741312 });
+                var mockLeaderboardSet = MockHelper.MockSet(new Leaderboards.Leaderboard { LeaderboardId = 741312 });
 
-                var mockEntrySet = MockHelper.MockSet<Entry>();
+                var mockEntrySet = MockHelper.MockSet<Leaderboards.Entry>();
 
-                var mockReplaySet = MockHelper.MockSet<Replay>();
+                var mockReplaySet = MockHelper.MockSet<Leaderboards.Replay>();
 
                 var mockRepository = new Mock<LeaderboardsContext>();
                 mockRepository.Setup(x => x.Leaderboards).Returns(mockLeaderboardSet.Object);
@@ -60,19 +63,19 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     LeaderboardsResources.ReadLeaderboardHeaders());
 
                 // Act
-                var actionResult = await controller.GetLeaderboardEntries(741312, new Models.LeaderboardsPagination());
-                var contentResult = actionResult as OkNegotiatedContentResult<Models.LeaderboardEntries>;
+                var actionResult = await controller.GetLeaderboardEntries(new LeaderboardsPagination(), 741312);
+                var contentResult = actionResult as OkNegotiatedContentResult<LeaderboardEntries>;
 
                 // Assert
                 Assert.IsNotNull(contentResult);
-                Assert.IsInstanceOfType(contentResult, typeof(OkNegotiatedContentResult<Models.LeaderboardEntries>));
+                Assert.IsInstanceOfType(contentResult, typeof(OkNegotiatedContentResult<LeaderboardEntries>));
             }
 
             [TestMethod]
             public async Task ReturnsNotFound()
             {
                 // Arrange
-                var mockLeaderboardSet = MockHelper.MockSet(new Leaderboard { LeaderboardId = 22 });
+                var mockLeaderboardSet = MockHelper.MockSet(new Leaderboards.Leaderboard { LeaderboardId = 22 });
 
                 var mockRepository = new Mock<LeaderboardsContext>();
                 mockRepository.Setup(x => x.Leaderboards).Returns(mockLeaderboardSet.Object);
@@ -83,7 +86,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     LeaderboardsResources.ReadLeaderboardHeaders());
 
                 // Act
-                var actionResult = await controller.GetLeaderboardEntries(0, new Models.LeaderboardsPagination());
+                var actionResult = await controller.GetLeaderboardEntries(new LeaderboardsPagination(), 0);
 
                 // Assert
                 Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));

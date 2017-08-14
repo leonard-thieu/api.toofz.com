@@ -145,12 +145,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextUtil.cs" />
     <Compile Include="Controllers\EnemiesControllerTests.cs" />
     <Compile Include="Controllers\LeaderboardsControllerTests.cs" />
     <Compile Include="Controllers\PlayersControllerTests.cs" />
     <Compile Include="Controllers\ReplaysControllerTests.cs" />
+    <Compile Include="Infrastructure\LeaderboardCategoryBindersTests.cs" />
+    <Compile Include="Infrastructure\MockLeaderboardCategoryBaseBinder.cs" />
+    <Compile Include="Infrastructure\PaginationBinderTests.cs" />
     <Compile Include="MaxValueAttributeTests.cs" />
     <Compile Include="MinValueAttributeTests.cs" />
+    <Compile Include="Models\LeaderboardCategoryBaseTests.cs" />
+    <Compile Include="Models\MockLeaderboardCategoryBase.cs" />
+    <Compile Include="Models\MockPagination.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\toofz.NecroDancer.Web.Api\toofz.NecroDancer.Web.Api.csproj">
