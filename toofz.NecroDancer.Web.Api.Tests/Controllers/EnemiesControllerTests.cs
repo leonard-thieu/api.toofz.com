@@ -27,7 +27,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var controller = new EnemiesController(mockRepository.Object);
 
                 // Act
-                var enemiesDTO = await controller.GetEnemiesAsync(null, new EnemiesPagination(), CancellationToken.None);
+                var enemiesDTO = await controller.GetEnemiesAsync(new EnemiesPagination(), null, CancellationToken.None);
 
                 // Assert
                 Assert.IsInstanceOfType(enemiesDTO, typeof(Enemies));
@@ -73,7 +73,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var controller = new EnemiesController(mockRepository.Object);
 
                 // Act
-                var actionResult = await controller.GetEnemies(null, new EnemiesPagination());
+                var actionResult = await controller.GetEnemies(new EnemiesPagination(), null);
                 var contentResult = actionResult as OkNegotiatedContentResult<Enemies>;
 
                 // Assert

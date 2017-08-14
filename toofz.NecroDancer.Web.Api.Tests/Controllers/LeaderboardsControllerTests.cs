@@ -32,7 +32,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var products = new Products(new Category());
 
                 // Act
-                var actionResult = await controller.GetDailies(products, null);
+                var actionResult = await controller.GetDailies(new LeaderboardsPagination(), products);
 
                 // Assert
                 Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<DailyLeaderboards>));
@@ -63,7 +63,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     LeaderboardsResources.ReadLeaderboardHeaders());
 
                 // Act
-                var actionResult = await controller.GetLeaderboardEntries(741312, new LeaderboardsPagination());
+                var actionResult = await controller.GetLeaderboardEntries(new LeaderboardsPagination(), 741312);
                 var contentResult = actionResult as OkNegotiatedContentResult<LeaderboardEntries>;
 
                 // Assert
@@ -86,7 +86,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     LeaderboardsResources.ReadLeaderboardHeaders());
 
                 // Act
-                var actionResult = await controller.GetLeaderboardEntries(0, new LeaderboardsPagination());
+                var actionResult = await controller.GetLeaderboardEntries(new LeaderboardsPagination(), 0);
 
                 // Assert
                 Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));

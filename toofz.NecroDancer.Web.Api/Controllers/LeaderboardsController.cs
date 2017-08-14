@@ -115,8 +115,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <summary>
         /// Gets a list of Crypt of the NecroDancer leaderboard entries.
         /// </summary>
-        /// <param name="lbid">The leaderboard ID.</param>
         /// <param name="pagination">Pagination parameters.</param>
+        /// <param name="lbid">The leaderboard ID.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns a list of Crypt of the NecroDancer leaderboard entries.</returns>
         /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
@@ -125,12 +125,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [ResponseType(typeof(LeaderboardEntries))]
         [Route("{lbid:int}/entries")]
         public async Task<IHttpActionResult> GetLeaderboardEntries(
+            LeaderboardsPagination pagination,
             int lbid,
-            [FromUri] LeaderboardsPagination pagination,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            pagination = pagination ?? new LeaderboardsPagination();
-
             var leaderboard = await db.Leaderboards.FirstOrDefaultAsync(l => l.LeaderboardId == lbid, cancellationToken);
             if (leaderboard == null)
             {
@@ -227,11 +225,11 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <summary>
         /// Gets a list of Crypt of the NecroDancer daily leaderboards.
         /// </summary>
+        /// <param name="pagination">Pagination parameters.</param>
         /// <param name="products">
         /// Valid values are 'classic' and 'amplified'. 
         /// If not provided, returns daily leaderboards from all products.
         /// </param>
-        /// <param name="pagination">Pagination parameters.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer daily leaderboards.
@@ -242,12 +240,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [ResponseType(typeof(DailyLeaderboards))]
         [Route("dailies")]
         public async Task<IHttpActionResult> GetDailies(
+            LeaderboardsPagination pagination,
             Products products,
-            [FromUri] LeaderboardsPagination pagination,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            pagination = pagination ?? new LeaderboardsPagination();
-
             var productIds = new List<int>();
             foreach (var p in products)
             {
@@ -300,8 +296,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <summary>
         /// Gets a list of Crypt of the NecroDancer daily leaderboard entries.
         /// </summary>
-        /// <param name="lbid">The daily leaderboard ID.</param>
         /// <param name="pagination">Pagination parameters.</param>
+        /// <param name="lbid">The daily leaderboard ID.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns a list of Crypt of the NecroDancer daily leaderboard entries.</returns>
         /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
@@ -310,12 +306,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [ResponseType(typeof(DailyLeaderboardEntries))]
         [Route("dailies/{lbid:int}/entries")]
         public async Task<IHttpActionResult> GetDailyLeaderboardEntries(
+            LeaderboardsPagination pagination,
             int lbid,
-            [FromUri] LeaderboardsPagination pagination,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var p = pagination ?? new LeaderboardsPagination();
-
             var leaderboard = await db.DailyLeaderboards.FirstOrDefaultAsync(l => l.LeaderboardId == lbid, cancellationToken);
             if (leaderboard == null)
             {
@@ -347,8 +341,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var total = await query.CountAsync(cancellationToken);
 
             var entriesPage = await query
-                .Skip(p.offset)
-                .Take(p.limit)
+                .Skip(pagination.offset)
+                .Take(pagination.limit)
                 .ToListAsync(cancellationToken);
 
             var replayIds = entriesPage.Select(entry => entry.ReplayId);

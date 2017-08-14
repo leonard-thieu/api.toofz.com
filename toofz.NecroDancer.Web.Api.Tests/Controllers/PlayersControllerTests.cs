@@ -33,7 +33,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     LeaderboardsResources.ReadLeaderboardHeaders());
 
                 // Act
-                var actionResult = await controller.GetPlayers("", new PlayersPagination());
+                var actionResult = await controller.GetPlayers(new PlayersPagination());
                 var contentResult = actionResult as OkNegotiatedContentResult<Players>;
 
                 // Assert

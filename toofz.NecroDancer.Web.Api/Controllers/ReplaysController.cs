@@ -37,13 +37,11 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [ResponseType(typeof(Models.Replays))]
         [Route("")]
         public async Task<IHttpActionResult> GetReplays(
+            ReplaysPagination pagination,
             int? version = null,
             int? error = null,
-            [FromUri] ReplaysPagination pagination = null,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            pagination = pagination ?? new ReplaysPagination();
-
             var query = from r in db.Replays
                         where r.Version == version && r.ErrorCode == error
                         orderby r.ReplayId

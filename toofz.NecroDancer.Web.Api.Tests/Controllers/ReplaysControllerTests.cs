@@ -32,7 +32,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var controller = new ReplaysController(mockRepository.Object, mockILeaderboardsStoreClient.Object);
 
                 // Act
-                var actionResult = await controller.GetReplays(0);
+                var actionResult = await controller.GetReplays(new ReplaysPagination());
                 var contentResult = actionResult as OkNegotiatedContentResult<Api.Models.Replays>;
 
                 // Assert
