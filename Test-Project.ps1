@@ -21,4 +21,4 @@ if (Test-Path Env:\APPVEYOR) { $targetArgs = $targetArgs + ' /logger:AppVeyor' }
     "-targetargs:$targetArgs" `
     "-filter:+[$Assembly*]*" `
     "-excludebyattribute:*.ExcludeFromCodeCoverage*"
-if ($LASTEXITCODE -ne 0) { throw "Execution failed with exit code $LASTEXITCODE" }
+if ($LASTEXITCODE -ne 0) { $Host.SetShouldExit($LASTEXITCODE) }

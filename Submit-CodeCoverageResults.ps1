@@ -14,7 +14,7 @@ if (Test-Path Env:\APPVEYOR_PULL_REQUEST_NUMBER) {
     & "packages\coveralls.io.$version\tools\coveralls.net.exe" `
         --opencover results.xml `
         -r $env:COVERALLS_REPO_TOKEN
-    if ($LASTEXITCODE -ne 0) { throw "Execution failed with exit code $LASTEXITCODE" }
+    if ($LASTEXITCODE -ne 0) { $Host.SetShouldExit($LASTEXITCODE) }
 
     Write-Output 'Code coverage results have been submitted.'
 }
