@@ -6,6 +6,7 @@ using Moq;
 using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Leaderboards.EntityFramework;
 using toofz.NecroDancer.Web.Api.Controllers;
+using toofz.NecroDancer.Web.Api.Models;
 using toofz.TestsShared;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
@@ -19,7 +20,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsOk()
             {
                 // Arrange
-                var mockSet = MockHelper.MockSet<Replay>();
+                var mockSet = MockHelper.MockSet<Leaderboards.Replay>();
 
                 var mockRepository = new Mock<LeaderboardsContext>();
                 mockRepository
@@ -32,7 +33,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Act
                 var actionResult = await controller.GetReplays(0);
-                var contentResult = actionResult as OkNegotiatedContentResult<Models.Replays>;
+                var contentResult = actionResult as OkNegotiatedContentResult<Api.Models.Replays>;
 
                 // Assert
                 Assert.IsNotNull(contentResult);
@@ -54,8 +55,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var controller = new ReplaysController(mockRepository.Object, mockILeaderboardsStoreClient.Object);
 
                 // Act
-                var actionResult = await controller.PostReplays(new List<Models.ReplayModel>());
-                var contentResult = actionResult as OkNegotiatedContentResult<Models.BulkStore>;
+                var actionResult = await controller.PostReplays(new List<ReplayModel>());
+                var contentResult = actionResult as OkNegotiatedContentResult<BulkStore>;
 
                 // Assert
                 Assert.IsNotNull(contentResult);
@@ -74,7 +75,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 controller.ModelState.AddModelError("fakeError", "fakeError");
 
                 // Act
-                var actionResult = await controller.PostReplays(new List<Models.ReplayModel>());
+                var actionResult = await controller.PostReplays(new List<ReplayModel>());
 
                 // Assert
                 Assert.IsInstanceOfType(actionResult, typeof(InvalidModelStateResult));

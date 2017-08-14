@@ -149,8 +149,12 @@
     <Compile Include="Controllers\LeaderboardsControllerTests.cs" />
     <Compile Include="Controllers\PlayersControllerTests.cs" />
     <Compile Include="Controllers\ReplaysControllerTests.cs" />
+    <Compile Include="Infrastructure\LeaderboardCategoryBindersTests.cs" />
+    <Compile Include="Infrastructure\MockLeaderboardCategoryBaseBinder.cs" />
     <Compile Include="MaxValueAttributeTests.cs" />
     <Compile Include="MinValueAttributeTests.cs" />
+    <Compile Include="Models\LeaderboardCategoryBaseTests.cs" />
+    <Compile Include="Models\MockLeaderboardCategoryBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\toofz.NecroDancer.Web.Api\toofz.NecroDancer.Web.Api.csproj">
