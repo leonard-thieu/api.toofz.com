@@ -297,11 +297,6 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             IEnumerable<PlayerModel> players,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var model = (from p in players
                          select new Leaderboards.Player
                          {

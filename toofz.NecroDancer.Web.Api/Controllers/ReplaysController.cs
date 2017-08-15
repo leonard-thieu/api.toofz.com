@@ -90,11 +90,6 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             IEnumerable<ReplayModel> replays,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var model = (from r in replays
                          select new Leaderboards.Replay
                          {
