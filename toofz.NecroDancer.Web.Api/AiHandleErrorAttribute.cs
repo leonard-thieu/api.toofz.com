@@ -12,7 +12,7 @@ namespace toofz.NecroDancer.Web.Api
             this.ai = ai;
         }
 
-        private readonly TelemetryClient ai;
+        readonly TelemetryClient ai;
 
         public override void OnException(ExceptionContext filterContext)
         {

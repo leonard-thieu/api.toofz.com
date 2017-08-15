@@ -1,9 +1,9 @@
-﻿using FluentValidation.WebApi;
-using Microsoft.Owin.Security.OAuth;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.ExceptionHandling;
+using FluentValidation.WebApi;
+using Microsoft.Owin.Security.OAuth;
 
 namespace toofz.NecroDancer.Web.Api
 {
@@ -27,13 +27,13 @@ namespace toofz.NecroDancer.Web.Api
             FluentValidationModelValidatorProvider.Configure(config);
         }
 
-        private static void InitializeCors(HttpConfiguration config)
+        static void InitializeCors(HttpConfiguration config)
         {
             var cors = new EnableCorsAttribute("*", "*", "*", "Date");
             config.EnableCors(cors);
         }
 
-        private static void RegisterRoutes(HttpConfiguration config)
+        static void RegisterRoutes(HttpConfiguration config)
         {
             // Web API routes
             config.MapHttpAttributeRoutes();

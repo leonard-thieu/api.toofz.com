@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace toofz.NecroDancer.Web.Api.Models
 {
     /// <summary>
     /// A Crypt of the NecroDancer item.
     /// </summary>
-    public class Item
+    public sealed class Item
     {
         /// <summary>
         /// The item's name.
@@ -34,7 +34,7 @@ namespace toofz.NecroDancer.Web.Api.Models
     /// <summary>
     /// A page of Crypt of the NecroDancer items.
     /// </summary>
-    public class Items
+    public sealed class Items
     {
         /// <summary>
         /// The total number of items in the result set.
@@ -49,7 +49,7 @@ namespace toofz.NecroDancer.Web.Api.Models
     /// <summary>
     /// A Crypt of the NecroDancer enemy.
     /// </summary>
-    public class Enemy
+    public sealed class Enemy
     {
         /// <summary>
         /// The enemy's element name.
@@ -84,7 +84,7 @@ namespace toofz.NecroDancer.Web.Api.Models
     /// <summary>
     /// A page of Crypt of the NecroDancer enemies.
     /// </summary>
-    public class Enemies
+    public sealed class Enemies
     {
         /// <summary>
         /// The total number of enemies in the result set.
@@ -99,7 +99,7 @@ namespace toofz.NecroDancer.Web.Api.Models
     /// <summary>
     /// A Crypt of the NecroDancer leaderboard.
     /// </summary>
-    public class Leaderboard
+    public sealed class Leaderboard
     {
         /// <summary>
         /// Steam lbid
@@ -138,7 +138,7 @@ namespace toofz.NecroDancer.Web.Api.Models
     /// <summary>
     /// A page of Crypt of the NecroDancer leaderboards.
     /// </summary>
-    public class Leaderboards
+    public sealed class Leaderboards
     {
         /// <summary>
         /// Total number of leaderboards.
@@ -153,7 +153,7 @@ namespace toofz.NecroDancer.Web.Api.Models
     /// <summary>
     /// A Crypt of the NecroDancer daily leaderboard.
     /// </summary>
-    public class DailyLeaderboard
+    public sealed class DailyLeaderboard
     {
         /// <summary>
         /// Steam lbid
@@ -180,7 +180,7 @@ namespace toofz.NecroDancer.Web.Api.Models
     /// <summary>
     /// A page of Crypt of the NecroDancer daily leaderboards.
     /// </summary>
-    public class DailyLeaderboards
+    public sealed class DailyLeaderboards
     {
         /// <summary>
         /// Total number of daily leaderboards.
@@ -195,7 +195,7 @@ namespace toofz.NecroDancer.Web.Api.Models
     /// <summary>
     /// A Steam player.
     /// </summary>
-    public class Player
+    public sealed class Player
     {
         /// <summary>
         /// The player's Steam ID.
@@ -218,7 +218,7 @@ namespace toofz.NecroDancer.Web.Api.Models
     /// <summary>
     /// A page of Steam players.
     /// </summary>
-    public class Players
+    public sealed class Players
     {
         /// <summary>
         /// Total number of players.
@@ -230,7 +230,7 @@ namespace toofz.NecroDancer.Web.Api.Models
         public IEnumerable<Player> players { get; set; }
     }
 
-    public class Replay
+    public sealed class Replay
     {
         public string id { get; set; }
         public int? error { get; set; }
@@ -239,7 +239,7 @@ namespace toofz.NecroDancer.Web.Api.Models
         public string killed_by { get; set; }
     }
 
-    public class Replays
+    public sealed class Replays
     {
         public int total { get; set; }
         public IEnumerable<Replay> replays { get; set; }
@@ -248,7 +248,7 @@ namespace toofz.NecroDancer.Web.Api.Models
     /// <summary>
     /// The zone and level that the entry ends on.
     /// </summary>
-    public class End
+    public sealed class End
     {
         /// <summary>
         /// The zone that the entry ends on.
@@ -263,7 +263,7 @@ namespace toofz.NecroDancer.Web.Api.Models
     /// <summary>
     /// A Crypt of the NecroDancer leaderboard entry.
     /// </summary>
-    public class Entry
+    public sealed class Entry
     {
         /// <summary>
         /// The leaderboard that contains the entry.
@@ -302,7 +302,7 @@ namespace toofz.NecroDancer.Web.Api.Models
     /// <summary>
     /// A page of Crypt of the NecroDancer leaderboard entries.
     /// </summary>
-    public class LeaderboardEntries
+    public sealed class LeaderboardEntries
     {
         /// <summary>
         /// The Crypt of the NecroDancer leaderboard.
@@ -321,7 +321,7 @@ namespace toofz.NecroDancer.Web.Api.Models
     /// <summary>
     /// A page of Crypt of the NecroDancer daily leaderboard entries.
     /// </summary>
-    public class DailyLeaderboardEntries
+    public sealed class DailyLeaderboardEntries
     {
         /// <summary>
         /// The Crypt of the NecroDancer daily leaderboard.
@@ -337,7 +337,7 @@ namespace toofz.NecroDancer.Web.Api.Models
         public IEnumerable<Entry> entries { get; set; }
     }
 
-    public class PlayerEntries
+    public sealed class PlayerEntries
     {
         /// <summary>
         /// The Steam player.
@@ -356,7 +356,7 @@ namespace toofz.NecroDancer.Web.Api.Models
     /// <summary>
     /// Represents the response of a bulk store operation.
     /// </summary>
-    public class BulkStore
+    public sealed class BulkStore
     {
         /// <summary>
         /// The number of rows affected.

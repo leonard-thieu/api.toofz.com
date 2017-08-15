@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace toofz.NecroDancer.Web.Api
 {
     [ExcludeFromCodeCoverage]
-    internal sealed class BrowserJsonFormatter : JsonMediaTypeFormatter
+    sealed class BrowserJsonFormatter : JsonMediaTypeFormatter
     {
         public BrowserJsonFormatter(JsonSerializerSettings serializerSettings)
         {

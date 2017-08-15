@@ -3,7 +3,7 @@ using System.Web.Routing;
 
 namespace toofz.NecroDancer.Web.Api
 {
-    internal static class RouteConfig
+    static class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)
         {

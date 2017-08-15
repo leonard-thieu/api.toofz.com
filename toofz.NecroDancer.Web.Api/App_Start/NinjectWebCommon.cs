@@ -15,9 +15,9 @@ using WebActivatorEx;
 namespace toofz.NecroDancer.Web.Api
 {
     [ExcludeFromCodeCoverage]
-    internal static class NinjectWebCommon
+    static class NinjectWebCommon
     {
-        private static readonly Bootstrapper bootstrapper = new Bootstrapper();
+        static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
@@ -41,7 +41,7 @@ namespace toofz.NecroDancer.Web.Api
         /// Creates the kernel that will manage your application.
         /// </summary>
         /// <returns>The created kernel.</returns>
-        private static IKernel CreateKernel()
+        static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
             try
@@ -63,7 +63,7 @@ namespace toofz.NecroDancer.Web.Api
         /// Load your modules or register your services here!
         /// </summary>
         /// <param name="kernel">The kernel.</param>
-        private static void RegisterServices(IKernel kernel)
+        static void RegisterServices(IKernel kernel)
         {
             var necroDancerConnectionString = Util.GetEnvVar("NecroDancerConnectionString");
             var leaderboardsConnectionString = Util.GetEnvVar("LeaderboardsConnectionString");

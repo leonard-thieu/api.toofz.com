@@ -3,9 +3,9 @@ using Microsoft.ApplicationInsights;
 
 namespace toofz.NecroDancer.Web.Api
 {
-    public class AiExceptionLogger : ExceptionLogger
+    public sealed class AiExceptionLogger : ExceptionLogger
     {
-        private readonly TelemetryClient ai = new TelemetryClient();
+        readonly TelemetryClient ai = new TelemetryClient();
 
         public override void Log(ExceptionLoggerContext context)
         {

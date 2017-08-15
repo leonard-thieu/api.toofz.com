@@ -6,7 +6,7 @@ using System.Web.Http;
 namespace toofz.NecroDancer.Web.Api
 {
     [ExcludeFromCodeCoverage]
-    internal static class FormatterConfiguration
+    static class FormatterConfiguration
     {
         public static void Configure(HttpConfiguration config)
         {

@@ -10,17 +10,14 @@ using toofz.NecroDancer.Web.Api.Identity;
 
 namespace toofz.NecroDancer.Web.Api.Providers
 {
-    internal sealed class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
+    sealed class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
         public ApplicationOAuthProvider(string publicClientId)
         {
-            if (publicClientId == null)
-                throw new ArgumentNullException(nameof(publicClientId));
-
-            this.publicClientId = publicClientId;
+            this.publicClientId = publicClientId ?? throw new ArgumentNullException(nameof(publicClientId));
         }
 
-        private readonly string publicClientId;
+        readonly string publicClientId;
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {

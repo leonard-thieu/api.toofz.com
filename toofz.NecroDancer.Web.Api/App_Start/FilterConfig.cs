@@ -5,9 +5,9 @@ using Microsoft.ApplicationInsights;
 namespace toofz.NecroDancer.Web.Api
 {
     [ExcludeFromCodeCoverage]
-    internal static class FilterConfig
+    static class FilterConfig
     {
-        private static TelemetryClient TelemetryClient = new TelemetryClient();
+        static TelemetryClient TelemetryClient = new TelemetryClient();
 
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
