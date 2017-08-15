@@ -62,24 +62,6 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsNotNull(contentResult);
                 Assert.IsNotNull(contentResult.Content);
             }
-
-            [TestMethod]
-            public async Task InvalidState_ReturnsBadRequest()
-            {
-                // Arrange
-                var mockRepository = new Mock<LeaderboardsContext>();
-
-                var mockILeaderboardsStoreClient = new Mock<ILeaderboardsStoreClient>();
-
-                var controller = new ReplaysController(mockRepository.Object, mockILeaderboardsStoreClient.Object);
-                controller.ModelState.AddModelError("fakeError", "fakeError");
-
-                // Act
-                var actionResult = await controller.PostReplays(new List<ReplayModel>());
-
-                // Assert
-                Assert.IsInstanceOfType(actionResult, typeof(InvalidModelStateResult));
-            }
         }
     }
 }
