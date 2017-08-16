@@ -33,7 +33,6 @@ namespace toofz.NecroDancer.Web.Api
             }
         }
 
-
         /// <summary>
         /// Performs application configuration.
         /// </summary>
