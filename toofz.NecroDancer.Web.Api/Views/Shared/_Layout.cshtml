@@ -156,18 +156,28 @@
             margin-right: 1em;
         }
 
-        .fa-twitter:before {
-            content: "\f099";
-            color: #41c8f5;
-            font-size: 22px;
+        .fa-twitter,
+        .fa-github {
+            margin-right: 0.5em;
         }
 
-        .fa-twitter:hover {
-            text-decoration: none;
-        }
+            .fa-twitter:hover, .fa-twitter:focus,
+            .fa-github:hover,
+            .fa-github:focus {
+                text-decoration: none !important;
+            }
 
-            .fa-twitter:hover:before {
-                color: #80dfff;
+            .fa-twitter:before,
+            .fa-github:before {
+                font-size: 22px;
+            }
+
+            .fa-twitter:before {
+                color: #41c8f5;
+            }
+
+            .fa-github:before {
+                color: #dbd6d1;
             }
     </style>
     @RenderSection("styles", required: false)
@@ -214,6 +224,7 @@
             <p>
                 <span id="copyright">&#169; 2017 Leonard Thieu</span>
                 <a href="https://twitter.com/Mendayen" class="fa fa-twitter"></a>
+                <a href="https://github.com/leonard-thieu/toofz-necrodancer" class="fa fa-github"></a>
             </p>
         </footer>
     </div>
