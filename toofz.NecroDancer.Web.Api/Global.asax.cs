@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -32,6 +33,8 @@ namespace toofz.NecroDancer.Web.Api
                 }
             }
         }
+
+        public static string Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         /// <summary>
         /// Performs application configuration.
