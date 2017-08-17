@@ -1,17 +1,15 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
-using Microsoft.ApplicationInsights;
+using toofz.NecroDancer.Web.Api.ErrorHandler;
 
 namespace toofz.NecroDancer.Web.Api
 {
     [ExcludeFromCodeCoverage]
     static class FilterConfig
     {
-        static TelemetryClient TelemetryClient = new TelemetryClient();
-
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new AiHandleErrorAttribute(TelemetryClient));
+            filters.Add(new AiHandleErrorAttribute());
         }
     }
 }

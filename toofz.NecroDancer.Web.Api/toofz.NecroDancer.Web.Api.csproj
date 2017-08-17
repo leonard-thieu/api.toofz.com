@@ -377,7 +377,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Compile Include="AiExceptionLogger.cs" />
-    <Compile Include="AiHandleErrorAttribute.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="MaxValueAttribute.cs" />
     <Compile Include="MinValueAttribute.cs" />

@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.Extensibility;
 
 namespace toofz.NecroDancer.Web.Api
@@ -34,7 +35,9 @@ namespace toofz.NecroDancer.Web.Api
             }
         }
 
-        public static string Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        public static readonly TelemetryClient TelemetryClient = new TelemetryClient();
+
+        public static readonly string Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         /// <summary>
         /// Performs application configuration.

@@ -1,6 +1,22 @@
-using System;using System.Web.Mvc;using Microsoft.ApplicationInsights;namespace toofz.NecroDancer.Web.Api.ErrorHandler{    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
-    public class AiHandleErrorAttribute : HandleErrorAttribute    {        public override void OnException(ExceptionContext filterContext)        {            if (filterContext != null && filterContext.HttpContext != null && filterContext.Exception != null)            {
+using System;
+using System.Web.Mvc;
+
+namespace toofz.NecroDancer.Web.Api.ErrorHandler
+{
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+    public sealed class AiHandleErrorAttribute : HandleErrorAttribute
+    {
+        public override void OnException(ExceptionContext filterContext)
+        {
+            if (filterContext != null && filterContext.HttpContext != null && filterContext.Exception != null)
+            {
                 // If customError is Off, then AI HTTPModule will report the exception
-                if (filterContext.HttpContext.IsCustomErrorEnabled)                {
-                    var ai = new TelemetryClient();                    ai.TrackException(filterContext.Exception);                }
-            }            base.OnException(filterContext);        }    }}
+                if (filterContext.HttpContext.IsCustomErrorEnabled)
+                {
+                    WebApiApplication.TelemetryClient.TrackException(filterContext.Exception);
+                }
+            }
+            base.OnException(filterContext);
+        }
+    }
+}
