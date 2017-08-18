@@ -35,14 +35,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 // Arrange
                 var item = "itemA";
 
-                // Act
-                var ex = Record.Exception(() =>
+                // Act -> Assert
+                Assert.ThrowsException<ArgumentException>(() =>
                 {
                     leaderboardCategory.Add(item);
                 });
-
-                // Assert
-                Assert.IsInstanceOfType(ex, typeof(ArgumentException));
             }
 
             [TestMethod]

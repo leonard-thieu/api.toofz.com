@@ -179,8 +179,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\RemoveServerHeaderModule.1.0.0\lib\net45\RemoveServerHeaderModule.dll</HintPath>
     </Reference>
-    <Reference Include="SqlBulkUpsert, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.SqlBulkUpsert.2.1.0\lib\net45\SqlBulkUpsert.dll</HintPath>
+    <Reference Include="SqlBulkUpsert, Version=2.1.5.51, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.SqlBulkUpsert.2.1.5\lib\net45\SqlBulkUpsert.dll</HintPath>
     </Reference>
     <Reference Include="SteamKit2, Version=1.8.3.0, Culture=neutral, PublicKeyToken=ed3ce47ed5aad940, processorArchitecture=MSIL">
       <HintPath>..\packages\SteamKit2.1.8.3\lib\net45\SteamKit2.dll</HintPath>
