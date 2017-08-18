@@ -21,6 +21,8 @@ install:
 
 before_build:
   - appveyor-retry nuget restore -DisableParallelProcessing
+  - choco install opencover.portable
+  - choco install codecov
 build:
   project: $(PROJECT).sln
   publish_wap: true
