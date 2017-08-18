@@ -26,6 +26,7 @@
     </NuGetPackageImportStamp>
     <ApplicationInsightsResourceId>/subscriptions/c9ac3656-5d47-43ae-89ce-777d29f47fe4/resourcegroups/toofz/providers/microsoft.insights/components/api.toofz.com</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/c9ac3656-5d47-43ae-89ce-777d29f47fe4/resourcegroups/toofz/providers/microsoft.insights/components/api.toofz.com</ApplicationInsightsAnnotationResourceId>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup>
     <GenerateBuildInfoConfigFile>true</GenerateBuildInfoConfigFile>
