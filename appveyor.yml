@@ -5,10 +5,6 @@ configuration:
   - Release
 environment:
   PROJECT: toofz.NecroDancer.Web.Api
-  COVERALLS_REPO_TOKEN:
-    secure: Ai6MFECmpOwXY/YWeYyisOX1ysC/zYdRWmO5QmCWURkulMVKjRw54MxT5nMCt7rY
-  COVERALLS_SERVICE_NAME: appveyor
-  COVERALLS_SERVICE_JOB_ID: '%APPVEYOR_JOB_ID%'
 cache:
   - packages -> **\packages.config
 notifications:
@@ -25,6 +21,8 @@ install:
 
 before_build:
   - appveyor-retry nuget restore -DisableParallelProcessing
+  - choco install opencover.portable
+  - choco install codecov
 build:
   project: $(PROJECT).sln
   publish_wap: true
@@ -32,6 +30,8 @@ build:
 
 test_script:
   - ps: .\Scripts\Test-Project.ps1
+after_test:
+  - codecov --file results.xml
 
 deploy:
   - provider: Environment
