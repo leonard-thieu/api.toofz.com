@@ -1,2 +1,3 @@
 ignore:
   - "toofz.NecroDancer.Web.Api/Areas/HelpPage"
+  - "toofz.NecroDancer.Web.Api/Migrations"
