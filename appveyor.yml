@@ -20,9 +20,9 @@ install:
   - git clone https://github.com/leonard-thieu/toofz-build.git Scripts
 
 before_build:
-  - appveyor-retry nuget restore -Verbosity quiet -NonInteractive
-  - choco install opencover.portable --confirm --limit-output
-  - choco install codecov --confirm --limit-output
+  - appveyor-retry nuget restore -Verbosity quiet
+  - choco install opencover.portable --limit-output
+  - choco install codecov --limit-output
 build:
   project: $(PROJECT).sln
   publish_wap: true
