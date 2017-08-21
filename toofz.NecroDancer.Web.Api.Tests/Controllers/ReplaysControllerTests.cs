@@ -11,13 +11,13 @@ using toofz.TestsShared;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
-    public class ReplaysControllerTests
+    class ReplaysControllerTests
     {
         [TestClass]
         public class GetReplays
         {
             [TestMethod]
-            public async Task ReturnsOk()
+            public async Task ReturnsOkWithReplays()
             {
                 // Arrange
                 var mockSet = MockHelper.MockSet<Leaderboards.Replay>();
@@ -32,12 +32,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var controller = new ReplaysController(mockRepository.Object, mockILeaderboardsStoreClient.Object);
 
                 // Act
-                var actionResult = await controller.GetReplays(new ReplaysPagination());
-                var contentResult = actionResult as OkNegotiatedContentResult<Api.Models.Replays>;
+                var result = await controller.GetReplays(new ReplaysPagination());
 
                 // Assert
-                Assert.IsNotNull(contentResult);
-                Assert.IsNotNull(contentResult.Content);
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<Api.Models.Replays>));
             }
         }
 
@@ -45,7 +43,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         public class PostReplays
         {
             [TestMethod]
-            public async Task ReturnsOk()
+            public async Task ReturnsOkWithBulkStore()
             {
                 // Arrange
                 var mockRepository = new Mock<LeaderboardsContext>();
@@ -55,12 +53,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var controller = new ReplaysController(mockRepository.Object, mockILeaderboardsStoreClient.Object);
 
                 // Act
-                var actionResult = await controller.PostReplays(new List<ReplayModel>());
-                var contentResult = actionResult as OkNegotiatedContentResult<BulkStore>;
+                var result = await controller.PostReplays(new List<ReplayModel>());
 
                 // Assert
-                Assert.IsNotNull(contentResult);
-                Assert.IsNotNull(contentResult.Content);
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<BulkStore>));
             }
         }
     }

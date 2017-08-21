@@ -3,7 +3,7 @@ using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 {
-    class MockLeaderboardCategoryBaseBinder : LeaderboardCategoryBaseBinder
+    sealed class MockLeaderboardCategoryBaseBinder : LeaderboardCategoryBaseBinder
     {
         public MockLeaderboardCategoryBaseBinder(LeaderboardCategoryBase model)
         {

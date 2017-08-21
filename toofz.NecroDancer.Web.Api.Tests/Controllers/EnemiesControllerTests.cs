@@ -10,13 +10,13 @@ using toofz.TestsShared;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
-    public class EnemiesControllerTests
+    class EnemiesControllerTests
     {
         [TestClass]
         public class GetEnemies
         {
             [TestMethod]
-            public async Task ReturnsOk()
+            public async Task ReturnsOkWithEnemies()
             {
                 // Arrange
                 var mockSet = MockHelper.MockSet<Data.Enemy>();
@@ -27,16 +27,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var controller = new EnemiesController(mockRepository.Object);
 
                 // Act
-                var actionResult = await controller.GetEnemies(new EnemiesPagination());
-                var contentResult = actionResult as OkNegotiatedContentResult<Enemies>;
+                var result = await controller.GetEnemies(new EnemiesPagination());
 
                 // Assert
-                Assert.IsNotNull(contentResult);
-                Assert.IsNotNull(contentResult.Content);
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<Enemies>));
             }
 
             [TestMethod]
-            public async Task WithAttribute_ReturnsOk()
+            public async Task WithAttribute_ReturnsOkWithEnemies()
             {
                 // Arrange
                 var mockSet = MockHelper.MockSet<Data.Enemy>();
@@ -47,12 +45,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var controller = new EnemiesController(mockRepository.Object);
 
                 // Act
-                var actionResult = await controller.GetEnemies(new EnemiesPagination(), null);
-                var contentResult = actionResult as OkNegotiatedContentResult<Enemies>;
+                var result = await controller.GetEnemies(new EnemiesPagination(), "boss");
 
                 // Assert
-                Assert.IsNotNull(contentResult);
-                Assert.IsNotNull(contentResult.Content);
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<Enemies>));
             }
         }
 

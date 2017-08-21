@@ -11,7 +11,7 @@ using toofz.TestsShared;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
-    public class PlayersControllerTests
+    class PlayersControllerTests
     {
         [TestClass]
         public class GetPlayers
