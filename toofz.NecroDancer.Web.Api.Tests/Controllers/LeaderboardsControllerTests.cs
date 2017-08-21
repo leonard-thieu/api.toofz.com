@@ -13,29 +13,26 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
     public class LeaderboardsControllerTests
     {
         [TestClass]
-        public class GetDailies
+        public class GetLeaderboards
         {
             [TestMethod]
-            public async Task ReturnsOk()
+            public async Task ReturnsOkWithLeaderboards()
             {
                 // Arrange
-                var mockSetDailyLeaderboard = MockHelper.MockSet<Leaderboards.DailyLeaderboard>();
-
-                var mockRepository = new Mock<LeaderboardsContext>();
-                mockRepository.Setup(x => x.DailyLeaderboards).Returns(mockSetDailyLeaderboard.Object);
-
-                var controller = new LeaderboardsController(
-                    mockRepository.Object,
-                    new Categories(),
-                    new LeaderboardHeaders());
-
+                var mockDb = new Mock<LeaderboardsContext>();
+                var categories = new Categories();
+                var headers = new LeaderboardHeaders();
+                var controller = new LeaderboardsController(mockDb.Object, categories, headers);
                 var products = new Products(new Category());
+                var modes = new Modes(new Category());
+                var runs = new Runs(new Category());
+                var characters = new Characters(new Category());
 
                 // Act
-                var actionResult = await controller.GetDailies(new LeaderboardsPagination(), products);
+                var result = await controller.GetLeaderboards(products, modes, runs, characters);
 
                 // Assert
-                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<DailyLeaderboards>));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<Api.Models.Leaderboards>));
             }
         }
 
@@ -90,6 +87,33 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Assert
                 Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
+            }
+        }
+
+        [TestClass]
+        public class GetDailies
+        {
+            [TestMethod]
+            public async Task ReturnsOk()
+            {
+                // Arrange
+                var mockSetDailyLeaderboard = MockHelper.MockSet<Leaderboards.DailyLeaderboard>();
+
+                var mockRepository = new Mock<LeaderboardsContext>();
+                mockRepository.Setup(x => x.DailyLeaderboards).Returns(mockSetDailyLeaderboard.Object);
+
+                var controller = new LeaderboardsController(
+                    mockRepository.Object,
+                    new Categories(),
+                    new LeaderboardHeaders());
+
+                var products = new Products(new Category());
+
+                // Act
+                var actionResult = await controller.GetDailies(new LeaderboardsPagination(), products);
+
+                // Assert
+                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<DailyLeaderboards>));
             }
         }
     }
