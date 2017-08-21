@@ -23,8 +23,8 @@ install:
 
 before_build:
   - appveyor-retry nuget restore -Verbosity quiet
-  - choco install opencover.portable --limit-output
-  - choco install codecov --limit-output
+  - choco install opencover.portable codecov --limit-output
+  - OpenCover.Console.exe -version
 build:
   project: $(PROJECT).sln
   publish_wap: true
