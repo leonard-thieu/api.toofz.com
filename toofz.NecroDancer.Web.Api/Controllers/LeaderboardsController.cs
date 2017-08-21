@@ -239,7 +239,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// </httpStatusCode>
         [ResponseType(typeof(DailyLeaderboards))]
         [Route("dailies")]
-        public async Task<IHttpActionResult> GetDailies(
+        public async Task<IHttpActionResult> GetDailyLeaderboards(
             LeaderboardsPagination pagination,
             Products products,
             CancellationToken cancellationToken = default(CancellationToken))

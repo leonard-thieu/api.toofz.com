@@ -2,7 +2,6 @@
 using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Leaderboards.EntityFramework;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
@@ -16,18 +15,21 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         public class GetLeaderboards
         {
             [TestMethod]
-            [Ignore]
             public async Task ReturnsOkWithLeaderboards()
             {
                 // Arrange
+                var mockLeaderboards = MockHelper.MockSet<Leaderboards.Leaderboard>();
                 var mockDb = new Mock<LeaderboardsContext>();
-                var categories = new Categories();
-                var headers = new LeaderboardHeaders();
+                mockDb
+                    .Setup(db => db.Leaderboards)
+                    .Returns(mockLeaderboards.Object);
+                var categories = new Leaderboards.Categories();
+                var headers = new Leaderboards.LeaderboardHeaders();
                 var controller = new LeaderboardsController(mockDb.Object, categories, headers);
-                var products = new Products(new Category());
-                var modes = new Modes(new Category());
-                var runs = new Runs(new Category());
-                var characters = new Characters(new Category());
+                var products = new Products(new Leaderboards.Category());
+                var modes = new Modes(new Leaderboards.Category());
+                var runs = new Runs(new Leaderboards.Category());
+                var characters = new Characters(new Leaderboards.Category());
 
                 // Act
                 var result = await controller.GetLeaderboards(products, modes, runs, characters);
@@ -57,8 +59,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 var controller = new LeaderboardsController(
                     mockRepository.Object,
-                    LeaderboardsResources.ReadLeaderboardCategories(),
-                    LeaderboardsResources.ReadLeaderboardHeaders());
+                    Leaderboards.LeaderboardsResources.ReadLeaderboardCategories(),
+                    Leaderboards.LeaderboardsResources.ReadLeaderboardHeaders());
 
                 // Act
                 var actionResult = await controller.GetLeaderboardEntries(new LeaderboardsPagination(), 741312);
@@ -80,8 +82,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 var controller = new LeaderboardsController(
                     mockRepository.Object,
-                    LeaderboardsResources.ReadLeaderboardCategories(),
-                    LeaderboardsResources.ReadLeaderboardHeaders());
+                    Leaderboards.LeaderboardsResources.ReadLeaderboardCategories(),
+                    Leaderboards.LeaderboardsResources.ReadLeaderboardHeaders());
 
                 // Act
                 var actionResult = await controller.GetLeaderboardEntries(new LeaderboardsPagination(), 0);
@@ -92,7 +94,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         }
 
         [TestClass]
-        public class GetDailies
+        public class GetDailyLeaderboards
         {
             [TestMethod]
             public async Task ReturnsOk()
@@ -105,16 +107,61 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 var controller = new LeaderboardsController(
                     mockRepository.Object,
-                    new Categories(),
-                    new LeaderboardHeaders());
+                    new Leaderboards.Categories(),
+                    new Leaderboards.LeaderboardHeaders());
 
-                var products = new Products(new Category());
+                var products = new Products(new Leaderboards.Category());
 
                 // Act
-                var actionResult = await controller.GetDailies(new LeaderboardsPagination(), products);
+                var actionResult = await controller.GetDailyLeaderboards(new LeaderboardsPagination(), products);
 
                 // Assert
                 Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<DailyLeaderboards>));
+            }
+        }
+
+        [TestClass]
+        public class GetDailyLeaderboardEntries
+        {
+            [TestMethod]
+            public async Task ReturnsOkWithDailyLeaderboardEntries()
+            {
+                // Arrange
+                var mockLeaderboards = MockHelper.MockSet(
+                    new Leaderboards.DailyLeaderboard { LeaderboardId = 1 }
+                );
+                var mockLeaderboardEntries = MockHelper.MockSet<Leaderboards.DailyEntry>();
+                var mockReplays = MockHelper.MockSet<Leaderboards.Replay>();
+                var mockDb = new Mock<LeaderboardsContext>();
+                mockDb
+                    .Setup(db => db.DailyLeaderboards)
+                    .Returns(mockLeaderboards.Object);
+                mockDb
+                    .Setup(db => db.DailyEntries)
+                    .Returns(mockLeaderboardEntries.Object);
+                mockDb
+                    .Setup(db => db.Replays)
+                    .Returns(mockReplays.Object);
+                var categories = new Leaderboards.Categories
+                {
+                    {
+                        "products",
+                        new Leaderboards.Category
+                        {
+                            {  "classic", new Leaderboards.CategoryItem { id = 0 } },
+                        }
+                    },
+                };
+                var headers = new Leaderboards.LeaderboardHeaders();
+                var controller = new LeaderboardsController(mockDb.Object, categories, headers);
+                var pagination = new LeaderboardsPagination();
+                var lbid = 1;
+
+                // Act
+                var result = await controller.GetDailyLeaderboardEntries(pagination, lbid);
+
+                // Assert
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<DailyLeaderboardEntries>));
             }
         }
     }
