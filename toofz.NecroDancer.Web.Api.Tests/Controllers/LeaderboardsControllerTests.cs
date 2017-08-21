@@ -16,6 +16,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         public class GetLeaderboards
         {
             [TestMethod]
+            [Ignore]
             public async Task ReturnsOkWithLeaderboards()
             {
                 // Arrange
