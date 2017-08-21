@@ -20,6 +20,7 @@ artifacts:
 
 install:
   - git clone https://github.com/leonard-thieu/toofz-build.git Scripts
+  - OpenCover.Console.exe -?
 
 before_build:
   - appveyor-retry nuget restore -Verbosity quiet
