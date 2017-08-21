@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace toofz.NecroDancer.Web.Api.Identity
@@ -11,13 +10,21 @@ namespace toofz.NecroDancer.Web.Api.Identity
             Database.SetInitializer<ApplicationDbContext>(null);
         }
 
-        public static ApplicationDbContext Create() => new ApplicationDbContext();
-
-        static string GetConnectionString()
+        public ApplicationDbContext()
         {
-            return Environment.GetEnvironmentVariable("toofzApiConnectionString", EnvironmentVariableTarget.Machine);
+            Initialize();
         }
 
-        public ApplicationDbContext() : base(GetConnectionString(), throwIfV1Schema: false) { }
+        public ApplicationDbContext(string nameOrConnectionString) : base(nameOrConnectionString, throwIfV1Schema: false)
+        {
+            Initialize();
+        }
+
+        void Initialize()
+        {
+            Configuration.AutoDetectChangesEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
+        }
     }
 }
