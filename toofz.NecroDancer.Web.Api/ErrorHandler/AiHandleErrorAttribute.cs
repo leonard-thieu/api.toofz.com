@@ -1,8 +1,10 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
 
 namespace toofz.NecroDancer.Web.Api.ErrorHandler
 {
+    [ExcludeFromCodeCoverage]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
     public sealed class AiHandleErrorAttribute : HandleErrorAttribute
     {

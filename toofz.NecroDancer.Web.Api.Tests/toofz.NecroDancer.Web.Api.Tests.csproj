@@ -147,6 +147,7 @@
   <ItemGroup>
     <Compile Include="ContextUtil.cs" />
     <Compile Include="Controllers\EnemiesControllerTests.cs" />
+    <Compile Include="Controllers\ItemsControllerTests.cs" />
     <Compile Include="Controllers\LeaderboardsControllerTests.cs" />
     <Compile Include="Controllers\PlayersControllerTests.cs" />
     <Compile Include="Controllers\ReplaysControllerTests.cs" />

@@ -15,14 +15,14 @@ assembly_info:
   patch: true
   file: AssemblyInfo.cs
   assembly_version: $(appveyor_build_version)
+artifacts:
+  - path: results.xml
 
 install:
   - git clone https://github.com/leonard-thieu/toofz-build.git Scripts
 
 before_build:
-  - appveyor-retry nuget restore -Verbosity quiet -NonInteractive
-  - choco install opencover.portable --confirm --limit-output
-  - choco install codecov --confirm --limit-output
+  - appveyor-retry nuget restore -Verbosity quiet
 build:
   project: $(PROJECT).sln
   publish_wap: true
@@ -31,7 +31,7 @@ build:
 test_script:
   - ps: .\Scripts\Test-Project.ps1
 after_test:
-  - codecov --file results.xml
+  - ps: .\Scripts\Submit-CodeCoverageResults.ps1
 
 deploy:
   - provider: Environment

@@ -1,7 +1,9 @@
-﻿using System.Web.Http.ExceptionHandling;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Web.Http.ExceptionHandling;
 
 namespace toofz.NecroDancer.Web.Api
 {
+    [ExcludeFromCodeCoverage]
     public sealed class AiExceptionLogger : ExceptionLogger
     {
         public override void Log(ExceptionLoggerContext context)

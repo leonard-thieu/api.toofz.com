@@ -13,29 +13,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
     public class EnemiesControllerTests
     {
         [TestClass]
-        public class GetEnemiesAsync
-        {
-            [TestMethod]
-            public async Task GetEnemiesAsync_ReturnsEnemiesDTO()
-            {
-                // Arrange
-                var mockSet = MockHelper.MockSet<Data.Enemy>();
-
-                var mockRepository = new Mock<NecroDancerContext>();
-                mockRepository.Setup(x => x.Enemies).Returns(mockSet.Object);
-
-                var controller = new EnemiesController(mockRepository.Object);
-
-                // Act
-                var enemiesDTO = await controller.GetEnemiesAsync(new EnemiesPagination(), null, CancellationToken.None);
-
-                // Assert
-                Assert.IsInstanceOfType(enemiesDTO, typeof(Enemies));
-            }
-        }
-
-        [TestClass]
-        public class Get
+        public class GetEnemies
         {
             [TestMethod]
             public async Task ReturnsOk()
@@ -56,13 +34,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsNotNull(contentResult);
                 Assert.IsNotNull(contentResult.Content);
             }
-        }
 
-        [TestClass]
-        public class Get_Attribute
-        {
             [TestMethod]
-            public async Task ReturnsOk()
+            public async Task WithAttribute_ReturnsOk()
             {
                 // Arrange
                 var mockSet = MockHelper.MockSet<Data.Enemy>();
@@ -79,6 +53,28 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Assert
                 Assert.IsNotNull(contentResult);
                 Assert.IsNotNull(contentResult.Content);
+            }
+        }
+
+        [TestClass]
+        public class GetEnemiesAsync
+        {
+            [TestMethod]
+            public async Task ReturnsEnemies()
+            {
+                // Arrange
+                var mockSet = MockHelper.MockSet<Data.Enemy>();
+
+                var mockRepository = new Mock<NecroDancerContext>();
+                mockRepository.Setup(x => x.Enemies).Returns(mockSet.Object);
+
+                var controller = new EnemiesController(mockRepository.Object);
+
+                // Act
+                var enemies = await controller.GetEnemiesAsync(new EnemiesPagination(), null, CancellationToken.None);
+
+                // Assert
+                Assert.IsInstanceOfType(enemies, typeof(Enemies));
             }
         }
     }
