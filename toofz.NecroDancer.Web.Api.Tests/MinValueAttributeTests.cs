@@ -2,7 +2,7 @@
 
 namespace toofz.NecroDancer.Web.Api.Tests
 {
-    public class MinValueAttributeTests
+    class MinValueAttributeTests
     {
         [TestClass]
         public class IsValid

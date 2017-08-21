@@ -9,7 +9,7 @@ using toofz.TestsShared;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
-    public class LeaderboardsControllerTests
+    class LeaderboardsControllerTests
     {
         [TestClass]
         public class GetLeaderboards
@@ -43,7 +43,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         public class GetLeaderboardEntries
         {
             [TestMethod]
-            public async Task ReturnsOk()
+            public async Task ReturnsOkWithLeaderboardEntries()
             {
                 // Arrange
                 var mockLeaderboardSet = MockHelper.MockSet(new Leaderboards.Leaderboard { LeaderboardId = 741312 });
@@ -63,16 +63,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     Leaderboards.LeaderboardsResources.ReadLeaderboardHeaders());
 
                 // Act
-                var actionResult = await controller.GetLeaderboardEntries(new LeaderboardsPagination(), 741312);
-                var contentResult = actionResult as OkNegotiatedContentResult<LeaderboardEntries>;
+                var result = await controller.GetLeaderboardEntries(new LeaderboardsPagination(), 741312);
 
                 // Assert
-                Assert.IsNotNull(contentResult);
-                Assert.IsInstanceOfType(contentResult, typeof(OkNegotiatedContentResult<LeaderboardEntries>));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<LeaderboardEntries>));
             }
 
             [TestMethod]
-            public async Task ReturnsNotFound()
+            public async Task LbidNotInDb_ReturnsNotFound()
             {
                 // Arrange
                 var mockLeaderboardSet = MockHelper.MockSet(new Leaderboards.Leaderboard { LeaderboardId = 22 });
@@ -97,7 +95,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         public class GetDailyLeaderboards
         {
             [TestMethod]
-            public async Task ReturnsOk()
+            public async Task ReturnsOkWithDailyLeaderboards()
             {
                 // Arrange
                 var mockSetDailyLeaderboard = MockHelper.MockSet<Leaderboards.DailyLeaderboard>();
@@ -113,10 +111,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var products = new Products(new Leaderboards.Category());
 
                 // Act
-                var actionResult = await controller.GetDailyLeaderboards(new LeaderboardsPagination(), products);
+                var result = await controller.GetDailyLeaderboards(new LeaderboardsPagination(), products);
 
                 // Assert
-                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<DailyLeaderboards>));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<DailyLeaderboards>));
             }
         }
 

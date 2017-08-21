@@ -2,7 +2,7 @@
 
 namespace toofz.NecroDancer.Web.Api.Tests
 {
-    public class MaxValueAttributeTests
+    class MaxValueAttributeTests
     {
         [TestClass]
         public class IsValid
