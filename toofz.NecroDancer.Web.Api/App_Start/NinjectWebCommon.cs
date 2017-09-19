@@ -1,11 +1,10 @@
 using System;
+using System.Data.SqlClient;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Web.Common;
-using toofz.NecroDancer.EntityFramework;
 using toofz.NecroDancer.Leaderboards;
-using toofz.NecroDancer.Leaderboards.EntityFramework;
 using toofz.NecroDancer.Web.Api;
 using WebActivatorEx;
 
@@ -70,7 +69,8 @@ namespace toofz.NecroDancer.Web.Api
 
             kernel.Bind<NecroDancerContext>().ToConstructor(s => new NecroDancerContext(necroDancerConnectionString));
             kernel.Bind<LeaderboardsContext>().ToConstructor(s => new LeaderboardsContext(leaderboardsConnectionString));
-            kernel.Bind<ILeaderboardsStoreClient>().ToConstructor(s => new LeaderboardsStoreClient(leaderboardsConnectionString));
+            kernel.Bind<SqlConnection>().ToConstructor(s => new SqlConnection(leaderboardsConnectionString));
+            kernel.Bind<ILeaderboardsStoreClient>().ToConstructor(s => new LeaderboardsStoreClient(s.Inject<SqlConnection>()));
             kernel.Bind<Categories>().ToMethod(s => LeaderboardsResources.ReadLeaderboardCategories());
             kernel.Bind<LeaderboardHeaders>().ToMethod(s => LeaderboardsResources.ReadLeaderboardHeaders());
         }

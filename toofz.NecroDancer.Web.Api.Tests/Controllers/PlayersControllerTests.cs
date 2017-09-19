@@ -4,7 +4,6 @@ using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using toofz.NecroDancer.Leaderboards;
-using toofz.NecroDancer.Leaderboards.EntityFramework;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.TestsShared;
@@ -14,13 +13,32 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
     class PlayersControllerTests
     {
         [TestClass]
-        public class GetPlayers
+        public class Constructor
         {
             [TestMethod]
-            public async Task NoParams_ReturnsPlayers()
+            public void ReturnsInstance()
             {
                 // Arrange
-                var mockSet = MockHelper.MockSet<Leaderboards.Player>();
+                var db = new LeaderboardsContext();
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var leaderboardHeaders = new LeaderboardHeaders();
+
+                // Act
+                var controller = new PlayersController(db, storeClient, leaderboardHeaders);
+
+                // Assert
+                Assert.IsInstanceOfType(controller, typeof(PlayersController));
+            }
+        }
+
+        [TestClass]
+        public class GetPlayersMethod
+        {
+            [TestMethod]
+            public async Task ReturnsPlayers()
+            {
+                // Arrange
+                var mockSet = new MockDbSet<Leaderboards.Player>();
 
                 var mockRepository = new Mock<LeaderboardsContext>();
                 mockRepository.Setup(x => x.Players).Returns(mockSet.Object);
@@ -49,9 +67,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ValidParams_ReturnsPlayerEntries()
             {
                 // Arrange
-                var mockSetPlayer = MockHelper.MockSet(new Leaderboards.Player { SteamId = 76561197960481221 });
-                var mockSetEntry = MockHelper.MockSet<Leaderboards.Entry>();
-                var mockSetReplay = MockHelper.MockSet<Leaderboards.Replay>();
+                var mockSetPlayer = new MockDbSet<Leaderboards.Player>(new Leaderboards.Player { SteamId = 76561197960481221 });
+                var mockSetEntry = new MockDbSet<Leaderboards.Entry>();
+                var mockSetReplay = new MockDbSet<Leaderboards.Replay>();
 
                 var mockRepository = new Mock<LeaderboardsContext>();
                 mockRepository.Setup(x => x.Players).Returns(mockSetPlayer.Object);

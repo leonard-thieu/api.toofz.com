@@ -4,6 +4,7 @@ image: Visual Studio 2017
 configuration:
   - Release
 environment:
+  APPVEYOR_CACHE_ENTRY_ZIP_ARGS: -t7z -m0=lzma -mx=9
   PROJECT: toofz.NecroDancer.Web.Api
 cache:
   - packages -> **\packages.config

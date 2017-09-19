@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using toofz.NecroDancer.Leaderboards;
-using toofz.NecroDancer.Leaderboards.EntityFramework;
 using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api.Controllers
@@ -68,12 +67,13 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             CancellationToken cancellationToken = default(CancellationToken))
         {
             IQueryable<Leaderboards.Player> queryBase = db.Players;
-            if (!string.IsNullOrEmpty(q))
+            // Filtering
+            if (q == null)
             {
                 queryBase = queryBase.Where(p => p.Name.StartsWith(q));
             }
-
-            if (queryBase.TryApplySort(sort, SortKeySelectorMap, out IQueryable<Leaderboards.Player> sorted))
+            // Sorting
+            if (queryBase.TryApplySort(sort, SortKeySelectorMap, out var sorted))
             {
                 queryBase = sorted;
             }
@@ -159,17 +159,17 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var entries = (from e in playerEntries
                            join r in replays on e.ReplayId equals r.ReplayId into g
                            from x in g.DefaultIfEmpty()
-                           join h in leaderboardHeaders on e.Leaderboard.LeaderboardId equals h.id
-                           orderby h.product, e.Leaderboard.RunId, h.character
+                           join h in leaderboardHeaders on e.Leaderboard.LeaderboardId equals h.Id
+                           orderby h.Product, e.Leaderboard.RunId, h.Character
                            select new Models.Entry
                            {
                                leaderboard = new Models.Leaderboard
                                {
-                                   id = h.id,
-                                   product = h.product,
-                                   character = h.character,
-                                   mode = h.mode,
-                                   run = h.run,
+                                   id = h.Id,
+                                   product = h.Product,
+                                   character = h.Character,
+                                   mode = h.Mode,
+                                   run = h.Run,
                                    updated_at = e.Leaderboard.LastUpdate,
                                },
                                rank = e.Rank,

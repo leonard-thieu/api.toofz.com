@@ -2,7 +2,6 @@
 using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using toofz.NecroDancer.EntityFramework;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.TestsShared;
@@ -18,7 +17,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsOkWithItems()
             {
                 // Arrange
-                var mockItems = MockHelper.MockSet<Data.Item>();
+                var mockItems = new MockDbSet<Data.Item>();
                 var mockDb = new Mock<NecroDancerContext>();
                 mockDb
                     .SetupGet(db => db.Items)
@@ -37,7 +36,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task WithCategory_ReturnsOkWithItems()
             {
                 // Arrange
-                var mockItems = MockHelper.MockSet<Data.Item>();
+                var mockItems = new MockDbSet<Data.Item>();
                 var mockDb = new Mock<NecroDancerContext>();
                 mockDb
                     .SetupGet(db => db.Items)
@@ -57,7 +56,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task WithCategoryAndsubcategory_ReturnsOkWithItems()
             {
                 // Arrange
-                var mockItems = MockHelper.MockSet<Data.Item>();
+                var mockItems = new MockDbSet<Data.Item>();
                 var mockDb = new Mock<NecroDancerContext>();
                 mockDb
                     .SetupGet(db => db.Items)

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using toofz.NecroDancer.EntityFramework;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.TestsShared;
@@ -19,7 +18,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsOkWithEnemies()
             {
                 // Arrange
-                var mockSet = MockHelper.MockSet<Data.Enemy>();
+                var mockSet = new MockDbSet<Data.Enemy>();
 
                 var mockRepository = new Mock<NecroDancerContext>();
                 mockRepository.Setup(x => x.Enemies).Returns(mockSet.Object);
@@ -37,7 +36,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task WithAttribute_ReturnsOkWithEnemies()
             {
                 // Arrange
-                var mockSet = MockHelper.MockSet<Data.Enemy>();
+                var mockSet = new MockDbSet<Data.Enemy>();
 
                 var mockRepository = new Mock<NecroDancerContext>();
                 mockRepository.Setup(x => x.Enemies).Returns(mockSet.Object);
@@ -59,7 +58,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsEnemies()
             {
                 // Arrange
-                var mockSet = MockHelper.MockSet<Data.Enemy>();
+                var mockSet = new MockDbSet<Data.Enemy>();
 
                 var mockRepository = new Mock<NecroDancerContext>();
                 mockRepository.Setup(x => x.Enemies).Returns(mockSet.Object);

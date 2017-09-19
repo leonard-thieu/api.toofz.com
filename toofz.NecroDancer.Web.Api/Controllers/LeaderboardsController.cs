@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
@@ -7,7 +6,6 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using toofz.NecroDancer.Leaderboards;
-using toofz.NecroDancer.Leaderboards.EntityFramework;
 using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api.Controllers
@@ -71,11 +69,11 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             CancellationToken cancellationToken = default(CancellationToken))
         {
             var lbids = (from h in leaderboardHeaders
-                         where products.Contains(h.product)
-                         where modes.Contains(h.mode)
-                         where runs.Contains(h.run)
-                         where characters.Contains(h.character)
-                         select h.id).ToList();
+                         where products.Contains(h.Product)
+                         where modes.Contains(h.Mode)
+                         where runs.Contains(h.Run)
+                         where characters.Contains(h.Character)
+                         select h.Id).ToList();
 
             var query = await (from l in db.Leaderboards
                                where lbids.Contains(l.LeaderboardId)
@@ -89,16 +87,16 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                }).ToListAsync(cancellationToken);
 
             var leaderboards = (from l in query
-                                join h in leaderboardHeaders on l.LeaderboardId equals h.id
-                                orderby h.product, h.character, l.RunId
+                                join h in leaderboardHeaders on l.LeaderboardId equals h.Id
+                                orderby h.Product, h.Character, l.RunId
                                 select new Models.Leaderboard
                                 {
-                                    id = h.id,
-                                    product = h.product,
-                                    character = h.character,
-                                    mode = h.mode,
-                                    run = h.run,
-                                    display_name = h.display_name,
+                                    id = h.Id,
+                                    product = h.Product,
+                                    character = h.Character,
+                                    mode = h.Mode,
+                                    run = h.Run,
+                                    display_name = h.DisplayName,
                                     updated_at = l.LastUpdate,
                                     total = l.Count,
                                 }).ToList();
@@ -197,7 +195,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                version = x?.Version,
                            }).ToList();
 
-            var h = leaderboardHeaders.FirstOrDefault(l => l.id == leaderboard.LeaderboardId);
+            var h = leaderboardHeaders.FirstOrDefault(l => l.Id == leaderboard.LeaderboardId);
             if (h == null)
             {
                 return NotFound();
@@ -207,12 +205,12 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             {
                 leaderboard = new Models.Leaderboard
                 {
-                    id = h.id,
-                    product = h.product,
-                    character = h.character,
-                    mode = h.mode,
-                    run = h.run,
-                    display_name = h.display_name,
+                    id = h.Id,
+                    product = h.Product,
+                    character = h.Character,
+                    mode = h.Mode,
+                    run = h.Run,
+                    display_name = h.DisplayName,
                     updated_at = leaderboard.LastUpdate,
                 },
                 total = total,
@@ -249,10 +247,9 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             {
                 try
                 {
-                    productIds.Add(leaderboardCategories.GetItemId("products", p));
+                    productIds.Add(leaderboardCategories["products"][p].Id);
                 }
-                // TODO: When GetId is changed to throw a more specific Exception, this should also be updated.
-                catch (Exception)
+                catch (KeyNotFoundException)
                 {
                     return BadRequest($"'{p}' is not a valid product.");
                 }
@@ -279,7 +276,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                     id = l.LeaderboardId,
                                     date = l.Date,
                                     updated_at = l.LastUpdate,
-                                    product = leaderboardCategories.GetItemName("products", l.ProductId),
+                                    product = leaderboardCategories["products"].GetName(l.ProductId),
                                     production = l.IsProduction,
                                 })
                                 .ToList();
@@ -385,7 +382,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                     id = leaderboard.LeaderboardId,
                     date = leaderboard.Date,
                     updated_at = leaderboard.LastUpdate,
-                    product = leaderboardCategories.GetItemName("products", leaderboard.ProductId),
+                    product = leaderboardCategories["products"].GetName(leaderboard.ProductId),
                     production = leaderboard.IsProduction,
                 },
                 total = total,
