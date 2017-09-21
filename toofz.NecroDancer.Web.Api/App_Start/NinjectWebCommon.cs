@@ -69,7 +69,13 @@ namespace toofz.NecroDancer.Web.Api
 
             kernel.Bind<NecroDancerContext>().ToConstructor(s => new NecroDancerContext(necroDancerConnectionString));
             kernel.Bind<LeaderboardsContext>().ToConstructor(s => new LeaderboardsContext(leaderboardsConnectionString));
-            kernel.Bind<SqlConnection>().ToConstructor(s => new SqlConnection(leaderboardsConnectionString));
+            kernel.Bind<SqlConnection>().ToMethod(s =>
+            {
+                var connection = new SqlConnection(leaderboardsConnectionString);
+                connection.Open();
+
+                return connection;
+            });
             kernel.Bind<ILeaderboardsStoreClient>().ToConstructor(s => new LeaderboardsStoreClient(s.Inject<SqlConnection>()));
             kernel.Bind<Categories>().ToMethod(s => LeaderboardsResources.ReadLeaderboardCategories());
             kernel.Bind<LeaderboardHeaders>().ToMethod(s => LeaderboardsResources.ReadLeaderboardHeaders());
