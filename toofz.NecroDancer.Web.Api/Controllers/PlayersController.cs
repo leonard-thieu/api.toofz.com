@@ -68,7 +68,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         {
             IQueryable<Leaderboards.Player> queryBase = db.Players;
             // Filtering
-            if (q == null)
+            if (q != null)
             {
                 queryBase = queryBase.Where(p => p.Name.StartsWith(q));
             }
