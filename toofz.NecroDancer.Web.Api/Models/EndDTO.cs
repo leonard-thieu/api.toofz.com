@@ -1,17 +1,22 @@
-﻿namespace toofz.NecroDancer.Web.Api.Models
+﻿using System.Runtime.Serialization;
+
+namespace toofz.NecroDancer.Web.Api.Models
 {
     /// <summary>
     /// The zone and level that the entry ends on.
     /// </summary>
-    public sealed class End
+    [DataContract]
+    public sealed class EndDTO
     {
         /// <summary>
         /// The zone that the entry ends on.
         /// </summary>
-        public int zone { get; set; }
+        [DataMember(Name = "zone")]
+        public int Zone { get; set; }
         /// <summary>
         /// The level that the entry ends on.
         /// </summary>
-        public int level { get; set; }
+        [DataMember(Name = "level")]
+        public int Level { get; set; }
     }
 }

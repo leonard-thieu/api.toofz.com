@@ -34,7 +34,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer enemies.
         /// </returns>
-        [ResponseType(typeof(Enemies))]
+        [ResponseType(typeof(EnemiesDTO))]
         [Route("")]
         public async Task<IHttpActionResult> GetEnemies(
             EnemiesPagination pagination,
@@ -60,7 +60,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
         /// Enemy attribute is invalid.
         /// </httpStatusCode>
-        [ResponseType(typeof(Enemies))]
+        [ResponseType(typeof(EnemiesDTO))]
         [Route("{attribute}")]
         public async Task<IHttpActionResult> GetEnemies(
             EnemiesPagination pagination,
@@ -79,7 +79,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             }
         }
 
-        internal async Task<Enemies> GetEnemiesAsync(
+        internal async Task<EnemiesDTO> GetEnemiesAsync(
             EnemiesPagination pagination,
             string attribute,
             CancellationToken cancellationToken)
@@ -103,15 +103,15 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             }
             var query = from e in baseQuery
                         orderby e.ElementName, e.Type
-                        select new Models.Enemy
+                        select new EnemyDTO
                         {
-                            name = e.ElementName,
-                            type = e.Type,
-                            display_name = e.Name,
-                            health = e.Stats.Health,
-                            damage = e.Stats.DamagePerHit,
-                            beats_per_move = e.Stats.BeatsPerMove,
-                            drops = e.Stats.CoinsToDrop,
+                            Name = e.ElementName,
+                            Type = e.Type,
+                            DisplayName = e.Name,
+                            Health = e.Stats.Health,
+                            Damage = e.Stats.DamagePerHit,
+                            BeatsPerMove = e.Stats.BeatsPerMove,
+                            Drops = e.Stats.CoinsToDrop,
                         };
 
             var total = await query.CountAsync(cancellationToken);
@@ -121,10 +121,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 .Take(pagination.limit)
                 .ToListAsync(cancellationToken);
 
-            return new Enemies
+            return new EnemiesDTO
             {
-                total = total,
-                enemies = enemies,
+                Total = total,
+                Enemies = enemies,
             };
         }
 

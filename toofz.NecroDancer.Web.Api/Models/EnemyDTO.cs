@@ -1,37 +1,47 @@
-﻿namespace toofz.NecroDancer.Web.Api.Models
+﻿using System.Runtime.Serialization;
+
+namespace toofz.NecroDancer.Web.Api.Models
 {
     /// <summary>
     /// A Crypt of the NecroDancer enemy.
     /// </summary>
-    public sealed class Enemy
+    [DataContract]
+    public sealed class EnemyDTO
     {
         /// <summary>
         /// The enemy's element name.
         /// </summary>
-        public string name { get; set; }
+        [DataMember(Name = "name")]
+        public string Name { get; set; }
         /// <summary>
         /// The enemy's type.
         /// </summary>
-        public int type { get; set; }
+        [DataMember(Name = "type")]
+        public int Type { get; set; }
         /// <summary>
         /// The enemy's display name.
         /// </summary>
-        public string display_name { get; set; }
+        [DataMember(Name = "display_name")]
+        public string DisplayName { get; set; }
         /// <summary>
         /// The enemy's health.
         /// </summary>
-        public int health { get; set; }
+        [DataMember(Name = "health")]
+        public int Health { get; set; }
         /// <summary>
         /// The amount of damage that the enemy does per attack.
         /// </summary>
-        public int damage { get; set; }
+        [DataMember(Name = "damage")]
+        public int Damage { get; set; }
         /// <summary>
         /// The enemy's beats per move.
         /// </summary>
-        public int beats_per_move { get; set; }
+        [DataMember(Name = "beats_per_move")]
+        public int BeatsPerMove { get; set; }
         /// <summary>
         /// The base amount of coins the enemy drops when killed.
         /// </summary>
-        public int drops { get; set; }
+        [DataMember(Name = "drops")]
+        public int Drops { get; set; }
     }
 }

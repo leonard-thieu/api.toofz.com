@@ -113,8 +113,8 @@
     <Reference Include="toofz.NecroDancer, Version=2.1.4.61, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.NecroDancer.2.1.4\lib\net45\toofz.NecroDancer.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer.Data, Version=3.0.0.28, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.Data.3.0.0\lib\net45\toofz.NecroDancer.Data.dll</HintPath>
+    <Reference Include="toofz.NecroDancer.Data, Version=4.0.0.30, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.Data.4.0.0\lib\net45\toofz.NecroDancer.Data.dll</HintPath>
     </Reference>
     <Reference Include="toofz.NecroDancer.Leaderboards, Version=9.0.0.174, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.NecroDancer.Leaderboards.9.0.0\lib\net45\toofz.NecroDancer.Leaderboards.dll</HintPath>

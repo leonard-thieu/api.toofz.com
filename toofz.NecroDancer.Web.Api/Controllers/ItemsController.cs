@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using toofz.NecroDancer.Data;
 using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api.Controllers
@@ -35,7 +36,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer items.
         /// </returns>
-        [ResponseType(typeof(Items))]
+        [ResponseType(typeof(ItemsDTO))]
         [Route("")]
         public async Task<IHttpActionResult> GetItems(
             ItemsPagination pagination,
@@ -55,7 +56,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer items in the category.
         /// </returns>
-        [ResponseType(typeof(Items))]
+        [ResponseType(typeof(ItemsDTO))]
         [Route("{category}")]
         public async Task<IHttpActionResult> GetItems(
             ItemsPagination pagination,
@@ -78,7 +79,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer items in the subcategory.
         /// </returns>
-        [ResponseType(typeof(Items))]
+        [ResponseType(typeof(ItemsDTO))]
         [Route("{category}/{subcategory}")]
         public async Task<IHttpActionResult> GetItems(
             ItemsPagination pagination,
@@ -92,21 +93,21 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             return Ok(content);
         }
 
-        async Task<Items> GetItemsAsync(
+        async Task<ItemsDTO> GetItemsAsync(
             ItemsPagination pagination,
-            Expression<Func<Data.Item, bool>> filter,
+            Expression<Func<Item, bool>> filter,
             CancellationToken cancellationToken)
         {
             var query = db.Items
                 .Where(filter)
                 .OrderBy(i => i.ElementName)
-                .Select(i => new Item
+                .Select(i => new ItemDTO
                 {
-                    name = i.ElementName,
-                    display_name = i.Name,
-                    slot = i.Slot,
-                    unlock = i.DiamondCost,
-                    cost = i.CoinCost,
+                    Name = i.ElementName,
+                    DisplayName = i.Name,
+                    Slot = i.Slot,
+                    Unlock = i.DiamondCost,
+                    Cost = i.CoinCost,
                 });
 
             var total = await query.CountAsync(cancellationToken);
@@ -116,14 +117,14 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 .Take(pagination.limit)
                 .ToListAsync(cancellationToken);
 
-            return new Items
+            return new ItemsDTO
             {
-                total = total,
-                items = items,
+                Total = total,
+                Items = items,
             };
         }
 
-        static Expression<Func<Data.Item, bool>> Items(string category, string subcategory)
+        static Expression<Func<Item, bool>> Items(string category, string subcategory)
         {
             category = category?.ToLowerInvariant();
             subcategory = subcategory?.ToLowerInvariant();
@@ -147,7 +148,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             }
         }
 
-        static Expression<Func<Data.Item, bool>> GetWeaponFilter(string subcategory)
+        static Expression<Func<Item, bool>> GetWeaponFilter(string subcategory)
         {
             switch (subcategory)
             {
@@ -172,7 +173,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         static readonly string[] PurpleChestSlots = new[] { "ring" };
         static readonly string[] BlackChestSlots = new[] { "feet" };
 
-        static Expression<Func<Data.Item, bool>> GetChestFilter(string subcategory)
+        static Expression<Func<Item, bool>> GetChestFilter(string subcategory)
         {
             switch (subcategory)
             {

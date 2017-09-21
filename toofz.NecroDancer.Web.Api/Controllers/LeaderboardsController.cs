@@ -59,7 +59,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer leaderboards.
         /// </returns>
-        [ResponseType(typeof(Models.Leaderboards))]
+        [ResponseType(typeof(LeaderboardsDTO))]
         [Route("")]
         public async Task<IHttpActionResult> GetLeaderboards(
             Products products,
@@ -89,22 +89,22 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var leaderboards = (from l in query
                                 join h in leaderboardHeaders on l.LeaderboardId equals h.Id
                                 orderby h.Product, h.Character, l.RunId
-                                select new Models.Leaderboard
+                                select new LeaderboardDTO
                                 {
-                                    id = h.Id,
-                                    product = h.Product,
-                                    character = h.Character,
-                                    mode = h.Mode,
-                                    run = h.Run,
-                                    display_name = h.DisplayName,
-                                    updated_at = l.LastUpdate,
-                                    total = l.Count,
+                                    Id = h.Id,
+                                    Product = h.Product,
+                                    Character = h.Character,
+                                    Mode = h.Mode,
+                                    Run = h.Run,
+                                    DisplayName = h.DisplayName,
+                                    UpdatedAt = l.LastUpdate,
+                                    Total = l.Count,
                                 }).ToList();
 
-            var vm = new Models.Leaderboards
+            var vm = new LeaderboardsDTO
             {
-                total = leaderboards.Count,
-                leaderboards = leaderboards,
+                Total = leaderboards.Count,
+                Leaderboards = leaderboards,
             };
 
             return Ok(vm);
@@ -120,7 +120,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
         /// The leaderboard does not exist.
         /// </httpStatusCode>
-        [ResponseType(typeof(LeaderboardEntries))]
+        [ResponseType(typeof(LeaderboardEntriesDTO))]
         [Route("{lbid:int}/entries")]
         public async Task<IHttpActionResult> GetLeaderboardEntries(
             LeaderboardsPagination pagination,
@@ -175,24 +175,24 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var entries = (from e in entriesPage
                            join r in replays on e.ReplayId equals r.ReplayId into g
                            from x in g.DefaultIfEmpty()
-                           select new Models.Entry
+                           select new EntryDTO
                            {
-                               player = new Models.Player
+                               Player = new PlayerDTO
                                {
-                                   id = e.Player.SteamId.ToString(),
-                                   display_name = e.Player.Name,
-                                   updated_at = e.Player.LastUpdate,
-                                   avatar = e.Player.Avatar,
+                                   Id = e.Player.SteamId.ToString(),
+                                   DisplayName = e.Player.Name,
+                                   UpdatedAt = e.Player.LastUpdate,
+                                   Avatar = e.Player.Avatar,
                                },
-                               rank = e.Rank,
-                               score = e.Score,
-                               end = new End
+                               Rank = e.Rank,
+                               Score = e.Score,
+                               End = new EndDTO
                                {
-                                   zone = e.End.Zone,
-                                   level = e.End.Level
+                                   Zone = e.End.Zone,
+                                   Level = e.End.Level
                                },
-                               killed_by = x?.KilledBy,
-                               version = x?.Version,
+                               KilledBy = x?.KilledBy,
+                               Version = x?.Version,
                            }).ToList();
 
             var h = leaderboardHeaders.FirstOrDefault(l => l.Id == leaderboard.LeaderboardId);
@@ -201,20 +201,20 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 return NotFound();
             }
 
-            var content = new LeaderboardEntries
+            var content = new LeaderboardEntriesDTO
             {
-                leaderboard = new Models.Leaderboard
+                Leaderboard = new LeaderboardDTO
                 {
-                    id = h.Id,
-                    product = h.Product,
-                    character = h.Character,
-                    mode = h.Mode,
-                    run = h.Run,
-                    display_name = h.DisplayName,
-                    updated_at = leaderboard.LastUpdate,
+                    Id = h.Id,
+                    Product = h.Product,
+                    Character = h.Character,
+                    Mode = h.Mode,
+                    Run = h.Run,
+                    DisplayName = h.DisplayName,
+                    UpdatedAt = leaderboard.LastUpdate,
                 },
-                total = total,
-                entries = entries,
+                Total = total,
+                Entries = entries,
             };
 
             return Ok(content);
@@ -235,7 +235,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
         /// A product is invalid.
         /// </httpStatusCode>
-        [ResponseType(typeof(DailyLeaderboards))]
+        [ResponseType(typeof(DailyLeaderboardsDTO))]
         [Route("dailies")]
         public async Task<IHttpActionResult> GetDailyLeaderboards(
             LeaderboardsPagination pagination,
@@ -271,20 +271,20 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                .ToListAsync(cancellationToken);
 
             var leaderboards = (from l in query
-                                select new Models.DailyLeaderboard
+                                select new DailyLeaderboardDTO
                                 {
-                                    id = l.LeaderboardId,
-                                    date = l.Date,
-                                    updated_at = l.LastUpdate,
-                                    product = leaderboardCategories["products"].GetName(l.ProductId),
-                                    production = l.IsProduction,
+                                    Id = l.LeaderboardId,
+                                    Date = l.Date,
+                                    UpdatedAt = l.LastUpdate,
+                                    Product = leaderboardCategories["products"].GetName(l.ProductId),
+                                    IsProduction = l.IsProduction,
                                 })
                                 .ToList();
 
-            var vm = new DailyLeaderboards
+            var vm = new DailyLeaderboardsDTO
             {
-                total = leaderboards.Count,
-                leaderboards = leaderboards,
+                Total = leaderboards.Count,
+                Leaderboards = leaderboards,
             };
 
             return Ok(vm);
@@ -300,7 +300,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
         /// The daily leaderboard does not exist.
         /// </httpStatusCode>
-        [ResponseType(typeof(DailyLeaderboardEntries))]
+        [ResponseType(typeof(DailyLeaderboardEntriesDTO))]
         [Route("dailies/{lbid:int}/entries")]
         public async Task<IHttpActionResult> GetDailyLeaderboardEntries(
             LeaderboardsPagination pagination,
@@ -355,38 +355,38 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var entries = (from e in entriesPage
                            join r in replays on e.ReplayId equals r.ReplayId into g
                            from x in g.DefaultIfEmpty()
-                           select new Models.Entry
+                           select new EntryDTO
                            {
-                               player = new Models.Player
+                               Player = new PlayerDTO
                                {
-                                   id = e.Player.SteamId.ToString(),
-                                   display_name = e.Player.Name,
-                                   updated_at = e.Player.LastUpdate,
-                                   avatar = e.Player.Avatar,
+                                   Id = e.Player.SteamId.ToString(),
+                                   DisplayName = e.Player.Name,
+                                   UpdatedAt = e.Player.LastUpdate,
+                                   Avatar = e.Player.Avatar,
                                },
-                               rank = e.Rank,
-                               score = e.Score,
-                               end = new End
+                               Rank = e.Rank,
+                               Score = e.Score,
+                               End = new EndDTO
                                {
-                                   zone = e.End.Zone,
-                                   level = e.End.Level,
+                                   Zone = e.End.Zone,
+                                   Level = e.End.Level,
                                },
-                               killed_by = x?.KilledBy,
-                               version = x?.Version,
+                               KilledBy = x?.KilledBy,
+                               Version = x?.Version,
                            }).ToList();
 
-            var content = new DailyLeaderboardEntries
+            var content = new DailyLeaderboardEntriesDTO
             {
-                leaderboard = new Models.DailyLeaderboard
+                Leaderboard = new DailyLeaderboardDTO
                 {
-                    id = leaderboard.LeaderboardId,
-                    date = leaderboard.Date,
-                    updated_at = leaderboard.LastUpdate,
-                    product = leaderboardCategories["products"].GetName(leaderboard.ProductId),
-                    production = leaderboard.IsProduction,
+                    Id = leaderboard.LeaderboardId,
+                    Date = leaderboard.Date,
+                    UpdatedAt = leaderboard.LastUpdate,
+                    Product = leaderboardCategories["products"].GetName(leaderboard.ProductId),
+                    IsProduction = leaderboard.IsProduction,
                 },
-                total = total,
-                entries = entries,
+                Total = total,
+                Entries = entries,
             };
 
             return Ok(content);

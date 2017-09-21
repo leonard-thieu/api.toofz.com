@@ -33,7 +33,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         readonly LeaderboardsContext db;
         readonly ILeaderboardsStoreClient storeClient;
 
-        [ResponseType(typeof(Models.Replays))]
+        [ResponseType(typeof(ReplaysDTO))]
         [Route("")]
         public async Task<IHttpActionResult> GetReplays(
             ReplaysPagination pagination,
@@ -44,13 +44,13 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var query = from r in db.Replays
                         where r.Version == version && r.ErrorCode == error
                         orderby r.ReplayId
-                        select new Models.Replay
+                        select new ReplayDTO
                         {
-                            id = r.ReplayId.ToString(),
-                            error = r.ErrorCode,
-                            seed = r.Seed,
-                            version = r.Version,
-                            killed_by = r.KilledBy,
+                            Id = r.ReplayId.ToString(),
+                            Error = r.ErrorCode,
+                            Seed = r.Seed,
+                            Version = r.Version,
+                            KilledBy = r.KilledBy,
                         };
 
             var total = await query.CountAsync(cancellationToken);
@@ -59,10 +59,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 .Take(pagination.limit)
                 .ToListAsync(cancellationToken);
 
-            var results = new Models.Replays
+            var results = new ReplaysDTO
             {
-                total = total,
-                replays = replays,
+                Total = total,
+                Replays = replays,
             };
 
             return Ok(results);
@@ -82,7 +82,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <httpStatusCode cref="System.Net.HttpStatusCode.Conflict">
         /// There are duplicate IDs.
         /// </httpStatusCode>
-        [ResponseType(typeof(BulkStore))]
+        [ResponseType(typeof(BulkStoreDTO))]
         [Route("")]
         [Authorize(Users = "ReplaysService")]
         public async Task<IHttpActionResult> PostReplays(
@@ -90,7 +90,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             CancellationToken cancellationToken = default(CancellationToken))
         {
             var model = (from r in replays
-                         select new Leaderboards.Replay
+                         select new Replay
                          {
                              ReplayId = r.ReplayId,
                              ErrorCode = r.ErrorCode,
@@ -109,7 +109,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 return Conflict();
             }
 
-            return Ok(new BulkStore { rows_affected = replays.Count() });
+            return Ok(new BulkStoreDTO { RowsAffected = replays.Count() });
         }
 
         #region IDisposable Members

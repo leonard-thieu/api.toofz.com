@@ -1,20 +1,25 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace toofz.NecroDancer.Web.Api.Models
 {
-    public sealed class PlayerEntries
+    [DataContract]
+    public sealed class PlayerEntriesDTO
     {
         /// <summary>
         /// The Steam player.
         /// </summary>
-        public Player player { get; set; }
+        [DataMember(Name = "player")]
+        public PlayerDTO Player { get; set; }
         /// <summary>
         /// Total number of leaderboard entries.
         /// </summary>
-        public int total { get; set; }
+        [DataMember(Name = "total")]
+        public int Total { get; set; }
         /// <summary>
         /// A collection of leaderboard entries.
         /// </summary>
-        public IEnumerable<Entry> entries { get; set; }
+        [DataMember(Name = "entries")]
+        public IEnumerable<EntryDTO> Entries { get; set; }
     }
 }

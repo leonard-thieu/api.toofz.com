@@ -18,10 +18,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
     {
         static IReadOnlyDictionary<string, string> SortKeySelectorMap = new Dictionary<string, string>
         {
-            { $"{nameof(Models.Player.id)}", $"{nameof(Leaderboards.Player.SteamId)}" },
-            { $"{nameof(Models.Player.display_name)}", $"{nameof(Leaderboards.Player.Name)}" },
-            { $"{nameof(Models.Player.updated_at)}", $"{nameof(Leaderboards.Player.LastUpdate)}" },
-            { $"{nameof(Models.PlayerEntries.entries)}", $"{nameof(Leaderboards.Player.Entries)}.{nameof(List<Leaderboards.Entry>.Count)}" },
+            { "id", $"{nameof(Player.SteamId)}" },
+            { "display_name", $"{nameof(Player.Name)}" },
+            { "updated_at", $"{nameof(Player.LastUpdate)}" },
+            { "entries", $"{nameof(Player.Entries)}.{nameof(List<Entry>.Count)}" },
         };
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a list of Steam players that match the search query.
         /// </returns>
-        [ResponseType(typeof(Players))]
+        [ResponseType(typeof(PlayersDTO))]
         [Route("")]
         public async Task<IHttpActionResult> GetPlayers(
             PlayersPagination pagination,
@@ -66,7 +66,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             string sort = "-entries,display_name,id",
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            IQueryable<Leaderboards.Player> queryBase = db.Players;
+            IQueryable<Player> queryBase = db.Players;
             // Filtering
             if (q != null)
             {
@@ -79,12 +79,12 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             }
 
             var query = from p in queryBase
-                        select new Models.Player
+                        select new PlayerDTO
                         {
-                            id = p.SteamId.ToString(),
-                            display_name = p.Name,
-                            updated_at = p.LastUpdate,
-                            avatar = p.Avatar,
+                            Id = p.SteamId.ToString(),
+                            DisplayName = p.Name,
+                            UpdatedAt = p.LastUpdate,
+                            Avatar = p.Avatar,
                         };
 
             var total = await query.CountAsync(cancellationToken);
@@ -93,10 +93,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 .Take(pagination.limit)
                 .ToListAsync(cancellationToken);
 
-            var results = new Players
+            var results = new PlayersDTO
             {
-                total = total,
-                players = players,
+                Total = total,
+                Players = players,
             };
 
             return Ok(results);
@@ -113,7 +113,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
         /// A player with that Steam ID was not found.
         /// </httpStatusCode>
-        [ResponseType(typeof(PlayerEntries))]
+        [ResponseType(typeof(PlayerEntriesDTO))]
         [Route("{steamId}/entries")]
         public async Task<IHttpActionResult> GetPlayer(
             long steamId,
@@ -161,39 +161,39 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                            from x in g.DefaultIfEmpty()
                            join h in leaderboardHeaders on e.Leaderboard.LeaderboardId equals h.Id
                            orderby h.Product, e.Leaderboard.RunId, h.Character
-                           select new Models.Entry
+                           select new EntryDTO
                            {
-                               leaderboard = new Models.Leaderboard
+                               Leaderboard = new LeaderboardDTO
                                {
-                                   id = h.Id,
-                                   product = h.Product,
-                                   character = h.Character,
-                                   mode = h.Mode,
-                                   run = h.Run,
-                                   updated_at = e.Leaderboard.LastUpdate,
+                                   Id = h.Id,
+                                   Product = h.Product,
+                                   Character = h.Character,
+                                   Mode = h.Mode,
+                                   Run = h.Run,
+                                   UpdatedAt = e.Leaderboard.LastUpdate,
                                },
-                               rank = e.Rank,
-                               score = e.Score,
-                               end = new End
+                               Rank = e.Rank,
+                               Score = e.Score,
+                               End = new EndDTO
                                {
-                                   zone = e.End.Zone,
-                                   level = e.End.Level,
+                                   Zone = e.End.Zone,
+                                   Level = e.End.Level,
                                },
-                               killed_by = x?.KilledBy,
-                               version = x?.Version,
+                               KilledBy = x?.KilledBy,
+                               Version = x?.Version,
                            }).ToList();
 
-            var vm = new PlayerEntries
+            var vm = new PlayerEntriesDTO
             {
-                player = new Models.Player
+                Player = new PlayerDTO
                 {
-                    id = player.SteamId.ToString(),
-                    display_name = player.Name,
-                    updated_at = player.LastUpdate,
-                    avatar = player.Avatar,
+                    Id = player.SteamId.ToString(),
+                    DisplayName = player.Name,
+                    UpdatedAt = player.LastUpdate,
+                    Avatar = player.Avatar,
                 },
-                total = entries.Count,
-                entries = entries,
+                Total = entries.Count,
+                Entries = entries,
             };
 
             return Ok(vm);
@@ -212,7 +212,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
         /// An entry for the player on the leaderboard was not found.
         /// </httpStatusCode>
-        [ResponseType(typeof(Models.Entry))]
+        [ResponseType(typeof(EntryDTO))]
         [Route("{steamId}/entries/{lbid:int}")]
         public async Task<IHttpActionResult> GetPlayerLeaderboardEntry(
             int lbid,
@@ -256,24 +256,24 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                 })
                                 .FirstOrDefaultAsync(cancellationToken);
 
-            var entry = new Models.Entry
+            var entry = new EntryDTO
             {
-                player = new Models.Player
+                Player = new PlayerDTO
                 {
-                    id = playerEntry.Player.SteamId.ToString(),
-                    display_name = playerEntry.Player.Name,
-                    updated_at = playerEntry.Player.LastUpdate,
-                    avatar = playerEntry.Player.Avatar,
+                    Id = playerEntry.Player.SteamId.ToString(),
+                    DisplayName = playerEntry.Player.Name,
+                    UpdatedAt = playerEntry.Player.LastUpdate,
+                    Avatar = playerEntry.Player.Avatar,
                 },
-                rank = playerEntry.Rank,
-                score = playerEntry.Score,
-                end = new End
+                Rank = playerEntry.Rank,
+                Score = playerEntry.Score,
+                End = new EndDTO
                 {
-                    zone = playerEntry.End.Zone,
-                    level = playerEntry.End.Level,
+                    Zone = playerEntry.End.Zone,
+                    Level = playerEntry.End.Level,
                 },
-                killed_by = replay?.KilledBy,
-                version = replay?.Version,
+                KilledBy = replay?.KilledBy,
+                Version = replay?.Version,
             };
 
             return Ok(entry);
@@ -290,7 +290,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
         /// Any players failed validation.
         /// </httpStatusCode>
-        [ResponseType(typeof(BulkStore))]
+        [ResponseType(typeof(BulkStoreDTO))]
         [Route("")]
         [Authorize(Users = "PlayersService")]
         public async Task<IHttpActionResult> PostPlayers(
@@ -298,7 +298,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             CancellationToken cancellationToken = default(CancellationToken))
         {
             var model = (from p in players
-                         select new Leaderboards.Player
+                         select new Player
                          {
                              SteamId = p.SteamId.Value,
                              Exists = p.Exists,
@@ -308,7 +308,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                          }).ToList();
             await storeClient.SaveChangesAsync(model, true, cancellationToken);
 
-            return Ok(new BulkStore { rows_affected = players.Count() });
+            return Ok(new BulkStoreDTO { RowsAffected = players.Count() });
         }
 
         #region IDisposable Members

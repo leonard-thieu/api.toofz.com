@@ -260,8 +260,8 @@
     <Reference Include="toofz.NecroDancer, Version=2.1.4.61, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.NecroDancer.2.1.4\lib\net45\toofz.NecroDancer.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer.Data, Version=3.0.0.28, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.Data.3.0.0\lib\net45\toofz.NecroDancer.Data.dll</HintPath>
+    <Reference Include="toofz.NecroDancer.Data, Version=4.0.0.30, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.Data.4.0.0\lib\net45\toofz.NecroDancer.Data.dll</HintPath>
     </Reference>
     <Reference Include="toofz.NecroDancer.Leaderboards, Version=9.0.0.174, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.NecroDancer.Leaderboards.9.0.0\lib\net45\toofz.NecroDancer.Leaderboards.dll</HintPath>
@@ -290,33 +290,33 @@
     <Compile Include="Infrastructure\ProductsBinder.cs" />
     <Compile Include="Infrastructure\RunsBinder.cs" />
     <Compile Include="IQueryableExtensions.cs" />
-    <Compile Include="Models\BulkStore.cs" />
+    <Compile Include="Models\BulkStoreDTO.cs" />
     <Compile Include="Models\Characters.cs" />
-    <Compile Include="Models\DailyLeaderboard.cs" />
-    <Compile Include="Models\DailyLeaderboardEntries.cs" />
-    <Compile Include="Models\DailyLeaderboards.cs" />
-    <Compile Include="Models\End.cs" />
-    <Compile Include="Models\Enemies.cs" />
+    <Compile Include="Models\DailyLeaderboardDTO.cs" />
+    <Compile Include="Models\DailyLeaderboardEntriesDTO.cs" />
+    <Compile Include="Models\DailyLeaderboardsDTO.cs" />
+    <Compile Include="Models\EndDTO.cs" />
+    <Compile Include="Models\EnemiesDTO.cs" />
     <Compile Include="Models\EnemiesPagination.cs" />
-    <Compile Include="Models\Enemy.cs" />
-    <Compile Include="Models\Entry.cs" />
+    <Compile Include="Models\EnemyDTO.cs" />
+    <Compile Include="Models\EntryDTO.cs" />
     <Compile Include="Models\IPagination.cs" />
-    <Compile Include="Models\Item.cs" />
-    <Compile Include="Models\Items.cs" />
+    <Compile Include="Models\ItemDTO.cs" />
+    <Compile Include="Models\ItemsDTO.cs" />
     <Compile Include="Models\ItemsPagination.cs" />
-    <Compile Include="Models\Leaderboard.cs" />
+    <Compile Include="Models\LeaderboardDTO.cs" />
     <Compile Include="Models\LeaderboardCategoryBase.cs" />
-    <Compile Include="Models\LeaderboardEntries.cs" />
-    <Compile Include="Models\Leaderboards.cs" />
+    <Compile Include="Models\LeaderboardEntriesDTO.cs" />
+    <Compile Include="Models\LeaderboardsDTO.cs" />
     <Compile Include="Models\LeaderboardsPagination.cs" />
     <Compile Include="Models\Modes.cs" />
-    <Compile Include="Models\Player.cs" />
-    <Compile Include="Models\PlayerEntries.cs" />
-    <Compile Include="Models\Players.cs" />
+    <Compile Include="Models\PlayerDTO.cs" />
+    <Compile Include="Models\PlayerEntriesDTO.cs" />
+    <Compile Include="Models\PlayersDTO.cs" />
     <Compile Include="Models\PlayersPagination.cs" />
     <Compile Include="Models\Products.cs" />
-    <Compile Include="Models\Replay.cs" />
-    <Compile Include="Models\Replays.cs" />
+    <Compile Include="Models\ReplayDTO.cs" />
+    <Compile Include="Models\ReplaysDTO.cs" />
     <Compile Include="Models\ReplaysPagination.cs" />
     <Compile Include="Models\Runs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

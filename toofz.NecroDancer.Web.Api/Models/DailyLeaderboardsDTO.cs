@@ -1,19 +1,23 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace toofz.NecroDancer.Web.Api.Models
 {
     /// <summary>
     /// A page of Crypt of the NecroDancer daily leaderboards.
     /// </summary>
-    public sealed class DailyLeaderboards
+    [DataContract]
+    public sealed class DailyLeaderboardsDTO
     {
         /// <summary>
         /// Total number of daily leaderboards.
         /// </summary>
-        public int total { get; set; }
+        [DataMember(Name = "total")]
+        public int Total { get; set; }
         /// <summary>
         /// A collection of daily leaderboards.
         /// </summary>
-        public IEnumerable<DailyLeaderboard> leaderboards { get; set; }
+        [DataMember(Name = "leaderboard")]
+        public IEnumerable<DailyLeaderboardDTO> Leaderboards { get; set; }
     }
 }

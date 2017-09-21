@@ -1,19 +1,23 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace toofz.NecroDancer.Web.Api.Models
 {
     /// <summary>
     /// A page of Crypt of the NecroDancer enemies.
     /// </summary>
-    public sealed class Enemies
+    [DataContract]
+    public sealed class EnemiesDTO
     {
         /// <summary>
         /// The total number of enemies in the result set.
         /// </summary>
-        public int total { get; set; }
+        [DataMember(Name = "total")]
+        public int Total { get; set; }
         /// <summary>
         /// A collection of enemies.
         /// </summary>
-        public IEnumerable<Enemy> enemies { get; set; }
+        [DataMember(Name = "enemies")]
+        public IEnumerable<EnemyDTO> Enemies { get; set; }
     }
 }

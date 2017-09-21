@@ -19,7 +19,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsOkWithReplays()
             {
                 // Arrange
-                var mockSet = new MockDbSet<Leaderboards.Replay>();
+                var mockSet = new MockDbSet<Replay>();
 
                 var mockRepository = new Mock<LeaderboardsContext>();
                 mockRepository
@@ -34,7 +34,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetReplays(new ReplaysPagination());
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<Api.Models.Replays>));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ReplaysDTO>));
             }
         }
 
@@ -55,7 +55,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.PostReplays(new List<ReplayModel>());
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<BulkStore>));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<BulkStoreDTO>));
             }
         }
     }

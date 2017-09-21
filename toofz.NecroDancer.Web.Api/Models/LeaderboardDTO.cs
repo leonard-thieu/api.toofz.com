@@ -1,43 +1,53 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace toofz.NecroDancer.Web.Api.Models
 {
     /// <summary>
     /// A Crypt of the NecroDancer leaderboard.
     /// </summary>
-    public sealed class Leaderboard
+    [DataContract]
+    public sealed class LeaderboardDTO
     {
         /// <summary>
         /// Steam lbid
         /// </summary>
-        public int id { get; set; }
+        [DataMember(Name = "id")]
+        public int Id { get; set; }
         /// <summary>
         /// Crypt of the NecroDancer product (e.g. classic, amplified)
         /// </summary>
-        public string product { get; set; }
+        [DataMember(Name = "product")]
+        public string Product { get; set; }
         /// <summary>
         /// Crypt of the NecroDancer character (e.g. all-characters, cadence, story-mode)
         /// </summary>
-        public string character { get; set; }
+        [DataMember(Name = "character")]
+        public string Character { get; set; }
         /// <summary>
         /// Crypt of the NecroDancer mode (e.g. standard, hard, no-return)
         /// </summary>
-        public string mode { get; set; }
+        [DataMember(Name = "mode")]
+        public string Mode { get; set; }
         /// <summary>
         /// Crypt of the NecroDancer run (e.g. score, seeded-speed, deathless)
         /// </summary>
-        public string run { get; set; }
+        [DataMember(Name = "run")]
+        public string Run { get; set; }
         /// <summary>
         /// Display name for the leaderboard.
         /// </summary>
-        public string display_name { get; set; }
+        [DataMember(Name = "display_name")]
+        public string DisplayName { get; set; }
         /// <summary>
         /// Time that the leaderboard was last updated at (in UTC)
         /// </summary>
-        public DateTime updated_at { get; set; }
+        [DataMember(Name = "updated_at")]
+        public DateTime UpdatedAt { get; set; }
         /// <summary>
         /// Total number of entries
         /// </summary>
-        public int total { get; set; }
+        [DataMember(Name = "total")]
+        public int Total { get; set; }
     }
 }

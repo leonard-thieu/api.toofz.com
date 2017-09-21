@@ -2,6 +2,7 @@
 using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using toofz.NecroDancer.Data;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.TestsShared;
@@ -17,7 +18,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsOkWithItems()
             {
                 // Arrange
-                var mockItems = new MockDbSet<Data.Item>();
+                var mockItems = new MockDbSet<Item>();
                 var mockDb = new Mock<NecroDancerContext>();
                 mockDb
                     .SetupGet(db => db.Items)
@@ -29,14 +30,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetItems(pagination);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<Items>));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ItemsDTO>));
             }
 
             [TestMethod]
             public async Task WithCategory_ReturnsOkWithItems()
             {
                 // Arrange
-                var mockItems = new MockDbSet<Data.Item>();
+                var mockItems = new MockDbSet<Item>();
                 var mockDb = new Mock<NecroDancerContext>();
                 mockDb
                     .SetupGet(db => db.Items)
@@ -49,14 +50,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetItems(pagination, category);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<Items>));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ItemsDTO>));
             }
 
             [TestMethod]
             public async Task WithCategoryAndsubcategory_ReturnsOkWithItems()
             {
                 // Arrange
-                var mockItems = new MockDbSet<Data.Item>();
+                var mockItems = new MockDbSet<Item>();
                 var mockDb = new Mock<NecroDancerContext>();
                 mockDb
                     .SetupGet(db => db.Items)
@@ -70,7 +71,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetItems(pagination, category, subcategory);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<Items>));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ItemsDTO>));
             }
         }
     }

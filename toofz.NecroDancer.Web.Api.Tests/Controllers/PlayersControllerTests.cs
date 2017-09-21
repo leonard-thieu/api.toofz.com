@@ -38,7 +38,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsPlayers()
             {
                 // Arrange
-                var mockSet = new MockDbSet<Leaderboards.Player>();
+                var mockSet = new MockDbSet<Player>();
 
                 var mockRepository = new Mock<LeaderboardsContext>();
                 mockRepository.Setup(x => x.Players).Returns(mockSet.Object);
@@ -52,7 +52,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Act
                 var actionResult = await controller.GetPlayers(new PlayersPagination());
-                var contentResult = actionResult as OkNegotiatedContentResult<Players>;
+                var contentResult = actionResult as OkNegotiatedContentResult<PlayersDTO>;
 
                 // Assert
                 Assert.IsNotNull(contentResult);
@@ -67,9 +67,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ValidParams_ReturnsPlayerEntries()
             {
                 // Arrange
-                var mockSetPlayer = new MockDbSet<Leaderboards.Player>(new Leaderboards.Player { SteamId = 76561197960481221 });
-                var mockSetEntry = new MockDbSet<Leaderboards.Entry>();
-                var mockSetReplay = new MockDbSet<Leaderboards.Replay>();
+                var mockSetPlayer = new MockDbSet<Player>(new Player { SteamId = 76561197960481221 });
+                var mockSetEntry = new MockDbSet<Entry>();
+                var mockSetReplay = new MockDbSet<Replay>();
 
                 var mockRepository = new Mock<LeaderboardsContext>();
                 mockRepository.Setup(x => x.Players).Returns(mockSetPlayer.Object);
@@ -85,8 +85,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Act
                 var actionResult = await controller.GetPlayer(76561197960481221);
-                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<PlayerEntries>));
-                var contentResult = actionResult as OkNegotiatedContentResult<PlayerEntries>;
+                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<PlayerEntriesDTO>));
+                var contentResult = actionResult as OkNegotiatedContentResult<PlayerEntriesDTO>;
 
                 // Assert
                 Assert.IsNotNull(contentResult);
@@ -112,7 +112,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Act
                 var actionResult = await controller.PostPlayers(new List<PlayerModel>());
-                var contentResult = actionResult as OkNegotiatedContentResult<BulkStore>;
+                var contentResult = actionResult as OkNegotiatedContentResult<BulkStoreDTO>;
 
                 // Assert
                 Assert.IsNotNull(contentResult);
