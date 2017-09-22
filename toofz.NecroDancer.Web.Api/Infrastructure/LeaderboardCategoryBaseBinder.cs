@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web.Http.Controllers;
 using System.Web.Http.ModelBinding;
-using System.Web.Http.ValueProviders;
 using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api.Infrastructure
@@ -22,7 +21,7 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
             }
             else
             {
-                var value = Convert<string>(result);
+                var value = result.ConvertTo<string>();
                 foreach (var item in value.Split(','))
                 {
                     try
@@ -40,17 +39,5 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
         }
 
         protected abstract LeaderboardCategoryBase GetModel();
-
-        T Convert<T>(ValueProviderResult result)
-        {
-            try
-            {
-                return (T)result.ConvertTo(typeof(T));
-            }
-            catch
-            {
-                return default(T);
-            }
-        }
     }
 }
