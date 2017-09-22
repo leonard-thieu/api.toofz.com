@@ -1,12 +1,13 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.ModelBinding;
 using toofz.NecroDancer.Data;
+using toofz.NecroDancer.Web.Api.Infrastructure;
 using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api.Controllers
@@ -17,6 +18,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
     [RoutePrefix("items")]
     public sealed class ItemsController : ApiController
     {
+        static readonly IEnumerable<string> RedChestSlots = new[] { "head", "hud", "hud_weapon", "action", "bomb", "shovel" };
+        static readonly IEnumerable<string> PurpleChestSlots = new[] { "ring" };
+        static readonly IEnumerable<string> BlackChestSlots = new[] { "feet" };
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ItemsController"/> class.
         /// </summary>
@@ -40,9 +45,11 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [Route("")]
         public async Task<IHttpActionResult> GetItems(
             ItemsPagination pagination,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
-            var content = await GetItemsAsync(pagination, i => true, cancellationToken);
+            var baseQuery = from i in db.Items
+                            select i;
+            var content = await GetItemsAsync(pagination, baseQuery, cancellationToken);
 
             return Ok(content);
         }
@@ -56,15 +63,32 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer items in the category.
         /// </returns>
+        /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
+        /// Item category is invalid.
+        /// </httpStatusCode>
         [ResponseType(typeof(ItemsDTO))]
         [Route("{category}")]
         public async Task<IHttpActionResult> GetItems(
             ItemsPagination pagination,
-            string category,
-            CancellationToken cancellationToken = default(CancellationToken))
+            [ModelBinder(typeof(ItemCategoryBinder))] string category,
+            CancellationToken cancellationToken = default)
         {
-            var filter = Items(category, null);
-            var content = await GetItemsAsync(pagination, filter, cancellationToken);
+            var baseQuery = from i in db.Items
+                            select i;
+            switch (category)
+            {
+                case "armor": baseQuery = baseQuery.Where(i => i.IsArmor); break;
+                case "consumable": baseQuery = baseQuery.Where(i => i.Consumable); break;
+                case "feet": baseQuery = baseQuery.Where(i => i.Slot == "feet"); break;
+                case "food": baseQuery = baseQuery.Where(i => i.IsFood); break;
+                case "head": baseQuery = baseQuery.Where(i => i.Slot == "head"); break;
+                case "rings": baseQuery = baseQuery.Where(i => i.Slot == "ring"); break;
+                case "scrolls": baseQuery = baseQuery.Where(i => i.IsScroll); break;
+                case "spells": baseQuery = baseQuery.Where(i => i.IsSpell); break;
+                case "torches": baseQuery = baseQuery.Where(i => i.IsTorch); break;
+                case "weapons": baseQuery = baseQuery.Where(i => i.IsWeapon); break;
+            }
+            var content = await GetItemsAsync(pagination, baseQuery, cancellationToken);
 
             return Ok(content);
         }
@@ -73,42 +97,76 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// Gets a list of Crypt of the NecroDancer items in a specific subcategory.
         /// </summary>
         /// <param name="pagination">Pagination parameters.</param>
-        /// <param name="category">The category of items to return.</param>
-        /// <param name="subcategory">The subcategory within the category.</param>
+        /// <param name="filter">The subcategory to get items for.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer items in the subcategory.
         /// </returns>
+        /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
+        /// Item category is invalid.
+        /// </httpStatusCode>
+        /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
+        /// Item subcategory is invalid.
+        /// </httpStatusCode>
         [ResponseType(typeof(ItemsDTO))]
         [Route("{category}/{subcategory}")]
         public async Task<IHttpActionResult> GetItems(
             ItemsPagination pagination,
-            string category,
-            string subcategory,
-            CancellationToken cancellationToken = default(CancellationToken))
+            ItemSubcategoryFilter filter,
+            CancellationToken cancellationToken = default)
         {
-            var filter = Items(category, subcategory);
-            var content = await GetItemsAsync(pagination, filter, cancellationToken);
+            var category = filter.category;
+            var subcategory = filter.subcategory;
+
+            var baseQuery = from i in db.Items
+                            select i;
+            switch (category)
+            {
+                case "weapons":
+                    switch (subcategory)
+                    {
+                        case "bows": baseQuery = baseQuery.Where(w => w.IsBow); break;
+                        case "broadswords": baseQuery = baseQuery.Where(w => w.IsBroadsword); break;
+                        case "cats": baseQuery = baseQuery.Where(w => w.IsCat); break;
+                        case "crossbows": baseQuery = baseQuery.Where(w => w.IsCrossbow); break;
+                        case "daggers": baseQuery = baseQuery.Where(w => w.IsDagger); break;
+                        case "flails": baseQuery = baseQuery.Where(w => w.IsFlail); break;
+                        case "longswords": baseQuery = baseQuery.Where(w => w.IsLongsword); break;
+                        case "rapiers": baseQuery = baseQuery.Where(w => w.IsRapier); break;
+                        case "spears": baseQuery = baseQuery.Where(w => w.IsSpear); break;
+                        case "whips": baseQuery = baseQuery.Where(w => w.IsWhip); break;
+                    }
+                    break;
+                case "chest":
+                    switch (subcategory)
+                    {
+                        case "red": baseQuery = baseQuery.Where(i => (i.IsFood || i.IsTorch || i.IsShovel || RedChestSlots.Contains(i.Slot)) && !i.IsScroll); break;
+                        case "purple": baseQuery = baseQuery.Where(i => i.IsSpell || i.IsScroll || PurpleChestSlots.Contains(i.Slot)); break;
+                        case "black": baseQuery = baseQuery.Where(i => i.IsArmor || i.IsWeapon || BlackChestSlots.Contains(i.Slot)); break;
+                        case "mimic": baseQuery = baseQuery.Where(i => true); break;
+                    }
+                    break;
+            }
+            var content = await GetItemsAsync(pagination, baseQuery, cancellationToken);
 
             return Ok(content);
         }
 
         async Task<ItemsDTO> GetItemsAsync(
             ItemsPagination pagination,
-            Expression<Func<Item, bool>> filter,
+            IQueryable<Item> baseQuery,
             CancellationToken cancellationToken)
         {
-            var query = db.Items
-                .Where(filter)
-                .OrderBy(i => i.ElementName)
-                .Select(i => new ItemDTO
-                {
-                    Name = i.ElementName,
-                    DisplayName = i.Name,
-                    Slot = i.Slot,
-                    Unlock = i.DiamondCost,
-                    Cost = i.CoinCost,
-                });
+            var query = from i in baseQuery
+                        orderby i.ElementName
+                        select new ItemDTO
+                        {
+                            Name = i.ElementName,
+                            DisplayName = i.Name,
+                            Slot = i.Slot,
+                            Unlock = i.DiamondCost,
+                            Cost = i.CoinCost,
+                        };
 
             var total = await query.CountAsync(cancellationToken);
 
@@ -122,69 +180,6 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 Total = total,
                 Items = items,
             };
-        }
-
-        static Expression<Func<Item, bool>> Items(string category, string subcategory)
-        {
-            category = category?.ToLowerInvariant();
-            subcategory = subcategory?.ToLowerInvariant();
-
-            switch (category)
-            {
-                case "armor": return i => i.IsArmor;
-                case "consumable": return i => i.Consumable;
-                case "feet": return i => i.Slot == "feet";
-                case "food": return i => i.IsFood;
-                case "head": return i => i.Slot == "head";
-                case "rings": return i => i.Slot == "ring";
-                case "scrolls": return i => i.IsScroll;
-                case "spells": return i => i.IsSpell;
-                case "torches": return i => i.IsTorch;
-                case "weapons": return GetWeaponFilter(subcategory);
-                case "chest": return GetChestFilter(subcategory);
-
-                default:
-                    throw new ArgumentException("Invalid item category.", nameof(category));
-            }
-        }
-
-        static Expression<Func<Item, bool>> GetWeaponFilter(string subcategory)
-        {
-            switch (subcategory)
-            {
-                case "bows": return i => i.IsBow;
-                case "broadswords": return i => i.IsBroadsword;
-                case "cats": return i => i.IsCat;
-                case "crossbows": return i => i.IsCrossbow;
-                case "daggers": return i => i.IsDagger;
-                case "flails": return i => i.IsFlail;
-                case "longswords": return i => i.IsLongsword;
-                case "rapiers": return i => i.IsRapier;
-                case "spears": return i => i.IsSpear;
-                case "whips": return i => i.IsWhip;
-                case null: return i => i.IsWeapon;
-
-                default:
-                    throw new ArgumentException("Invalid weapon category.", nameof(subcategory));
-            }
-        }
-
-        static readonly string[] RedChestSlots = new[] { "head", "hud", "hud_weapon", "action", "bomb", "shovel" };
-        static readonly string[] PurpleChestSlots = new[] { "ring" };
-        static readonly string[] BlackChestSlots = new[] { "feet" };
-
-        static Expression<Func<Item, bool>> GetChestFilter(string subcategory)
-        {
-            switch (subcategory)
-            {
-                case "red": return i => (i.IsFood || i.IsTorch || i.IsShovel || RedChestSlots.Contains(i.Slot)) && !i.IsScroll;
-                case "purple": return i => i.IsSpell || i.IsScroll || PurpleChestSlots.Contains(i.Slot);
-                case "black": return i => i.IsArmor || i.IsWeapon || BlackChestSlots.Contains(i.Slot);
-                case "mimic": return i => true;
-
-                default:
-                    throw new ArgumentException("Invalid chest category.", nameof(subcategory));
-            }
         }
 
         #region IDisposable Members
@@ -208,6 +203,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             }
 
             disposed = true;
+
             base.Dispose(disposing);
         }
 

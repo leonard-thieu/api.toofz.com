@@ -344,6 +344,8 @@
     <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\CharactersBinder.cs" />
     <Compile Include="Infrastructure\EnemyAttributeBinder.cs" />
+    <Compile Include="Infrastructure\ItemCategoryBinder.cs" />
+    <Compile Include="Infrastructure\ItemSubcategoryFilterBinder.cs" />
     <Compile Include="Infrastructure\LeaderboardCategoryBaseBinder.cs" />
     <Compile Include="Infrastructure\ModesBinder.cs" />
     <Compile Include="Infrastructure\PaginationBinder.cs" />
@@ -363,6 +365,7 @@
     <Compile Include="Models\ItemDTO.cs" />
     <Compile Include="Models\ItemsDTO.cs" />
     <Compile Include="Models\ItemsPagination.cs" />
+    <Compile Include="Models\ItemSubcategoryFilter.cs" />
     <Compile Include="Models\LeaderboardCategoryBase.cs" />
     <Compile Include="Models\LeaderboardDTO.cs" />
     <Compile Include="Models\LeaderboardEntriesDTO.cs" />
