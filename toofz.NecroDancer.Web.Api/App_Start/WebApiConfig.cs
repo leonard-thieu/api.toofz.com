@@ -8,7 +8,7 @@ using Microsoft.Owin.Security.OAuth;
 namespace toofz.NecroDancer.Web.Api
 {
     [ExcludeFromCodeCoverage]
-    public static class WebApiConfig
+    static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
         {
