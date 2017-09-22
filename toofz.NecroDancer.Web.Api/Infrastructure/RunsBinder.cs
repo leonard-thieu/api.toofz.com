@@ -1,5 +1,4 @@
-﻿using toofz.NecroDancer.Leaderboards;
-using toofz.NecroDancer.Web.Api.Models;
+﻿using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api.Infrastructure
 {

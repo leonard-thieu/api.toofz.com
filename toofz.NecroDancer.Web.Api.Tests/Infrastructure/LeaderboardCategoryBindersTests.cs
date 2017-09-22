@@ -5,7 +5,6 @@ using System.Web.Http.ModelBinding;
 using System.Web.Http.ValueProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Models;
 

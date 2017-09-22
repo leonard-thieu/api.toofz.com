@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using toofz.NecroDancer.Leaderboards;
 
 namespace toofz.NecroDancer.Web.Api.Models
 {
@@ -32,14 +31,8 @@ namespace toofz.NecroDancer.Web.Api.Models
             }
         }
 
-        public IEnumerator<string> GetEnumerator()
-        {
-            return ((IEnumerable<string>)items).GetEnumerator();
-        }
+        public IEnumerator<string> GetEnumerator() => ((IEnumerable<string>)items).GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return ((IEnumerable<string>)items).GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)items).GetEnumerator();
     }
 }
