@@ -1,10 +1,12 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.ModelBinding;
+using toofz.NecroDancer.Data;
+using toofz.NecroDancer.Web.Api.Infrastructure;
 using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api.Controllers
@@ -38,15 +40,17 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [Route("")]
         public async Task<IHttpActionResult> GetEnemies(
             EnemiesPagination pagination,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
-            var content = await GetEnemiesAsync(pagination, null, cancellationToken);
+            var baseQuery = from e in db.Enemies
+                            select e;
+            var content = await GetEnemiesAsync(pagination, baseQuery, cancellationToken);
 
             return Ok(content);
         }
 
         /// <summary>
-        /// Gets a list of Crypt of the NecroDancer enemies with a specific attribute.
+        /// Gets a list of Crypt of the NecroDancer enemies with the specified attribute.
         /// </summary>
         /// <param name="pagination">Pagination parameters.</param>
         /// <param name="attribute">
@@ -64,43 +68,32 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [Route("{attribute}")]
         public async Task<IHttpActionResult> GetEnemies(
             EnemiesPagination pagination,
-            string attribute,
-            CancellationToken cancellationToken = default(CancellationToken))
-        {
-            try
-            {
-                var content = await GetEnemiesAsync(pagination, attribute, cancellationToken);
-
-                return Ok(content);
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        internal async Task<EnemiesDTO> GetEnemiesAsync(
-            EnemiesPagination pagination,
-            string attribute,
-            CancellationToken cancellationToken)
+            [ModelBinder(typeof(EnemyAttributeBinder))] string attribute,
+            CancellationToken cancellationToken = default)
         {
             var baseQuery = from e in db.Enemies
                             select e;
-            if (attribute != null)
+            switch (attribute)
             {
-                switch (attribute)
-                {
-                    case "boss": baseQuery = baseQuery.Where(e => e.OptionalStats.Boss); break;
-                    case "bounce-on-movement-fail": baseQuery = baseQuery.Where(e => e.OptionalStats.BounceOnMovementFail); break;
-                    case "floating": baseQuery = baseQuery.Where(e => e.OptionalStats.Floating); break;
-                    case "ignore-liquids": baseQuery = baseQuery.Where(e => e.OptionalStats.IgnoreLiquids); break;
-                    case "ignore-walls": baseQuery = baseQuery.Where(e => e.OptionalStats.IgnoreWalls); break;
-                    case "is-monkey-like": baseQuery = baseQuery.Where(e => e.OptionalStats.IsMonkeyLike); break;
-                    case "massive": baseQuery = baseQuery.Where(e => e.OptionalStats.Massive); break;
-                    case "miniboss": baseQuery = baseQuery.Where(e => e.OptionalStats.Miniboss); break;
-                    default: throw new ArgumentException("Enemy attribute is invalid.");
-                }
+                case "boss": baseQuery = baseQuery.Where(e => e.OptionalStats.Boss); break;
+                case "bounce-on-movement-fail": baseQuery = baseQuery.Where(e => e.OptionalStats.BounceOnMovementFail); break;
+                case "floating": baseQuery = baseQuery.Where(e => e.OptionalStats.Floating); break;
+                case "ignore-liquids": baseQuery = baseQuery.Where(e => e.OptionalStats.IgnoreLiquids); break;
+                case "ignore-walls": baseQuery = baseQuery.Where(e => e.OptionalStats.IgnoreWalls); break;
+                case "is-monkey-like": baseQuery = baseQuery.Where(e => e.OptionalStats.IsMonkeyLike); break;
+                case "massive": baseQuery = baseQuery.Where(e => e.OptionalStats.Massive); break;
+                case "miniboss": baseQuery = baseQuery.Where(e => e.OptionalStats.Miniboss); break;
             }
+            var content = await GetEnemiesAsync(pagination, baseQuery, cancellationToken);
+
+            return Ok(content);
+        }
+
+        async Task<EnemiesDTO> GetEnemiesAsync(
+            EnemiesPagination pagination,
+            IQueryable<Enemy> baseQuery,
+            CancellationToken cancellationToken)
+        {
             var query = from e in baseQuery
                         orderby e.ElementName, e.Type
                         select new EnemyDTO
@@ -149,6 +142,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             }
 
             disposed = true;
+
             base.Dispose(disposing);
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,6 +13,125 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
     class EnemiesControllerTests
     {
+        static IEnumerable<Enemy> GetEnemies()
+        {
+            return new List<Enemy>
+            {
+                new Enemy
+                {
+                    ElementName = "monkey",
+                    Type = 4,
+                    Name = "Magic Monkey",
+                    Stats = new Stats
+                    {
+                        Health = 2,
+                        DamagePerHit = 0,
+                        BeatsPerMove = 1,
+                        CoinsToDrop = 2,
+                    },
+                    OptionalStats = new OptionalStats { IsMonkeyLike = true },
+                },
+                new Enemy
+                {
+                    ElementName = "necrodancer",
+                    Type = 1,
+                    Name = "The Necrodancer",
+                    Stats = new Stats
+                    {
+                        Health = 6,
+                        DamagePerHit = 3,
+                        BeatsPerMove = 2,
+                        CoinsToDrop = 0,
+                    },
+                    OptionalStats = new OptionalStats { Boss = true },
+                },
+                new Enemy
+                {
+                    ElementName = "bat",
+                    Type = 1,
+                    Name = "Blue Bat",
+                    Stats = new Stats
+                    {
+                        Health = 1,
+                        DamagePerHit = 1,
+                        BeatsPerMove = 2,
+                        CoinsToDrop = 2,
+                    },
+                    OptionalStats = new OptionalStats { Floating = true },
+                },
+                new Enemy
+                {
+                    ElementName = "tarmonster",
+                    Type = 1,
+                    Name = "Tarmonster",
+                    Stats = new Stats
+                    {
+                        Health = 1,
+                        DamagePerHit = 3,
+                        BeatsPerMove = 1,
+                        CoinsToDrop = 3,
+                    },
+                    OptionalStats = new OptionalStats { IgnoreLiquids = true },
+                },
+                new Enemy
+                {
+                    ElementName = "spider",
+                    Type = 1,
+                    Name = "Spider",
+                    Stats = new Stats
+                    {
+                        Health = 1,
+                        DamagePerHit = 2,
+                        BeatsPerMove = 2,
+                        CoinsToDrop = 3,
+                    },
+                    OptionalStats = new OptionalStats { IgnoreWalls = true },
+                },
+                new Enemy
+                {
+                    ElementName = "monkey",
+                    Type = 3,
+                    Name = "Green Monkey",
+                    Stats = new Stats
+                    {
+                        Health = 1,
+                        DamagePerHit = 0,
+                        BeatsPerMove = 1,
+                        CoinsToDrop = 1,
+                    },
+                    OptionalStats = new OptionalStats { IsMonkeyLike = true },
+                },
+                new Enemy
+                {
+                    ElementName = "dragon",
+                    Type = 2,
+                    Name = "Red Dragon",
+                    Stats = new Stats
+                    {
+                        Health = 6,
+                        DamagePerHit = 6,
+                        BeatsPerMove = 2,
+                        CoinsToDrop = 20,
+                    },
+                    OptionalStats = new OptionalStats { Massive = true },
+                },
+                new Enemy
+                {
+                    ElementName = "ogre",
+                    Type = 1,
+                    Name = "Ogre",
+                    Stats = new Stats
+                    {
+                        Health = 5,
+                        DamagePerHit = 5,
+                        BeatsPerMove = 4,
+                        CoinsToDrop = 15,
+                    },
+                    OptionalStats = new OptionalStats { Miniboss = true },
+                },
+            };
+        }
+
         [TestClass]
         public class Constructor
         {
@@ -19,7 +139,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public void ReturnsInstance()
             {
                 // Arrange
-                var db = new NecroDancerContext();
+                var mockDb = new Mock<NecroDancerContext>();
+                var db = mockDb.Object;
 
                 // Act
                 var controller = new EnemiesController(db);
@@ -30,64 +151,150 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         }
 
         [TestClass]
-        public class GetEnemiesMethod
+        public class GetEnemiesMethod_EnemiesPagination_CancellationToken
         {
-            [TestMethod]
-            public async Task ReturnsOkWithEnemies()
+            public GetEnemiesMethod_EnemiesPagination_CancellationToken()
             {
-                // Arrange
-                var mockSet = new MockDbSet<Enemy>();
+                var enemies = GetEnemies();
+                var mockDbEnemies = new MockDbSet<Enemy>(enemies);
+                var dbEnemies = mockDbEnemies.Object;
+                var mockDb = new Mock<NecroDancerContext>();
+                mockDb.Setup(x => x.Enemies).Returns(dbEnemies);
+                var db = mockDb.Object;
+                controller = new EnemiesController(db);
+                pagination = new EnemiesPagination();
+            }
 
-                var mockRepository = new Mock<NecroDancerContext>();
-                mockRepository.Setup(x => x.Enemies).Returns(mockSet.Object);
+            EnemiesController controller;
+            EnemiesPagination pagination;
 
-                var controller = new EnemiesController(mockRepository.Object);
-
-                // Act
-                var result = await controller.GetEnemies(new EnemiesPagination());
+            [TestMethod]
+            public async Task ReturnsOk()
+            {
+                // Arrange -> Act
+                var result = await controller.GetEnemies(pagination);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EnemiesDTO>));
             }
 
             [TestMethod]
-            public async Task WithAttribute_ReturnsOkWithEnemies()
+            public async Task ReturnsEnemies()
             {
-                // Arrange
-                var mockSet = new MockDbSet<Enemy>();
-
-                var mockRepository = new Mock<NecroDancerContext>();
-                mockRepository.Setup(x => x.Enemies).Returns(mockSet.Object);
-
-                var controller = new EnemiesController(mockRepository.Object);
-
-                // Act
-                var result = await controller.GetEnemies(new EnemiesPagination(), "boss");
+                // Arrange -> Act
+                var result = await controller.GetEnemies(pagination);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EnemiesDTO>));
+                var contentResult = (OkNegotiatedContentResult<EnemiesDTO>)result;
+                var contentEnemies = contentResult.Content.Enemies;
+                Assert.AreEqual(8, contentEnemies.Count());
+            }
+
+            [TestMethod]
+            public async Task ResultsAreOrderedByElemenyNameThenByType()
+            {
+                // Arrange -> Act
+                var result = await controller.GetEnemies(pagination);
+
+                // Assert
+                var contentResult = (OkNegotiatedContentResult<EnemiesDTO>)result;
+                var contentEnemies = contentResult.Content.Enemies;
+                var first = contentEnemies.First();
+                Assert.AreEqual("bat", first.Name);
+                Assert.AreEqual(1, first.Type);
+                var firstMonkey = contentEnemies.First(e => e.Name == "monkey");
+                Assert.AreEqual("monkey", firstMonkey.Name);
+                Assert.AreEqual(3, firstMonkey.Type);
+            }
+
+            [TestMethod]
+            public async Task LimitIsLessThanResultsCount_ReturnsLimitResults()
+            {
+                // Arrange
+                pagination.limit = 2;
+
+                // Act
+                var result = await controller.GetEnemies(pagination);
+
+                // Assert
+                var contentResult = (OkNegotiatedContentResult<EnemiesDTO>)result;
+                var contentEnemies = contentResult.Content.Enemies;
+                Assert.AreEqual(2, contentEnemies.Count());
+            }
+
+            [TestMethod]
+            public async Task OffsetIsSpecified_ReturnsOffsetResults()
+            {
+                // Arrange
+                pagination.offset = 2;
+
+                // Act
+                var result = await controller.GetEnemies(pagination);
+
+                // Assert
+                var contentResult = (OkNegotiatedContentResult<EnemiesDTO>)result;
+                var contentEnemies = contentResult.Content.Enemies;
+                var first = contentEnemies.First();
+                Assert.AreEqual("monkey", first.Name);
+                Assert.AreEqual(3, first.Type);
             }
         }
 
         [TestClass]
-        public class GetEnemiesAsync
+        public class GetEnemiesMethod_EnemiesPagination_String_CancellationToken
         {
-            [TestMethod]
-            public async Task ReturnsEnemies()
+            public GetEnemiesMethod_EnemiesPagination_String_CancellationToken()
             {
-                // Arrange
-                var mockSet = new MockDbSet<Enemy>();
+                var enemies = GetEnemies();
+                var mockDbEnemies = new MockDbSet<Enemy>(enemies);
+                var dbEnemies = mockDbEnemies.Object;
+                var mockDb = new Mock<NecroDancerContext>();
+                mockDb.Setup(x => x.Enemies).Returns(dbEnemies);
+                var db = mockDb.Object;
+                controller = new EnemiesController(db);
+                pagination = new EnemiesPagination();
+            }
 
-                var mockRepository = new Mock<NecroDancerContext>();
-                mockRepository.Setup(x => x.Enemies).Returns(mockSet.Object);
+            EnemiesController controller;
+            EnemiesPagination pagination;
 
-                var controller = new EnemiesController(mockRepository.Object);
-
-                // Act
-                var enemies = await controller.GetEnemiesAsync(new EnemiesPagination(), null, CancellationToken.None);
+            [DataTestMethod]
+            [DataRow("boss")]
+            [DataRow("bounce-on-movement-fail")]
+            [DataRow("floating")]
+            [DataRow("ignore-liquids")]
+            [DataRow("ignore-walls")]
+            [DataRow("is-monkey-like")]
+            [DataRow("massive")]
+            [DataRow("miniboss")]
+            public async Task ReturnsOk(string attribute)
+            {
+                // Arrange -> Act
+                var result = await controller.GetEnemies(pagination, attribute);
 
                 // Assert
-                Assert.IsInstanceOfType(enemies, typeof(EnemiesDTO));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EnemiesDTO>));
+            }
+
+            [DataTestMethod]
+            [DataRow("boss", "necrodancer", 1)]
+            [DataRow("floating", "bat", 1)]
+            [DataRow("ignore-liquids", "tarmonster", 1)]
+            [DataRow("ignore-walls", "spider", 1)]
+            [DataRow("is-monkey-like", "monkey", 3)]
+            [DataRow("massive", "dragon", 2)]
+            [DataRow("miniboss", "ogre", 1)]
+            public async Task ReturnsEnemiesFilteredByAttribute(string attribute, string name, int type)
+            {
+                // Arrange -> Act
+                var result = await controller.GetEnemies(pagination, attribute);
+
+                // Assert
+                var contentResult = (OkNegotiatedContentResult<EnemiesDTO>)result;
+                var contentEnemies = contentResult.Content.Enemies;
+                var first = contentEnemies.First();
+                Assert.AreEqual(name, first.Name);
+                Assert.AreEqual(type, first.Type);
             }
         }
     }

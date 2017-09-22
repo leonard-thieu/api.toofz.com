@@ -28,6 +28,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -127,6 +128,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\toofz.NecroDancer.Web.Api\toofz.NecroDancer.Web.Api.csproj">
+      <Project>{538c3cd9-be40-4cd6-aec8-4b7c07ec4ce7}</Project>
+      <Name>toofz.NecroDancer.Web.Api</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
@@ -135,29 +143,23 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContextUtil.cs" />
     <Compile Include="Controllers\EnemiesControllerTests.cs" />
     <Compile Include="Controllers\ItemsControllerTests.cs" />
     <Compile Include="Controllers\LeaderboardsControllerTests.cs" />
     <Compile Include="Controllers\PlayersControllerTests.cs" />
     <Compile Include="Controllers\ReplaysControllerTests.cs" />
+    <Compile Include="Infrastructure\EnemyAttributeBinderTests.cs" />
     <Compile Include="Infrastructure\LeaderboardCategoryBindersTests.cs" />
     <Compile Include="Infrastructure\MockLeaderboardCategoryBaseBinder.cs" />
     <Compile Include="Infrastructure\PaginationBinderTests.cs" />
-    <Compile Include="MaxValueAttributeTests.cs" />
-    <Compile Include="MinValueAttributeTests.cs" />
     <Compile Include="Models\LeaderboardCategoryBaseTests.cs" />
     <Compile Include="Models\MockLeaderboardCategoryBase.cs" />
     <Compile Include="Models\MockPagination.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\toofz.NecroDancer.Web.Api\toofz.NecroDancer.Web.Api.csproj">
-      <Project>{538c3cd9-be40-4cd6-aec8-4b7c07ec4ce7}</Project>
-      <Name>toofz.NecroDancer.Web.Api</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
+    <Compile Include="ContextUtil.cs" />
+    <Compile Include="MaxValueAttributeTests.cs" />
+    <Compile Include="MinValueAttributeTests.cs" />
+    <Compile Include="Util.cs" />
+    <Compile Include="ValueProviderResultExtensionsTests.cs" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -42,6 +42,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>App_Data/XmlDocument.xml</DocumentationFile>
     <NoWarn>1591</NoWarn>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -279,61 +280,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\api.toofz.com - Web Deploy.pubxml" />
-    <Compile Include="Identity\ApplicationDbContext.Views.cs">
-      <DependentUpon>ApplicationDbContext.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\CharactersBinder.cs" />
-    <Compile Include="Infrastructure\LeaderboardCategoryBaseBinder.cs" />
-    <Compile Include="Infrastructure\ModesBinder.cs" />
-    <Compile Include="Infrastructure\PaginationBinder.cs" />
-    <Compile Include="Infrastructure\ProductsBinder.cs" />
-    <Compile Include="Infrastructure\RunsBinder.cs" />
-    <Compile Include="IQueryableExtensions.cs" />
-    <Compile Include="Models\BulkStoreDTO.cs" />
-    <Compile Include="Models\Characters.cs" />
-    <Compile Include="Models\DailyLeaderboardDTO.cs" />
-    <Compile Include="Models\DailyLeaderboardEntriesDTO.cs" />
-    <Compile Include="Models\DailyLeaderboardsDTO.cs" />
-    <Compile Include="Models\EndDTO.cs" />
-    <Compile Include="Models\EnemiesDTO.cs" />
-    <Compile Include="Models\EnemiesPagination.cs" />
-    <Compile Include="Models\EnemyDTO.cs" />
-    <Compile Include="Models\EntryDTO.cs" />
-    <Compile Include="Models\IPagination.cs" />
-    <Compile Include="Models\ItemDTO.cs" />
-    <Compile Include="Models\ItemsDTO.cs" />
-    <Compile Include="Models\ItemsPagination.cs" />
-    <Compile Include="Models\LeaderboardDTO.cs" />
-    <Compile Include="Models\LeaderboardCategoryBase.cs" />
-    <Compile Include="Models\LeaderboardEntriesDTO.cs" />
-    <Compile Include="Models\LeaderboardsDTO.cs" />
-    <Compile Include="Models\LeaderboardsPagination.cs" />
-    <Compile Include="Models\Modes.cs" />
-    <Compile Include="Models\PlayerDTO.cs" />
-    <Compile Include="Models\PlayerEntriesDTO.cs" />
-    <Compile Include="Models\PlayersDTO.cs" />
-    <Compile Include="Models\PlayersPagination.cs" />
-    <Compile Include="Models\Products.cs" />
-    <Compile Include="Models\ReplayDTO.cs" />
-    <Compile Include="Models\ReplaysDTO.cs" />
-    <Compile Include="Models\ReplaysPagination.cs" />
-    <Compile Include="Models\Runs.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <WCFMetadata Include="Service References\" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Properties\PublishProfiles\api.toofz.com - Web Deploy.pubxml" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="App_Data\XmlDocument.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\FormatterConfiguration.cs" />
-    <Compile Include="App_Start\NinjectWebCommon.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -386,6 +339,8 @@
     <Content Include="Areas\HelpPage\Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Controllers\EnemiesController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\LeaderboardsController.cs" />
@@ -393,43 +348,63 @@
     <Compile Include="Controllers\ReplaysController.cs" />
     <Compile Include="ErrorHandler\AiHandleErrorAttribute.cs" />
     <Compile Include="Identity\ApplicationDbContext.cs" />
+    <Compile Include="Identity\ApplicationDbContext.Views.cs">
+      <DependentUpon>ApplicationDbContext.cs</DependentUpon>
+    </Compile>
     <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
+    <Compile Include="Infrastructure\CharactersBinder.cs" />
+    <Compile Include="Infrastructure\EnemyAttributeBinder.cs" />
+    <Compile Include="Infrastructure\LeaderboardCategoryBaseBinder.cs" />
+    <Compile Include="Infrastructure\ModesBinder.cs" />
+    <Compile Include="Infrastructure\PaginationBinder.cs" />
+    <Compile Include="Infrastructure\ProductsBinder.cs" />
+    <Compile Include="Infrastructure\RunsBinder.cs" />
+    <Compile Include="Models\BulkStoreDTO.cs" />
+    <Compile Include="Models\Characters.cs" />
+    <Compile Include="Models\DailyLeaderboardDTO.cs" />
+    <Compile Include="Models\DailyLeaderboardEntriesDTO.cs" />
+    <Compile Include="Models\DailyLeaderboardsDTO.cs" />
+    <Compile Include="Models\EndDTO.cs" />
+    <Compile Include="Models\EnemiesDTO.cs" />
+    <Compile Include="Models\EnemiesPagination.cs" />
+    <Compile Include="Models\EnemyDTO.cs" />
+    <Compile Include="Models\EntryDTO.cs" />
+    <Compile Include="Models\IPagination.cs" />
+    <Compile Include="Models\ItemDTO.cs" />
+    <Compile Include="Models\ItemsDTO.cs" />
+    <Compile Include="Models\ItemsPagination.cs" />
+    <Compile Include="Models\LeaderboardCategoryBase.cs" />
+    <Compile Include="Models\LeaderboardDTO.cs" />
+    <Compile Include="Models\LeaderboardEntriesDTO.cs" />
+    <Compile Include="Models\LeaderboardsDTO.cs" />
+    <Compile Include="Models\LeaderboardsPagination.cs" />
+    <Compile Include="Models\Modes.cs" />
+    <Compile Include="Models\PlayerDTO.cs" />
+    <Compile Include="Models\PlayerEntriesDTO.cs" />
     <Compile Include="Models\PlayerModel.cs" />
+    <Compile Include="Models\PlayersDTO.cs" />
+    <Compile Include="Models\PlayersPagination.cs" />
+    <Compile Include="Models\Products.cs" />
+    <Compile Include="Models\ReplayDTO.cs" />
     <Compile Include="Models\ReplayModel.cs" />
+    <Compile Include="Models\ReplaysDTO.cs" />
+    <Compile Include="Models\ReplaysPagination.cs" />
+    <Compile Include="Models\Runs.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Content Include="Views\Shared\_FaviconPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Web.config" />
     <Compile Include="AiExceptionLogger.cs" />
+    <Compile Include="BrowserJsonFormatter.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="IQueryableExtensions.cs" />
     <Compile Include="MaxValueAttribute.cs" />
     <Compile Include="MinValueAttribute.cs" />
     <Compile Include="ValidateModelAttribute.cs" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-    <Compile Include="BrowserJsonFormatter.cs" />
-    <Content Include="Global.asax" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Startup.cs" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Compile Include="ValueProviderResultExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Migrations\201601311141217_InitialCreate.cs" />
@@ -440,6 +415,36 @@
       <DependentUpon>201601311141217_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Migrations\Configuration.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\FormatterConfiguration.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Global.asax" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Compile Include="Startup.cs" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
@@ -560,4 +565,4 @@
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props'))" />
   </Target>
-</Project>
+    </Project>
