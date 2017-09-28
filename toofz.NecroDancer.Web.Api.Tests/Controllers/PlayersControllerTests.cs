@@ -52,7 +52,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Act
                 var actionResult = await controller.GetPlayers(new PlayersPagination());
-                var contentResult = actionResult as OkNegotiatedContentResult<PlayersDTO>;
+                var contentResult = actionResult as OkNegotiatedContentResult<PlayersEnvelope>;
 
                 // Assert
                 Assert.IsNotNull(contentResult);

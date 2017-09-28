@@ -58,7 +58,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a list of Steam players that match the search query.
         /// </returns>
-        [ResponseType(typeof(PlayersDTO))]
+        [ResponseType(typeof(PlayersEnvelope))]
         [Route("")]
         public async Task<IHttpActionResult> GetPlayers(
             PlayersPagination pagination,
@@ -93,13 +93,13 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 .Take(pagination.limit)
                 .ToListAsync(cancellationToken);
 
-            var results = new PlayersDTO
+            var content = new PlayersEnvelope
             {
                 Total = total,
                 Players = players,
             };
 
-            return Ok(results);
+            return Ok(content);
         }
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                Version = x?.Version,
                            }).ToList();
 
-            var vm = new PlayerEntriesDTO
+            var content = new PlayerEntriesDTO
             {
                 Player = new PlayerDTO
                 {
@@ -196,7 +196,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 Entries = entries,
             };
 
-            return Ok(vm);
+            return Ok(content);
         }
 
         /// <summary>
@@ -256,7 +256,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                 })
                                 .FirstOrDefaultAsync(cancellationToken);
 
-            var entry = new EntryDTO
+            var content = new EntryDTO
             {
                 Player = new PlayerDTO
                 {
@@ -276,7 +276,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 Version = replay?.Version,
             };
 
-            return Ok(entry);
+            return Ok(content);
         }
 
         /// <summary>
@@ -306,8 +306,9 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                              LastUpdate = p.LastUpdate,
                              Avatar = p.Avatar,
                          }).ToList();
-            await storeClient.SaveChangesAsync(model, true, cancellationToken);
-            var content = new BulkStoreDTO { RowsAffected = players.Count() };
+            var rowsAffected = await storeClient.SaveChangesAsync(model, true, cancellationToken);
+
+            var content = new BulkStoreDTO { RowsAffected = rowsAffected };
 
             return Ok(content);
         }

@@ -59,14 +59,14 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer leaderboards.
         /// </returns>
-        [ResponseType(typeof(LeaderboardsDTO))]
+        [ResponseType(typeof(LeaderboardsEnvelope))]
         [Route("")]
         public async Task<IHttpActionResult> GetLeaderboards(
             Products products,
             Modes modes,
             Runs runs,
             Characters characters,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
             var lbids = (from h in leaderboardHeaders
                          where products.Contains(h.Product)
@@ -101,13 +101,13 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                     Total = l.Count,
                                 }).ToList();
 
-            var vm = new LeaderboardsDTO
+            var content = new LeaderboardsEnvelope
             {
                 Total = leaderboards.Count,
                 Leaderboards = leaderboards,
             };
 
-            return Ok(vm);
+            return Ok(content);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         public async Task<IHttpActionResult> GetLeaderboardEntries(
             LeaderboardsPagination pagination,
             int lbid,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
             var leaderboard = await db.Leaderboards.FirstOrDefaultAsync(l => l.LeaderboardId == lbid, cancellationToken);
             if (leaderboard == null)
@@ -235,12 +235,12 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
         /// A product is invalid.
         /// </httpStatusCode>
-        [ResponseType(typeof(DailyLeaderboardsDTO))]
+        [ResponseType(typeof(DailyLeaderboardsEnvelope))]
         [Route("dailies")]
         public async Task<IHttpActionResult> GetDailyLeaderboards(
             LeaderboardsPagination pagination,
             Products products,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
             var productIds = new List<int>();
             foreach (var p in products)
@@ -281,13 +281,13 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                 })
                                 .ToList();
 
-            var vm = new DailyLeaderboardsDTO
+            var content = new DailyLeaderboardsEnvelope
             {
                 Total = leaderboards.Count,
                 Leaderboards = leaderboards,
             };
 
-            return Ok(vm);
+            return Ok(content);
         }
 
         /// <summary>
@@ -305,7 +305,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         public async Task<IHttpActionResult> GetDailyLeaderboardEntries(
             LeaderboardsPagination pagination,
             int lbid,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
             var leaderboard = await db.DailyLeaderboards.FirstOrDefaultAsync(l => l.LeaderboardId == lbid, cancellationToken);
             if (leaderboard == null)

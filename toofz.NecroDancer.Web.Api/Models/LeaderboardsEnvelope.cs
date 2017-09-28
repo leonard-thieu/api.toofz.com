@@ -4,20 +4,20 @@ using System.Runtime.Serialization;
 namespace toofz.NecroDancer.Web.Api.Models
 {
     /// <summary>
-    /// A page of Crypt of the NecroDancer daily leaderboards.
+    /// A page of Crypt of the NecroDancer leaderboards.
     /// </summary>
     [DataContract]
-    public sealed class DailyLeaderboardsDTO
+    public sealed class LeaderboardsEnvelope
     {
         /// <summary>
-        /// Total number of daily leaderboards.
+        /// Total number of leaderboards.
         /// </summary>
         [DataMember(Name = "total")]
         public int Total { get; set; }
         /// <summary>
-        /// A collection of daily leaderboards.
+        /// A collection of leaderboards.
         /// </summary>
-        [DataMember(Name = "leaderboard")]
-        public IEnumerable<DailyLeaderboardDTO> Leaderboards { get; set; }
+        [DataMember(Name = "leaderboards")]
+        public IEnumerable<LeaderboardDTO> Leaderboards { get; set; }
     }
 }

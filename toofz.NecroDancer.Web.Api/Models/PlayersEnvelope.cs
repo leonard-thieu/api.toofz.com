@@ -4,20 +4,20 @@ using System.Runtime.Serialization;
 namespace toofz.NecroDancer.Web.Api.Models
 {
     /// <summary>
-    /// A page of Crypt of the NecroDancer enemies.
+    /// A page of Steam players.
     /// </summary>
     [DataContract]
-    public sealed class EnemiesDTO
+    public sealed class PlayersEnvelope
     {
         /// <summary>
-        /// The total number of enemies in the result set.
+        /// Total number of players.
         /// </summary>
         [DataMember(Name = "total")]
         public int Total { get; set; }
         /// <summary>
-        /// A collection of enemies.
+        /// A collection of players.
         /// </summary>
-        [DataMember(Name = "enemies")]
-        public IEnumerable<EnemyDTO> Enemies { get; set; }
+        [DataMember(Name = "players")]
+        public IEnumerable<PlayerDTO> Players { get; set; }
     }
 }

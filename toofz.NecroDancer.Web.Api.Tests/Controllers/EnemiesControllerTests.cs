@@ -151,7 +151,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetEnemies(pagination);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EnemiesDTO>));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EnemiesEnvelope>));
             }
 
             [TestMethod]
@@ -161,7 +161,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetEnemies(pagination);
 
                 // Assert
-                var contentResult = (OkNegotiatedContentResult<EnemiesDTO>)result;
+                var contentResult = (OkNegotiatedContentResult<EnemiesEnvelope>)result;
                 var contentEnemies = contentResult.Content.Enemies;
                 Assert.AreEqual(8, contentEnemies.Count());
             }
@@ -173,7 +173,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetEnemies(pagination);
 
                 // Assert
-                var contentResult = (OkNegotiatedContentResult<EnemiesDTO>)result;
+                var contentResult = (OkNegotiatedContentResult<EnemiesEnvelope>)result;
                 var contentEnemies = contentResult.Content.Enemies;
                 var first = contentEnemies.First();
                 Assert.AreEqual("bat", first.Name);
@@ -193,7 +193,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetEnemies(pagination);
 
                 // Assert
-                var contentResult = (OkNegotiatedContentResult<EnemiesDTO>)result;
+                var contentResult = (OkNegotiatedContentResult<EnemiesEnvelope>)result;
                 var contentEnemies = contentResult.Content.Enemies;
                 Assert.AreEqual(2, contentEnemies.Count());
             }
@@ -208,7 +208,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetEnemies(pagination);
 
                 // Assert
-                var contentResult = (OkNegotiatedContentResult<EnemiesDTO>)result;
+                var contentResult = (OkNegotiatedContentResult<EnemiesEnvelope>)result;
                 var contentEnemies = contentResult.Content.Enemies;
                 var first = contentEnemies.First();
                 Assert.AreEqual("monkey", first.Name);
@@ -249,7 +249,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetEnemies(pagination, attribute);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EnemiesDTO>));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EnemiesEnvelope>));
             }
 
             [DataTestMethod]
@@ -266,7 +266,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetEnemies(pagination, attribute);
 
                 // Assert
-                var contentResult = (OkNegotiatedContentResult<EnemiesDTO>)result;
+                var contentResult = (OkNegotiatedContentResult<EnemiesEnvelope>)result;
                 var contentEnemies = contentResult.Content.Enemies;
                 var first = contentEnemies.First();
                 Assert.AreEqual(name, first.Name);

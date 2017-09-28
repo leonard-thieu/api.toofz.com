@@ -41,7 +41,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer items.
         /// </returns>
-        [ResponseType(typeof(ItemsDTO))]
+        [ResponseType(typeof(ItemsEnvelope))]
         [Route("")]
         public async Task<IHttpActionResult> GetItems(
             ItemsPagination pagination,
@@ -66,7 +66,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
         /// Item category is invalid.
         /// </httpStatusCode>
-        [ResponseType(typeof(ItemsDTO))]
+        [ResponseType(typeof(ItemsEnvelope))]
         [Route("{category}")]
         public async Task<IHttpActionResult> GetItems(
             ItemsPagination pagination,
@@ -108,7 +108,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
         /// Item subcategory is invalid.
         /// </httpStatusCode>
-        [ResponseType(typeof(ItemsDTO))]
+        [ResponseType(typeof(ItemsEnvelope))]
         [Route("{category}/{subcategory}")]
         public async Task<IHttpActionResult> GetItems(
             ItemsPagination pagination,
@@ -152,7 +152,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             return Ok(content);
         }
 
-        async Task<ItemsDTO> GetItemsAsync(
+        async Task<ItemsEnvelope> GetItemsAsync(
             ItemsPagination pagination,
             IQueryable<Item> baseQuery,
             CancellationToken cancellationToken)
@@ -178,7 +178,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                          })
                          .ToList();
 
-            return new ItemsDTO
+            return new ItemsEnvelope
             {
                 Total = total,
                 Items = items,

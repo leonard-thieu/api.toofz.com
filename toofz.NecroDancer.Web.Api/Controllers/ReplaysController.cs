@@ -33,13 +33,13 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         readonly LeaderboardsContext db;
         readonly ILeaderboardsStoreClient storeClient;
 
-        [ResponseType(typeof(ReplaysDTO))]
+        [ResponseType(typeof(ReplaysEnvelope))]
         [Route("")]
         public async Task<IHttpActionResult> GetReplays(
             ReplaysPagination pagination,
             int? version = null,
             int? error = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
             var query = from r in db.Replays
                         where r.Version == version && r.ErrorCode == error
@@ -59,13 +59,13 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 .Take(pagination.limit)
                 .ToListAsync(cancellationToken);
 
-            var results = new ReplaysDTO
+            var content = new ReplaysEnvelope
             {
                 Total = total,
                 Replays = replays,
             };
 
-            return Ok(results);
+            return Ok(content);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [Authorize(Users = "ReplaysService")]
         public async Task<IHttpActionResult> PostReplays(
             IEnumerable<ReplayModel> replays,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
             var model = (from r in replays
                          select new Replay
@@ -109,7 +109,9 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 return Conflict();
             }
 
-            return Ok(new BulkStoreDTO { RowsAffected = replays.Count() });
+            var content = new BulkStoreDTO { RowsAffected = replays.Count() };
+
+            return Ok(content);
         }
 
         #region IDisposable Members

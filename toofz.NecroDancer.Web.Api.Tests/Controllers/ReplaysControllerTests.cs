@@ -34,7 +34,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetReplays(new ReplaysPagination());
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ReplaysDTO>));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ReplaysEnvelope>));
             }
         }
 

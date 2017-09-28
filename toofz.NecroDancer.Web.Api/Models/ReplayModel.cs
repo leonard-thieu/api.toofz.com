@@ -13,12 +13,10 @@ namespace toofz.NecroDancer.Web.Api.Models
         /// </summary>
         [Required]
         public long ReplayId { get; set; }
-
         /// <summary>
         /// An error code indicating what error was encountered while processing the replay.
         /// </summary>
         public int? ErrorCode { get; set; }
-
         /// <summary>
         /// The seed of the replay.
         /// </summary>

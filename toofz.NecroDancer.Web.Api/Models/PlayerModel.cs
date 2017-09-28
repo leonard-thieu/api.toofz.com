@@ -13,24 +13,20 @@ namespace toofz.NecroDancer.Web.Api.Models
         /// </summary>
         [Required]
         public long? SteamId { get; set; }
-
         /// <summary>
         /// Indicates if a player exists.
         /// </summary>
         [Required]
         public bool? Exists { get; set; }
-
         /// <summary>
         /// The player's display name.
         /// </summary>
         public string Name { get; set; }
-
         /// <summary>
         /// The last time the player's information was updated.
         /// </summary>
         [Required]
         public DateTime? LastUpdate { get; set; }
-
         /// <summary>
         /// The URL of the player's avatar.
         /// </summary>

@@ -35,7 +35,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetLeaderboards(products, modes, runs, characters);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<LeaderboardsDTO>));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<LeaderboardsEnvelope>));
             }
         }
 
@@ -114,7 +114,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetDailyLeaderboards(new LeaderboardsPagination(), products);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<DailyLeaderboardsDTO>));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<DailyLeaderboardsEnvelope>));
             }
         }
 

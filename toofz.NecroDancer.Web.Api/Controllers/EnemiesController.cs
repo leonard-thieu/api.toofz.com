@@ -36,7 +36,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer enemies.
         /// </returns>
-        [ResponseType(typeof(EnemiesDTO))]
+        [ResponseType(typeof(EnemiesEnvelope))]
         [Route("")]
         public async Task<IHttpActionResult> GetEnemies(
             EnemiesPagination pagination,
@@ -64,7 +64,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
         /// Enemy attribute is invalid.
         /// </httpStatusCode>
-        [ResponseType(typeof(EnemiesDTO))]
+        [ResponseType(typeof(EnemiesEnvelope))]
         [Route("{attribute}")]
         public async Task<IHttpActionResult> GetEnemies(
             EnemiesPagination pagination,
@@ -89,7 +89,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             return Ok(content);
         }
 
-        async Task<EnemiesDTO> GetEnemiesAsync(
+        async Task<EnemiesEnvelope> GetEnemiesAsync(
             EnemiesPagination pagination,
             IQueryable<Enemy> baseQuery,
             CancellationToken cancellationToken)
@@ -117,7 +117,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                            })
                            .ToList();
 
-            return new EnemiesDTO
+            return new EnemiesEnvelope
             {
                 Total = total,
                 Enemies = enemies,

@@ -217,7 +217,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetItems(pagination);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ItemsDTO>));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ItemsEnvelope>));
             }
 
             [TestMethod]
@@ -227,7 +227,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetItems(pagination);
 
                 // Assert
-                var contentResult = (OkNegotiatedContentResult<ItemsDTO>)result;
+                var contentResult = (OkNegotiatedContentResult<ItemsEnvelope>)result;
                 var contentItems = contentResult.Content.Items;
                 Assert.AreEqual(10, contentItems.Count());
             }
@@ -239,7 +239,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetItems(pagination);
 
                 // Assert
-                var contentResult = (OkNegotiatedContentResult<ItemsDTO>)result;
+                var contentResult = (OkNegotiatedContentResult<ItemsEnvelope>)result;
                 var contentItems = contentResult.Content.Items;
                 var first = contentItems.First();
                 Assert.AreEqual("armor_glass", first.Name);
@@ -255,7 +255,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetItems(pagination);
 
                 // Assert
-                var contentResult = (OkNegotiatedContentResult<ItemsDTO>)result;
+                var contentResult = (OkNegotiatedContentResult<ItemsEnvelope>)result;
                 var contentItems = contentResult.Content.Items;
                 Assert.AreEqual(2, contentItems.Count());
             }
@@ -270,7 +270,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetItems(pagination);
 
                 // Assert
-                var contentResult = (OkNegotiatedContentResult<ItemsDTO>)result;
+                var contentResult = (OkNegotiatedContentResult<ItemsEnvelope>)result;
                 var contentItems = contentResult.Content.Items;
                 var first = contentItems.First();
                 Assert.AreEqual("food_1", first.Name);
@@ -312,7 +312,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetItems(pagination, category);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ItemsDTO>));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ItemsEnvelope>));
             }
 
             [DataTestMethod]
@@ -332,7 +332,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetItems(pagination, category);
 
                 // Assert
-                var contentResult = (OkNegotiatedContentResult<ItemsDTO>)result;
+                var contentResult = (OkNegotiatedContentResult<ItemsEnvelope>)result;
                 var contentItems = contentResult.Content.Items;
                 var first = contentItems.First();
                 Assert.AreEqual(name, first.Name);
@@ -383,7 +383,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetItems(pagination, filter);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ItemsDTO>));
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ItemsEnvelope>));
             }
 
             [DataTestMethod]
@@ -412,7 +412,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetItems(pagination, filter);
 
                 // Assert
-                var contentResult = (OkNegotiatedContentResult<ItemsDTO>)result;
+                var contentResult = (OkNegotiatedContentResult<ItemsEnvelope>)result;
                 var contentItems = contentResult.Content.Items;
                 var first = contentItems.First();
                 Assert.AreEqual(name, first.Name);
