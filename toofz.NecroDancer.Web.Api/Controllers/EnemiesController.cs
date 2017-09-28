@@ -21,12 +21,12 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// Initializes a new instance of the <see cref="EnemiesController"/> class.
         /// </summary>
         /// <param name="db">The NecroDancer context.</param>
-        public EnemiesController(NecroDancerContext db)
+        public EnemiesController(INecroDancerContext db)
         {
             this.db = db;
         }
 
-        readonly NecroDancerContext db;
+        readonly INecroDancerContext db;
 
         /// <summary>
         /// Gets a list of Crypt of the NecroDancer enemies.
@@ -44,6 +44,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         {
             var baseQuery = from e in db.Enemies
                             select e;
+
             var content = await GetEnemiesAsync(pagination, baseQuery, cancellationToken);
 
             return Ok(content);
@@ -84,6 +85,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 case "massive": baseQuery = baseQuery.Where(e => e.OptionalStats.Massive); break;
                 case "miniboss": baseQuery = baseQuery.Where(e => e.OptionalStats.Miniboss); break;
             }
+
             var content = await GetEnemiesAsync(pagination, baseQuery, cancellationToken);
 
             return Ok(content);

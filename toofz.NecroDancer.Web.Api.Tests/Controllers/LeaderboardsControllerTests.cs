@@ -12,20 +12,41 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
     class LeaderboardsControllerTests
     {
         [TestClass]
-        public class GetLeaderboards
+        public class Constructor
+        {
+            [TestMethod]
+            public void ReturnsInstance()
+            {
+                // Arrange
+                var db = Mock.Of<ILeaderboardsContext>();
+                var categories = new Categories();
+                var headers = new LeaderboardHeaders();
+
+                // Act
+                var controller = new LeaderboardsController(db, categories, headers);
+
+                // Assert
+                Assert.IsInstanceOfType(controller, typeof(LeaderboardsController));
+            }
+        }
+
+        [TestClass]
+        public class GetLeaderboardsMethod
         {
             [TestMethod]
             public async Task ReturnsOkWithLeaderboards()
             {
                 // Arrange
                 var mockLeaderboards = new MockDbSet<Leaderboard>();
-                var mockDb = new Mock<LeaderboardsContext>();
+                var leaderboards = mockLeaderboards.Object;
+                var mockDb = new Mock<ILeaderboardsContext>();
                 mockDb
-                    .Setup(db => db.Leaderboards)
-                    .Returns(mockLeaderboards.Object);
+                    .Setup(d => d.Leaderboards)
+                    .Returns(leaderboards);
+                var db = mockDb.Object;
                 var categories = new Categories();
                 var headers = new LeaderboardHeaders();
-                var controller = new LeaderboardsController(mockDb.Object, categories, headers);
+                var controller = new LeaderboardsController(db, categories, headers);
                 var products = new Products(new Category());
                 var modes = new Modes(new Category());
                 var runs = new Runs(new Category());
@@ -40,7 +61,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         }
 
         [TestClass]
-        public class GetLeaderboardEntries
+        public class GetLeaderboardEntriesMethod
         {
             [TestMethod]
             public async Task ReturnsOkWithLeaderboardEntries()
@@ -92,7 +113,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         }
 
         [TestClass]
-        public class GetDailyLeaderboards
+        public class GetDailyLeaderboardsMethod
         {
             [TestMethod]
             public async Task ReturnsOkWithDailyLeaderboards()
@@ -119,7 +140,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         }
 
         [TestClass]
-        public class GetDailyLeaderboardEntries
+        public class GetDailyLeaderboardEntriesMethod
         {
             [TestMethod]
             public async Task ReturnsOkWithDailyLeaderboardEntries()
@@ -160,6 +181,45 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<DailyLeaderboardEntriesDTO>));
+            }
+        }
+
+        [TestClass]
+        public class DisposeMethod
+        {
+            [TestMethod]
+            public void DisposesDb()
+            {
+                // Arrange
+                var mockDb = new Mock<ILeaderboardsContext>();
+                var db = mockDb.Object;
+                var categories = new Categories();
+                var headers = new LeaderboardHeaders();
+                var controller = new LeaderboardsController(db, categories, headers);
+
+                // Act
+                controller.Dispose();
+
+                // Assert
+                mockDb.Verify(d => d.Dispose(), Times.Once);
+            }
+
+            [TestMethod]
+            public void DisposesMoreThanOnce_OnlyDisposesDbOnce()
+            {
+                // Arrange
+                var mockDb = new Mock<ILeaderboardsContext>();
+                var db = mockDb.Object;
+                var categories = new Categories();
+                var headers = new LeaderboardHeaders();
+                var controller = new LeaderboardsController(db, categories, headers);
+
+                // Act
+                controller.Dispose();
+                controller.Dispose();
+
+                // Assert
+                mockDb.Verify(d => d.Dispose(), Times.Once);
             }
         }
     }

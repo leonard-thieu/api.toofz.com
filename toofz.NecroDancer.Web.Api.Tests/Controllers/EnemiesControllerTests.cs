@@ -273,5 +273,40 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.AreEqual(type, first.Type);
             }
         }
+
+        [TestClass]
+        public class DisposeMethod
+        {
+            [TestMethod]
+            public void DisposesDb()
+            {
+                // Arrange
+                var mockDb = new Mock<INecroDancerContext>();
+                var db = mockDb.Object;
+                var controller = new EnemiesController(db);
+
+                // Act
+                controller.Dispose();
+
+                // Assert
+                mockDb.Verify(d => d.Dispose(), Times.Once);
+            }
+
+            [TestMethod]
+            public void DisposeMoreThanOnce_DisposesDbOnlyOnce()
+            {
+                // Arrange
+                var mockDb = new Mock<INecroDancerContext>();
+                var db = mockDb.Object;
+                var controller = new EnemiesController(db);
+
+                // Act
+                controller.Dispose();
+                controller.Dispose();
+
+                // Assert
+                mockDb.Verify(d => d.Dispose(), Times.Once);
+            }
+        }
     }
 }

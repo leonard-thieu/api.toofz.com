@@ -13,7 +13,25 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
     class ReplaysControllerTests
     {
         [TestClass]
-        public class GetReplays
+        public class Constructor
+        {
+            [TestMethod]
+            public void ReturnsInstance()
+            {
+                // Arrange
+                var db = Mock.Of<ILeaderboardsContext>();
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+
+                // Act
+                var controller = new ReplaysController(db, storeClient);
+
+                // Assert
+                Assert.IsInstanceOfType(controller, typeof(ReplaysController));
+            }
+        }
+
+        [TestClass]
+        public class GetReplaysMethod
         {
             [TestMethod]
             public async Task ReturnsOkWithReplays()
@@ -39,7 +57,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         }
 
         [TestClass]
-        public class PostReplays
+        public class PostReplaysMethod
         {
             [TestMethod]
             public async Task ReturnsOkWithBulkStore()
@@ -56,6 +74,43 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<BulkStoreDTO>));
+            }
+        }
+
+        [TestClass]
+        public class DisposeMethod
+        {
+            [TestMethod]
+            public void DisposesDb()
+            {
+                // Arrange
+                var mockDb = new Mock<ILeaderboardsContext>();
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var controller = new ReplaysController(db, storeClient);
+
+                // Act
+                controller.Dispose();
+
+                // Assert
+                mockDb.Verify(d => d.Dispose(), Times.Once);
+            }
+
+            [TestMethod]
+            public void DisposesMoreThanOnce_OnlyDisposesDbOnce()
+            {
+                // Arrange
+                var mockDb = new Mock<ILeaderboardsContext>();
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var controller = new ReplaysController(db, storeClient);
+
+                // Act
+                controller.Dispose();
+                controller.Dispose();
+
+                // Assert
+                mockDb.Verify(d => d.Dispose(), Times.Once);
             }
         }
     }

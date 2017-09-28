@@ -23,14 +23,14 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <param name="db">The leaderboards context.</param>
         /// <param name="storeClient">The store client used to store submitted data.</param>
         public ReplaysController(
-            LeaderboardsContext db,
+            ILeaderboardsContext db,
             ILeaderboardsStoreClient storeClient)
         {
             this.db = db;
             this.storeClient = storeClient;
         }
 
-        readonly LeaderboardsContext db;
+        readonly ILeaderboardsContext db;
         readonly ILeaderboardsStoreClient storeClient;
 
         [ResponseType(typeof(ReplaysEnvelope))]

@@ -26,12 +26,12 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// Initializes a new instance of the <see cref="ItemsController"/> class.
         /// </summary>
         /// <param name="db">The NecroDancer context.</param>
-        public ItemsController(NecroDancerContext db)
+        public ItemsController(INecroDancerContext db)
         {
             this.db = db;
         }
 
-        readonly NecroDancerContext db;
+        readonly INecroDancerContext db;
 
         /// <summary>
         /// Gets a list of Crypt of the NecroDancer items.
@@ -49,6 +49,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         {
             var baseQuery = from i in db.Items
                             select i;
+
             var content = await GetItemsAsync(pagination, baseQuery, cancellationToken);
 
             return Ok(content);
@@ -88,6 +89,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 case "torches": baseQuery = baseQuery.Where(i => i.IsTorch); break;
                 case "weapons": baseQuery = baseQuery.Where(i => i.IsWeapon); break;
             }
+
             var content = await GetItemsAsync(pagination, baseQuery, cancellationToken);
 
             return Ok(content);
@@ -147,6 +149,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                     }
                     break;
             }
+
             var content = await GetItemsAsync(pagination, baseQuery, cancellationToken);
 
             return Ok(content);

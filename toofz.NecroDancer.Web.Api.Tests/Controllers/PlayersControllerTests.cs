@@ -61,7 +61,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         }
 
         [TestClass]
-        public class GetPlayer
+        public class GetPlayerMethod
         {
             [TestMethod]
             public async Task ValidParams_ReturnsPlayerEntries()
@@ -95,7 +95,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         }
 
         [TestClass]
-        public class PostPlayers
+        public class PostPlayersMethod
         {
             [TestMethod]
             public async Task ValidParams_ReturnsBulkStoreDTO()
@@ -117,6 +117,45 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Assert
                 Assert.IsNotNull(contentResult);
                 Assert.IsNotNull(contentResult.Content);
+            }
+        }
+
+        [TestClass]
+        public class DisposeMethod
+        {
+            [TestMethod]
+            public void DisposesDb()
+            {
+                // Arrange
+                var mockDb = new Mock<ILeaderboardsContext>();
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var leaderboardHeaders = new LeaderboardHeaders();
+                var controller = new PlayersController(db, storeClient, leaderboardHeaders);
+
+                // Act
+                controller.Dispose();
+
+                // Assert
+                mockDb.Verify(d => d.Dispose(), Times.Once);
+            }
+
+            [TestMethod]
+            public void DisposesMoreThanOnce_OnlyDisposesDbOnce()
+            {
+                // Arrange
+                var mockDb = new Mock<ILeaderboardsContext>();
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var leaderboardHeaders = new LeaderboardHeaders();
+                var controller = new PlayersController(db, storeClient, leaderboardHeaders);
+
+                // Act
+                controller.Dispose();
+                controller.Dispose();
+
+                // Assert
+                mockDb.Verify(d => d.Dispose(), Times.Once);
             }
         }
     }

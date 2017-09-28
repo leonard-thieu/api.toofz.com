@@ -23,7 +23,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <param name="leaderboardCategories">Leaderboard categories.</param>
         /// <param name="leaderboardHeaders">Leaderboard headers.</param>
         public LeaderboardsController(
-            LeaderboardsContext db,
+            ILeaderboardsContext db,
             Categories leaderboardCategories,
             LeaderboardHeaders leaderboardHeaders)
         {
@@ -32,7 +32,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             this.leaderboardHeaders = leaderboardHeaders;
         }
 
-        readonly LeaderboardsContext db;
+        readonly ILeaderboardsContext db;
         readonly Categories leaderboardCategories;
         readonly LeaderboardHeaders leaderboardHeaders;
 
