@@ -68,7 +68,7 @@ namespace toofz.NecroDancer.Web.Api
             var leaderboardsConnectionString = Util.GetEnvVar("LeaderboardsConnectionString");
 
             kernel.Bind<NecroDancerContext>().ToConstructor(s => new NecroDancerContext(necroDancerConnectionString));
-            kernel.Bind<LeaderboardsContext>().ToConstructor(s => new LeaderboardsContext(leaderboardsConnectionString));
+            kernel.Bind<ILeaderboardsContext>().ToConstructor(s => new LeaderboardsContext(leaderboardsConnectionString));
             kernel.Bind<SqlConnection>().ToMethod(s =>
             {
                 var connection = new SqlConnection(leaderboardsConnectionString);

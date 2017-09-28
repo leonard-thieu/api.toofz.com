@@ -17,11 +17,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             return new List<Enemy>
             {
-                new Enemy
+                new Enemy("monkey", 4)
                 {
-                    ElementName = "monkey",
-                    Type = 4,
-                    Name = "Magic Monkey",
                     Stats = new Stats
                     {
                         Health = 2,
@@ -31,11 +28,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     },
                     OptionalStats = new OptionalStats { IsMonkeyLike = true },
                 },
-                new Enemy
+                new Enemy("necrodancer", 1)
                 {
-                    ElementName = "necrodancer",
-                    Type = 1,
-                    Name = "The Necrodancer",
                     Stats = new Stats
                     {
                         Health = 6,
@@ -45,11 +39,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     },
                     OptionalStats = new OptionalStats { Boss = true },
                 },
-                new Enemy
+                new Enemy("bat", 1)
                 {
-                    ElementName = "bat",
-                    Type = 1,
-                    Name = "Blue Bat",
                     Stats = new Stats
                     {
                         Health = 1,
@@ -59,11 +50,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     },
                     OptionalStats = new OptionalStats { Floating = true },
                 },
-                new Enemy
+                new Enemy("tarmonster", 1)
                 {
-                    ElementName = "tarmonster",
-                    Type = 1,
-                    Name = "Tarmonster",
                     Stats = new Stats
                     {
                         Health = 1,
@@ -73,11 +61,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     },
                     OptionalStats = new OptionalStats { IgnoreLiquids = true },
                 },
-                new Enemy
+                new Enemy("spider", 1)
                 {
-                    ElementName = "spider",
-                    Type = 1,
-                    Name = "Spider",
                     Stats = new Stats
                     {
                         Health = 1,
@@ -87,11 +72,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     },
                     OptionalStats = new OptionalStats { IgnoreWalls = true },
                 },
-                new Enemy
+                new Enemy("monkey", 3)
                 {
-                    ElementName = "monkey",
-                    Type = 3,
-                    Name = "Green Monkey",
                     Stats = new Stats
                     {
                         Health = 1,
@@ -101,11 +83,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     },
                     OptionalStats = new OptionalStats { IsMonkeyLike = true },
                 },
-                new Enemy
+                new Enemy("dragon", 2)
                 {
-                    ElementName = "dragon",
-                    Type = 2,
-                    Name = "Red Dragon",
                     Stats = new Stats
                     {
                         Health = 6,
@@ -115,11 +94,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     },
                     OptionalStats = new OptionalStats { Massive = true },
                 },
-                new Enemy
+                new Enemy("ogre", 1)
                 {
-                    ElementName = "ogre",
-                    Type = 1,
-                    Name = "Ogre",
                     Stats = new Stats
                     {
                         Health = 5,

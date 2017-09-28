@@ -251,17 +251,17 @@
     <Reference Include="toofz, Version=7.2.0.182, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.7.2.0\lib\net45\toofz.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer, Version=2.1.4.61, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.2.1.4\lib\net45\toofz.NecroDancer.dll</HintPath>
+    <Reference Include="toofz.NecroDancer, Version=3.0.1.84, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.3.0.1\lib\net45\toofz.NecroDancer.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer.Data, Version=4.0.0.30, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.Data.4.0.0\lib\net45\toofz.NecroDancer.Data.dll</HintPath>
+    <Reference Include="toofz.NecroDancer.Data, Version=5.0.0.34, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.Data.5.0.0\lib\net45\toofz.NecroDancer.Data.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer.Leaderboards, Version=9.0.0.174, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.9.0.0\lib\net45\toofz.NecroDancer.Leaderboards.dll</HintPath>
+    <Reference Include="toofz.NecroDancer.Leaderboards, Version=10.0.0.178, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.10.0.0\lib\net45\toofz.NecroDancer.Leaderboards.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer.Leaderboards.Data, Version=2.0.2.25, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.Data.2.0.2\lib\net45\toofz.NecroDancer.Leaderboards.Data.dll</HintPath>
+    <Reference Include="toofz.NecroDancer.Leaderboards.Data, Version=3.0.0.30, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.Data.3.0.0\lib\net45\toofz.NecroDancer.Leaderboards.Data.dll</HintPath>
     </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
@@ -343,6 +343,7 @@
     <Compile Include="Identity\ApplicationUser.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\CharactersBinder.cs" />
+    <Compile Include="Infrastructure\CommaSeparatedValuesBinder.cs" />
     <Compile Include="Infrastructure\EnemyAttributeBinder.cs" />
     <Compile Include="Infrastructure\ItemCategoryBinder.cs" />
     <Compile Include="Infrastructure\ItemSubcategoryFilterBinder.cs" />

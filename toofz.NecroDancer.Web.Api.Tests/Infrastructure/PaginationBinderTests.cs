@@ -18,7 +18,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
         {
             HttpActionContext actionContext;
             const string modelName = "mockModelName";
-            PaginationBinder<MockPagination> binder;
+            PaginationBinder<StubPagination> binder;
             ModelBindingContext bindingContext;
             Mock<IValueProvider> mock_ValueProvider;
 
@@ -27,7 +27,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             {
                 actionContext = ContextUtil.CreateActionContext();
 
-                binder = new PaginationBinder<MockPagination>();
+                binder = new PaginationBinder<StubPagination>();
 
                 var data = new DataAnnotationsModelMetadataProvider();
                 var modelMetadata = data.GetMetadataForType(null, typeof(IPagination));
@@ -52,8 +52,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var canBind = binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.IsInstanceOfType(bindingContext.Model, typeof(MockPagination));
-                var model = (MockPagination)bindingContext.Model;
+                Assert.IsInstanceOfType(bindingContext.Model, typeof(StubPagination));
+                var model = (StubPagination)bindingContext.Model;
                 Assert.AreEqual(13, model.offset);
                 Assert.IsTrue(canBind);
             }
@@ -70,8 +70,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var canBind = binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.IsInstanceOfType(bindingContext.Model, typeof(MockPagination));
-                var model = (MockPagination)bindingContext.Model;
+                Assert.IsInstanceOfType(bindingContext.Model, typeof(StubPagination));
+                var model = (StubPagination)bindingContext.Model;
                 Assert.AreEqual(3, model.offset);
                 Assert.IsTrue(canBind);
             }
@@ -144,8 +144,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var canBind = binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.IsInstanceOfType(bindingContext.Model, typeof(MockPagination));
-                var model = (MockPagination)bindingContext.Model;
+                Assert.IsInstanceOfType(bindingContext.Model, typeof(StubPagination));
+                var model = (StubPagination)bindingContext.Model;
                 Assert.AreEqual(7, model.limit);
                 Assert.IsTrue(canBind);
             }
@@ -162,8 +162,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var canBind = binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.IsInstanceOfType(bindingContext.Model, typeof(MockPagination));
-                var model = (MockPagination)bindingContext.Model;
+                Assert.IsInstanceOfType(bindingContext.Model, typeof(StubPagination));
+                var model = (StubPagination)bindingContext.Model;
                 Assert.AreEqual(3, model.limit);
                 Assert.IsTrue(canBind);
             }
@@ -239,11 +239,21 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var canBind = binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.IsInstanceOfType(bindingContext.Model, typeof(MockPagination));
-                var model = (MockPagination)bindingContext.Model;
+                Assert.IsInstanceOfType(bindingContext.Model, typeof(StubPagination));
+                var model = (StubPagination)bindingContext.Model;
                 Assert.AreEqual(7, model.limit);
                 Assert.AreEqual(13, model.offset);
                 Assert.IsTrue(canBind);
+            }
+
+            sealed class StubPagination : IPagination
+            {
+                [MinValue(0)]
+                [MaxValue(30)]
+                public int offset { get; set; } = 13;
+                [MinValue(1)]
+                [MaxValue(20)]
+                public int limit { get; set; } = 7;
             }
         }
     }

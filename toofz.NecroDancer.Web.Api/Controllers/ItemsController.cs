@@ -158,22 +158,25 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             CancellationToken cancellationToken)
         {
             var query = from i in baseQuery
-                        orderby i.ElementName
-                        select new ItemDTO
-                        {
-                            Name = i.ElementName,
-                            DisplayName = i.Name,
-                            Slot = i.Slot,
-                            Unlock = i.DiamondCost,
-                            Cost = i.CoinCost,
-                        };
+                        orderby i.Name
+                        select i;
 
             var total = await query.CountAsync(cancellationToken);
 
-            var items = await query
+            var dbItems = await query
                 .Skip(pagination.offset)
                 .Take(pagination.limit)
                 .ToListAsync(cancellationToken);
+            var items = (from i in dbItems
+                         select new ItemDTO
+                         {
+                             Name = i.Name,
+                             DisplayName = i.DisplayName,
+                             Slot = i.Slot,
+                             Unlock = i.DiamondCost,
+                             Cost = i.CoinCost,
+                         })
+                         .ToList();
 
             return new ItemsDTO
             {

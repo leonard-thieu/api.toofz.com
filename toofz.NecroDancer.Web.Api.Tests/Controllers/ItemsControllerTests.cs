@@ -17,197 +17,155 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             return new List<Item>
             {
-                new Item
+                new Item("armor_glass", "")
                 {
-                    ElementName = "armor_glass",
-                    Name = "Glass Armor",
                     Slot = "body",
                     DiamondCost = 4,
                     CoinCost = 50,
                     IsArmor = true,
                 },
-                new Item
+                new Item("misc_heart_container", "")
                 {
-                    ElementName = "misc_heart_container",
-                    Name = "Heart Container",
                     Slot = null,
                     DiamondCost = null,
                     CoinCost = 50,
                     Consumable = true,
                 },
-                new Item
+                new Item("feet_ballet_shoes", "")
                 {
-                    ElementName = "feet_ballet_shoes",
-                    Name = "Ballet Shoes",
                     Slot = "feet",
                     DiamondCost = null,
                     CoinCost = 25,
                 },
-                new Item
+                new Item("food_1", "")
                 {
-                    ElementName = "food_1",
-                    Name = "Apple",
                     Slot = "action",
                     DiamondCost = null,
                     CoinCost = 10,
                     IsFood = true,
                 },
-                new Item
+                new Item("head_blast_helm","")
                 {
-                    ElementName = "head_blast_helm",
-                    Name = "Blast Helm",
                     Slot = "head",
                     DiamondCost = 5,
                     CoinCost = 60,
                 },
-                new Item
+                new Item("ring_becoming", "")
                 {
-                    ElementName = "ring_becoming",
-                    Name = "Ring Of Becoming",
                     Slot = "ring",
                     DiamondCost = 5,
                     CoinCost = 100,
                 },
-                new Item
+                new Item("scroll_earthquake", "")
                 {
-                    ElementName = "scroll_earthquake",
-                    Name = "Earthquake Scroll",
                     Slot = "action",
                     DiamondCost = 3,
                     CoinCost = 20,
                     IsScroll = true,
                 },
-                new Item
+                new Item("spell_bomb", "")
                 {
-                    ElementName = "spell_bomb",
-                    Name = "Bomb Spell",
                     Slot = "spell",
                     DiamondCost = 6,
                     CoinCost = 150,
                     IsSpell = true,
                 },
-                new Item
+                new Item("spell_fireball", "")
                 {
-                    ElementName = "spell_fireball",
-                    Name = "Fireball Spell",
                     Slot = "spell",
                     DiamondCost = 1,
                     CoinCost = 50,
                     IsSpell = true,
                 },
-                new Item
+                new Item("torch_1", "")
                 {
-                    ElementName = "torch_1",
-                    Name = "Torch",
                     Slot = "torch",
                     DiamondCost = null,
                     CoinCost = 3,
                     IsTorch = true,
                 },
-                new Item
+                new Item("weapon_axe", "")
                 {
-                    ElementName = "weapon_axe",
-                    Name = "Axe",
                     Slot = "weapon",
                     DiamondCost = 8,
                     CoinCost = 60,
                     IsWeapon = true,
                     IsAxe = true,
                 },
-                new Item
+                new Item("weapon_blood_bow", "")
                 {
-                    ElementName = "weapon_blood_bow",
-                    Name = "Blood Bow",
                     Slot = "weapon",
                     DiamondCost = null,
                     CoinCost = 250,
                     IsWeapon = true,
                     IsBow = true,
                 },
-                new Item
+                new Item("weapon_blood_broadsword", "")
                 {
-                    ElementName = "weapon_blood_broadsword",
-                    Name = "Blood Broadsword",
                     Slot = "weapon",
                     DiamondCost = null,
                     CoinCost = 40,
                     IsWeapon = true,
                     IsBroadsword = true,
                 },
-                new Item
+                new Item("weapon_blood_cat", "")
                 {
-                    ElementName = "weapon_blood_cat",
-                    Name = "Blood Cat",
                     Slot = "weapon",
                     DiamondCost = null,
                     CoinCost = 85,
                     IsWeapon = true,
                     IsCat = true,
                 },
-                new Item
+                new Item("weapon_blood_crossbow", "")
                 {
-                    ElementName = "weapon_blood_crossbow",
-                    Name = "Blood Crossbow",
                     Slot = "weapon",
                     DiamondCost = null,
                     CoinCost = 225,
                     IsWeapon = true,
                     IsCrossbow = true,
                 },
-                new Item
+                new Item("weapon_blood_dagger", "")
                 {
-                    ElementName = "weapon_blood_dagger",
-                    Name = "Blood Dagger",
                     Slot = "weapon",
                     DiamondCost = null,
                     CoinCost = 5,
                     IsWeapon = true,
                     IsDagger = true,
                 },
-                new Item
+                new Item("weapon_blood_flail", "")
                 {
-                    ElementName = "weapon_blood_flail",
-                    Name = "Blood Flail",
                     Slot = "weapon",
                     DiamondCost = null,
                     CoinCost = 80,
                     IsWeapon = true,
                     IsFlail = true,
                 },
-                new Item
+                new Item("weapon_blood_longsword", "")
                 {
-                    ElementName = "weapon_blood_longsword",
-                    Name = "Blood Longsword",
                     Slot = "weapon",
                     DiamondCost = null,
                     CoinCost = 65,
                     IsWeapon = true,
                     IsLongsword = true,
                 },
-                new Item
+                new Item("weapon_blood_rapier", "")
                 {
-                    ElementName = "weapon_blood_rapier",
-                    Name = "Blood Rapier",
                     Slot = "weapon",
                     DiamondCost = null,
                     CoinCost = 75,
                     IsWeapon = true,
                     IsRapier = true,
                 },
-                new Item
+                new Item("weapon_golden_spear", "")
                 {
-                    ElementName = "weapon_golden_spear",
-                    Name = "Golden Spear",
                     Slot = "weapon",
                     DiamondCost = null,
                     CoinCost = 100,
                     IsWeapon = true,
                     IsSpear = true,
                 },
-                new Item
+                new Item("weapon_obsidian_whip", "")
                 {
-                    ElementName = "weapon_obsidian_whip",
-                    Name = "Obsidian Whip",
                     Slot = "weapon",
                     DiamondCost = null,
                     CoinCost = 150,

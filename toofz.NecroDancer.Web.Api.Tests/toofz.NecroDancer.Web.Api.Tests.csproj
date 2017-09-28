@@ -87,6 +87,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
@@ -112,17 +113,17 @@
     <Reference Include="toofz, Version=7.2.0.182, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.7.2.0\lib\net45\toofz.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer, Version=2.1.4.61, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.2.1.4\lib\net45\toofz.NecroDancer.dll</HintPath>
+    <Reference Include="toofz.NecroDancer, Version=3.0.1.84, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.3.0.1\lib\net45\toofz.NecroDancer.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer.Data, Version=4.0.0.30, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.Data.4.0.0\lib\net45\toofz.NecroDancer.Data.dll</HintPath>
+    <Reference Include="toofz.NecroDancer.Data, Version=5.0.0.34, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.Data.5.0.0\lib\net45\toofz.NecroDancer.Data.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer.Leaderboards, Version=9.0.0.174, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.9.0.0\lib\net45\toofz.NecroDancer.Leaderboards.dll</HintPath>
+    <Reference Include="toofz.NecroDancer.Leaderboards, Version=10.0.0.178, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.10.0.0\lib\net45\toofz.NecroDancer.Leaderboards.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer.Leaderboards.Data, Version=2.0.2.25, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.Data.2.0.2\lib\net45\toofz.NecroDancer.Leaderboards.Data.dll</HintPath>
+    <Reference Include="toofz.NecroDancer.Leaderboards.Data, Version=3.0.0.30, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.Data.3.0.0\lib\net45\toofz.NecroDancer.Leaderboards.Data.dll</HintPath>
     </Reference>
     <Reference Include="toofz.TestsShared, Version=4.0.0.81, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.TestsShared.4.0.0\lib\net45\toofz.TestsShared.dll</HintPath>
@@ -151,15 +152,13 @@
     <Compile Include="Controllers\LeaderboardsControllerTests.cs" />
     <Compile Include="Controllers\PlayersControllerTests.cs" />
     <Compile Include="Controllers\ReplaysControllerTests.cs" />
+    <Compile Include="Infrastructure\CommaSeparatedValuesBinderTests.cs" />
     <Compile Include="Infrastructure\EnemyAttributeBinderTests.cs" />
     <Compile Include="Infrastructure\ItemCategoryBinderTests.cs" />
     <Compile Include="Infrastructure\ItemSubcategoryFilterBinderTests.cs" />
     <Compile Include="Infrastructure\LeaderboardCategoryBindersTests.cs" />
-    <Compile Include="Infrastructure\MockLeaderboardCategoryBaseBinder.cs" />
     <Compile Include="Infrastructure\PaginationBinderTests.cs" />
     <Compile Include="Models\LeaderboardCategoryBaseTests.cs" />
-    <Compile Include="Models\MockLeaderboardCategoryBase.cs" />
-    <Compile Include="Models\MockPagination.cs" />
     <Compile Include="ContextUtil.cs" />
     <Compile Include="MaxValueAttributeTests.cs" />
     <Compile Include="MinValueAttributeTests.cs" />

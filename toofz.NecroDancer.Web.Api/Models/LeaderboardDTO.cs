@@ -43,7 +43,7 @@ namespace toofz.NecroDancer.Web.Api.Models
         /// Time that the leaderboard was last updated at (in UTC)
         /// </summary>
         [DataMember(Name = "updated_at")]
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
         /// <summary>
         /// Total number of entries
         /// </summary>

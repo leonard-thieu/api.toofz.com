@@ -31,7 +31,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <param name="storeClient">The leaderboards store client.</param>
         /// <param name="leaderboardHeaders">Leaderboard headers.</param>
         public PlayersController(
-            LeaderboardsContext db,
+            ILeaderboardsContext db,
             ILeaderboardsStoreClient storeClient,
             LeaderboardHeaders leaderboardHeaders)
         {
@@ -40,7 +40,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             this.leaderboardHeaders = leaderboardHeaders;
         }
 
-        readonly LeaderboardsContext db;
+        readonly ILeaderboardsContext db;
         readonly ILeaderboardsStoreClient storeClient;
         readonly LeaderboardHeaders leaderboardHeaders;
 
@@ -64,7 +64,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             PlayersPagination pagination,
             string q = null,
             string sort = "-entries,display_name,id",
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
             IQueryable<Player> queryBase = db.Players;
             // Filtering
@@ -117,7 +117,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [Route("{steamId}/entries")]
         public async Task<IHttpActionResult> GetPlayer(
             long steamId,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
             var player = db.Players.FirstOrDefault(p => p.SteamId == steamId);
             if (player == null)
@@ -126,7 +126,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             }
 
             var playerEntries = await (from e in db.Entries
-                                       where e.SteamId == steamId && e.Leaderboard.Date == null
+                                       where e.SteamId == steamId
                                        select new
                                        {
                                            Leaderboard = new
@@ -217,7 +217,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         public async Task<IHttpActionResult> GetPlayerLeaderboardEntry(
             int lbid,
             long steamId,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
             var query = from e in db.Entries
                         where e.LeaderboardId == lbid
@@ -295,7 +295,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [Authorize(Users = "PlayersService")]
         public async Task<IHttpActionResult> PostPlayers(
             IEnumerable<PlayerModel> players,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
             var model = (from p in players
                          select new Player
@@ -307,8 +307,9 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                              Avatar = p.Avatar,
                          }).ToList();
             await storeClient.SaveChangesAsync(model, true, cancellationToken);
+            var content = new BulkStoreDTO { RowsAffected = players.Count() };
 
-            return Ok(new BulkStoreDTO { RowsAffected = players.Count() });
+            return Ok(content);
         }
 
         #region IDisposable Members
@@ -332,6 +333,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             }
 
             disposed = true;
+
             base.Dispose(disposing);
         }
 
