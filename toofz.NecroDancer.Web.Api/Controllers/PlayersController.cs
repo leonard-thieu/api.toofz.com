@@ -18,10 +18,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
     {
         static IReadOnlyDictionary<string, string> SortKeySelectorMap = new Dictionary<string, string>
         {
-            { "id", $"{nameof(Player.SteamId)}" },
-            { "display_name", $"{nameof(Player.Name)}" },
-            { "updated_at", $"{nameof(Player.LastUpdate)}" },
-            { "entries", $"{nameof(Player.Entries)}.{nameof(List<Entry>.Count)}" },
+            ["id"] = $"{nameof(Player.SteamId)}",
+            ["display_name"] = $"{nameof(Player.Name)}",
+            ["updated_at"] = $"{nameof(Player.LastUpdate)}",
+            ["entries"] = $"{nameof(Player.Entries)}.{nameof(List<Entry>.Count)}",
         };
 
         /// <summary>
@@ -62,8 +62,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [Route("")]
         public async Task<IHttpActionResult> GetPlayers(
             PlayersPagination pagination,
+            PlayersSortParam sort,
             string q = null,
-            string sort = "-entries,display_name,id",
             CancellationToken cancellationToken = default)
         {
             IQueryable<Player> queryBase = db.Players;

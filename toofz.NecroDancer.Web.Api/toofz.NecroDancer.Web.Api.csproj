@@ -347,13 +347,14 @@
     <Compile Include="Infrastructure\EnemyAttributeBinder.cs" />
     <Compile Include="Infrastructure\ItemCategoryBinder.cs" />
     <Compile Include="Infrastructure\ItemSubcategoryFilterBinder.cs" />
-    <Compile Include="Infrastructure\LeaderboardCategoryBaseBinder.cs" />
     <Compile Include="Infrastructure\ModesBinder.cs" />
     <Compile Include="Infrastructure\PaginationBinder.cs" />
+    <Compile Include="Infrastructure\PlayersSortParamBinder.cs" />
     <Compile Include="Infrastructure\ProductsBinder.cs" />
     <Compile Include="Infrastructure\RunsBinder.cs" />
     <Compile Include="Models\BulkStoreDTO.cs" />
     <Compile Include="Models\Characters.cs" />
+    <Compile Include="Models\CommaSeparatedValues.cs" />
     <Compile Include="Models\DailyLeaderboardDTO.cs" />
     <Compile Include="Models\DailyLeaderboardEntriesDTO.cs" />
     <Compile Include="Models\DailyLeaderboardsEnvelope.cs" />
@@ -378,6 +379,7 @@
     <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Models\PlayersEnvelope.cs" />
     <Compile Include="Models\PlayersPagination.cs" />
+    <Compile Include="Models\PlayersSortParam.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\ReplayDTO.cs" />
     <Compile Include="Models\ReplayModel.cs" />

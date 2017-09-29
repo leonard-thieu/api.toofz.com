@@ -10,7 +10,7 @@ namespace toofz.NecroDancer.Web.Api
         // Modified from http://www.itorian.com/2015/12/sorting-in-webapi-generic-way-to-apply.html
         public static bool TryApplySort<T>(
             this IQueryable<T> source,
-            string sort,
+            IEnumerable<string> sort,
             IReadOnlyDictionary<string, string> keySelectorMap,
             out IQueryable<T> sorted)
         {
@@ -22,7 +22,7 @@ namespace toofz.NecroDancer.Web.Api
             if (sort == null) { return false; }
 
             var sortExpressions = new List<string>();
-            foreach (var token in sort.Split(','))
+            foreach (var token in sort)
             {
                 var sortOption = token;
                 var isDescending = false;

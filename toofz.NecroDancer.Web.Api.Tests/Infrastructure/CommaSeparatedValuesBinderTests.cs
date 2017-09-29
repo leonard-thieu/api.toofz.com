@@ -1,10 +1,13 @@
-﻿using System.Collections;
-using System.Web.Http.Controllers;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Http.Metadata.Providers;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.ValueProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using toofz.NecroDancer.Web.Api.Infrastructure;
+using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 {
@@ -17,10 +20,15 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void ReturnsInstance()
             {
                 // Arrange -> Act
-                var binder = new CommaSeparatedValuesBinder();
+                var binder = new CommaSeparatedValuesBinderAdapter();
 
                 // Assert
                 Assert.IsInstanceOfType(binder, typeof(CommaSeparatedValuesBinder));
+            }
+
+            sealed class CommaSeparatedValuesBinderAdapter : CommaSeparatedValuesBinder
+            {
+                protected override CommaSeparatedValues GetModel() => throw new NotImplementedException();
             }
         }
 
@@ -29,8 +37,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
         {
             public BindModelMethod()
             {
-                valueProvider = mockValueProvider.Object;
-                var modelMetadata = Util.CreateModelMetadata<string>();
+                var values = new[] { "item1", "item2", "item3" };
+                var model = new CommaSeparatedValuesAdapter(values);
+                binder = new CommaSeparatedValuesBinderAdapter(model);
+
+                var data = new EmptyModelMetadataProvider();
+                var modelMetadata = data.GetMetadataForType(null, typeof(CommaSeparatedValues));
+                mockValueProvider = new Mock<IValueProvider>();
+                var valueProvider = mockValueProvider.Object;
                 bindingContext = new ModelBindingContext
                 {
                     ModelName = modelName,
@@ -39,57 +53,142 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 };
             }
 
-            CommaSeparatedValuesBinder binder = new CommaSeparatedValuesBinder();
-            HttpActionContext actionContext = null;
             string modelName = "myModelName";
-            Mock<IValueProvider> mockValueProvider = new Mock<IValueProvider>();
-            IValueProvider valueProvider;
+            CommaSeparatedValuesBinder binder;
             ModelBindingContext bindingContext;
+            Mock<IValueProvider> mockValueProvider;
 
             [TestMethod]
-            public void ValueNotSpecified_ReturnsFalse()
+            public void ValueIsNull_SetsModelWithDefaultValues()
             {
                 // Arrange
                 mockValueProvider
-                    .Setup(p => p.GetValue(modelName))
+                    .Setup(v => v.GetValue(modelName))
                     .Returns((ValueProviderResult)null);
 
                 // Act
-                var success = binder.BindModel(actionContext, bindingContext);
+                binder.BindModel(null, bindingContext);
+
+                // Assert
+                Assert.IsInstanceOfType(bindingContext.Model, typeof(CommaSeparatedValues));
+                var model = (CommaSeparatedValues)bindingContext.Model;
+                var expected = new[] { "item1", "item2", "item3" };
+                var actual = model.ToArray();
+                CollectionAssert.AreEqual(expected, actual);
+            }
+
+            [TestMethod]
+            public void ValueIsNull_ReturnsTrue()
+            {
+                // Arrange
+                mockValueProvider
+                    .Setup(v => v.GetValue(modelName))
+                    .Returns((ValueProviderResult)null);
+
+                // Act
+                var canBind = binder.BindModel(null, bindingContext);
+
+                // Assert
+                Assert.IsTrue(canBind);
+            }
+
+            [TestMethod]
+            public void ValueIsValidCommaSeparatedValues_SetsModelWithValues()
+            {
+                // Arrange
+                mockValueProvider
+                    .Setup(v => v.GetValue(modelName))
+                    .Returns(Util.CreateValueProviderResult("item1,item3"));
+
+                // Act
+                binder.BindModel(null, bindingContext);
+
+                // Assert
+                Assert.IsInstanceOfType(bindingContext.Model, typeof(CommaSeparatedValues));
+                var model = (CommaSeparatedValues)bindingContext.Model;
+                var expected = new[] { "item1", "item3" };
+                var actual = model.ToArray();
+                CollectionAssert.AreEqual(expected, actual);
+            }
+
+            [TestMethod]
+            public void ValueIsValidCommaSeparatedValues_ReturnsTrue()
+            {
+                // Arrange
+                mockValueProvider
+                    .Setup(v => v.GetValue(modelName))
+                    .Returns(Util.CreateValueProviderResult("item1,item3"));
+
+                // Act
+                var canBind = binder.BindModel(null, bindingContext);
+
+                // Assert
+                Assert.IsTrue(canBind);
+            }
+
+            [TestMethod]
+            public void ValueContainsInvalidValues_AddsModelErrorsForInvalidValues()
+            {
+                // Arrange
+                mockValueProvider
+                    .Setup(v => v.GetValue(modelName))
+                    .Returns(Util.CreateValueProviderResult("item1,itemA,item3"));
+
+                // Act
+                binder.BindModel(null, bindingContext);
+
+                // Assert
+                var hasErrors = bindingContext.ModelState.TryGetValue(modelName, out var modelState);
+                Assert.IsTrue(hasErrors);
+                Assert.AreEqual(1, modelState.Errors.Count);
+            }
+
+            [TestMethod]
+            public void ValueContainsInvalidValues_ReturnsFalse()
+            {
+                // Arrange
+                mockValueProvider
+                    .Setup(v => v.GetValue(modelName))
+                    .Returns(Util.CreateValueProviderResult("item1,itemA,item3"));
+
+                // Act
+                var success = binder.BindModel(null, bindingContext);
 
                 // Assert
                 Assert.IsFalse(success);
             }
 
-            [TestMethod]
-            public void ValueIsSpecified_SetsModelToSplitValues()
+            sealed class CommaSeparatedValuesBinderAdapter : CommaSeparatedValuesBinder
             {
-                // Arrange
-                mockValueProvider
-                    .Setup(p => p.GetValue(modelName))
-                    .Returns(Util.CreateValueProviderResult("a,b,c"));
+                public CommaSeparatedValuesBinderAdapter(CommaSeparatedValues model)
+                {
+                    this.model = model;
+                }
 
-                // Act
-                binder.BindModel(actionContext, bindingContext);
+                readonly CommaSeparatedValues model;
 
-                // Assert
-                var values = bindingContext.Model as ICollection;
-                CollectionAssert.AreEquivalent(new[] { "a", "b", "c" }, values);
+                protected override CommaSeparatedValues GetModel() => model;
             }
 
-            [TestMethod]
-            public void ValueIsSpecified_ReturnsTrue()
+            sealed class CommaSeparatedValuesAdapter : CommaSeparatedValues
             {
-                // Arrange
-                mockValueProvider
-                    .Setup(p => p.GetValue(modelName))
-                    .Returns(Util.CreateValueProviderResult("a,b,c"));
+                public CommaSeparatedValuesAdapter(IEnumerable<string> defaults)
+                {
+                    this.defaults = defaults;
+                }
 
-                // Act
-                var success = binder.BindModel(actionContext, bindingContext);
+                readonly IEnumerable<string> defaults;
 
-                // Assert
-                Assert.IsTrue(success);
+                public override void Add(string item)
+                {
+                    if (!defaults.Contains(item))
+                    {
+                        throw new ArgumentException();
+                    }
+                    base.Add(item);
+                }
+
+                protected override IEnumerable<string> GetDefaults() => defaults;
             }
         }
     }
