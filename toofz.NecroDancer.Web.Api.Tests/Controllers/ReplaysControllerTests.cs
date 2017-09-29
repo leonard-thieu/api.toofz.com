@@ -34,22 +34,20 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         public class GetReplaysMethod
         {
             [TestMethod]
-            public async Task ReturnsOkWithReplays()
+            public async Task ReturnsReplays()
             {
                 // Arrange
-                var mockSet = new MockDbSet<Replay>();
-
-                var mockRepository = new Mock<LeaderboardsContext>();
-                mockRepository
-                    .Setup(x => x.Replays)
-                    .Returns(mockSet.Object);
-
-                var mockILeaderboardsStoreClient = new Mock<ILeaderboardsStoreClient>();
-
-                var controller = new ReplaysController(mockRepository.Object, mockILeaderboardsStoreClient.Object);
+                var mockReplays = new MockDbSet<Replay>();
+                var replays = mockReplays.Object;
+                var mockDb = new Mock<ILeaderboardsContext>();
+                mockDb.Setup(x => x.Replays).Returns(replays);
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var controller = new ReplaysController(db, storeClient);
+                var pagination = new ReplaysPagination();
 
                 // Act
-                var result = await controller.GetReplays(new ReplaysPagination());
+                var result = await controller.GetReplays(pagination);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ReplaysEnvelope>));
@@ -60,17 +58,16 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         public class PostReplaysMethod
         {
             [TestMethod]
-            public async Task ReturnsOkWithBulkStore()
+            public async Task ReturnsBulkStoreDTO()
             {
                 // Arrange
-                var mockRepository = new Mock<LeaderboardsContext>();
-
-                var mockILeaderboardsStoreClient = new Mock<ILeaderboardsStoreClient>();
-
-                var controller = new ReplaysController(mockRepository.Object, mockILeaderboardsStoreClient.Object);
+                var db = Mock.Of<ILeaderboardsContext>();
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var controller = new ReplaysController(db, storeClient);
+                var replays = new[] { new ReplayModel() };
 
                 // Act
-                var result = await controller.PostReplays(new List<ReplayModel>());
+                var result = await controller.PostReplays(replays);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<BulkStoreDTO>));

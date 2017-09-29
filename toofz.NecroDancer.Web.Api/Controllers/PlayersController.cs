@@ -272,9 +272,12 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                     Zone = playerEntry.End.Zone,
                     Level = playerEntry.End.Level,
                 },
-                KilledBy = replay?.KilledBy,
-                Version = replay?.Version,
             };
+            if (replay != null)
+            {
+                content.KilledBy = replay.KilledBy;
+                content.Version = replay.Version;
+            }
 
             return Ok(content);
         }
