@@ -5,7 +5,7 @@ using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Models
 {
-    class PlayersSortParamTests
+    class PlayersSortParamsTests
     {
         [TestClass]
         public class Constructor
@@ -14,10 +14,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
             public void ReturnsInstance()
             {
                 // Arrange -> Act
-                var playersSortParam = new PlayersSortParam();
+                var sort = new PlayersSortParams();
 
                 // Assert
-                Assert.IsInstanceOfType(playersSortParam, typeof(PlayersSortParam));
+                Assert.IsInstanceOfType(sort, typeof(PlayersSortParams));
             }
         }
 
@@ -36,13 +36,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
             public void ItemIsValid_AddsItem(string item)
             {
                 // Arrange
-                var playersSortParam = new PlayersSortParam();
+                var sort = new PlayersSortParams();
 
                 // Act
-                playersSortParam.Add(item);
+                sort.Add(item);
 
                 // Assert
-                var item2 = playersSortParam.First();
+                var item2 = sort.First();
                 Assert.AreEqual(item, item2);
             }
 
@@ -50,13 +50,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
             public void ItemIsInvalid_ThrowsArgumentException()
             {
                 // Arrange
-                var playersSortParam = new PlayersSortParam();
+                var sort = new PlayersSortParams();
                 var item = "myInvalidItem";
 
                 // Act -> Assert
                 var ex = Assert.ThrowsException<ArgumentException>(() =>
                 {
-                    playersSortParam.Add(item);
+                    sort.Add(item);
                 });
                 Assert.IsNull(ex.ParamName);
             }
@@ -69,14 +69,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
             public void ReturnsDefaults()
             {
                 // Arrange
-                var playersSortParam = new PlayersSortParam();
+                var sort = new PlayersSortParams();
 
                 // Act
-                playersSortParam.AddDefaults();
+                sort.AddDefaults();
 
                 // Assert
                 var expected = new[] { "-entries", "display_name", "id" };
-                var actual = playersSortParam.ToArray();
+                var actual = sort.ToArray();
                 CollectionAssert.AreEqual(expected, actual);
             }
         }

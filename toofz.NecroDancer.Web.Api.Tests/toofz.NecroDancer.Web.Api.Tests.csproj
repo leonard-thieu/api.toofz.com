@@ -186,13 +186,14 @@
     <Compile Include="Infrastructure\ItemSubcategoryFilterBinderTests.cs" />
     <Compile Include="Infrastructure\ModesBinderTests.cs" />
     <Compile Include="Infrastructure\PaginationBinderTests.cs" />
-    <Compile Include="Infrastructure\PlayersSortParamBinderTests.cs" />
+    <Compile Include="Infrastructure\PlayersSortParamsBinderTests.cs" />
     <Compile Include="Infrastructure\ProductsBinderTests.cs" />
     <Compile Include="Infrastructure\RunsBinderTests.cs" />
     <Compile Include="Models\CommaSeparatedValuesTests.cs" />
     <Compile Include="Models\LeaderboardCategoryBaseTests.cs" />
-    <Compile Include="Models\PlayersSortParamTests.cs" />
+    <Compile Include="Models\PlayersSortParamsTests.cs" />
     <Compile Include="ContextUtil.cs" />
+    <Compile Include="IQueryableExtensionsTests.cs" />
     <Compile Include="MaxValueAttributeTests.cs" />
     <Compile Include="MinValueAttributeTests.cs" />
     <Compile Include="Util.cs" />

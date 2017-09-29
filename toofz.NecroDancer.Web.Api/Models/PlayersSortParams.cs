@@ -5,8 +5,8 @@ using toofz.NecroDancer.Web.Api.Infrastructure;
 
 namespace toofz.NecroDancer.Web.Api.Models
 {
-    [ModelBinder(BinderType = typeof(PlayersSortParamBinder))]
-    public sealed class PlayersSortParam : CommaSeparatedValues
+    [ModelBinder(BinderType = typeof(PlayersSortParamsBinder))]
+    public sealed class PlayersSortParams : CommaSeparatedValues
     {
         public override void Add(string item)
         {

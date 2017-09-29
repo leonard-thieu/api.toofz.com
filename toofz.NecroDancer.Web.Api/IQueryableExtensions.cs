@@ -8,18 +8,17 @@ namespace toofz.NecroDancer.Web.Api
     static class IQueryableExtensions
     {
         // Modified from http://www.itorian.com/2015/12/sorting-in-webapi-generic-way-to-apply.html
-        public static bool TryApplySort<T>(
+        public static IQueryable<T> OrderBy<T>(
             this IQueryable<T> source,
-            IEnumerable<string> sort,
-            IReadOnlyDictionary<string, string> keySelectorMap,
-            out IQueryable<T> sorted)
+            IDictionary<string, string> keySelectorMap,
+            IEnumerable<string> sort)
         {
-            sorted = source ?? throw new ArgumentNullException(nameof(source), $"{nameof(source)} is null.");
-
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
             if (keySelectorMap == null)
-                throw new ArgumentNullException(nameof(keySelectorMap), $"{nameof(keySelectorMap)} is null.");
+                throw new ArgumentNullException(nameof(keySelectorMap));
 
-            if (sort == null) { return false; }
+            if (sort == null || !sort.Any()) { return source; }
 
             var sortExpressions = new List<string>();
             foreach (var token in sort)
@@ -50,13 +49,8 @@ namespace toofz.NecroDancer.Web.Api
             }
 
             var ordering = string.Join(", ", sortExpressions);
-            if (ordering != "")
-            {
-                sorted = source.OrderBy(ordering);
-                return true;
-            }
 
-            return false;
+            return source.OrderBy(ordering);
         }
     }
 }
