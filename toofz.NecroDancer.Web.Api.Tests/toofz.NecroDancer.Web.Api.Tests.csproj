@@ -198,6 +198,7 @@
     <Compile Include="MaxValueAttributeTests.cs" />
     <Compile Include="MinValueAttributeTests.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="ValidateModelAttributeTests.cs" />
     <Compile Include="ValueProviderResultExtensionsTests.cs" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
