@@ -115,7 +115,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// </httpStatusCode>
         [ResponseType(typeof(PlayerEntriesDTO))]
         [Route("{steamId}/entries")]
-        public async Task<IHttpActionResult> GetPlayer(
+        public async Task<IHttpActionResult> GetPlayerEntries(
             long steamId,
             CancellationToken cancellationToken = default)
         {
@@ -214,7 +214,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// </httpStatusCode>
         [ResponseType(typeof(EntryDTO))]
         [Route("{steamId}/entries/{lbid:int}")]
-        public async Task<IHttpActionResult> GetPlayerLeaderboardEntry(
+        public async Task<IHttpActionResult> GetPlayerEntry(
             int lbid,
             long steamId,
             CancellationToken cancellationToken = default)

@@ -204,35 +204,113 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         }
 
         [TestClass]
-        public class GetPlayerMethod
+        public class GetPlayerEntriesMethod
         {
+            [TestMethod]
+            public async Task PlayerNotFound_ReturnsNotFound()
+            {
+                // Arrange
+                var mockPlayers = new MockDbSet<Player>();
+                var players = mockPlayers.Object;
+                var mockDb = new Mock<ILeaderboardsContext>();
+                mockDb.Setup(x => x.Players).Returns(players);
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var leaderboardHeaders = new LeaderboardHeaders();
+                var controller = new PlayersController(db, storeClient, leaderboardHeaders);
+                var steamId = 1;
+
+                // Act
+                var result = await controller.GetPlayerEntries(steamId);
+
+                // Assert
+                Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+            }
+
             [TestMethod]
             public async Task ReturnsPlayerEntries()
             {
                 // Arrange
-                var mockSetPlayer = new MockDbSet<Player>(new Player { SteamId = 76561197960481221 });
-                var mockSetEntry = new MockDbSet<Entry>();
-                var mockSetReplay = new MockDbSet<Replay>();
-
-                var mockRepository = new Mock<LeaderboardsContext>();
-                mockRepository.Setup(x => x.Players).Returns(mockSetPlayer.Object);
-                mockRepository.Setup(x => x.Entries).Returns(mockSetEntry.Object);
-                mockRepository.Setup(x => x.Replays).Returns(mockSetReplay.Object);
-
-                var mockILeaderboardsStoreClient = new Mock<ILeaderboardsStoreClient>();
-
-                var controller = new PlayersController(
-                    mockRepository.Object,
-                    mockILeaderboardsStoreClient.Object,
-                    LeaderboardsResources.ReadLeaderboardHeaders());
+                var steamId = 76561197960481221;
+                var mockPlayers = new MockDbSet<Player>(new Player { SteamId = steamId });
+                var players = mockPlayers.Object;
+                var mockEntries = new MockDbSet<Entry>();
+                var entries = mockEntries.Object;
+                var mockReplays = new MockDbSet<Replay>();
+                var replays = mockReplays.Object;
+                var mockDb = new Mock<ILeaderboardsContext>();
+                mockDb.Setup(x => x.Players).Returns(players);
+                mockDb.Setup(x => x.Entries).Returns(entries);
+                mockDb.Setup(x => x.Replays).Returns(replays);
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var leaderboardHeaders = new LeaderboardHeaders();
+                var controller = new PlayersController(db, storeClient, leaderboardHeaders);
 
                 // Act
-                var actionResult = await controller.GetPlayer(76561197960481221);
-                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<PlayerEntriesDTO>));
-                var contentResult = actionResult as OkNegotiatedContentResult<PlayerEntriesDTO>;
+                var result = await controller.GetPlayerEntries(steamId);
 
                 // Assert
-                Assert.IsNotNull(contentResult);
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<PlayerEntriesDTO>));
+                var contentResult = (OkNegotiatedContentResult<PlayerEntriesDTO>)result;
+                Assert.IsNotNull(contentResult.Content);
+            }
+        }
+
+        [TestClass]
+        public class GetPlayerEntryMethod
+        {
+            [TestMethod]
+            public async Task PlayerNotFound_ReturnsNotFound()
+            {
+                // Arrange
+                var mockEntries = new MockDbSet<Entry>();
+                var entries = mockEntries.Object;
+                var mockDb = new Mock<ILeaderboardsContext>();
+                mockDb.Setup(x => x.Entries).Returns(entries);
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var leaderboardHeaders = new LeaderboardHeaders();
+                var controller = new PlayersController(db, storeClient, leaderboardHeaders);
+                var lbid = 234265;
+                var steamId = 1;
+
+                // Act
+                var result = await controller.GetPlayerEntry(lbid, steamId);
+
+                // Assert
+                Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+            }
+
+            [TestMethod]
+            public async Task ReturnsPlayerEntry()
+            {
+                // Arrange
+                var lbid = 234265;
+                var steamId = 1;
+                var entry = new Entry
+                {
+                    LeaderboardId = lbid,
+                    Player = new Player { SteamId = steamId, },
+                };
+                var mockEntries = new MockDbSet<Entry>(entry);
+                var entries = mockEntries.Object;
+                var mockReplays = new MockDbSet<Replay>();
+                var replays = mockReplays.Object;
+                var mockDb = new Mock<ILeaderboardsContext>();
+                mockDb.Setup(x => x.Entries).Returns(entries);
+                mockDb.Setup(x => x.Replays).Returns(replays);
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var leaderboardHeaders = new LeaderboardHeaders();
+                var controller = new PlayersController(db, storeClient, leaderboardHeaders);
+
+                // Act
+                var result = await controller.GetPlayerEntry(lbid, steamId);
+
+                // Assert
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EntryDTO>));
+                var contentResult = (OkNegotiatedContentResult<EntryDTO>)result;
                 Assert.IsNotNull(contentResult.Content);
             }
         }
