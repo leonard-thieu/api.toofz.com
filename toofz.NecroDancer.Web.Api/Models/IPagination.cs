@@ -2,7 +2,7 @@
 {
     public interface IPagination
     {
-        int offset { get; set; }
-        int limit { get; set; }
+        int Offset { get; set; }
+        int Limit { get; set; }
     }
 }

@@ -187,7 +187,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task LimitIsLessThanResultsCount_ReturnsLimitResults()
             {
                 // Arrange
-                pagination.limit = 2;
+                pagination.Limit = 2;
 
                 // Act
                 var result = await controller.GetEnemies(pagination);
@@ -202,7 +202,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task OffsetIsSpecified_ReturnsOffsetResults()
             {
                 // Arrange
-                pagination.offset = 2;
+                pagination.Offset = 2;
 
                 // Act
                 var result = await controller.GetEnemies(pagination);

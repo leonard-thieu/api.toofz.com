@@ -20,7 +20,7 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
             {
                 try
                 {
-                    model.offset = (int)offsetResult.ConvertTo(typeof(int));
+                    model.Offset = (int)offsetResult.ConvertTo(typeof(int));
                 }
                 catch
                 {
@@ -33,7 +33,7 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
             {
                 try
                 {
-                    model.limit = (int)limitResult.ConvertTo(typeof(int));
+                    model.Limit = (int)limitResult.ConvertTo(typeof(int));
                 }
                 catch
                 {

@@ -167,8 +167,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var total = await query.CountAsync(cancellationToken);
 
             var dbItems = await query
-                .Skip(pagination.offset)
-                .Take(pagination.limit)
+                .Skip(pagination.Offset)
+                .Take(pagination.Limit)
                 .ToListAsync(cancellationToken);
             var items = (from i in dbItems
                          select new ItemDTO

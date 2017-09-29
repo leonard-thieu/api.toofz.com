@@ -55,8 +55,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
 
             var total = await query.CountAsync(cancellationToken);
             var replays = await query
-                .Skip(pagination.offset)
-                .Take(pagination.limit)
+                .Skip(pagination.Offset)
+                .Take(pagination.Limit)
                 .ToListAsync(cancellationToken);
 
             var content = new ReplaysEnvelope

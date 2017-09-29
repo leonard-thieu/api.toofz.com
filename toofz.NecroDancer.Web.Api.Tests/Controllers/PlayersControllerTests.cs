@@ -111,7 +111,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task LimitIsLessThanResultsCount_ReturnsLimitResults()
             {
                 // Arrange
-                var pagination = new PlayersPagination { limit = 2 };
+                var pagination = new PlayersPagination { Limit = 2 };
                 var sort = new PlayersSortParam();
 
                 // Act
@@ -130,7 +130,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task OffsetIsSpecified_ReturnsOffsetResults()
             {
                 // Arrange
-                var pagination = new PlayersPagination { offset = 2 };
+                var pagination = new PlayersPagination { Offset = 2 };
                 var sort = new PlayersSortParam();
 
                 // Act

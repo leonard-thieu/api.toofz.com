@@ -54,7 +54,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 // Assert
                 Assert.IsInstanceOfType(bindingContext.Model, typeof(StubPagination));
                 var model = (StubPagination)bindingContext.Model;
-                Assert.AreEqual(13, model.offset);
+                Assert.AreEqual(13, model.Offset);
                 Assert.IsTrue(canBind);
             }
 
@@ -72,7 +72,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 // Assert
                 Assert.IsInstanceOfType(bindingContext.Model, typeof(StubPagination));
                 var model = (StubPagination)bindingContext.Model;
-                Assert.AreEqual(3, model.offset);
+                Assert.AreEqual(3, model.Offset);
                 Assert.IsTrue(canBind);
             }
 
@@ -146,7 +146,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 // Assert
                 Assert.IsInstanceOfType(bindingContext.Model, typeof(StubPagination));
                 var model = (StubPagination)bindingContext.Model;
-                Assert.AreEqual(7, model.limit);
+                Assert.AreEqual(7, model.Limit);
                 Assert.IsTrue(canBind);
             }
 
@@ -164,7 +164,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 // Assert
                 Assert.IsInstanceOfType(bindingContext.Model, typeof(StubPagination));
                 var model = (StubPagination)bindingContext.Model;
-                Assert.AreEqual(3, model.limit);
+                Assert.AreEqual(3, model.Limit);
                 Assert.IsTrue(canBind);
             }
 
@@ -241,8 +241,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 // Assert
                 Assert.IsInstanceOfType(bindingContext.Model, typeof(StubPagination));
                 var model = (StubPagination)bindingContext.Model;
-                Assert.AreEqual(7, model.limit);
-                Assert.AreEqual(13, model.offset);
+                Assert.AreEqual(7, model.Limit);
+                Assert.AreEqual(13, model.Offset);
                 Assert.IsTrue(canBind);
             }
 
@@ -250,10 +250,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             {
                 [MinValue(0)]
                 [MaxValue(30)]
-                public int offset { get; set; } = 13;
+                public int Offset { get; set; } = 13;
                 [MinValue(1)]
                 [MaxValue(20)]
-                public int limit { get; set; } = 7;
+                public int Limit { get; set; } = 7;
             }
         }
     }
