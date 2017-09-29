@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
@@ -16,7 +17,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
     [RoutePrefix("players")]
     public sealed class PlayersController : ApiController
     {
-        static IReadOnlyDictionary<string, string> SortKeySelectorMap = new Dictionary<string, string>
+        static Dictionary<string, string> SortKeySelectorMap = new Dictionary<string, string>
         {
             ["id"] = $"{nameof(Player.SteamId)}",
             ["display_name"] = $"{nameof(Player.Name)}",
@@ -62,7 +63,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [Route("")]
         public async Task<IHttpActionResult> GetPlayers(
             PlayersPagination pagination,
-            PlayersSortParam sort,
+            PlayersSortParams sort,
             string q = null,
             CancellationToken cancellationToken = default)
         {
@@ -73,9 +74,15 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 queryBase = queryBase.Where(p => p.Name.StartsWith(q));
             }
             // Sorting
-            if (queryBase.TryApplySort(sort, SortKeySelectorMap, out var sorted))
+            try
             {
-                queryBase = sorted;
+                queryBase = queryBase.OrderBy(SortKeySelectorMap, sort);
+            }
+            catch (ArgumentException ex)
+            {
+                ModelState.AddModelError(nameof(sort), ex);
+
+                return BadRequest(ModelState);
             }
 
             var query = from p in queryBase

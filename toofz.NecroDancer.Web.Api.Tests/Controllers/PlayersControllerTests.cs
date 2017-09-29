@@ -112,7 +112,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             {
                 // Arrange
                 var pagination = new PlayersPagination { Limit = 2 };
-                var sort = new PlayersSortParam();
+                var sort = new PlayersSortParams();
 
                 // Act
                 var actionResult = await controller.GetPlayers(pagination, sort);
@@ -131,7 +131,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             {
                 // Arrange
                 var pagination = new PlayersPagination { Offset = 2 };
-                var sort = new PlayersSortParam();
+                var sort = new PlayersSortParams();
 
                 // Act
                 var actionResult = await controller.GetPlayers(pagination, sort);
@@ -150,7 +150,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             {
                 // Arrange
                 var pagination = new PlayersPagination();
-                var sort = new PlayersSortParam();
+                var sort = new PlayersSortParams();
                 sort.Add("-id");
 
                 // Act
@@ -170,7 +170,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             {
                 // Arrange
                 var pagination = new PlayersPagination();
-                var sort = new PlayersSortParam();
+                var sort = new PlayersSortParams();
                 var q = "ad";
 
                 // Act
@@ -190,7 +190,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             {
                 // Arrange
                 var pagination = new PlayersPagination();
-                var sort = new PlayersSortParam();
+                var sort = new PlayersSortParams();
 
                 // Act
                 var actionResult = await controller.GetPlayers(pagination, sort);

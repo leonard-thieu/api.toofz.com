@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -30,10 +29,10 @@ namespace toofz.NecroDancer.Web.Api.Providers
                 return;
             }
 
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, OAuthDefaults.AuthenticationType);
-            ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager, CookieAuthenticationDefaults.AuthenticationType);
+            var oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, OAuthDefaults.AuthenticationType);
+            var cookiesIdentity = await user.GenerateUserIdentityAsync(userManager, CookieAuthenticationDefaults.AuthenticationType);
 
-            AuthenticationProperties properties = CreateProperties(user.UserName);
+            var properties = CreateProperties(user.UserName);
             var ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
@@ -46,7 +45,7 @@ namespace toofz.NecroDancer.Web.Api.Providers
                 context.AdditionalResponseParameters.Add(property.Key, property.Value);
             }
 
-            return Task.FromResult<object>(null);
+            return Task.CompletedTask;
         }
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
@@ -57,7 +56,7 @@ namespace toofz.NecroDancer.Web.Api.Providers
                 context.Validated();
             }
 
-            return Task.FromResult<object>(null);
+            return Task.CompletedTask;
         }
 
         public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
@@ -71,14 +70,14 @@ namespace toofz.NecroDancer.Web.Api.Providers
                 }
             }
 
-            return Task.FromResult<object>(null);
+            return Task.CompletedTask;
         }
 
         public static AuthenticationProperties CreateProperties(string userName)
         {
             var data = new Dictionary<string, string>
             {
-                { "userName", userName }
+                ["userName"] = userName,
             };
 
             return new AuthenticationProperties(data);
