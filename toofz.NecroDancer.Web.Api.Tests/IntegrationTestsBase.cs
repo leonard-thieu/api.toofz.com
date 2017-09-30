@@ -31,7 +31,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
         [TestCleanup]
         public void TestCleanup()
         {
-            Server.Dispose();
+            Server?.Dispose();
         }
     }
 }
