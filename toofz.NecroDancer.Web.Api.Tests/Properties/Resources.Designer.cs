@@ -191,5 +191,88 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
                 return ResourceManager.GetString("GetItemsBySubcategory", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;player&quot;: {
+        ///    &quot;id&quot;: &quot;1&quot;,
+        ///    &quot;display_name&quot;: &quot;Leonard&quot;,
+        ///    &quot;updated_at&quot;: null,
+        ///    &quot;avatar&quot;: null
+        ///  },
+        ///  &quot;total&quot;: 1,
+        ///  &quot;entries&quot;: [
+        ///    {
+        ///      &quot;leaderboard&quot;: {
+        ///        &quot;id&quot;: 739999,
+        ///        &quot;product&quot;: &quot;classic&quot;,
+        ///        &quot;character&quot;: &quot;cadence&quot;,
+        ///        &quot;mode&quot;: &quot;standard&quot;,
+        ///        &quot;run&quot;: &quot;score&quot;,
+        ///        &quot;display_name&quot;: null,
+        ///        &quot;updated_at&quot;: null,
+        ///        &quot;total&quot;: 0
+        ///      },
+        ///      &quot;rank&quot;: 0,
+        ///      &quot;score&quot;: 0,
+        ///      &quot;end&quot;: {
+        ///        &quot;zone&quot;: 0,
+        ///        &quot;level&quot;: 0
+        ///      },        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string GetPlayerEntries {
+            get {
+                return ResourceManager.GetString("GetPlayerEntries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;player&quot;: {
+        ///    &quot;id&quot;: &quot;2&quot;,
+        ///    &quot;display_name&quot;: &quot;Julianna&quot;,
+        ///    &quot;updated_at&quot;: null,
+        ///    &quot;avatar&quot;: null
+        ///  },
+        ///  &quot;rank&quot;: 0,
+        ///  &quot;score&quot;: 0,
+        ///  &quot;end&quot;: {
+        ///    &quot;zone&quot;: 0,
+        ///    &quot;level&quot;: 0
+        ///  },
+        ///  &quot;killed_by&quot;: null,
+        ///  &quot;version&quot;: null
+        ///}.
+        /// </summary>
+        internal static string GetPlayerEntry {
+            get {
+                return ResourceManager.GetString("GetPlayerEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;total&quot;: 2,
+        ///  &quot;players&quot;: [
+        ///    {
+        ///      &quot;id&quot;: &quot;5&quot;,
+        ///      &quot;display_name&quot;: &quot;Stacey&quot;,
+        ///      &quot;updated_at&quot;: null,
+        ///      &quot;avatar&quot;: null
+        ///    },
+        ///    {
+        ///      &quot;id&quot;: &quot;3&quot;,
+        ///      &quot;display_name&quot;: &quot;Steve&quot;,
+        ///      &quot;updated_at&quot;: null,
+        ///      &quot;avatar&quot;: null
+        ///    }
+        ///  ]
+        ///}.
+        /// </summary>
+        internal static string GetPlayers {
+            get {
+                return ResourceManager.GetString("GetPlayers", resourceCulture);
+            }
+        }
     }
 }

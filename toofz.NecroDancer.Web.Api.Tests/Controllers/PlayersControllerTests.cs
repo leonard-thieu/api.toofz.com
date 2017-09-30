@@ -1,18 +1,142 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Newtonsoft.Json;
 using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
+using toofz.NecroDancer.Web.Api.Tests.Properties;
 using toofz.TestsShared;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
     class PlayersControllerTests
     {
+        static IEnumerable<Player> Players
+        {
+            get
+            {
+                var p1 = new Player
+                {
+                    SteamId = 1,
+                    Name = "Leonard",
+                };
+                p1.Entries.AddRange(new[]
+                {
+                    new Entry
+                    {
+                        Leaderboard = new Leaderboard { LeaderboardId = 739999 },
+                        LeaderboardId = 739999,
+                        Player = p1,
+                        SteamId = 1,
+                        ReplayId = 421438228643743438,
+                    },
+                });
+                var p2 = new Player
+                {
+                    SteamId = 2,
+                    Name = "Julianna",
+                };
+                p2.Entries.AddRange(new[]
+                {
+                    new Entry
+                    {
+                        Leaderboard = new Leaderboard { LeaderboardId = 739795 },
+                        LeaderboardId = 739795,
+                        Player = p2,
+                        SteamId = 2,
+                        ReplayId = 26236580330596509,
+                    },
+                    new Entry
+                    {
+                        Leaderboard = new Leaderboard { LeaderboardId = 739796 },
+                        LeaderboardId = 739796,
+                        Player = p2,
+                        SteamId = 2,
+                        ReplayId = 26236580330596596,
+                    },
+                    new Entry
+                    {
+                        Leaderboard = new Leaderboard { LeaderboardId = 739999 },
+                        LeaderboardId = 739999,
+                        Player = p2,
+                        SteamId = 2,
+                        ReplayId = 422567813941329155,
+                    },
+                });
+                var p3 = new Player
+                {
+                    SteamId = 3,
+                    Name = "Steve",
+                };
+                p3.Entries.AddRange(new[]
+                {
+                    new Entry
+                    {
+                        Leaderboard = new Leaderboard(),
+                        SteamId = 3,
+                    },
+                    new Entry
+                    {
+                        Leaderboard = new Leaderboard(),
+                        SteamId = 3,
+                    },
+                });
+                var p4 = new Player
+                {
+                    SteamId = 4,
+                    Name = "Julianna",
+                };
+                p4.Entries.AddRange(new[]
+                {
+                    new Entry
+                    {
+                        Leaderboard = new Leaderboard(),
+                        SteamId = 4,
+                    },
+                    new Entry
+                    {
+                        Leaderboard = new Leaderboard(),
+                        SteamId = 4,
+                    },
+                    new Entry
+                    {
+                        Leaderboard = new Leaderboard(),
+                        SteamId = 4,
+                    },
+                });
+                var p5 = new Player
+                {
+                    SteamId = 5,
+                    Name = "Stacey",
+                };
+                p5.Entries.AddRange(new[]
+                {
+                    new Entry
+                    {
+                        Leaderboard = new Leaderboard(),
+                        SteamId = 5,
+                    },
+                    new Entry
+                    {
+                        Leaderboard = new Leaderboard(),
+                        SteamId = 5,
+                    },
+                    new Entry
+                    {
+                        Leaderboard = new Leaderboard(),
+                        SteamId = 5,
+                    },
+                });
+
+                return new[] { p1, p2, p3, p4, p5 };
+            }
+        }
+
         [TestClass]
         public class Constructor
         {
@@ -35,67 +159,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         [TestClass]
         public class GetPlayersMethod
         {
-            static IEnumerable<Player> GetPlayers()
-            {
-                var p1 = new Player
-                {
-                    SteamId = 1,
-                    Name = "aaa",
-                };
-                p1.Entries.AddRange(new[]
-                {
-                    new Entry(),
-                });
-                var p2 = new Player
-                {
-                    SteamId = 2,
-                    Name = "bba",
-                };
-                p2.Entries.AddRange(new[]
-                {
-                    new Entry(),
-                    new Entry(),
-                    new Entry(),
-                });
-                var p3 = new Player
-                {
-                    SteamId = 3,
-                    Name = "aca",
-                };
-                p3.Entries.AddRange(new[]
-                {
-                    new Entry(),
-                    new Entry(),
-                });
-                var p4 = new Player
-                {
-                    SteamId = 4,
-                    Name = "bba",
-                };
-                p4.Entries.AddRange(new[]
-                {
-                    new Entry(),
-                    new Entry(),
-                    new Entry(),
-                });
-                var p5 = new Player
-                {
-                    SteamId = 5,
-                    Name = "ada",
-                };
-                p5.Entries.AddRange(new[]
-                {
-                    new Entry(),
-                    new Entry(),
-                    new Entry(),
-                });
-
-                return new[] { p1, p2, p3, p4, p5 };
-            }
-
             public GetPlayersMethod()
             {
-                var mockPlayers = new MockDbSet<Player>(GetPlayers());
+                var mockPlayers = new MockDbSet<Player>(Players);
                 var players = mockPlayers.Object;
                 var mockDb = new Mock<LeaderboardsContext>();
                 mockDb.Setup(d => d.Players).Returns(players);
@@ -171,7 +237,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Arrange
                 var pagination = new PlayersPagination();
                 var sort = new PlayersSortParams();
-                var q = "ad";
+                var q = "Sta";
 
                 // Act
                 var actionResult = await controller.GetPlayers(pagination, sort, q);
@@ -374,6 +440,84 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Assert
                 mockDb.Verify(d => d.Dispose(), Times.Once);
+            }
+        }
+
+        [TestClass]
+        public class IntegrationTests : IntegrationTestsBase
+        {
+            [TestMethod]
+            public async Task GetPlayersMethod()
+            {
+                // Arrange
+                var mockPlayers = new MockDbSet<Player>(Players);
+                var players = mockPlayers.Object;
+                var mockDb = new Mock<ILeaderboardsContext>();
+                mockDb.Setup(d => d.Players).Returns(players);
+                var db = mockDb.Object;
+                Kernel.Rebind<ILeaderboardsContext>().ToConstant(db);
+
+                // Act
+                var response = await Server.HttpClient.GetAsync("/players?q=St");
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Assert
+                Assert.That.NormalizedAreEqual(Resources.GetPlayers, content);
+            }
+
+            [TestMethod]
+            public async Task GetPlayerEntriesMethod()
+            {
+                // Arrange
+                var players = Players;
+                var mockDbPlayers = new MockDbSet<Player>(players);
+                var dbPlayers = mockDbPlayers.Object;
+                var entries = from p in players
+                              from e in p.Entries
+                              select e;
+                var mockDbEntries = new MockDbSet<Entry>(entries);
+                var dbEntries = mockDbEntries.Object;
+                var mockDbReplays = new MockDbSet<Replay>();
+                var dbReplays = mockDbReplays.Object;
+                var mockDb = new Mock<ILeaderboardsContext>();
+                mockDb.Setup(d => d.Players).Returns(dbPlayers);
+                mockDb.Setup(d => d.Entries).Returns(dbEntries);
+                mockDb.Setup(d => d.Replays).Returns(dbReplays);
+                var db = mockDb.Object;
+                Kernel.Rebind<ILeaderboardsContext>().ToConstant(db);
+
+                // Act
+                var response = await Server.HttpClient.GetAsync("/players/1/entries");
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Assert
+                Assert.That.NormalizedAreEqual(Resources.GetPlayerEntries, content);
+            }
+
+            [TestMethod]
+            public async Task GetPlayerEntryMethod()
+            {
+                // Arrange
+                var players = Players;
+                var entries = from p in players
+                              from e in p.Entries
+                              select e;
+                var mockDbEntries = new MockDbSet<Entry>(entries);
+                var dbEntries = mockDbEntries.Object;
+                var mockDbReplays = new MockDbSet<Replay>();
+                var dbReplays = mockDbReplays.Object;
+                var mockDb = new Mock<ILeaderboardsContext>();
+                mockDb.Setup(d => d.Entries).Returns(dbEntries);
+                mockDb.Setup(d => d.Replays).Returns(dbReplays);
+                var db = mockDb.Object;
+                Kernel.Rebind<ILeaderboardsContext>().ToConstant(db);
+
+                // Act
+                var response = await Server.HttpClient.GetAsync("/players/2/entries/739999");
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Assert
+                Assert.That.NormalizedAreEqual(Resources.GetPlayerEntry, content);
             }
         }
     }

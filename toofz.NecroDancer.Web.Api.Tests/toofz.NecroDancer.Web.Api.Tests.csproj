@@ -212,6 +212,9 @@
     <None Include="Resources\GetItems.json" />
     <None Include="Resources\GetItemsByCategory.json" />
     <None Include="Resources\GetItemsBySubcategory.json" />
+    <None Include="Resources\GetPlayerEntries.json" />
+    <None Include="Resources\GetPlayerEntry.json" />
+    <None Include="Resources\GetPlayers.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\EnemiesControllerTests.cs" />

@@ -1,0 +1,16 @@
+{
+  "player": {
+    "id": "2",
+    "display_name": "Julianna",
+    "updated_at": null,
+    "avatar": null
+  },
+  "rank": 0,
+  "score": 0,
+  "end": {
+    "zone": 0,
+    "level": 0
+  },
+  "killed_by": null,
+  "version": null
+}

@@ -20,7 +20,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
             Kernel = NinjectWebCommon.CreateKernel();
             Server = TestServer.Create(app =>
             {
-                var config = new HttpConfiguration();
+                var config = new HttpConfiguration { IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always };
                 app.UseNinjectMiddleware(() => Kernel);
                 app.UseNinjectWebApi(config);
                 WebApiConfig.Register(config);
