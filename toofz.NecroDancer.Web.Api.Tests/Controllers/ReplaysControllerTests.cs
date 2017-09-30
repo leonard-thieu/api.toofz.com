@@ -75,16 +75,31 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsBulkStoreDTO()
             {
                 // Arrange
+                var replays = new List<ReplayModel>
+                {
+                    new ReplayModel
+                    {
+                        ReplayId = 42385384753,
+                        ErrorCode = null,
+                        Seed = 3548,
+                        Version = 75,
+                        KilledBy = "BOMB",
+                    },
+                };
                 var db = Mock.Of<ILeaderboardsContext>();
-                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var mockStoreClient = new Mock<ILeaderboardsStoreClient>();
+                mockStoreClient.Setup(s => s.SaveChangesAsync(It.IsAny<IEnumerable<Replay>>(), true, default)).Returns(Task.FromResult(replays.Count));
+                var storeClient = mockStoreClient.Object;
                 var controller = new ReplaysController(db, storeClient);
-                var replays = new[] { new ReplayModel() };
 
                 // Act
-                var result = await controller.PostReplays(replays);
+                var actionResult = await controller.PostReplays(replays);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<BulkStoreDTO>));
+                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<BulkStoreDTO>));
+                var contentResult = (OkNegotiatedContentResult<BulkStoreDTO>)actionResult;
+                var content = contentResult.Content;
+                Assert.AreEqual(1, content.RowsAffected);
             }
         }
 
