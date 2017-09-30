@@ -1,0 +1,17 @@
+{
+  "total": 2,
+  "players": [
+    {
+      "id": "5",
+      "display_name": "Stacey",
+      "updated_at": null,
+      "avatar": null
+    },
+    {
+      "id": "3",
+      "display_name": "Steve",
+      "updated_at": null,
+      "avatar": null
+    }
+  ]
+}

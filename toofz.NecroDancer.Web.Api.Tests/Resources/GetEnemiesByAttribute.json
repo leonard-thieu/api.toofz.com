@@ -1,0 +1,14 @@
+{
+  "total": 1,
+  "enemies": [
+    {
+      "name": "necrodancer",
+      "type": 1,
+      "display_name": "Necrodancer",
+      "health": 6,
+      "damage": 3,
+      "beats_per_move": 2,
+      "drops": 0
+    }
+  ]
+}

@@ -220,7 +220,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// An entry for the player on the leaderboard was not found.
         /// </httpStatusCode>
         [ResponseType(typeof(EntryDTO))]
-        [Route("{steamId}/entries/{lbid:int}")]
+        [Route("{steamId}/entries/{lbid}")]
         public async Task<IHttpActionResult> GetPlayerEntry(
             int lbid,
             long steamId,

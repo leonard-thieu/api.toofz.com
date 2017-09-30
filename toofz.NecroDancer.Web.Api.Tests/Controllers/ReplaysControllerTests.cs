@@ -6,12 +6,26 @@ using Moq;
 using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
+using toofz.NecroDancer.Web.Api.Tests.Properties;
 using toofz.TestsShared;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
     class ReplaysControllerTests
     {
+        static IEnumerable<Replay> Replays
+        {
+            get
+            {
+                return new[]
+                {
+                    new Replay { ReplayId = 25094445621522262 },
+                    new Replay { ReplayId = 25094445622197065 },
+                    new Replay { ReplayId = 25094445622344966 },
+                };
+            }
+        }
+
         [TestClass]
         public class Constructor
         {
@@ -108,6 +122,32 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Assert
                 mockDb.Verify(d => d.Dispose(), Times.Once);
+            }
+        }
+
+        [TestClass]
+        public class IntegrationTests : IntegrationTestsBase
+        {
+            [TestMethod]
+            public async Task GetReplaysMethod()
+            {
+                // Arrange
+                var replays = Replays;
+                var mockDbReplays = new MockDbSet<Replay>(replays);
+                var dbReplays = mockDbReplays.Object;
+                var mockDb = new Mock<ILeaderboardsContext>();
+                mockDb.Setup(d => d.Replays).Returns(dbReplays);
+                var db = mockDb.Object;
+                Kernel.Rebind<ILeaderboardsContext>().ToConstant(db);
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                Kernel.Rebind<ILeaderboardsStoreClient>().ToConstant(storeClient);
+
+                // Act
+                var response = await Server.HttpClient.GetAsync("/replays");
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Assert
+                Assert.That.NormalizedAreEqual(Resources.GetReplays, content);
             }
         }
     }

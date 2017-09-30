@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -7,15 +8,16 @@ using Moq;
 using toofz.NecroDancer.Data;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
+using toofz.NecroDancer.Web.Api.Tests.Properties;
 using toofz.TestsShared;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
     class EnemiesControllerTests
     {
-        static IEnumerable<Enemy> GetEnemies()
+        static IEnumerable<Enemy> Enemies
         {
-            return new List<Enemy>
+            get => new[]
             {
                 new Enemy("monkey", 4)
                 {
@@ -115,7 +117,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public void ReturnsInstance()
             {
                 // Arrange
-                var mockDb = new Mock<NecroDancerContext>();
+                var mockDb = new Mock<INecroDancerContext>();
                 var db = mockDb.Object;
 
                 // Act
@@ -127,15 +129,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         }
 
         [TestClass]
-        public class GetEnemiesMethod_EnemiesPagination_CancellationToken
+        public class GetEnemiesMethod
         {
-            public GetEnemiesMethod_EnemiesPagination_CancellationToken()
+            public GetEnemiesMethod()
             {
-                var enemies = GetEnemies();
-                var mockDbEnemies = new MockDbSet<Enemy>(enemies);
-                var dbEnemies = mockDbEnemies.Object;
-                var mockDb = new Mock<NecroDancerContext>();
-                mockDb.Setup(x => x.Enemies).Returns(dbEnemies);
+                var mockEnemies = new MockDbSet<Enemy>(Enemies);
+                var enemies = mockEnemies.Object;
+                var mockDb = new Mock<INecroDancerContext>();
+                mockDb.Setup(x => x.Enemies).Returns(enemies);
                 var db = mockDb.Object;
                 controller = new EnemiesController(db);
                 pagination = new EnemiesPagination();
@@ -217,15 +218,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         }
 
         [TestClass]
-        public class GetEnemiesMethod_EnemiesPagination_String_CancellationToken
+        public class GetEnemiesByAttributeMethod
         {
-            public GetEnemiesMethod_EnemiesPagination_String_CancellationToken()
+            public GetEnemiesByAttributeMethod()
             {
-                var enemies = GetEnemies();
-                var mockDbEnemies = new MockDbSet<Enemy>(enemies);
-                var dbEnemies = mockDbEnemies.Object;
-                var mockDb = new Mock<NecroDancerContext>();
-                mockDb.Setup(x => x.Enemies).Returns(dbEnemies);
+                var mockEnemies = new MockDbSet<Enemy>(Enemies);
+                var enemies = mockEnemies.Object;
+                var mockDb = new Mock<INecroDancerContext>();
+                mockDb.Setup(x => x.Enemies).Returns(enemies);
                 var db = mockDb.Object;
                 controller = new EnemiesController(db);
                 pagination = new EnemiesPagination();
@@ -246,7 +246,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsOk(string attribute)
             {
                 // Arrange -> Act
-                var result = await controller.GetEnemies(pagination, attribute);
+                var result = await controller.GetEnemiesByAttribute(pagination, attribute);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EnemiesEnvelope>));
@@ -263,7 +263,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsEnemiesFilteredByAttribute(string attribute, string name, int type)
             {
                 // Arrange -> Act
-                var result = await controller.GetEnemies(pagination, attribute);
+                var result = await controller.GetEnemiesByAttribute(pagination, attribute);
 
                 // Assert
                 var contentResult = (OkNegotiatedContentResult<EnemiesEnvelope>)result;
@@ -306,6 +306,50 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Assert
                 mockDb.Verify(d => d.Dispose(), Times.Once);
+            }
+        }
+
+        [TestClass]
+        public class IntegrationTests : IntegrationTestsBase
+        {
+            [TestMethod]
+            public async Task GetEnemiesMethod()
+            {
+                // Arrange
+                var mockEnemies = new MockDbSet<Enemy>(Enemies);
+                var enemies = mockEnemies.Object;
+                var mockDb = new Mock<INecroDancerContext>();
+                mockDb.SetupGet(d => d.Enemies).Returns(enemies);
+                var db = mockDb.Object;
+                Kernel.Rebind<INecroDancerContext>().ToConstant(db);
+
+                // Act
+                var response = await Server.HttpClient.GetAsync("/enemies");
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Assert
+                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+                Assert.That.NormalizedAreEqual(Resources.GetEnemies, content);
+            }
+
+            [TestMethod]
+            public async Task GetEnemiesByAttributeMethod()
+            {
+                // Arrange
+                var mockEnemies = new MockDbSet<Enemy>(Enemies);
+                var enemies = mockEnemies.Object;
+                var mockDb = new Mock<INecroDancerContext>();
+                mockDb.SetupGet(d => d.Enemies).Returns(enemies);
+                var db = mockDb.Object;
+                Kernel.Rebind<INecroDancerContext>().ToConstant(db);
+
+                // Act
+                var response = await Server.HttpClient.GetAsync("/enemies/boss");
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Assert
+                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+                Assert.That.NormalizedAreEqual(Resources.GetEnemiesByAttribute, content);
             }
         }
     }

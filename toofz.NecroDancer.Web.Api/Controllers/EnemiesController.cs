@@ -67,7 +67,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// </httpStatusCode>
         [ResponseType(typeof(EnemiesEnvelope))]
         [Route("{attribute}")]
-        public async Task<IHttpActionResult> GetEnemies(
+        public async Task<IHttpActionResult> GetEnemiesByAttribute(
             EnemiesPagination pagination,
             [ModelBinder(typeof(EnemyAttributeBinder))] string attribute,
             CancellationToken cancellationToken = default)
