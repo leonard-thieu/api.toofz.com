@@ -1,0 +1,77 @@
+{
+  "total": 8,
+  "enemies": [
+    {
+      "name": "bat",
+      "type": 1,
+      "display_name": "Bat",
+      "health": 1,
+      "damage": 1,
+      "beats_per_move": 2,
+      "drops": 2
+    },
+    {
+      "name": "dragon",
+      "type": 2,
+      "display_name": "Dragon",
+      "health": 6,
+      "damage": 6,
+      "beats_per_move": 2,
+      "drops": 20
+    },
+    {
+      "name": "monkey",
+      "type": 3,
+      "display_name": "Monkey",
+      "health": 1,
+      "damage": 0,
+      "beats_per_move": 1,
+      "drops": 1
+    },
+    {
+      "name": "monkey",
+      "type": 4,
+      "display_name": "Monkey",
+      "health": 2,
+      "damage": 0,
+      "beats_per_move": 1,
+      "drops": 2
+    },
+    {
+      "name": "necrodancer",
+      "type": 1,
+      "display_name": "Necrodancer",
+      "health": 6,
+      "damage": 3,
+      "beats_per_move": 2,
+      "drops": 0
+    },
+    {
+      "name": "ogre",
+      "type": 1,
+      "display_name": "Ogre",
+      "health": 5,
+      "damage": 5,
+      "beats_per_move": 4,
+      "drops": 15
+    },
+    {
+      "name": "spider",
+      "type": 1,
+      "display_name": "Spider",
+      "health": 1,
+      "damage": 2,
+      "beats_per_move": 2,
+      "drops": 3
+    },
+    {
+      "name": "tarmonster",
+      "type": 1,
+      "display_name": "Tarmonster",
+      "health": 1,
+      "damage": 3,
+      "beats_per_move": 1,
+      "drops": 3
+    }
+  ]
+}

@@ -18,7 +18,7 @@ namespace toofz.NecroDancer.Web.Api
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
             config.Filters.Add(new ValidateModelAttribute());
 
-            InitializeCors(config);
+            RegisterCors(config);
             RegisterRoutes(config);
 
             config.Services.Add(typeof(IExceptionLogger), new AiExceptionLogger());
@@ -27,7 +27,7 @@ namespace toofz.NecroDancer.Web.Api
             FluentValidationModelValidatorProvider.Configure(config);
         }
 
-        static void InitializeCors(HttpConfiguration config)
+        static void RegisterCors(HttpConfiguration config)
         {
             var cors = new EnableCorsAttribute("*", "*", "*", "Date");
             config.EnableCors(cors);

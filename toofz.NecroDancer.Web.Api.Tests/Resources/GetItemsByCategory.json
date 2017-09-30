@@ -1,0 +1,12 @@
+{
+  "total": 1,
+  "items": [
+    {
+      "name": "armor_glass",
+      "display_name": "Armor Glass",
+      "slot": "body",
+      "unlock": 4,
+      "cost": 50
+    }
+  ]
+}

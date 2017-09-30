@@ -40,7 +40,7 @@ namespace toofz.NecroDancer.Web.Api
         /// Creates the kernel that will manage your application.
         /// </summary>
         /// <returns>The created kernel.</returns>
-        static IKernel CreateKernel()
+        internal static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
             try

@@ -1,0 +1,12 @@
+{
+  "total": 1,
+  "items": [
+    {
+      "name": "weapon_blood_bow",
+      "display_name": "Weapon Blood Bow",
+      "slot": "weapon",
+      "unlock": null,
+      "cost": 250
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -7,15 +8,16 @@ using Moq;
 using toofz.NecroDancer.Data;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
+using toofz.NecroDancer.Web.Api.Tests.Properties;
 using toofz.TestsShared;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
     class ItemsControllerTests
     {
-        static IEnumerable<Item> GetItems()
+        static IEnumerable<Item> Items
         {
-            return new List<Item>
+            get => new[]
             {
                 new Item("armor_glass", "")
                 {
@@ -193,15 +195,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         }
 
         [TestClass]
-        public class GetItemsMethod_ItemsPagination_CancellationToken
+        public class GetItemsMethod
         {
-            public GetItemsMethod_ItemsPagination_CancellationToken()
+            public GetItemsMethod()
             {
-                var items = GetItems();
-                var mockDbItems = new MockDbSet<Item>(items);
-                var dbItems = mockDbItems.Object;
+                var mockItems = new MockDbSet<Item>(Items);
+                var items = mockItems.Object;
                 var mockDb = new Mock<NecroDancerContext>();
-                mockDb.Setup(x => x.Items).Returns(dbItems);
+                mockDb.Setup(x => x.Items).Returns(items);
                 var db = mockDb.Object;
                 controller = new ItemsController(db);
                 pagination = new ItemsPagination();
@@ -278,15 +279,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         }
 
         [TestClass]
-        public class GetItemsMethod_ItemsPagination_String_CancellationToken
+        public class GetItemsByCategoryMethod
         {
-            public GetItemsMethod_ItemsPagination_String_CancellationToken()
+            public GetItemsByCategoryMethod()
             {
-                var items = GetItems();
-                var mockDbItems = new MockDbSet<Item>(items);
-                var dbItems = mockDbItems.Object;
+                var mockItems = new MockDbSet<Item>(Items);
+                var items = mockItems.Object;
                 var mockDb = new Mock<NecroDancerContext>();
-                mockDb.Setup(x => x.Items).Returns(dbItems);
+                mockDb.Setup(x => x.Items).Returns(items);
                 var db = mockDb.Object;
                 controller = new ItemsController(db);
                 pagination = new ItemsPagination();
@@ -309,7 +309,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsOk(string category)
             {
                 // Arrange -> Act
-                var result = await controller.GetItems(pagination, category);
+                var result = await controller.GetItemsByCategory(pagination, category);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ItemsEnvelope>));
@@ -329,7 +329,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsItemsFilteredByCategory(string category, string name)
             {
                 // Arrange -> Act
-                var result = await controller.GetItems(pagination, category);
+                var result = await controller.GetItemsByCategory(pagination, category);
 
                 // Assert
                 var contentResult = (OkNegotiatedContentResult<ItemsEnvelope>)result;
@@ -340,15 +340,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         }
 
         [TestClass]
-        public class GetItemsMethod_ItemsPagination_String_String_CancellationToken
+        public class GetItemsBySubcategoryMethod
         {
-            public GetItemsMethod_ItemsPagination_String_String_CancellationToken()
+            public GetItemsBySubcategoryMethod()
             {
-                var items = GetItems();
-                var mockDbItems = new MockDbSet<Item>(items);
-                var dbItems = mockDbItems.Object;
+                var mockItems = new MockDbSet<Item>(Items);
+                var items = mockItems.Object;
                 var mockDb = new Mock<NecroDancerContext>();
-                mockDb.Setup(x => x.Items).Returns(dbItems);
+                mockDb.Setup(x => x.Items).Returns(items);
                 var db = mockDb.Object;
                 controller = new ItemsController(db);
                 pagination = new ItemsPagination();
@@ -380,7 +379,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     category = category,
                     subcategory = subcategory
                 };
-                var result = await controller.GetItems(pagination, filter);
+                var result = await controller.GetItemsBySubcategory(pagination, filter);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ItemsEnvelope>));
@@ -409,7 +408,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     category = category,
                     subcategory = subcategory
                 };
-                var result = await controller.GetItems(pagination, filter);
+                var result = await controller.GetItemsBySubcategory(pagination, filter);
 
                 // Assert
                 var contentResult = (OkNegotiatedContentResult<ItemsEnvelope>)result;
@@ -451,6 +450,70 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Assert
                 mockDb.Verify(d => d.Dispose(), Times.Once);
+            }
+        }
+
+        [TestClass]
+        public class IntegrationTests : IntegrationTestsBase
+        {
+            [TestMethod]
+            public async Task GetItemsMethod()
+            {
+                // Arrange
+                var mockItems = new MockDbSet<Item>(Items);
+                var items = mockItems.Object;
+                var mockDb = new Mock<INecroDancerContext>();
+                mockDb.SetupGet(d => d.Items).Returns(items);
+                var db = mockDb.Object;
+                Kernel.Rebind<INecroDancerContext>().ToConstant(db);
+
+                // Act
+                var response = await Server.HttpClient.GetAsync("/items");
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Assert
+                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+                Assert.That.NormalizedAreEqual(Resources.GetItems, content);
+            }
+
+            [TestMethod]
+            public async Task GetItemsByCategoryMethod()
+            {
+                // Arrange
+                var mockItems = new MockDbSet<Item>(Items);
+                var items = mockItems.Object;
+                var mockDb = new Mock<INecroDancerContext>();
+                mockDb.SetupGet(d => d.Items).Returns(items);
+                var db = mockDb.Object;
+                Kernel.Rebind<INecroDancerContext>().ToConstant(db);
+
+                // Act
+                var response = await Server.HttpClient.GetAsync("/items/armor");
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Assert
+                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+                Assert.That.NormalizedAreEqual(Resources.GetItemsByCategory, content);
+            }
+
+            [TestMethod]
+            public async Task GetItemsBySubcategoryMethod()
+            {
+                // Arrange
+                var mockItems = new MockDbSet<Item>(Items);
+                var items = mockItems.Object;
+                var mockDb = new Mock<INecroDancerContext>();
+                mockDb.SetupGet(d => d.Items).Returns(items);
+                var db = mockDb.Object;
+                Kernel.Rebind<INecroDancerContext>().ToConstant(db);
+
+                // Act
+                var response = await Server.HttpClient.GetAsync("/items/weapons/bows");
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Assert
+                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+                Assert.That.NormalizedAreEqual(Resources.GetItemsBySubcategory, content);
             }
         }
     }

@@ -69,7 +69,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// </httpStatusCode>
         [ResponseType(typeof(ItemsEnvelope))]
         [Route("{category}")]
-        public async Task<IHttpActionResult> GetItems(
+        public async Task<IHttpActionResult> GetItemsByCategory(
             ItemsPagination pagination,
             [ModelBinder(typeof(ItemCategoryBinder))] string category,
             CancellationToken cancellationToken = default)
@@ -112,7 +112,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// </httpStatusCode>
         [ResponseType(typeof(ItemsEnvelope))]
         [Route("{category}/{subcategory}")]
-        public async Task<IHttpActionResult> GetItems(
+        public async Task<IHttpActionResult> GetItemsBySubcategory(
             ItemsPagination pagination,
             ItemSubcategoryFilter filter,
             CancellationToken cancellationToken = default)
