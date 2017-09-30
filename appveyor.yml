@@ -6,8 +6,6 @@ configuration:
 environment:
   APPVEYOR_CACHE_ENTRY_ZIP_ARGS: -t7z -m0=lzma -mx=9
   PROJECT: toofz.NecroDancer.Web.Api
-  NecroDancerConnectionString: Server=(local)\SQL2014;Database=master;User ID=sa;Password=Password12!
-  LeaderboardsConnectionString: Server=(local)\SQL2014;Database=master;User ID=sa;Password=Password12!
 cache:
   - packages -> **\packages.config
 notifications:
@@ -30,6 +28,8 @@ build:
   verbosity: minimal
 
 test_script:
+  - ps: [Environment]::SetEnvironmentVariable("NecroDancerConnectionString", "Server=(local)\SQL2014;Database=master;User ID=sa;Password=Password12!", "Machine")
+  - ps: [Environment]::SetEnvironmentVariable("LeaderboardsConnectionString", "Server=(local)\SQL2014;Database=master;User ID=sa;Password=Password12!", "Machine")
   - ps: .\Scripts\Test-Project.ps1
 after_test:
   - ps: .\Scripts\Submit-CodeCoverageResults.ps1
