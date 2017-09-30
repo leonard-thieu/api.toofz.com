@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
@@ -386,11 +387,23 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsBulkStoreDTO()
             {
                 // Arrange
+                var players = new List<PlayerModel>
+                {
+                    new PlayerModel
+                    {
+                        SteamId = 1,
+                        Exists = true,
+                        Name = "Mendayen",
+                        LastUpdate = new DateTime(2017, 9, 30, 21, 45, 53, DateTimeKind.Utc),
+                        Avatar = "http://example.org/"
+                    },
+                };
                 var db = Mock.Of<ILeaderboardsContext>();
-                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var mockStoreClient = new Mock<ILeaderboardsStoreClient>();
+                mockStoreClient.Setup(s => s.SaveChangesAsync(It.IsAny<IEnumerable<Player>>(), true, default)).Returns(Task.FromResult(players.Count));
+                var storeClient = mockStoreClient.Object;
                 var leaderboardHeaders = LeaderboardsResources.ReadLeaderboardHeaders();
                 var controller = new PlayersController(db, storeClient, leaderboardHeaders);
-                var players = new List<PlayerModel>();
 
                 // Act
                 var actionResult = await controller.PostPlayers(players);
@@ -398,7 +411,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Assert
                 Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<BulkStoreDTO>));
                 var contentResult = (OkNegotiatedContentResult<BulkStoreDTO>)actionResult;
-                Assert.IsNotNull(contentResult.Content);
+                var content = contentResult.Content;
+                Assert.AreEqual(1, content.RowsAffected);
             }
         }
 
