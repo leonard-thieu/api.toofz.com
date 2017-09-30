@@ -1,11 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Web.Http;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System.Diagnostics.CodeAnalysis;
-using System.Web.Http;
 
 namespace toofz.NecroDancer.Web.Api
 {
-    [ExcludeFromCodeCoverage]
     static class FormatterConfiguration
     {
         public static void Configure(HttpConfiguration config)

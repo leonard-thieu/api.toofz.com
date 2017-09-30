@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.ExceptionHandling;
 using FluentValidation.WebApi;
@@ -7,7 +6,6 @@ using Microsoft.Owin.Security.OAuth;
 
 namespace toofz.NecroDancer.Web.Api
 {
-    [ExcludeFromCodeCoverage]
     static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
