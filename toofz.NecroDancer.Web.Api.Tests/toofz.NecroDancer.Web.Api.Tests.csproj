@@ -215,6 +215,7 @@
     <None Include="Resources\GetPlayerEntries.json" />
     <None Include="Resources\GetPlayerEntry.json" />
     <None Include="Resources\GetPlayers.json" />
+    <None Include="Resources\GetReplays.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\EnemiesControllerTests.cs" />

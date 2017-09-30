@@ -274,5 +274,39 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
                 return ResourceManager.GetString("GetPlayers", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;total&quot;: 3,
+        ///  &quot;replays&quot;: [
+        ///    {
+        ///      &quot;id&quot;: &quot;25094445621522262&quot;,
+        ///      &quot;error&quot;: null,
+        ///      &quot;seed&quot;: null,
+        ///      &quot;version&quot;: null,
+        ///      &quot;killed_by&quot;: null
+        ///    },
+        ///    {
+        ///      &quot;id&quot;: &quot;25094445622197065&quot;,
+        ///      &quot;error&quot;: null,
+        ///      &quot;seed&quot;: null,
+        ///      &quot;version&quot;: null,
+        ///      &quot;killed_by&quot;: null
+        ///    },
+        ///    {
+        ///      &quot;id&quot;: &quot;25094445622344966&quot;,
+        ///      &quot;error&quot;: null,
+        ///      &quot;seed&quot;: null,
+        ///      &quot;version&quot;: null,
+        ///      &quot;killed_by&quot;: null
+        ///    }
+        ///  ]
+        ///}.
+        /// </summary>
+        internal static string GetReplays {
+            get {
+                return ResourceManager.GetString("GetReplays", resourceCulture);
+            }
+        }
     }
 }
