@@ -456,6 +456,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Setup(d => d.Players).Returns(players);
                 var db = mockDb.Object;
                 Kernel.Rebind<ILeaderboardsContext>().ToConstant(db);
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                Kernel.Rebind<ILeaderboardsStoreClient>().ToConstant(storeClient);
 
                 // Act
                 var response = await Server.HttpClient.GetAsync("/players?q=St");
@@ -485,6 +487,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Setup(d => d.Replays).Returns(dbReplays);
                 var db = mockDb.Object;
                 Kernel.Rebind<ILeaderboardsContext>().ToConstant(db);
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                Kernel.Rebind<ILeaderboardsStoreClient>().ToConstant(storeClient);
 
                 // Act
                 var response = await Server.HttpClient.GetAsync("/players/1/entries");
@@ -511,6 +515,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Setup(d => d.Replays).Returns(dbReplays);
                 var db = mockDb.Object;
                 Kernel.Rebind<ILeaderboardsContext>().ToConstant(db);
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                Kernel.Rebind<ILeaderboardsStoreClient>().ToConstant(storeClient);
 
                 // Act
                 var response = await Server.HttpClient.GetAsync("/players/2/entries/739999");
