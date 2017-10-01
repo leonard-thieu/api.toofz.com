@@ -28,7 +28,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 {
                     new Entry
                     {
-                        Leaderboard = new Leaderboard { LeaderboardId = 739999 },
+                        Leaderboard = new Leaderboard
+                        {
+                            LeaderboardId = 739999,
+                            Product = new Product(1, "classic", "Classic"),
+                            Mode = new Mode(1, "standard", "Standard"),
+                            Run = new Run(1, "score", "Score"),
+                            Character = new Character(1, "cadence", "Cadence"),
+                        },
                         LeaderboardId = 739999,
                         Player = p1,
                         SteamId = 1,
@@ -145,10 +152,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Arrange
                 var db = new LeaderboardsContext();
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
-                var leaderboardHeaders = new LeaderboardHeaders();
 
                 // Act
-                var controller = new PlayersController(db, storeClient, leaderboardHeaders);
+                var controller = new PlayersController(db, storeClient);
 
                 // Assert
                 Assert.IsInstanceOfType(controller, typeof(PlayersController));
@@ -166,8 +172,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Setup(d => d.Players).Returns(players);
                 var db = mockDb.Object;
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
-                var leaderboardHeaders = LeaderboardsResources.ReadLeaderboardHeaders();
-                controller = new PlayersController(db, storeClient, leaderboardHeaders);
+                controller = new PlayersController(db, storeClient);
             }
 
             PlayersController controller;
@@ -281,8 +286,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Setup(x => x.Players).Returns(players);
                 var db = mockDb.Object;
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
-                var leaderboardHeaders = new LeaderboardHeaders();
-                var controller = new PlayersController(db, storeClient, leaderboardHeaders);
+                var controller = new PlayersController(db, storeClient);
                 var steamId = 1;
 
                 // Act
@@ -309,8 +313,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Setup(x => x.Replays).Returns(replays);
                 var db = mockDb.Object;
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
-                var leaderboardHeaders = new LeaderboardHeaders();
-                var controller = new PlayersController(db, storeClient, leaderboardHeaders);
+                var controller = new PlayersController(db, storeClient);
 
                 // Act
                 var result = await controller.GetPlayerEntries(steamId);
@@ -335,8 +338,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Setup(x => x.Entries).Returns(entries);
                 var db = mockDb.Object;
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
-                var leaderboardHeaders = new LeaderboardHeaders();
-                var controller = new PlayersController(db, storeClient, leaderboardHeaders);
+                var controller = new PlayersController(db, storeClient);
                 var lbid = 234265;
                 var steamId = 1;
 
@@ -356,7 +358,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var entry = new Entry
                 {
                     LeaderboardId = lbid,
-                    Player = new Player { SteamId = steamId, },
+                    SteamId = steamId,
+                    Player = new Player { SteamId = steamId },
                 };
                 var mockEntries = new MockDbSet<Entry>(entry);
                 var entries = mockEntries.Object;
@@ -367,8 +370,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Setup(x => x.Replays).Returns(replays);
                 var db = mockDb.Object;
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
-                var leaderboardHeaders = new LeaderboardHeaders();
-                var controller = new PlayersController(db, storeClient, leaderboardHeaders);
+                var controller = new PlayersController(db, storeClient);
 
                 // Act
                 var result = await controller.GetPlayerEntry(lbid, steamId);
@@ -402,8 +404,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var mockStoreClient = new Mock<ILeaderboardsStoreClient>();
                 mockStoreClient.Setup(s => s.SaveChangesAsync(It.IsAny<IEnumerable<Player>>(), true, default)).Returns(Task.FromResult(players.Count));
                 var storeClient = mockStoreClient.Object;
-                var leaderboardHeaders = LeaderboardsResources.ReadLeaderboardHeaders();
-                var controller = new PlayersController(db, storeClient, leaderboardHeaders);
+                var controller = new PlayersController(db, storeClient);
 
                 // Act
                 var actionResult = await controller.PostPlayers(players);
@@ -426,8 +427,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var mockDb = new Mock<ILeaderboardsContext>();
                 var db = mockDb.Object;
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
-                var leaderboardHeaders = new LeaderboardHeaders();
-                var controller = new PlayersController(db, storeClient, leaderboardHeaders);
+                var controller = new PlayersController(db, storeClient);
 
                 // Act
                 controller.Dispose();
@@ -443,8 +443,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var mockDb = new Mock<ILeaderboardsContext>();
                 var db = mockDb.Object;
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
-                var leaderboardHeaders = new LeaderboardHeaders();
-                var controller = new PlayersController(db, storeClient, leaderboardHeaders);
+                var controller = new PlayersController(db, storeClient);
 
                 // Act
                 controller.Dispose();

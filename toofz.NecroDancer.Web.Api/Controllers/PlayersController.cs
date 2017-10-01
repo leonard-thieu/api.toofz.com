@@ -30,20 +30,16 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// </summary>
         /// <param name="db">The leaderboards context.</param>
         /// <param name="storeClient">The leaderboards store client.</param>
-        /// <param name="leaderboardHeaders">Leaderboard headers.</param>
         public PlayersController(
             ILeaderboardsContext db,
-            ILeaderboardsStoreClient storeClient,
-            LeaderboardHeaders leaderboardHeaders)
+            ILeaderboardsStoreClient storeClient)
         {
             this.db = db;
             this.storeClient = storeClient;
-            this.leaderboardHeaders = leaderboardHeaders;
         }
 
         readonly ILeaderboardsContext db;
         readonly ILeaderboardsStoreClient storeClient;
-        readonly LeaderboardHeaders leaderboardHeaders;
 
         /// <summary>
         /// Search for Steam players.
@@ -126,32 +122,46 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             long steamId,
             CancellationToken cancellationToken = default)
         {
-            var player = db.Players.FirstOrDefault(p => p.SteamId == steamId);
+            var player = await (from p in db.Players
+                                where p.SteamId == steamId
+                                select new PlayerDTO
+                                {
+                                    Id = p.SteamId.ToString(),
+                                    DisplayName = p.Name,
+                                    UpdatedAt = p.LastUpdate,
+                                    Avatar = p.Avatar,
+                                })
+                                .FirstOrDefaultAsync(cancellationToken);
             if (player == null)
             {
                 return NotFound();
             }
 
-            var playerEntries = await (from e in db.Entries
-                                       where e.SteamId == steamId
-                                       select new
-                                       {
-                                           Leaderboard = new
-                                           {
-                                               e.Leaderboard.LeaderboardId,
-                                               e.Leaderboard.CharacterId,
-                                               e.Leaderboard.RunId,
-                                               e.Leaderboard.LastUpdate,
-                                           },
-                                           Rank = e.Rank,
-                                           Score = e.Score,
-                                           End = new
-                                           {
-                                               e.Zone,
-                                               e.Level,
-                                           },
-                                           ReplayId = e.ReplayId,
-                                       }).ToListAsync(cancellationToken);
+            var query = from e in db.Entries
+                        where e.SteamId == steamId
+                        select new
+                        {
+                            Leaderboard = new
+                            {
+                                e.Leaderboard.LeaderboardId,
+                                e.Leaderboard.Product,
+                                e.Leaderboard.Mode,
+                                e.Leaderboard.Run,
+                                e.Leaderboard.Character,
+                                e.Leaderboard.LastUpdate,
+                            },
+                            Rank = e.Rank,
+                            Score = e.Score,
+                            End = new
+                            {
+                                e.Zone,
+                                e.Level,
+                            },
+                            ReplayId = e.ReplayId,
+                        };
+
+            var total = await query.CountAsync(cancellationToken);
+            var playerEntries = await query.ToListAsync(cancellationToken);
 
             var replayIds = playerEntries.Select(entry => entry.ReplayId);
             var replays = await (from r in db.Replays
@@ -161,22 +171,22 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                      r.ReplayId,
                                      r.KilledBy,
                                      r.Version,
-                                 }).ToListAsync(cancellationToken);
+                                 })
+                                 .ToListAsync(cancellationToken);
 
             var entries = (from e in playerEntries
                            join r in replays on e.ReplayId equals r.ReplayId into g
                            from x in g.DefaultIfEmpty()
-                           join h in leaderboardHeaders on e.Leaderboard.LeaderboardId equals h.Id
-                           orderby h.Product, e.Leaderboard.RunId, h.Character
+                           orderby e.Leaderboard.Product.Name, e.Leaderboard.Run.RunId, e.Leaderboard.Character.Name
                            select new EntryDTO
                            {
                                Leaderboard = new LeaderboardDTO
                                {
-                                   Id = h.Id,
-                                   Product = h.Product,
-                                   Character = h.Character,
-                                   Mode = h.Mode,
-                                   Run = h.Run,
+                                   Id = e.Leaderboard.LeaderboardId,
+                                   Product = e.Leaderboard.Product.Name,
+                                   Mode = e.Leaderboard.Mode.Name,
+                                   Run = e.Leaderboard.Run.Name,
+                                   Character = e.Leaderboard.Character.Name,
                                    UpdatedAt = e.Leaderboard.LastUpdate,
                                },
                                Rank = e.Rank,
@@ -192,14 +202,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
 
             var content = new PlayerEntriesDTO
             {
-                Player = new PlayerDTO
-                {
-                    Id = player.SteamId.ToString(),
-                    DisplayName = player.Name,
-                    UpdatedAt = player.LastUpdate,
-                    Avatar = player.Avatar,
-                },
-                Total = entries.Count,
+                Player = player,
+                Total = total,
                 Entries = entries,
             };
 
@@ -226,42 +230,32 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             long steamId,
             CancellationToken cancellationToken = default)
         {
-            var query = from e in db.Entries
-                        where e.LeaderboardId == lbid
-                        orderby e.Rank
-                        select new
-                        {
-                            Player = new
-                            {
-                                e.Player.SteamId,
-                                e.Player.Name,
-                                e.Player.LastUpdate,
-                                e.Player.Avatar,
-                            },
-                            Rank = e.Rank,
-                            Score = e.Score,
-                            End = new
-                            {
-                                e.Zone,
-                                e.Level,
-                            },
-                            ReplayId = e.ReplayId,
-                        };
-
-            var playerEntry = await query.FirstOrDefaultAsync(e => e.Player.SteamId == steamId, cancellationToken);
+            var playerEntry = await (from e in db.Entries
+                                     where e.LeaderboardId == lbid && e.SteamId == steamId
+                                     orderby e.Rank
+                                     select new
+                                     {
+                                         Player = new
+                                         {
+                                             e.Player.SteamId,
+                                             e.Player.Name,
+                                             e.Player.LastUpdate,
+                                             e.Player.Avatar,
+                                         },
+                                         Rank = e.Rank,
+                                         Score = e.Score,
+                                         End = new
+                                         {
+                                             e.Zone,
+                                             e.Level,
+                                         },
+                                         ReplayId = e.ReplayId,
+                                     })
+                                     .FirstOrDefaultAsync(cancellationToken);
             if (playerEntry == null)
             {
                 return NotFound();
             }
-
-            var replay = await (from r in db.Replays
-                                where r.ReplayId == playerEntry.ReplayId
-                                select new
-                                {
-                                    r.KilledBy,
-                                    r.Version,
-                                })
-                                .FirstOrDefaultAsync(cancellationToken);
 
             var content = new EntryDTO
             {
@@ -280,6 +274,15 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                     Level = playerEntry.End.Level,
                 },
             };
+
+            var replay = await (from r in db.Replays
+                                where r.ReplayId == playerEntry.ReplayId
+                                select new
+                                {
+                                    r.KilledBy,
+                                    r.Version,
+                                })
+                                .FirstOrDefaultAsync(cancellationToken);
             if (replay != null)
             {
                 content.KilledBy = replay.KilledBy;
