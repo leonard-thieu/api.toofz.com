@@ -376,8 +376,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Arrange
                 var filter = new ItemSubcategoryFilter
                 {
-                    category = category,
-                    subcategory = subcategory
+                    Category = category,
+                    Subcategory = subcategory
                 };
                 var result = await controller.GetItemsBySubcategory(pagination, filter);
 
@@ -405,8 +405,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Arrange -> Act
                 var filter = new ItemSubcategoryFilter
                 {
-                    category = category,
-                    subcategory = subcategory
+                    Category = category,
+                    Subcategory = subcategory
                 };
                 var result = await controller.GetItemsBySubcategory(pagination, filter);
 

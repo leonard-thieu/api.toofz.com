@@ -147,7 +147,6 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                         };
 
             var total = await query.CountAsync(cancellationToken);
-
             var entriesPage = await query
                 .Skip(pagination.Offset)
                 .Take(pagination.Limit)
@@ -301,7 +300,6 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                         };
 
             var total = await query.CountAsync(cancellationToken);
-
             var entriesPage = await query
                 .Skip(pagination.Offset)
                 .Take(pagination.Limit)

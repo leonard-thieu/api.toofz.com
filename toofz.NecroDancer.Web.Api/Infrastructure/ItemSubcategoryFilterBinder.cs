@@ -25,7 +25,7 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
                 case "weapons":
                 case "chest":
                     var model = new ItemSubcategoryFilter();
-                    model.category = category;
+                    model.Category = category;
                     var subcategoryResult = bindingContext.ValueProvider.GetValue("subcategory");
                     var subcategory = subcategoryResult.ConvertTo<string>();
                     switch (category)
@@ -43,7 +43,7 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
                                 case "rapiers":
                                 case "spears":
                                 case "whips":
-                                    model.subcategory = subcategory;
+                                    model.Subcategory = subcategory;
                                     bindingContext.Model = model;
                                     return true;
 
@@ -58,7 +58,7 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
                                 case "purple":
                                 case "black":
                                 case "mimic":
-                                    model.subcategory = subcategory;
+                                    model.Subcategory = subcategory;
                                     bindingContext.Model = model;
                                     return true;
 

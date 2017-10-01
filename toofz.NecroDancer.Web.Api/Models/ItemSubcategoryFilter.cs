@@ -6,7 +6,7 @@ namespace toofz.NecroDancer.Web.Api.Models
     [ModelBinder(BinderType = typeof(ItemSubcategoryFilterBinder))]
     public sealed class ItemSubcategoryFilter
     {
-        public string category { get; set; }
-        public string subcategory { get; set; }
+        public string Category { get; set; }
+        public string Subcategory { get; set; }
     }
 }

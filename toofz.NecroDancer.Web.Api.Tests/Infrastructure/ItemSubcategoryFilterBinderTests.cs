@@ -164,8 +164,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
                 // Assert
                 var filter = (ItemSubcategoryFilter)bindingContext.Model;
-                Assert.AreEqual(category, filter.category);
-                Assert.AreEqual(subcategory, filter.subcategory);
+                Assert.AreEqual(category, filter.Category);
+                Assert.AreEqual(subcategory, filter.Subcategory);
             }
 
             [DataTestMethod]

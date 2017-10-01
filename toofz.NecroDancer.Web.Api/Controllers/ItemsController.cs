@@ -117,15 +117,12 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             ItemSubcategoryFilter filter,
             CancellationToken cancellationToken = default)
         {
-            var category = filter.category;
-            var subcategory = filter.subcategory;
-
             var baseQuery = from i in db.Items
                             select i;
-            switch (category)
+            switch (filter.Category)
             {
                 case "weapons":
-                    switch (subcategory)
+                    switch (filter.Subcategory)
                     {
                         case "bows": baseQuery = baseQuery.Where(w => w.IsBow); break;
                         case "broadswords": baseQuery = baseQuery.Where(w => w.IsBroadsword); break;
@@ -140,7 +137,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                     }
                     break;
                 case "chest":
-                    switch (subcategory)
+                    switch (filter.Subcategory)
                     {
                         case "red": baseQuery = baseQuery.Where(i => (i.IsFood || i.IsTorch || i.IsShovel || RedChestSlots.Contains(i.Slot)) && !i.IsScroll); break;
                         case "purple": baseQuery = baseQuery.Where(i => i.IsSpell || i.IsScroll || PurpleChestSlots.Contains(i.Slot)); break;
@@ -162,24 +159,20 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         {
             var query = from i in baseQuery
                         orderby i.Name
-                        select i;
+                        select new ItemDTO
+                        {
+                            Name = i.Name,
+                            DisplayName = i.DisplayName,
+                            Slot = i.Slot,
+                            Unlock = i.DiamondCost,
+                            Cost = i.CoinCost,
+                        };
 
             var total = await query.CountAsync(cancellationToken);
-
-            var dbItems = await query
+            var items = await query
                 .Skip(pagination.Offset)
                 .Take(pagination.Limit)
                 .ToListAsync(cancellationToken);
-            var items = (from i in dbItems
-                         select new ItemDTO
-                         {
-                             Name = i.Name,
-                             DisplayName = i.DisplayName,
-                             Slot = i.Slot,
-                             Unlock = i.DiamondCost,
-                             Cost = i.CoinCost,
-                         })
-                         .ToList();
 
             return new ItemsEnvelope
             {

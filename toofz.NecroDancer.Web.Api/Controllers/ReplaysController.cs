@@ -99,9 +99,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                              KilledBy = r.KilledBy,
                          }).ToList();
 
+            var rowsAffected = 0;
             try
             {
-                await storeClient.SaveChangesAsync(model, true, cancellationToken);
+                rowsAffected = await storeClient.SaveChangesAsync(model, true, cancellationToken);
             }
             // Violation of PRIMARY KEY constraint
             catch (SqlException ex) when (ex.Number == 2627)
@@ -109,7 +110,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 return Conflict();
             }
 
-            var content = new BulkStoreDTO { RowsAffected = replays.Count() };
+            var content = new BulkStoreDTO { RowsAffected = rowsAffected };
 
             return Ok(content);
         }

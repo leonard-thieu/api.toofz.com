@@ -98,26 +98,22 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         {
             var query = from e in baseQuery
                         orderby e.Name, e.Type
-                        select e;
+                        select new EnemyDTO
+                        {
+                            Name = e.Name,
+                            Type = e.Type,
+                            DisplayName = e.DisplayName,
+                            Health = e.Stats.Health,
+                            Damage = e.Stats.DamagePerHit,
+                            BeatsPerMove = e.Stats.BeatsPerMove,
+                            Drops = e.Stats.CoinsToDrop,
+                        };
 
             var total = await query.CountAsync(cancellationToken);
-
-            var dbEnemies = await query
+            var enemies = await query
                 .Skip(pagination.Offset)
                 .Take(pagination.Limit)
                 .ToListAsync(cancellationToken);
-            var enemies = (from e in dbEnemies
-                           select new EnemyDTO
-                           {
-                               Name = e.Name,
-                               Type = e.Type,
-                               DisplayName = e.DisplayName,
-                               Health = e.Stats.Health,
-                               Damage = e.Stats.DamagePerHit,
-                               BeatsPerMove = e.Stats.BeatsPerMove,
-                               Drops = e.Stats.CoinsToDrop,
-                           })
-                           .ToList();
 
             return new EnemiesEnvelope
             {
