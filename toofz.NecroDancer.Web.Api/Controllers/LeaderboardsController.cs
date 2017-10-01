@@ -20,21 +20,12 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// Initializes a new instance of the <see cref="LeaderboardsController"/> class.
         /// </summary>
         /// <param name="db">The leaderboards context.</param>
-        /// <param name="leaderboardCategories">Leaderboard categories.</param>
-        /// <param name="leaderboardHeaders">Leaderboard headers.</param>
-        public LeaderboardsController(
-            ILeaderboardsContext db,
-            Categories leaderboardCategories,
-            LeaderboardHeaders leaderboardHeaders)
+        public LeaderboardsController(ILeaderboardsContext db)
         {
             this.db = db;
-            this.leaderboardCategories = leaderboardCategories;
-            this.leaderboardHeaders = leaderboardHeaders;
         }
 
         readonly ILeaderboardsContext db;
-        readonly Categories leaderboardCategories;
-        readonly LeaderboardHeaders leaderboardHeaders;
 
         /// <summary>
         /// Gets a list of Crypt of the NecroDancer leaderboards.
@@ -68,42 +59,30 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             Characters characters,
             CancellationToken cancellationToken = default)
         {
-            var lbids = (from h in leaderboardHeaders
-                         where products.Contains(h.Product)
-                         where modes.Contains(h.Mode)
-                         where runs.Contains(h.Run)
-                         where characters.Contains(h.Character)
-                         select h.Id).ToList();
+            var query = from l in db.Leaderboards
+                        where products.Contains(l.Product.Name)
+                        where modes.Contains(l.Mode.Name)
+                        where runs.Contains(l.Run.Name)
+                        where characters.Contains(l.Character.Name)
+                        orderby l.Product.Name, l.Character.Name, l.RunId
+                        select new LeaderboardDTO
+                        {
+                            Id = l.LeaderboardId,
+                            Product = l.Product.Name,
+                            Character = l.Character.Name,
+                            Mode = l.Mode.Name,
+                            Run = l.Run.Name,
+                            DisplayName = l.DisplayName,
+                            UpdatedAt = l.LastUpdate,
+                            Total = l.Entries.Count,
+                        };
 
-            var query = await (from l in db.Leaderboards
-                               where lbids.Contains(l.LeaderboardId)
-                               select new
-                               {
-                                   l.LeaderboardId,
-                                   l.CharacterId,
-                                   l.RunId,
-                                   l.LastUpdate,
-                                   l.Entries.Count,
-                               }).ToListAsync(cancellationToken);
-
-            var leaderboards = (from l in query
-                                join h in leaderboardHeaders on l.LeaderboardId equals h.Id
-                                orderby h.Product, h.Character, l.RunId
-                                select new LeaderboardDTO
-                                {
-                                    Id = h.Id,
-                                    Product = h.Product,
-                                    Character = h.Character,
-                                    Mode = h.Mode,
-                                    Run = h.Run,
-                                    DisplayName = h.DisplayName,
-                                    UpdatedAt = l.LastUpdate,
-                                    Total = l.Count,
-                                }).ToList();
+            var total = await query.CountAsync(cancellationToken);
+            var leaderboards = await query.ToListAsync(cancellationToken);
 
             var content = new LeaderboardsEnvelope
             {
-                Total = leaderboards.Count,
+                Total = total,
                 Leaderboards = leaderboards,
             };
 
@@ -127,7 +106,19 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             int lbid,
             CancellationToken cancellationToken = default)
         {
-            var leaderboard = await db.Leaderboards.FirstOrDefaultAsync(l => l.LeaderboardId == lbid, cancellationToken);
+            var leaderboard = await (from l in db.Leaderboards
+                                     where l.LeaderboardId == lbid
+                                     select new LeaderboardDTO
+                                     {
+                                         Id = l.LeaderboardId,
+                                         Product = l.Product.Name,
+                                         Character = l.Character.Name,
+                                         Mode = l.Mode.Name,
+                                         Run = l.Run.Name,
+                                         DisplayName = l.DisplayName,
+                                         UpdatedAt = l.LastUpdate,
+                                     })
+                                     .FirstOrDefaultAsync(cancellationToken);
             if (leaderboard == null)
             {
                 return NotFound();
@@ -195,24 +186,9 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                Version = x?.Version,
                            }).ToList();
 
-            var h = leaderboardHeaders.FirstOrDefault(l => l.Id == leaderboard.LeaderboardId);
-            if (h == null)
-            {
-                return NotFound();
-            }
-
             var content = new LeaderboardEntriesDTO
             {
-                Leaderboard = new LeaderboardDTO
-                {
-                    Id = h.Id,
-                    Product = h.Product,
-                    Character = h.Character,
-                    Mode = h.Mode,
-                    Run = h.Run,
-                    DisplayName = h.DisplayName,
-                    UpdatedAt = leaderboard.LastUpdate,
-                },
+                Leaderboard = leaderboard,
                 Total = total,
                 Entries = entries,
             };
@@ -242,48 +218,27 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             Products products,
             CancellationToken cancellationToken = default)
         {
-            var productIds = new List<int>();
-            foreach (var p in products)
-            {
-                try
-                {
-                    productIds.Add(leaderboardCategories["products"][p].Id);
-                }
-                catch (KeyNotFoundException)
-                {
-                    return BadRequest($"'{p}' is not a valid product.");
-                }
-            }
+            var query = from l in db.DailyLeaderboards
+                        where products.Contains(l.Product.Name)
+                        orderby l.Date descending, l.ProductId
+                        select new DailyLeaderboardDTO
+                        {
+                            Id = l.LeaderboardId,
+                            Date = l.Date,
+                            UpdatedAt = l.LastUpdate,
+                            IsProduction = l.IsProduction,
+                            Product = l.Product.Name,
+                        };
 
-            var query = await (from l in db.DailyLeaderboards
-                               where productIds.Contains(l.ProductId)
-                               orderby l.Date descending, l.ProductId
-                               select new
-                               {
-                                   l.LeaderboardId,
-                                   l.Date,
-                                   l.LastUpdate,
-                                   l.ProductId,
-                                   l.IsProduction,
-                               })
-                               .Skip(pagination.Offset)
-                               .Take(pagination.Limit)
-                               .ToListAsync(cancellationToken);
-
-            var leaderboards = (from l in query
-                                select new DailyLeaderboardDTO
-                                {
-                                    Id = l.LeaderboardId,
-                                    Date = l.Date,
-                                    UpdatedAt = l.LastUpdate,
-                                    Product = leaderboardCategories["products"].GetName(l.ProductId),
-                                    IsProduction = l.IsProduction,
-                                })
-                                .ToList();
+            var total = await query.CountAsync(cancellationToken);
+            var leaderboards = await query
+                .Skip(pagination.Offset)
+                .Take(pagination.Limit)
+                .ToListAsync(cancellationToken);
 
             var content = new DailyLeaderboardsEnvelope
             {
-                Total = leaderboards.Count,
+                Total = total,
                 Leaderboards = leaderboards,
             };
 
@@ -307,7 +262,17 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             int lbid,
             CancellationToken cancellationToken = default)
         {
-            var leaderboard = await db.DailyLeaderboards.FirstOrDefaultAsync(l => l.LeaderboardId == lbid, cancellationToken);
+            var leaderboard = await (from l in db.DailyLeaderboards
+                                     where l.LeaderboardId == lbid
+                                     select new DailyLeaderboardDTO
+                                     {
+                                         Id = l.LeaderboardId,
+                                         Date = l.Date,
+                                         UpdatedAt = l.LastUpdate,
+                                         Product = l.Product.Name,
+                                         IsProduction = l.IsProduction,
+                                     })
+                                     .FirstOrDefaultAsync(cancellationToken);
             if (leaderboard == null)
             {
                 return NotFound();
@@ -350,7 +315,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                      r.ReplayId,
                                      r.KilledBy,
                                      r.Version,
-                                 }).ToListAsync(cancellationToken);
+                                 })
+                                 .ToListAsync(cancellationToken);
 
             var entries = (from e in entriesPage
                            join r in replays on e.ReplayId equals r.ReplayId into g
@@ -373,18 +339,12 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                },
                                KilledBy = x?.KilledBy,
                                Version = x?.Version,
-                           }).ToList();
+                           })
+                           .ToList();
 
             var content = new DailyLeaderboardEntriesDTO
             {
-                Leaderboard = new DailyLeaderboardDTO
-                {
-                    Id = leaderboard.LeaderboardId,
-                    Date = leaderboard.Date,
-                    UpdatedAt = leaderboard.LastUpdate,
-                    Product = leaderboardCategories["products"].GetName(leaderboard.ProductId),
-                    IsProduction = leaderboard.IsProduction,
-                },
+                Leaderboard = leaderboard,
                 Total = total,
                 Entries = entries,
             };

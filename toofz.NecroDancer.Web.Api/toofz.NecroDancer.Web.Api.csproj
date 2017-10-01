@@ -257,11 +257,11 @@
     <Reference Include="toofz.NecroDancer.Data, Version=5.0.1.36, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.NecroDancer.Data.5.0.1\lib\net45\toofz.NecroDancer.Data.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer.Leaderboards, Version=10.0.0.178, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.10.0.0\lib\net45\toofz.NecroDancer.Leaderboards.dll</HintPath>
+    <Reference Include="toofz.NecroDancer.Leaderboards, Version=10.1.0.180, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.10.1.0\lib\net45\toofz.NecroDancer.Leaderboards.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer.Leaderboards.Data, Version=3.0.0.30, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.Data.3.0.0\lib\net45\toofz.NecroDancer.Leaderboards.Data.dll</HintPath>
+    <Reference Include="toofz.NecroDancer.Leaderboards.Data, Version=4.0.0.32, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.Data.4.0.0\lib\net45\toofz.NecroDancer.Leaderboards.Data.dll</HintPath>
     </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
