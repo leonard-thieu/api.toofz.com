@@ -1,8 +1,8 @@
 {
   "player": {
     "id": "1",
-    "display_name": "Leonard",
     "updated_at": null,
+    "display_name": "Leonard",
     "avatar": null
   },
   "total": 1,
@@ -10,12 +10,13 @@
     {
       "leaderboard": {
         "id": 739999,
+        "updated_at": null,
+        "display_name": null,
+        "production": false,
         "product": "classic",
-        "character": "cadence",
         "mode": "standard",
         "run": "score",
-        "display_name": null,
-        "updated_at": null,
+        "character": "cadence",
         "total": 0
       },
       "rank": 0,

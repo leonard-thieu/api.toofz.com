@@ -67,12 +67,13 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                         select new LeaderboardDTO
                         {
                             Id = l.LeaderboardId,
+                            UpdatedAt = l.LastUpdate,
+                            DisplayName = l.DisplayName,
+                            IsProduction = l.IsProduction,
                             Product = l.Product.Name,
-                            Character = l.Character.Name,
                             Mode = l.Mode.Name,
                             Run = l.Run.Name,
-                            DisplayName = l.DisplayName,
-                            UpdatedAt = l.LastUpdate,
+                            Character = l.Character.Name,
                             Total = l.Entries.Count,
                         };
 
@@ -110,12 +111,14 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                      select new LeaderboardDTO
                                      {
                                          Id = l.LeaderboardId,
+                                         UpdatedAt = l.LastUpdate,
+                                         DisplayName = l.DisplayName,
+                                         IsProduction = l.IsProduction,
                                          Product = l.Product.Name,
-                                         Character = l.Character.Name,
                                          Mode = l.Mode.Name,
                                          Run = l.Run.Name,
-                                         DisplayName = l.DisplayName,
-                                         UpdatedAt = l.LastUpdate,
+                                         Character = l.Character.Name,
+                                         Total = l.Entries.Count,
                                      })
                                      .FirstOrDefaultAsync(cancellationToken);
             if (leaderboard == null)
@@ -131,8 +134,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                             Player = new
                             {
                                 e.Player.SteamId,
-                                e.Player.Name,
                                 e.Player.LastUpdate,
+                                e.Player.Name,
                                 e.Player.Avatar,
                             },
                             Rank = e.Rank,
@@ -169,8 +172,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                Player = new PlayerDTO
                                {
                                    Id = e.Player.SteamId.ToString(),
-                                   DisplayName = e.Player.Name,
                                    UpdatedAt = e.Player.LastUpdate,
+                                   DisplayName = e.Player.Name,
                                    Avatar = e.Player.Avatar,
                                },
                                Rank = e.Rank,
@@ -222,10 +225,12 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                         select new DailyLeaderboardDTO
                         {
                             Id = l.LeaderboardId,
-                            Date = l.Date,
                             UpdatedAt = l.LastUpdate,
+                            DisplayName = l.DisplayName,
                             IsProduction = l.IsProduction,
                             Product = l.Product.Name,
+                            Date = l.Date,
+                            Total = l.Entries.Count,
                         };
 
             var total = await query.CountAsync(cancellationToken);
@@ -265,10 +270,12 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                      select new DailyLeaderboardDTO
                                      {
                                          Id = l.LeaderboardId,
-                                         Date = l.Date,
                                          UpdatedAt = l.LastUpdate,
-                                         Product = l.Product.Name,
+                                         DisplayName = l.DisplayName,
                                          IsProduction = l.IsProduction,
+                                         Product = l.Product.Name,
+                                         Date = l.Date,
+                                         Total = l.Entries.Count,
                                      })
                                      .FirstOrDefaultAsync(cancellationToken);
             if (leaderboard == null)
@@ -284,8 +291,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                             Player = new
                             {
                                 e.Player.SteamId,
-                                e.Player.Name,
                                 e.Player.LastUpdate,
+                                e.Player.Name,
                                 e.Player.Avatar,
                             },
                             Rank = e.Rank,
@@ -323,8 +330,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                Player = new PlayerDTO
                                {
                                    Id = e.Player.SteamId.ToString(),
-                                   DisplayName = e.Player.Name,
                                    UpdatedAt = e.Player.LastUpdate,
+                                   DisplayName = e.Player.Name,
                                    Avatar = e.Player.Avatar,
                                },
                                Rank = e.Rank,

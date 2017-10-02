@@ -15,15 +15,15 @@ namespace toofz.NecroDancer.Web.Api.Models
         [DataMember(Name = "id")]
         public string Id { get; set; }
         /// <summary>
-        /// The player's display name.
-        /// </summary>
-        [DataMember(Name = "display_name")]
-        public string DisplayName { get; set; }
-        /// <summary>
         /// The time (in UTC) that the player's data was retrieved at.
         /// </summary>
         [DataMember(Name = "updated_at")]
         public DateTime? UpdatedAt { get; set; }
+        /// <summary>
+        /// The player's display name.
+        /// </summary>
+        [DataMember(Name = "display_name")]
+        public string DisplayName { get; set; }
         /// <summary>
         /// The URL of the player's avatar.
         /// </summary>

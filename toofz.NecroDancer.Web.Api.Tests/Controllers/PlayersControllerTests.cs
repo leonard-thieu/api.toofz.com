@@ -321,8 +321,6 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<PlayerEntriesDTO>));
-                var contentResult = (OkNegotiatedContentResult<PlayerEntriesDTO>)result;
-                Assert.IsNotNull(contentResult.Content);
             }
         }
 
@@ -419,6 +417,56 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var content = contentResult.Content;
                 Assert.AreEqual(74, content.Version);
                 Assert.AreEqual("BOMB", content.KilledBy);
+            }
+        }
+
+        [TestClass]
+        public class GetPlayerDailyEntriesMethod
+        {
+            [TestMethod]
+            public async Task PlayerNotFound_ReturnsNotFound()
+            {
+                // Arrange
+                var mockPlayers = new MockDbSet<Player>();
+                var players = mockPlayers.Object;
+                var mockDb = new Mock<ILeaderboardsContext>();
+                mockDb.Setup(x => x.Players).Returns(players);
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var controller = new PlayersController(db, storeClient);
+                var steamId = 1;
+
+                // Act
+                var result = await controller.GetPlayerDailyEntries(steamId);
+
+                // Assert
+                Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+            }
+
+            [TestMethod]
+            public async Task ReturnsPlayerEntries()
+            {
+                // Arrange
+                var steamId = 76561197960481221;
+                var mockPlayers = new MockDbSet<Player>(new Player { SteamId = steamId });
+                var players = mockPlayers.Object;
+                var mockEntries = new MockDbSet<DailyEntry>();
+                var entries = mockEntries.Object;
+                var mockReplays = new MockDbSet<Replay>();
+                var replays = mockReplays.Object;
+                var mockDb = new Mock<ILeaderboardsContext>();
+                mockDb.Setup(x => x.Players).Returns(players);
+                mockDb.Setup(x => x.DailyEntries).Returns(entries);
+                mockDb.Setup(x => x.Replays).Returns(replays);
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var controller = new PlayersController(db, storeClient);
+
+                // Act
+                var result = await controller.GetPlayerDailyEntries(steamId);
+
+                // Assert
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<PlayerDailyEntriesDTO>));
             }
         }
 

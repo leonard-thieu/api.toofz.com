@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
@@ -76,8 +75,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                         select new PlayerDTO
                         {
                             Id = p.SteamId.ToString(),
-                            DisplayName = p.Name,
                             UpdatedAt = p.LastUpdate,
+                            DisplayName = p.Name,
                             Avatar = p.Avatar,
                         };
 
@@ -118,8 +117,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                 select new PlayerDTO
                                 {
                                     Id = p.SteamId.ToString(),
-                                    DisplayName = p.Name,
                                     UpdatedAt = p.LastUpdate,
+                                    DisplayName = p.Name,
                                     Avatar = p.Avatar,
                                 })
                                 .FirstOrDefaultAsync(cancellationToken);
@@ -135,11 +134,14 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                             Leaderboard = new
                             {
                                 e.Leaderboard.LeaderboardId,
+                                e.Leaderboard.LastUpdate,
+                                e.Leaderboard.DisplayName,
+                                e.Leaderboard.IsProduction,
                                 e.Leaderboard.Product,
                                 e.Leaderboard.Mode,
                                 e.Leaderboard.Run,
                                 e.Leaderboard.Character,
-                                e.Leaderboard.LastUpdate,
+                                Total = e.Leaderboard.Entries.Count,
                             },
                             Rank = e.Rank,
                             Score = e.Score,
@@ -174,11 +176,14 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                Leaderboard = new LeaderboardDTO
                                {
                                    Id = e.Leaderboard.LeaderboardId,
+                                   UpdatedAt = e.Leaderboard.LastUpdate,
+                                   DisplayName = e.Leaderboard.DisplayName,
+                                   IsProduction = e.Leaderboard.IsProduction,
                                    Product = e.Leaderboard.Product.Name,
                                    Mode = e.Leaderboard.Mode.Name,
                                    Run = e.Leaderboard.Run.Name,
                                    Character = e.Leaderboard.Character.Name,
-                                   UpdatedAt = e.Leaderboard.LastUpdate,
+                                   Total = e.Leaderboard.Total,
                                },
                                Rank = e.Rank,
                                Score = e.Score,
@@ -189,7 +194,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                },
                                KilledBy = x?.KilledBy,
                                Version = x?.Version,
-                           }).ToList();
+                           })
+                           .ToList();
 
             var content = new PlayerEntriesDTO
             {
@@ -229,8 +235,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                          Player = new
                                          {
                                              e.Player.SteamId,
-                                             e.Player.Name,
                                              e.Player.LastUpdate,
+                                             e.Player.Name,
                                              e.Player.Avatar,
                                          },
                                          Rank = e.Rank,
@@ -253,8 +259,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 Player = new PlayerDTO
                 {
                     Id = playerEntry.Player.SteamId.ToString(),
-                    DisplayName = playerEntry.Player.Name,
                     UpdatedAt = playerEntry.Player.LastUpdate,
+                    DisplayName = playerEntry.Player.Name,
                     Avatar = playerEntry.Player.Avatar,
                 },
                 Rank = playerEntry.Rank,
@@ -279,6 +285,114 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 content.KilledBy = replay.KilledBy;
                 content.Version = replay.Version;
             }
+
+            return Ok(content);
+        }
+
+        /// <summary>
+        /// Gets a Steam player's daily leaderboard entries.
+        /// </summary>
+        /// <param name="steamId">The Steam ID of the player.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
+        /// <returns>
+        /// Returns a Steam player's daily leaderboard entries.
+        /// </returns>
+        /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
+        /// A player with that Steam ID was not found.
+        /// </httpStatusCode>
+        [ResponseType(typeof(PlayerDailyEntriesDTO))]
+        [Route("{steamId}/entries/dailies")]
+        public async Task<IHttpActionResult> GetPlayerDailyEntries(
+            long steamId,
+            CancellationToken cancellationToken = default)
+        {
+            var player = await (from p in db.Players
+                                where p.SteamId == steamId
+                                select new PlayerDTO
+                                {
+                                    Id = p.SteamId.ToString(),
+                                    UpdatedAt = p.LastUpdate,
+                                    DisplayName = p.Name,
+                                    Avatar = p.Avatar,
+                                })
+                                .FirstOrDefaultAsync(cancellationToken);
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            var query = from e in db.DailyEntries
+                        where e.SteamId == steamId
+                        select new
+                        {
+                            Leaderboard = new
+                            {
+                                e.Leaderboard.LeaderboardId,
+                                e.Leaderboard.LastUpdate,
+                                e.Leaderboard.DisplayName,
+                                e.Leaderboard.IsProduction,
+                                e.Leaderboard.Product,
+                                e.Leaderboard.Date,
+                                Total = e.Leaderboard.Entries.Count,
+                            },
+                            Rank = e.Rank,
+                            Score = e.Score,
+                            End = new
+                            {
+                                e.Zone,
+                                e.Level,
+                            },
+                            ReplayId = e.ReplayId,
+                        };
+
+            var total = await query.CountAsync(cancellationToken);
+            var playerEntries = await query.ToListAsync(cancellationToken);
+
+            var replayIds = playerEntries.Select(e => e.ReplayId);
+            var replays = await (from r in db.Replays
+                                 where replayIds.Contains(r.ReplayId)
+                                 select new
+                                 {
+                                     r.ReplayId,
+                                     r.KilledBy,
+                                     r.Version,
+                                 })
+                                 .ToListAsync(cancellationToken);
+
+            var entries = (from e in playerEntries
+                           join r in replays on e.ReplayId equals r.ReplayId into g
+                           from x in g.DefaultIfEmpty()
+                           orderby e.Leaderboard.Product.Name, e.Leaderboard.IsProduction
+                           select new DailyEntryDTO
+                           {
+                               Leaderboard = new DailyLeaderboardDTO
+                               {
+                                   Id = e.Leaderboard.LeaderboardId,
+                                   UpdatedAt = e.Leaderboard.LastUpdate,
+                                   DisplayName = e.Leaderboard.DisplayName,
+                                   IsProduction = e.Leaderboard.IsProduction,
+                                   Product = e.Leaderboard.Product.Name,
+                                   Date = e.Leaderboard.Date,
+                                   Total = e.Leaderboard.Total,
+                               },
+                               Rank = e.Rank,
+                               Score = e.Score,
+                               End = new EndDTO
+                               {
+                                   Zone = e.End.Zone,
+                                   Level = e.End.Level,
+                               },
+                               KilledBy = x?.KilledBy,
+                               Version = x?.Version,
+                           })
+                           .ToList();
+
+            var content = new PlayerDailyEntriesDTO
+            {
+                Player = player,
+                Total = total,
+                Entries = entries,
+            };
 
             return Ok(content);
         }
