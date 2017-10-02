@@ -331,6 +331,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\EnemiesController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\LeaderboardsController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
