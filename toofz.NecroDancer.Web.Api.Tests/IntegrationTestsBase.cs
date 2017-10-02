@@ -1,10 +1,12 @@
 ﻿using System.Web.Http;
 using Microsoft.Owin.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using Ninject;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Owin;
+using toofz.NecroDancer.Leaderboards;
 
 namespace toofz.NecroDancer.Web.Api.Tests
 {
@@ -18,6 +20,9 @@ namespace toofz.NecroDancer.Web.Api.Tests
         public void TestInitialize()
         {
             Kernel = NinjectWebCommon.CreateKernel();
+            Kernel.Rebind<INecroDancerContext>().ToConstant(Mock.Of<INecroDancerContext>());
+            Kernel.Rebind<ILeaderboardsContext>().ToConstant(Mock.Of<ILeaderboardsContext>());
+            Kernel.Rebind<ILeaderboardsStoreClient>().ToConstant(Mock.Of<ILeaderboardsStoreClient>());
             Server = TestServer.Create(app =>
             {
                 var config = new HttpConfiguration { IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always };
