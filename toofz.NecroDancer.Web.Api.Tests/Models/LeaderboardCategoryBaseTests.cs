@@ -26,6 +26,19 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
             }
 
             [TestMethod]
+            public void CategoryIsEmpty_ThrowsArgumentException()
+            {
+                // Arrange
+                var values = new List<string>();
+
+                // Act -> Assert
+                Assert.ThrowsException<ArgumentException>(() =>
+                {
+                    new LeaderboardCategoryBaseAdapter(values);
+                });
+            }
+
+            [TestMethod]
             public void ReturnsInstance()
             {
                 // Arrange

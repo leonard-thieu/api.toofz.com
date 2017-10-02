@@ -71,24 +71,6 @@ namespace toofz.NecroDancer.Web.Api.Tests
             }
 
             [TestMethod]
-            public void SortContainsInvalidOptions_ThrowsArgumentException()
-            {
-                // Arrange
-                var source = (new List<string>()).AsQueryable();
-                var keySelectorMap = new Dictionary<string, string>
-                {
-                    ["option"] = "Length",
-                };
-                var sort = new List<string> { "invalid" };
-
-                // Act -> Assert
-                Assert.ThrowsException<ArgumentException>(() =>
-                {
-                    IQueryableExtensions.OrderBy(source, keySelectorMap, sort);
-                });
-            }
-
-            [TestMethod]
             public void ReturnsQueryableWithOrdering()
             {
                 // Arrange

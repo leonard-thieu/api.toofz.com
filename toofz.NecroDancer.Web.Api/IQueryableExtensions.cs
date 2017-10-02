@@ -31,21 +31,13 @@ namespace toofz.NecroDancer.Web.Api
                     isDescending = true;
                 }
 
-                if (keySelectorMap.TryGetValue(sortOption, out string keySelector))
+                // Invalid options should already be caught by the model binder.
+                var sortExpression = keySelectorMap[sortOption];
+                if (isDescending)
                 {
-                    var sortExpression = keySelector;
-                    if (isDescending)
-                    {
-                        sortExpression += " descending";
-                    }
-                    sortExpressions.Add(sortExpression);
+                    sortExpression += " descending";
                 }
-                else
-                {
-                    var properties = string.Join(", ", from p in keySelectorMap.Values
-                                                       select $"'{p}'");
-                    throw new ArgumentException($"'{sortOption}' is not a valid property to sort by. Valid properties are: {properties}.");
-                }
+                sortExpressions.Add(sortExpression);
             }
 
             var ordering = string.Join(", ", sortExpressions);

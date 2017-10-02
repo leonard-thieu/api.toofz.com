@@ -79,6 +79,25 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         public class GetLeaderboardEntriesMethod
         {
             [TestMethod]
+            public async Task LeaderboardNotFound_ReturnsNotFound()
+            {
+                // Arrange
+                var mockDbLeaderboards = new MockDbSet<Leaderboard>(new Leaderboard { LeaderboardId = 22 });
+                var dbLeaderboards = mockDbLeaderboards.Object;
+                var mockDb = new Mock<ILeaderboardsContext>();
+                mockDb.Setup(x => x.Leaderboards).Returns(dbLeaderboards);
+                var db = mockDb.Object;
+                var controller = new LeaderboardsController(db);
+                var pagination = new LeaderboardsPagination();
+
+                // Act
+                var actionResult = await controller.GetLeaderboardEntries(pagination, 0);
+
+                // Assert
+                Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
+            }
+
+            [TestMethod]
             public async Task ReturnsLeaderboardEntries()
             {
                 // Arrange
@@ -97,7 +116,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var dbEntries = mockDbEntries.Object;
                 var mockDbReplays = new MockDbSet<Replay>();
                 var dbReplays = mockDbReplays.Object;
-                var mockDb = new Mock<LeaderboardsContext>();
+                var mockDb = new Mock<ILeaderboardsContext>();
                 mockDb.Setup(x => x.Leaderboards).Returns(dbLeaderboards);
                 mockDb.Setup(x => x.Entries).Returns(dbEntries);
                 mockDb.Setup(x => x.Replays).Returns(dbReplays);
@@ -110,25 +129,6 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<LeaderboardEntriesDTO>));
-            }
-
-            [TestMethod]
-            public async Task LbidNotInDb_ReturnsNotFound()
-            {
-                // Arrange
-                var mockDbLeaderboards = new MockDbSet<Leaderboard>(new Leaderboard { LeaderboardId = 22 });
-                var dbLeaderboards = mockDbLeaderboards.Object;
-                var mockDb = new Mock<LeaderboardsContext>();
-                mockDb.Setup(x => x.Leaderboards).Returns(dbLeaderboards);
-                var db = mockDb.Object;
-                var controller = new LeaderboardsController(db);
-                var pagination = new LeaderboardsPagination();
-
-                // Act
-                var actionResult = await controller.GetLeaderboardEntries(pagination, 0);
-
-                // Assert
-                Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
             }
         }
 
@@ -160,6 +160,25 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         public class GetDailyLeaderboardEntriesMethod
         {
             [TestMethod]
+            public async Task DailyLeaderboardNotFound_ReturnsNotFound()
+            {
+                // Arrange
+                var mockDb = new Mock<ILeaderboardsContext>();
+                var mockDbDailyLeaderboards = new MockDbSet<DailyLeaderboard>();
+                var dbDailyLeaderboards = mockDbDailyLeaderboards.Object;
+                mockDb.Setup(d => d.DailyLeaderboards).Returns(dbDailyLeaderboards);
+                var db = mockDb.Object;
+                var controller = new LeaderboardsController(db);
+                var pagination = new LeaderboardsPagination();
+
+                // Act
+                var actionResult = await controller.GetDailyLeaderboardEntries(pagination, 0);
+
+                // Assert
+                Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
+            }
+
+            [TestMethod]
             public async Task ReturnsDailyLeaderboardEntries()
             {
                 // Arrange
@@ -175,7 +194,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var dbDailyEntries = mockDbDailyEntries.Object;
                 var mockDbReplays = new MockDbSet<Replay>();
                 var dbReplays = mockDbReplays.Object;
-                var mockDb = new Mock<LeaderboardsContext>();
+                var mockDb = new Mock<ILeaderboardsContext>();
                 mockDb.Setup(d => d.DailyLeaderboards).Returns(dbDailyLeaderboards);
                 mockDb.Setup(d => d.DailyEntries).Returns(dbDailyEntries);
                 mockDb.Setup(d => d.Replays).Returns(dbReplays);

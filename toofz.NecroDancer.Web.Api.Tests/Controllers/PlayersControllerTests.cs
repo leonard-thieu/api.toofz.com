@@ -378,8 +378,47 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EntryDTO>));
+            }
+
+            [TestMethod]
+            public async Task ReplayFound_AddsReplayInformation()
+            {
+                // Arrange
+                var mockDb = new Mock<ILeaderboardsContext>();
+                var lbid = 234265;
+                var steamId = 1;
+                var entry = new Entry
+                {
+                    LeaderboardId = lbid,
+                    SteamId = steamId,
+                    Player = new Player { SteamId = steamId },
+                    ReplayId = 234,
+                };
+                var mockEntries = new MockDbSet<Entry>(entry);
+                var entries = mockEntries.Object;
+                mockDb.Setup(x => x.Entries).Returns(entries);
+                var replay = new Replay
+                {
+                    ReplayId = 234,
+                    Version = 74,
+                    KilledBy = "BOMB",
+                };
+                var mockReplays = new MockDbSet<Replay>(replay);
+                var replays = mockReplays.Object;
+                mockDb.Setup(x => x.Replays).Returns(replays);
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var controller = new PlayersController(db, storeClient);
+
+                // Act
+                var result = await controller.GetPlayerEntry(lbid, steamId);
+
+                // Assert
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EntryDTO>));
                 var contentResult = (OkNegotiatedContentResult<EntryDTO>)result;
-                Assert.IsNotNull(contentResult.Content);
+                var content = contentResult.Content;
+                Assert.AreEqual(74, content.Version);
+                Assert.AreEqual("BOMB", content.KilledBy);
             }
         }
 

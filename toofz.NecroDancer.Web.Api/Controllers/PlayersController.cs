@@ -70,16 +70,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 queryBase = queryBase.Where(p => p.Name.StartsWith(q));
             }
             // Sorting
-            try
-            {
-                queryBase = queryBase.OrderBy(SortKeySelectorMap, sort);
-            }
-            catch (ArgumentException ex)
-            {
-                ModelState.AddModelError(nameof(sort), ex);
-
-                return BadRequest(ModelState);
-            }
+            queryBase = queryBase.OrderBy(SortKeySelectorMap, sort);
 
             var query = from p in queryBase
                         select new PlayerDTO
