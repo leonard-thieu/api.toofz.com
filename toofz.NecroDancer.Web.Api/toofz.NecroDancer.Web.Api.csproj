@@ -356,6 +356,7 @@
     <Compile Include="Models\BulkStoreDTO.cs" />
     <Compile Include="Models\Characters.cs" />
     <Compile Include="Models\CommaSeparatedValues.cs" />
+    <Compile Include="Models\DailyEntryDTO.cs" />
     <Compile Include="Models\DailyLeaderboardDTO.cs" />
     <Compile Include="Models\DailyLeaderboardEntriesDTO.cs" />
     <Compile Include="Models\DailyLeaderboardsEnvelope.cs" />
@@ -375,6 +376,7 @@
     <Compile Include="Models\LeaderboardsEnvelope.cs" />
     <Compile Include="Models\LeaderboardsPagination.cs" />
     <Compile Include="Models\Modes.cs" />
+    <Compile Include="Models\PlayerDailyEntriesDTO.cs" />
     <Compile Include="Models\PlayerDTO.cs" />
     <Compile Include="Models\PlayerEntriesDTO.cs" />
     <Compile Include="Models\PlayerModel.cs" />

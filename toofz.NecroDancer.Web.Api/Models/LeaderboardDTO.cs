@@ -15,15 +15,25 @@ namespace toofz.NecroDancer.Web.Api.Models
         [DataMember(Name = "id")]
         public int Id { get; set; }
         /// <summary>
+        /// Time that the leaderboard was last updated at (in UTC)
+        /// </summary>
+        [DataMember(Name = "updated_at")]
+        public DateTime? UpdatedAt { get; set; }
+        /// <summary>
+        /// Display name for the leaderboard.
+        /// </summary>
+        [DataMember(Name = "display_name")]
+        public string DisplayName { get; set; }
+        /// <summary>
+        /// Indicates if the leaderboard is a production leaderboard.
+        /// </summary>
+        [DataMember(Name = "production")]
+        public bool IsProduction { get; set; }
+        /// <summary>
         /// Crypt of the NecroDancer product (e.g. classic, amplified)
         /// </summary>
         [DataMember(Name = "product")]
         public string Product { get; set; }
-        /// <summary>
-        /// Crypt of the NecroDancer character (e.g. all-characters, cadence, story-mode)
-        /// </summary>
-        [DataMember(Name = "character")]
-        public string Character { get; set; }
         /// <summary>
         /// Crypt of the NecroDancer mode (e.g. standard, hard, no-return)
         /// </summary>
@@ -35,15 +45,10 @@ namespace toofz.NecroDancer.Web.Api.Models
         [DataMember(Name = "run")]
         public string Run { get; set; }
         /// <summary>
-        /// Display name for the leaderboard.
+        /// Crypt of the NecroDancer character (e.g. all-characters, cadence, story-mode)
         /// </summary>
-        [DataMember(Name = "display_name")]
-        public string DisplayName { get; set; }
-        /// <summary>
-        /// Time that the leaderboard was last updated at (in UTC)
-        /// </summary>
-        [DataMember(Name = "updated_at")]
-        public DateTime? UpdatedAt { get; set; }
+        [DataMember(Name = "character")]
+        public string Character { get; set; }
         /// <summary>
         /// Total number of entries
         /// </summary>

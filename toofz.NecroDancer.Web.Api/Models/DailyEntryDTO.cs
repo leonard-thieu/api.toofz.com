@@ -2,22 +2,14 @@
 
 namespace toofz.NecroDancer.Web.Api.Models
 {
-    /// <summary>
-    /// A Crypt of the NecroDancer leaderboard entry.
-    /// </summary>
     [DataContract]
-    public sealed class EntryDTO
+    public sealed class DailyEntryDTO
     {
         /// <summary>
         /// The leaderboard that contains the entry.
         /// </summary>
-        [DataMember(Name = "leaderboard", EmitDefaultValue = false)]
-        public LeaderboardDTO Leaderboard { get; set; }
-        /// <summary>
-        /// The player that submitted the entry.
-        /// </summary>
-        [DataMember(Name = "player", EmitDefaultValue = false)]
-        public PlayerDTO Player { get; set; }
+        [DataMember(Name = "leaderboard")]
+        public DailyLeaderboardDTO Leaderboard { get; set; }
         /// <summary>
         /// The rank of the entry on the leaderboard.
         /// </summary>

@@ -3,14 +3,14 @@
   "players": [
     {
       "id": "5",
-      "display_name": "Stacey",
       "updated_at": null,
+      "display_name": "Stacey",
       "avatar": null
     },
     {
       "id": "3",
-      "display_name": "Steve",
       "updated_at": null,
+      "display_name": "Steve",
       "avatar": null
     }
   ]
