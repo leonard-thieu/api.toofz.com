@@ -21,7 +21,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
         {
             Kernel = NinjectWebCommon.CreateKernel();
             Kernel.Rebind<INecroDancerContext>().ToConstant(Mock.Of<INecroDancerContext>());
-            Kernel.Rebind<ILeaderboardsContext>().ToConstant(Mock.Of<ILeaderboardsContext>());
+            Kernel.Rebind<ILeaderboardsContext>().ToConstant(Util.CreateLeaderboardsContext());
             Kernel.Rebind<ILeaderboardsStoreClient>().ToConstant(Mock.Of<ILeaderboardsStoreClient>());
             Server = TestServer.Create(app =>
             {

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Ninject;
 using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
@@ -461,30 +462,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task GetPlayersMethod()
             {
                 // Arrange
-                var mockDb = new Mock<ILeaderboardsContext>();
+                var db = Kernel.Get<ILeaderboardsContext>();
+                var mockDb = Mock.Get(db);
                 var mockPlayers = new MockDbSet<Player>(Players);
                 var players = mockPlayers.Object;
                 mockDb.Setup(d => d.Players).Returns(players);
-                var products = LeaderboardCategories.Products;
-                var mockDbProducts = new MockDbSet<Product>(products);
-                var dbProducts = mockDbProducts.Object;
-                mockDb.Setup(d => d.Products).Returns(dbProducts);
-                var modes = LeaderboardCategories.Modes;
-                var mockDbModes = new MockDbSet<Mode>(modes);
-                var dbModes = mockDbModes.Object;
-                mockDb.Setup(d => d.Modes).Returns(dbModes);
-                var runs = LeaderboardCategories.Runs;
-                var mockDbRuns = new MockDbSet<Run>(runs);
-                var dbRuns = mockDbRuns.Object;
-                mockDb.Setup(d => d.Runs).Returns(dbRuns);
-                var characters = LeaderboardCategories.Characters;
-                var mockDbCharacters = new MockDbSet<Character>(characters);
-                var dbCharacters = mockDbCharacters.Object;
-                mockDb.Setup(d => d.Characters).Returns(dbCharacters);
-                var db = mockDb.Object;
-                Kernel.Rebind<ILeaderboardsContext>().ToConstant(db);
-                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
-                Kernel.Rebind<ILeaderboardsStoreClient>().ToConstant(storeClient);
 
                 // Act
                 var response = await Server.HttpClient.GetAsync("/players?q=St");
@@ -498,7 +480,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task GetPlayerEntriesMethod()
             {
                 // Arrange
-                var mockDb = new Mock<ILeaderboardsContext>();
+                var db = Kernel.Get<ILeaderboardsContext>();
+                var mockDb = Mock.Get(db);
                 var players = Players;
                 var mockDbPlayers = new MockDbSet<Player>(players);
                 var dbPlayers = mockDbPlayers.Object;
@@ -512,26 +495,6 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var mockDbReplays = new MockDbSet<Replay>();
                 var dbReplays = mockDbReplays.Object;
                 mockDb.Setup(d => d.Replays).Returns(dbReplays);
-                var products = LeaderboardCategories.Products;
-                var mockDbProducts = new MockDbSet<Product>(products);
-                var dbProducts = mockDbProducts.Object;
-                mockDb.Setup(d => d.Products).Returns(dbProducts);
-                var modes = LeaderboardCategories.Modes;
-                var mockDbModes = new MockDbSet<Mode>(modes);
-                var dbModes = mockDbModes.Object;
-                mockDb.Setup(d => d.Modes).Returns(dbModes);
-                var runs = LeaderboardCategories.Runs;
-                var mockDbRuns = new MockDbSet<Run>(runs);
-                var dbRuns = mockDbRuns.Object;
-                mockDb.Setup(d => d.Runs).Returns(dbRuns);
-                var characters = LeaderboardCategories.Characters;
-                var mockDbCharacters = new MockDbSet<Character>(characters);
-                var dbCharacters = mockDbCharacters.Object;
-                mockDb.Setup(d => d.Characters).Returns(dbCharacters);
-                var db = mockDb.Object;
-                Kernel.Rebind<ILeaderboardsContext>().ToConstant(db);
-                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
-                Kernel.Rebind<ILeaderboardsStoreClient>().ToConstant(storeClient);
 
                 // Act
                 var response = await Server.HttpClient.GetAsync("/players/1/entries");
@@ -545,8 +508,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task GetPlayerEntryMethod()
             {
                 // Arrange
+                var db = Kernel.Get<ILeaderboardsContext>();
+                var mockDb = Mock.Get(db);
                 var players = Players;
-                var mockDb = new Mock<ILeaderboardsContext>();
                 var entries = from p in players
                               from e in p.Entries
                               select e;
@@ -556,26 +520,6 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var mockDbReplays = new MockDbSet<Replay>();
                 var dbReplays = mockDbReplays.Object;
                 mockDb.Setup(d => d.Replays).Returns(dbReplays);
-                var products = LeaderboardCategories.Products;
-                var mockDbProducts = new MockDbSet<Product>(products);
-                var dbProducts = mockDbProducts.Object;
-                mockDb.Setup(d => d.Products).Returns(dbProducts);
-                var modes = LeaderboardCategories.Modes;
-                var mockDbModes = new MockDbSet<Mode>(modes);
-                var dbModes = mockDbModes.Object;
-                mockDb.Setup(d => d.Modes).Returns(dbModes);
-                var runs = LeaderboardCategories.Runs;
-                var mockDbRuns = new MockDbSet<Run>(runs);
-                var dbRuns = mockDbRuns.Object;
-                mockDb.Setup(d => d.Runs).Returns(dbRuns);
-                var characters = LeaderboardCategories.Characters;
-                var mockDbCharacters = new MockDbSet<Character>(characters);
-                var dbCharacters = mockDbCharacters.Object;
-                mockDb.Setup(d => d.Characters).Returns(dbCharacters);
-                var db = mockDb.Object;
-                Kernel.Rebind<ILeaderboardsContext>().ToConstant(db);
-                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
-                Kernel.Rebind<ILeaderboardsStoreClient>().ToConstant(storeClient);
 
                 // Act
                 var response = await Server.HttpClient.GetAsync("/players/2/entries/739999");

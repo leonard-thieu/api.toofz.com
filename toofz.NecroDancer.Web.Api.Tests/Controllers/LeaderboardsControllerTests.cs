@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Ninject;
 using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
@@ -138,27 +139,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsDailyLeaderboards()
             {
                 // Arrange
-                var mockDb = new Mock<LeaderboardsContext>();
+                var db = Util.CreateLeaderboardsContext();
+                var mockDb = Mock.Get(db);
                 var mockDbDailyLeaderboards = new MockDbSet<DailyLeaderboard>();
                 var dbDailyLeaderboards = mockDbDailyLeaderboards.Object;
                 mockDb.Setup(x => x.DailyLeaderboards).Returns(dbDailyLeaderboards);
-                var products = LeaderboardCategories.Products;
-                var mockDbProducts = new MockDbSet<Product>(products);
-                var dbProducts = mockDbProducts.Object;
-                mockDb.Setup(d => d.Products).Returns(dbProducts);
-                var modes = LeaderboardCategories.Modes;
-                var mockDbModes = new MockDbSet<Mode>(modes);
-                var dbModes = mockDbModes.Object;
-                mockDb.Setup(d => d.Modes).Returns(dbModes);
-                var runs = LeaderboardCategories.Runs;
-                var mockDbRuns = new MockDbSet<Run>(runs);
-                var dbRuns = mockDbRuns.Object;
-                mockDb.Setup(d => d.Runs).Returns(dbRuns);
-                var characters = LeaderboardCategories.Characters;
-                var mockDbCharacters = new MockDbSet<Character>(characters);
-                var dbCharacters = mockDbCharacters.Object;
-                mockDb.Setup(d => d.Characters).Returns(dbCharacters);
-                var db = mockDb.Object;
                 var controller = new LeaderboardsController(db);
                 var pagination = new LeaderboardsPagination();
                 var productsParams = new Products(LeaderboardCategories.Products.Select(p => p.Name).ToList());
@@ -249,28 +234,12 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task GetLeaderboardsMethod()
             {
                 // Arrange
-                var mockDb = new Mock<ILeaderboardsContext>();
+                var db = Kernel.Get<ILeaderboardsContext>();
+                var mockDb = Mock.Get(db);
                 var leaderboards = Leaderboards;
                 var mockDbLeaderboards = new MockDbSet<Leaderboard>(leaderboards);
                 var dbLeaderboards = mockDbLeaderboards.Object;
                 mockDb.Setup(d => d.Leaderboards).Returns(dbLeaderboards);
-                var products = LeaderboardCategories.Products;
-                var mockDbProducts = new MockDbSet<Product>(products);
-                var dbProducts = mockDbProducts.Object;
-                mockDb.Setup(d => d.Products).Returns(dbProducts);
-                var modes = LeaderboardCategories.Modes;
-                var mockDbModes = new MockDbSet<Mode>(modes);
-                var dbModes = mockDbModes.Object;
-                mockDb.Setup(d => d.Modes).Returns(dbModes);
-                var runs = LeaderboardCategories.Runs;
-                var mockDbRuns = new MockDbSet<Run>(runs);
-                var dbRuns = mockDbRuns.Object;
-                mockDb.Setup(d => d.Runs).Returns(dbRuns);
-                var characters = LeaderboardCategories.Characters;
-                var mockDbCharacters = new MockDbSet<Character>(characters);
-                var dbCharacters = mockDbCharacters.Object;
-                mockDb.Setup(d => d.Characters).Returns(dbCharacters);
-                var db = mockDb.Object;
                 Kernel.Rebind<ILeaderboardsContext>().ToConstant(db);
 
                 // Act
