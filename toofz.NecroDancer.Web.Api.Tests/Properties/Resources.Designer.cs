@@ -194,6 +194,29 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to {
+        ///  &quot;total&quot;: 1,
+        ///  &quot;leaderboards&quot;: [
+        ///    {
+        ///      &quot;id&quot;: 0,
+        ///      &quot;product&quot;: &quot;amplified&quot;,
+        ///      &quot;character&quot;: &quot;cadence&quot;,
+        ///      &quot;mode&quot;: &quot;standard&quot;,
+        ///      &quot;run&quot;: &quot;speed&quot;,
+        ///      &quot;display_name&quot;: null,
+        ///      &quot;updated_at&quot;: null,
+        ///      &quot;total&quot;: 0
+        ///    }
+        ///  ]
+        ///}.
+        /// </summary>
+        internal static string GetLeaderboards {
+            get {
+                return ResourceManager.GetString("GetLeaderboards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
         ///  &quot;player&quot;: {
         ///    &quot;id&quot;: &quot;1&quot;,
         ///    &quot;display_name&quot;: &quot;Leonard&quot;,

@@ -173,11 +173,11 @@
     <Reference Include="toofz.NecroDancer.Data, Version=5.0.1.36, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.NecroDancer.Data.5.0.1\lib\net45\toofz.NecroDancer.Data.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer.Leaderboards, Version=10.1.0.180, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.10.1.0\lib\net45\toofz.NecroDancer.Leaderboards.dll</HintPath>
+    <Reference Include="toofz.NecroDancer.Leaderboards, Version=10.1.1.182, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.10.1.1\lib\net45\toofz.NecroDancer.Leaderboards.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer.Leaderboards.Data, Version=4.0.0.32, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.Data.4.0.0\lib\net45\toofz.NecroDancer.Leaderboards.Data.dll</HintPath>
+    <Reference Include="toofz.NecroDancer.Leaderboards.Data, Version=4.0.2.36, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.Data.4.0.2\lib\net45\toofz.NecroDancer.Leaderboards.Data.dll</HintPath>
     </Reference>
     <Reference Include="toofz.TestsShared, Version=4.0.0.81, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.TestsShared.4.0.0\lib\net45\toofz.TestsShared.dll</HintPath>
@@ -212,6 +212,7 @@
     <None Include="Resources\GetItems.json" />
     <None Include="Resources\GetItemsByCategory.json" />
     <None Include="Resources\GetItemsBySubcategory.json" />
+    <None Include="Resources\GetLeaderboards.json" />
     <None Include="Resources\GetPlayerEntries.json" />
     <None Include="Resources\GetPlayerEntry.json" />
     <None Include="Resources\GetPlayers.json" />
@@ -243,6 +244,7 @@
     <Compile Include="ContextUtil.cs" />
     <Compile Include="IntegrationTestsBase.cs" />
     <Compile Include="IQueryableExtensionsTests.cs" />
+    <Compile Include="LeaderboardCategories.cs" />
     <Compile Include="MaxValueAttributeTests.cs" />
     <Compile Include="MinValueAttributeTests.cs" />
     <Compile Include="Util.cs" />

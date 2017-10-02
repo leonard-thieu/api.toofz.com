@@ -1,0 +1,15 @@
+{
+  "total": 1,
+  "leaderboards": [
+    {
+      "id": 0,
+      "product": "amplified",
+      "character": "cadence",
+      "mode": "standard",
+      "run": "speed",
+      "display_name": null,
+      "updated_at": null,
+      "total": 0
+    }
+  ]
+}

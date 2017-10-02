@@ -16,12 +16,12 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
             public void CategoryIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
-                Category category = null;
+                IEnumerable<string> values = null;
 
                 // Act -> Assert
                 Assert.ThrowsException<ArgumentNullException>(() =>
                 {
-                    new LeaderboardCategoryBaseAdapter(category);
+                    new LeaderboardCategoryBaseAdapter(values);
                 });
             }
 
@@ -29,10 +29,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
             public void ReturnsInstance()
             {
                 // Arrange
-                var category = new Category();
+                var values = new[] { "myValue1" };
 
                 // Act
-                var leaderboardCategory = new LeaderboardCategoryBaseAdapter(category);
+                var leaderboardCategory = new LeaderboardCategoryBaseAdapter(values);
 
                 // Assert
                 Assert.IsInstanceOfType(leaderboardCategory, typeof(LeaderboardCategoryBase));
@@ -44,16 +44,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
         {
             public AddMethod()
             {
-                category = new Category
-                {
-                    ["item1"] = new CategoryItem(),
-                    ["item2"] = new CategoryItem(),
-                    ["item3"] = new CategoryItem(),
-                };
-                leaderboardCategory = new LeaderboardCategoryBaseAdapter(category);
+                values = new[] { "item1", "item2", "item3" };
+                leaderboardCategory = new LeaderboardCategoryBaseAdapter(values);
             }
 
-            Category category;
+            IEnumerable<string> values;
             LeaderboardCategoryBase leaderboardCategory;
 
             [TestMethod]
@@ -91,19 +86,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
             public void ReturnsDefaults()
             {
                 // Arrange
-                var category = new Category
-                {
-                    ["item1"] = new CategoryItem(),
-                    ["item2"] = new CategoryItem(),
-                    ["item3"] = new CategoryItem(),
-                };
-                var leaderboardCategory = new LeaderboardCategoryBaseAdapter(category);
+                var values = new[] { "item1", "item2", "item3" };
+                var leaderboardCategory = new LeaderboardCategoryBaseAdapter(values);
 
                 // Act
                 leaderboardCategory.AddDefaults();
 
                 // Assert
-                CollectionAssert.AreEqual(category.Keys, leaderboardCategory.ToArray());
+                CollectionAssert.AreEqual(values, leaderboardCategory.ToArray());
             }
         }
 
@@ -111,10 +101,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
         public class GetEnumeratorMethod
         {
             [TestMethod]
-            public void WhenCalled_ReturnsIEnumeratorOfString()
+            public void ReturnsEnumerator()
             {
                 // Arrange
-                var leaderboardCategory = new LeaderboardCategoryBaseAdapter(new Category());
+                var values = new[] { "myValue1" };
+                var leaderboardCategory = new LeaderboardCategoryBaseAdapter(values);
 
                 // Act
                 var enumerator = leaderboardCategory.GetEnumerator();
@@ -128,10 +119,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
         public class IEnumerable_GetEnumeratorMethod
         {
             [TestMethod]
-            public void WhenCalled_ReturnsIEnumerator()
+            public void ReturnsEnumerator()
             {
                 // Arrange
-                var leaderboardCategory = new LeaderboardCategoryBaseAdapter(new Category());
+                var values = new[] { "myValue1" };
+                var leaderboardCategory = new LeaderboardCategoryBaseAdapter(values);
                 var enumerable = (IEnumerable)leaderboardCategory;
 
                 // Act
@@ -144,7 +136,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
 
         sealed class LeaderboardCategoryBaseAdapter : LeaderboardCategoryBase
         {
-            public LeaderboardCategoryBaseAdapter(Category category) : base(category) { }
+            public LeaderboardCategoryBaseAdapter(IEnumerable<string> values) : base(values) { }
         }
     }
 }

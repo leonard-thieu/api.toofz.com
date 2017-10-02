@@ -1,20 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api.Infrastructure
 {
     public sealed class CharactersBinder : CommaSeparatedValuesBinder
     {
-        public CharactersBinder(Categories leaderboardCategories)
+        public CharactersBinder(IEnumerable<string> characters)
         {
-            if (leaderboardCategories == null)
-                throw new ArgumentNullException(nameof(leaderboardCategories));
-
-            category = leaderboardCategories["characters"];
+            this.characters = characters ?? throw new ArgumentNullException(nameof(characters));
         }
 
-        readonly Category category;
+        readonly IEnumerable<string> characters;
 
-        protected override CommaSeparatedValues GetModel() => new Characters(category);
+        protected override CommaSeparatedValues GetModel() => new Characters(characters);
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Http.Controllers;
 using System.Web.Http.Metadata.Providers;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.ValueProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Web.Api.Infrastructure;
 using toofz.NecroDancer.Web.Api.Models;
 
@@ -20,12 +20,12 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void LeaderboardCategoriesIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
-                Categories leaderboardCategories = null;
+                IEnumerable<string> characters = null;
 
                 // Act -> Assert
                 Assert.ThrowsException<ArgumentNullException>(() =>
                 {
-                    new CharactersBinder(leaderboardCategories);
+                    new CharactersBinder(characters);
                 });
             }
 
@@ -33,10 +33,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void ReturnsInstance()
             {
                 // Arrange
-                var leaderboardCategories = LeaderboardsResources.ReadLeaderboardCategories();
+                var characters = new List<string>();
 
                 // Act
-                var binder = new CharactersBinder(leaderboardCategories);
+                var binder = new CharactersBinder(characters);
 
                 // Assert
                 Assert.IsInstanceOfType(binder, typeof(CharactersBinder));
@@ -50,8 +50,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void ReturnsModel()
             {
                 // Arrange
-                var leaderboardCategories = LeaderboardsResources.ReadLeaderboardCategories();
-                var binder = new CharactersBinder(leaderboardCategories);
+                var characters = new[] { "cadence" };
+                var binder = new CharactersBinder(characters);
                 HttpActionContext actionContext = null;
                 var modelName = "myModelName";
                 var mockValueProvider = new Mock<IValueProvider>();

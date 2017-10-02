@@ -1,25 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace toofz.NecroDancer.Web.Api.Models
 {
     public abstract class LeaderboardCategoryBase : CommaSeparatedValues
     {
-        protected LeaderboardCategoryBase(Category category)
+        protected LeaderboardCategoryBase(IEnumerable<string> values)
         {
-            this.category = category ?? throw new ArgumentNullException(nameof(category));
+            if (values == null)
+                throw new ArgumentNullException(nameof(values));
+            if (!values.Any())
+                throw new ArgumentException($"'{nameof(values)}' does not contain any values.", nameof(values));
+
+            this.values = values.ToList().AsReadOnly();
         }
 
-        readonly Category category;
+        readonly IEnumerable<string> values;
 
         public override void Add(string item)
         {
-            if (!category.ContainsKey(item))
+            if (!values.Contains(item))
                 throw new ArgumentException($"'{item}' is not a valid value.");
 
             base.Add(item);
         }
 
-        protected override IEnumerable<string> GetDefaults() => category.Keys;
+        protected override IEnumerable<string> GetDefaults() => values;
     }
 }
