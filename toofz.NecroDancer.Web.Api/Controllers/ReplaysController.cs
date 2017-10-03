@@ -41,7 +41,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             int? error = null,
             CancellationToken cancellationToken = default)
         {
-            var query = from r in db.Replays
+            var query = from r in db.Replays.AsNoTracking()
                         where r.Version == version && r.ErrorCode == error
                         orderby r.ReplayId
                         select new ReplayDTO

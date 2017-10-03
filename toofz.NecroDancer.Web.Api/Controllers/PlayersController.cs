@@ -62,7 +62,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             string q = null,
             CancellationToken cancellationToken = default)
         {
-            IQueryable<Player> queryBase = db.Players;
+            IQueryable<Player> queryBase = db.Players.AsNoTracking();
             // Filtering
             if (q != null)
             {
@@ -112,7 +112,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             long steamId,
             CancellationToken cancellationToken = default)
         {
-            var player = await (from p in db.Players
+            var player = await (from p in db.Players.AsNoTracking()
                                 where p.SteamId == steamId
                                 select new PlayerDTO
                                 {
@@ -127,7 +127,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 return NotFound();
             }
 
-            var query = from e in db.Entries
+            var query = from e in db.Entries.AsNoTracking()
                         where e.SteamId == steamId
                         select new
                         {
@@ -157,7 +157,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var playerEntries = await query.ToListAsync(cancellationToken);
 
             var replayIds = playerEntries.Select(entry => entry.ReplayId);
-            var replays = await (from r in db.Replays
+            var replays = await (from r in db.Replays.AsNoTracking()
                                  where replayIds.Contains(r.ReplayId)
                                  select new
                                  {
@@ -227,7 +227,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             long steamId,
             CancellationToken cancellationToken = default)
         {
-            var playerEntry = await (from e in db.Entries
+            var playerEntry = await (from e in db.Entries.AsNoTracking()
                                      where e.LeaderboardId == lbid && e.SteamId == steamId
                                      orderby e.Rank
                                      select new
@@ -272,7 +272,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 },
             };
 
-            var replay = await (from r in db.Replays
+            var replay = await (from r in db.Replays.AsNoTracking()
                                 where r.ReplayId == playerEntry.ReplayId
                                 select new
                                 {
@@ -306,7 +306,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             long steamId,
             CancellationToken cancellationToken = default)
         {
-            var player = await (from p in db.Players
+            var player = await (from p in db.Players.AsNoTracking()
                                 where p.SteamId == steamId
                                 select new PlayerDTO
                                 {
@@ -321,7 +321,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 return NotFound();
             }
 
-            var query = from e in db.DailyEntries
+            var query = from e in db.DailyEntries.AsNoTracking()
                         where e.SteamId == steamId
                         select new
                         {
@@ -349,7 +349,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var playerEntries = await query.ToListAsync(cancellationToken);
 
             var replayIds = playerEntries.Select(e => e.ReplayId);
-            var replays = await (from r in db.Replays
+            var replays = await (from r in db.Replays.AsNoTracking()
                                  where replayIds.Contains(r.ReplayId)
                                  select new
                                  {

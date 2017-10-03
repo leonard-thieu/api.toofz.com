@@ -47,7 +47,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             ItemsPagination pagination,
             CancellationToken cancellationToken = default)
         {
-            var baseQuery = from i in db.Items
+            var baseQuery = from i in db.Items.AsNoTracking()
                             select i;
 
             var content = await GetItemsAsync(pagination, baseQuery, cancellationToken);
@@ -74,7 +74,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             [ModelBinder(typeof(ItemCategoryBinder))] string category,
             CancellationToken cancellationToken = default)
         {
-            var baseQuery = from i in db.Items
+            var baseQuery = from i in db.Items.AsNoTracking()
                             select i;
             switch (category)
             {
@@ -117,7 +117,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             ItemSubcategoryFilter filter,
             CancellationToken cancellationToken = default)
         {
-            var baseQuery = from i in db.Items
+            var baseQuery = from i in db.Items.AsNoTracking()
                             select i;
             switch (filter.Category)
             {

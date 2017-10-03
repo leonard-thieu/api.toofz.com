@@ -58,7 +58,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             Characters characters,
             CancellationToken cancellationToken = default)
         {
-            var query = from l in db.Leaderboards
+            var query = from l in db.Leaderboards.AsNoTracking()
                         where products.Contains(l.Product.Name)
                         where modes.Contains(l.Mode.Name)
                         where runs.Contains(l.Run.Name)
@@ -106,7 +106,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             int lbid,
             CancellationToken cancellationToken = default)
         {
-            var leaderboard = await (from l in db.Leaderboards
+            var leaderboard = await (from l in db.Leaderboards.AsNoTracking()
                                      where l.LeaderboardId == lbid
                                      select new LeaderboardDTO
                                      {
@@ -126,7 +126,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 return NotFound();
             }
 
-            var query = from e in db.Entries
+            var query = from e in db.Entries.AsNoTracking()
                         where e.LeaderboardId == lbid
                         orderby e.Rank
                         select new
@@ -155,7 +155,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 .ToListAsync(cancellationToken);
 
             var replayIds = entriesPage.Select(entry => entry.ReplayId);
-            var replays = await (from r in db.Replays
+            var replays = await (from r in db.Replays.AsNoTracking()
                                  where replayIds.Contains(r.ReplayId)
                                  select new
                                  {
@@ -219,7 +219,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             Products products,
             CancellationToken cancellationToken = default)
         {
-            var query = from l in db.DailyLeaderboards
+            var query = from l in db.DailyLeaderboards.AsNoTracking()
                         where products.Contains(l.Product.Name)
                         orderby l.Date descending, l.ProductId
                         select new DailyLeaderboardDTO
@@ -265,7 +265,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             int lbid,
             CancellationToken cancellationToken = default)
         {
-            var leaderboard = await (from l in db.DailyLeaderboards
+            var leaderboard = await (from l in db.DailyLeaderboards.AsNoTracking()
                                      where l.LeaderboardId == lbid
                                      select new DailyLeaderboardDTO
                                      {
@@ -283,7 +283,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 return NotFound();
             }
 
-            var query = from e in db.DailyEntries
+            var query = from e in db.DailyEntries.AsNoTracking()
                         where e.LeaderboardId == lbid
                         orderby e.Rank
                         select new
@@ -312,7 +312,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 .ToListAsync(cancellationToken);
 
             var replayIds = entriesPage.Select(entry => entry.ReplayId);
-            var replays = await (from r in db.Replays
+            var replays = await (from r in db.Replays.AsNoTracking()
                                  where replayIds.Contains(r.ReplayId)
                                  select new
                                  {

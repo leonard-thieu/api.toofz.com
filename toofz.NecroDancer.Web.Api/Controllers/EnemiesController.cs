@@ -42,7 +42,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             EnemiesPagination pagination,
             CancellationToken cancellationToken = default)
         {
-            var baseQuery = from e in db.Enemies
+            var baseQuery = from e in db.Enemies.AsNoTracking()
                             select e;
 
             var content = await GetEnemiesAsync(pagination, baseQuery, cancellationToken);
@@ -72,7 +72,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             [ModelBinder(typeof(EnemyAttributeBinder))] string attribute,
             CancellationToken cancellationToken = default)
         {
-            var baseQuery = from e in db.Enemies
+            var baseQuery = from e in db.Enemies.AsNoTracking()
                             select e;
             switch (attribute)
             {
