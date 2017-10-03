@@ -17,7 +17,7 @@ namespace toofz.NecroDancer.Web.Api.Models
         /// <summary>
         /// A collection of daily leaderboards.
         /// </summary>
-        [DataMember(Name = "leaderboard")]
+        [DataMember(Name = "leaderboards")]
         public IEnumerable<DailyLeaderboardDTO> Leaderboards { get; set; }
     }
 }
