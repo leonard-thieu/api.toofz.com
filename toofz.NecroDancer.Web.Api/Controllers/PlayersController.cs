@@ -398,6 +398,88 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         }
 
         /// <summary>
+        /// Gets a player's leaderboard entry for a daily leaderboard.
+        /// </summary>
+        /// <param name="lbid">The ID of the leaderboard.</param>
+        /// <param name="steamId">The Steam ID of the player.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
+        /// <returns>Returns a player's leaderboard entry for a daily leaderboard.</returns>
+        /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
+        /// A player with that Steam ID was not found.
+        /// </httpStatusCode>
+        /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
+        /// An entry for the player on the dao;y leaderboard was not found.
+        /// </httpStatusCode>
+        [ResponseType(typeof(EntryDTO))]
+        [Route("{steamId}/entries/dailies/{lbid}")]
+        public async Task<IHttpActionResult> GetPlayerDailyEntry(
+            int lbid,
+            long steamId,
+            CancellationToken cancellationToken = default)
+        {
+            var playerEntry = await (from e in db.DailyEntries.AsNoTracking()
+                                     where e.LeaderboardId == lbid && e.SteamId == steamId
+                                     orderby e.Rank
+                                     select new
+                                     {
+                                         Player = new
+                                         {
+                                             e.Player.SteamId,
+                                             e.Player.LastUpdate,
+                                             e.Player.Name,
+                                             e.Player.Avatar,
+                                         },
+                                         Rank = e.Rank,
+                                         Score = e.Score,
+                                         End = new
+                                         {
+                                             e.Zone,
+                                             e.Level,
+                                         },
+                                         ReplayId = e.ReplayId,
+                                     })
+                                     .FirstOrDefaultAsync(cancellationToken);
+            if (playerEntry == null)
+            {
+                return NotFound();
+            }
+
+            var content = new DailyEntryDTO
+            {
+                Player = new PlayerDTO
+                {
+                    Id = playerEntry.Player.SteamId.ToString(),
+                    UpdatedAt = playerEntry.Player.LastUpdate,
+                    DisplayName = playerEntry.Player.Name,
+                    Avatar = playerEntry.Player.Avatar,
+                },
+                Rank = playerEntry.Rank,
+                Score = playerEntry.Score,
+                End = new EndDTO
+                {
+                    Zone = playerEntry.End.Zone,
+                    Level = playerEntry.End.Level,
+                },
+            };
+
+            var replay = await (from r in db.Replays.AsNoTracking()
+                                where r.ReplayId == playerEntry.ReplayId
+                                select new
+                                {
+                                    r.KilledBy,
+                                    r.Version,
+                                })
+                                .FirstOrDefaultAsync(cancellationToken);
+            if (replay != null)
+            {
+                content.KilledBy = replay.KilledBy;
+                content.Version = replay.Version;
+            }
+
+            return Ok(content);
+        }
+
+        /// <summary>
         /// Updates Steam players.
         /// </summary>
         /// <param name="players">A list of players.</param>

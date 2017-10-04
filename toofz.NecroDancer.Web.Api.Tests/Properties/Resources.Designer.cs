@@ -198,12 +198,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///  &quot;leaderboards&quot;: [
         ///    {
         ///      &quot;id&quot;: 0,
+        ///      &quot;updated_at&quot;: null,
+        ///      &quot;display_name&quot;: null,
+        ///      &quot;production&quot;: false,
         ///      &quot;product&quot;: &quot;amplified&quot;,
-        ///      &quot;character&quot;: &quot;cadence&quot;,
         ///      &quot;mode&quot;: &quot;standard&quot;,
         ///      &quot;run&quot;: &quot;speed&quot;,
-        ///      &quot;display_name&quot;: null,
-        ///      &quot;updated_at&quot;: null,
+        ///      &quot;character&quot;: &quot;cadence&quot;,
         ///      &quot;total&quot;: 0
         ///    }
         ///  ]
@@ -219,8 +220,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///   Looks up a localized string similar to {
         ///  &quot;player&quot;: {
         ///    &quot;id&quot;: &quot;1&quot;,
-        ///    &quot;display_name&quot;: &quot;Leonard&quot;,
         ///    &quot;updated_at&quot;: null,
+        ///    &quot;display_name&quot;: &quot;Leonard&quot;,
         ///    &quot;avatar&quot;: null
         ///  },
         ///  &quot;total&quot;: 1,
@@ -228,12 +229,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///    {
         ///      &quot;leaderboard&quot;: {
         ///        &quot;id&quot;: 739999,
-        ///        &quot;product&quot;: &quot;classic&quot;,
-        ///        &quot;character&quot;: &quot;cadence&quot;,
-        ///        &quot;mode&quot;: &quot;standard&quot;,
-        ///        &quot;run&quot;: &quot;score&quot;,
-        ///        &quot;display_name&quot;: null,
         ///        &quot;updated_at&quot;: null,
+        ///        &quot;display_name&quot;: null,
+        ///        &quot;production&quot;: false,
+        ///        &quot;product&quot;: &quot;classic&quot;,
+        ///        &quot;date&quot;: &quot;0001-01-01T00:00:00Z&quot;,
         ///        &quot;total&quot;: 0
         ///      },
         ///      &quot;rank&quot;: 0,
@@ -241,7 +241,41 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///      &quot;end&quot;: {
         ///        &quot;zone&quot;: 0,
         ///        &quot;level&quot;: 0
-        ///      },        /// [rest of string was truncated]&quot;;.
+        ///      },
+        ///      &quot;killed_b [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string GetPlayerDailyEntries {
+            get {
+                return ResourceManager.GetString("GetPlayerDailyEntries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;player&quot;: {
+        ///    &quot;id&quot;: &quot;1&quot;,
+        ///    &quot;updated_at&quot;: null,
+        ///    &quot;display_name&quot;: &quot;Leonard&quot;,
+        ///    &quot;avatar&quot;: null
+        ///  },
+        ///  &quot;total&quot;: 1,
+        ///  &quot;entries&quot;: [
+        ///    {
+        ///      &quot;leaderboard&quot;: {
+        ///        &quot;id&quot;: 739999,
+        ///        &quot;updated_at&quot;: null,
+        ///        &quot;display_name&quot;: null,
+        ///        &quot;production&quot;: false,
+        ///        &quot;product&quot;: &quot;classic&quot;,
+        ///        &quot;mode&quot;: &quot;standard&quot;,
+        ///        &quot;run&quot;: &quot;score&quot;,
+        ///        &quot;character&quot;: &quot;cadence&quot;,
+        ///        &quot;total&quot;: 0
+        ///      },
+        ///      &quot;rank&quot;: 0,
+        ///      &quot;score&quot;: 0,
+        ///      &quot;end&quot;: {
+        ///        &quot;zone&quot;: 0,        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GetPlayerEntries {
             get {
@@ -253,8 +287,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///   Looks up a localized string similar to {
         ///  &quot;player&quot;: {
         ///    &quot;id&quot;: &quot;2&quot;,
-        ///    &quot;display_name&quot;: &quot;Julianna&quot;,
         ///    &quot;updated_at&quot;: null,
+        ///    &quot;display_name&quot;: &quot;Julianna&quot;,
         ///    &quot;avatar&quot;: null
         ///  },
         ///  &quot;rank&quot;: 0,
@@ -279,14 +313,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///  &quot;players&quot;: [
         ///    {
         ///      &quot;id&quot;: &quot;5&quot;,
-        ///      &quot;display_name&quot;: &quot;Stacey&quot;,
         ///      &quot;updated_at&quot;: null,
+        ///      &quot;display_name&quot;: &quot;Stacey&quot;,
         ///      &quot;avatar&quot;: null
         ///    },
         ///    {
         ///      &quot;id&quot;: &quot;3&quot;,
-        ///      &quot;display_name&quot;: &quot;Steve&quot;,
         ///      &quot;updated_at&quot;: null,
+        ///      &quot;display_name&quot;: &quot;Steve&quot;,
         ///      &quot;avatar&quot;: null
         ///    }
         ///  ]

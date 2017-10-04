@@ -8,8 +8,13 @@ namespace toofz.NecroDancer.Web.Api.Models
         /// <summary>
         /// The leaderboard that contains the entry.
         /// </summary>
-        [DataMember(Name = "leaderboard")]
+        [DataMember(Name = "leaderboard", EmitDefaultValue = false)]
         public DailyLeaderboardDTO Leaderboard { get; set; }
+        /// <summary>
+        /// The player that submitted the entry.
+        /// </summary>
+        [DataMember(Name = "player", EmitDefaultValue = false)]
+        public PlayerDTO Player { get; set; }
         /// <summary>
         /// The rank of the entry on the leaderboard.
         /// </summary>

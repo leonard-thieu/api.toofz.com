@@ -43,6 +43,21 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         ReplayId = 421438228643743438,
                     },
                 });
+                p1.DailyEntries.AddRange(new[]
+                {
+                    new DailyEntry
+                    {
+                        Leaderboard = new DailyLeaderboard
+                        {
+                            LeaderboardId = 739999,
+                            Product = new Product(1, "classic", "Classic"),
+                        },
+                        LeaderboardId = 739999,
+                        Player = p1,
+                        SteamId = 1,
+                        ReplayId = 421438228643743438,
+                    },
+                });
                 var p2 = new Player
                 {
                     SteamId = 2,
@@ -73,6 +88,21 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         Player = p2,
                         SteamId = 2,
                         ReplayId = 422567813941329155,
+                    },
+                });
+                p2.DailyEntries.AddRange(new[]
+                {
+                    new DailyEntry
+                    {
+                        Leaderboard = new DailyLeaderboard
+                        {
+                            LeaderboardId = 739999,
+                            Product = new Product(1, "classic", "Classic"),
+                        },
+                        LeaderboardId = 739999,
+                        Player = p2,
+                        SteamId = 2,
+                        ReplayId = 421438228643743438,
                     },
                 });
                 var p3 = new Player
@@ -471,6 +501,102 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         }
 
         [TestClass]
+        public class GetPlayerDailyEntryMethod
+        {
+            [TestMethod]
+            public async Task PlayerNotFound_ReturnsNotFound()
+            {
+                // Arrange
+                var mockEntries = new MockDbSet<DailyEntry>();
+                var entries = mockEntries.Object;
+                var mockDb = new Mock<ILeaderboardsContext>();
+                mockDb.Setup(x => x.DailyEntries).Returns(entries);
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var controller = new PlayersController(db, storeClient);
+                var lbid = 234265;
+                var steamId = 1;
+
+                // Act
+                var result = await controller.GetPlayerDailyEntry(lbid, steamId);
+
+                // Assert
+                Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+            }
+
+            [TestMethod]
+            public async Task ReturnsPlayerEntry()
+            {
+                // Arrange
+                var mockDb = new Mock<ILeaderboardsContext>();
+                var lbid = 234265;
+                var steamId = 1;
+                var entry = new DailyEntry
+                {
+                    LeaderboardId = lbid,
+                    SteamId = steamId,
+                    Player = new Player { SteamId = steamId },
+                };
+                var mockEntries = new MockDbSet<DailyEntry>(entry);
+                var entries = mockEntries.Object;
+                mockDb.Setup(x => x.DailyEntries).Returns(entries);
+                var mockReplays = new MockDbSet<Replay>();
+                var replays = mockReplays.Object;
+                mockDb.Setup(x => x.Replays).Returns(replays);
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var controller = new PlayersController(db, storeClient);
+
+                // Act
+                var result = await controller.GetPlayerDailyEntry(lbid, steamId);
+
+                // Assert
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<DailyEntryDTO>));
+            }
+
+            [TestMethod]
+            public async Task ReplayFound_AddsReplayInformation()
+            {
+                // Arrange
+                var mockDb = new Mock<ILeaderboardsContext>();
+                var lbid = 234265;
+                var steamId = 1;
+                var entry = new DailyEntry
+                {
+                    LeaderboardId = lbid,
+                    SteamId = steamId,
+                    Player = new Player { SteamId = steamId },
+                    ReplayId = 234,
+                };
+                var mockEntries = new MockDbSet<DailyEntry>(entry);
+                var entries = mockEntries.Object;
+                mockDb.Setup(x => x.DailyEntries).Returns(entries);
+                var replay = new Replay
+                {
+                    ReplayId = 234,
+                    Version = 74,
+                    KilledBy = "BOMB",
+                };
+                var mockReplays = new MockDbSet<Replay>(replay);
+                var replays = mockReplays.Object;
+                mockDb.Setup(x => x.Replays).Returns(replays);
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var controller = new PlayersController(db, storeClient);
+
+                // Act
+                var result = await controller.GetPlayerDailyEntry(lbid, steamId);
+
+                // Assert
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<DailyEntryDTO>));
+                var contentResult = (OkNegotiatedContentResult<DailyEntryDTO>)result;
+                var content = contentResult.Content;
+                Assert.AreEqual(74, content.Version);
+                Assert.AreEqual("BOMB", content.KilledBy);
+            }
+        }
+
+        [TestClass]
         public class PostPlayersMethod
         {
             [TestMethod]
@@ -610,6 +736,59 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Act
                 var response = await Server.HttpClient.GetAsync("/players/2/entries/739999");
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Assert
+                Assert.That.NormalizedAreEqual(Resources.GetPlayerEntry, content);
+            }
+
+            [TestMethod]
+            public async Task GetPlayerDailyEntriesMethod()
+            {
+                // Arrange
+                var db = Kernel.Get<ILeaderboardsContext>();
+                var mockDb = Mock.Get(db);
+                var players = Players;
+                var mockDbPlayers = new MockDbSet<Player>(players);
+                var dbPlayers = mockDbPlayers.Object;
+                mockDb.Setup(d => d.Players).Returns(dbPlayers);
+                var entries = from p in players
+                              from e in p.DailyEntries
+                              select e;
+                var mockDbEntries = new MockDbSet<DailyEntry>(entries);
+                var dbEntries = mockDbEntries.Object;
+                mockDb.Setup(d => d.DailyEntries).Returns(dbEntries);
+                var mockDbReplays = new MockDbSet<Replay>();
+                var dbReplays = mockDbReplays.Object;
+                mockDb.Setup(d => d.Replays).Returns(dbReplays);
+
+                // Act
+                var response = await Server.HttpClient.GetAsync("/players/1/entries/dailies");
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Assert
+                Assert.That.NormalizedAreEqual(Resources.GetPlayerDailyEntries, content);
+            }
+
+            [TestMethod]
+            public async Task GetPlayerDailyEntryMethod()
+            {
+                // Arrange
+                var db = Kernel.Get<ILeaderboardsContext>();
+                var mockDb = Mock.Get(db);
+                var players = Players;
+                var entries = from p in players
+                              from e in p.DailyEntries
+                              select e;
+                var mockDbEntries = new MockDbSet<DailyEntry>(entries);
+                var dbEntries = mockDbEntries.Object;
+                mockDb.Setup(d => d.DailyEntries).Returns(dbEntries);
+                var mockDbReplays = new MockDbSet<Replay>();
+                var dbReplays = mockDbReplays.Object;
+                mockDb.Setup(d => d.Replays).Returns(dbReplays);
+
+                // Act
+                var response = await Server.HttpClient.GetAsync("/players/2/entries/dailies/739999");
                 var content = await response.Content.ReadAsStringAsync();
 
                 // Assert

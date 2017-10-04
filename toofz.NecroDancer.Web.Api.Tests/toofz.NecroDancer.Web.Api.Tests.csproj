@@ -194,8 +194,8 @@
     <Reference Include="toofz.NecroDancer.Data, Version=5.0.1.36, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.NecroDancer.Data.5.0.1\lib\net45\toofz.NecroDancer.Data.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer.Leaderboards, Version=11.0.1.200, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.11.0.1\lib\net45\toofz.NecroDancer.Leaderboards.dll</HintPath>
+    <Reference Include="toofz.NecroDancer.Leaderboards, Version=11.1.0.202, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.11.1.0\lib\net45\toofz.NecroDancer.Leaderboards.dll</HintPath>
     </Reference>
     <Reference Include="toofz.NecroDancer.Leaderboards.Data, Version=4.0.2.36, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.NecroDancer.Leaderboards.Data.4.0.2\lib\net45\toofz.NecroDancer.Leaderboards.Data.dll</HintPath>
@@ -234,6 +234,7 @@
     <None Include="Resources\GetItemsByCategory.json" />
     <None Include="Resources\GetItemsBySubcategory.json" />
     <None Include="Resources\GetLeaderboards.json" />
+    <None Include="Resources\GetPlayerDailyEntries.json" />
     <None Include="Resources\GetPlayerEntries.json" />
     <None Include="Resources\GetPlayerEntry.json" />
     <None Include="Resources\GetPlayers.json" />
