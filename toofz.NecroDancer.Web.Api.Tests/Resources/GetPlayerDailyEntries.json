@@ -14,6 +14,11 @@
         "display_name": null,
         "production": false,
         "product": "classic",
+        "_product": {
+          "id": 1,
+          "name": "classic",
+          "display_name": "Classic"
+        },
         "date": "0001-01-01T00:00:00Z",
         "total": 0
       },

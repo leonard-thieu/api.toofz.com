@@ -7,9 +7,29 @@
       "display_name": null,
       "production": false,
       "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
       "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
       "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
       "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
       "total": 0
     }
   ]

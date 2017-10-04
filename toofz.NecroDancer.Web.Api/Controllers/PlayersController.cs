@@ -170,20 +170,45 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var entries = (from e in playerEntries
                            join r in replays on e.ReplayId equals r.ReplayId into g
                            from x in g.DefaultIfEmpty()
-                           orderby e.Leaderboard.Product.Name, e.Leaderboard.Run.RunId, e.Leaderboard.Character.Name
+                           let l = e.Leaderboard
+                           orderby l.Product.Name, l.Run.RunId, l.Character.Name
                            select new EntryDTO
                            {
                                Leaderboard = new LeaderboardDTO
                                {
-                                   Id = e.Leaderboard.LeaderboardId,
-                                   UpdatedAt = e.Leaderboard.LastUpdate,
-                                   DisplayName = e.Leaderboard.DisplayName,
-                                   IsProduction = e.Leaderboard.IsProduction,
-                                   Product = e.Leaderboard.Product.Name,
-                                   Mode = e.Leaderboard.Mode.Name,
-                                   Run = e.Leaderboard.Run.Name,
-                                   Character = e.Leaderboard.Character.Name,
-                                   Total = e.Leaderboard.Total,
+                                   Id = l.LeaderboardId,
+                                   UpdatedAt = l.LastUpdate,
+                                   DisplayName = l.DisplayName,
+                                   IsProduction = l.IsProduction,
+                                   ProductName = l.Product.Name,
+                                   Product = new ProductDTO
+                                   {
+                                       Id = l.Product.ProductId,
+                                       Name = l.Product.Name,
+                                       DisplayName = l.Product.DisplayName,
+                                   },
+                                   ModeName = l.Mode.Name,
+                                   Mode = new ModeDTO
+                                   {
+                                       Id = l.Mode.ModeId,
+                                       Name = l.Mode.Name,
+                                       DisplayName = l.Mode.DisplayName,
+                                   },
+                                   RunName = l.Run.Name,
+                                   Run = new RunDTO
+                                   {
+                                       Id = l.Run.RunId,
+                                       Name = l.Run.Name,
+                                       DisplayName = l.Run.DisplayName,
+                                   },
+                                   CharacterName = l.Character.Name,
+                                   Character = new CharacterDTO
+                                   {
+                                       Id = l.Character.CharacterId,
+                                       Name = l.Character.Name,
+                                       DisplayName = l.Character.DisplayName,
+                                   },
+                                   Total = l.Total,
                                },
                                Rank = e.Rank,
                                Score = e.Score,
@@ -362,18 +387,25 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var entries = (from e in playerEntries
                            join r in replays on e.ReplayId equals r.ReplayId into g
                            from x in g.DefaultIfEmpty()
-                           orderby e.Leaderboard.Product.Name, e.Leaderboard.IsProduction
+                           let l = e.Leaderboard
+                           orderby l.Product.Name, l.IsProduction
                            select new DailyEntryDTO
                            {
                                Leaderboard = new DailyLeaderboardDTO
                                {
-                                   Id = e.Leaderboard.LeaderboardId,
-                                   UpdatedAt = e.Leaderboard.LastUpdate,
-                                   DisplayName = e.Leaderboard.DisplayName,
-                                   IsProduction = e.Leaderboard.IsProduction,
-                                   Product = e.Leaderboard.Product.Name,
-                                   Date = e.Leaderboard.Date,
-                                   Total = e.Leaderboard.Total,
+                                   Id = l.LeaderboardId,
+                                   UpdatedAt = l.LastUpdate,
+                                   DisplayName = l.DisplayName,
+                                   IsProduction = l.IsProduction,
+                                   ProductName = l.Product.Name,
+                                   Product = new ProductDTO
+                                   {
+                                       Id = l.Product.ProductId,
+                                       Name = l.Product.Name,
+                                       DisplayName = l.Product.DisplayName,
+                                   },
+                                   Date = l.Date,
+                                   Total = l.Total,
                                },
                                Rank = e.Rank,
                                Score = e.Score,

@@ -14,9 +14,29 @@
         "display_name": null,
         "production": false,
         "product": "classic",
+        "_product": {
+          "id": 1,
+          "name": "classic",
+          "display_name": "Classic"
+        },
         "mode": "standard",
+        "_mode": {
+          "id": 1,
+          "name": "standard",
+          "display_name": "Standard"
+        },
         "run": "score",
+        "_run": {
+          "id": 1,
+          "name": "score",
+          "display_name": "Score"
+        },
         "character": "cadence",
+        "_character": {
+          "id": 1,
+          "name": "cadence",
+          "display_name": "Cadence"
+        },
         "total": 0
       },
       "rank": 0,

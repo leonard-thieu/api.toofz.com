@@ -30,25 +30,45 @@ namespace toofz.NecroDancer.Web.Api.Models
         [DataMember(Name = "production")]
         public bool IsProduction { get; set; }
         /// <summary>
-        /// Crypt of the NecroDancer product (e.g. classic, amplified)
+        /// Crypt of the NecroDancer product name (e.g. classic, amplified)
         /// </summary>
         [DataMember(Name = "product")]
-        public string Product { get; set; }
+        public string ProductName { get; set; }
         /// <summary>
-        /// Crypt of the NecroDancer mode (e.g. standard, hard, no-return)
+        /// Crypt of the NecroDancer product
+        /// </summary>
+        [DataMember(Name = "_product")]
+        public ProductDTO Product { get; set; }
+        /// <summary>
+        /// Crypt of the NecroDancer mode name (e.g. standard, hard, no-return)
         /// </summary>
         [DataMember(Name = "mode")]
-        public string Mode { get; set; }
+        public string ModeName { get; set; }
         /// <summary>
-        /// Crypt of the NecroDancer run (e.g. score, seeded-speed, deathless)
+        /// Crypt of the NecroDancer mode
+        /// </summary>
+        [DataMember(Name = "_mode")]
+        public ModeDTO Mode { get; set; }
+        /// <summary>
+        /// Crypt of the NecroDancer run name (e.g. score, seeded-speed, deathless)
         /// </summary>
         [DataMember(Name = "run")]
-        public string Run { get; set; }
+        public string RunName { get; set; }
         /// <summary>
-        /// Crypt of the NecroDancer character (e.g. all-characters, cadence, story-mode)
+        /// Crypt of the NecroDancer run
+        /// </summary>
+        [DataMember(Name = "_run")]
+        public RunDTO Run { get; set; }
+        /// <summary>
+        /// Crypt of the NecroDancer character name (e.g. all-characters, cadence, story-mode)
         /// </summary>
         [DataMember(Name = "character")]
-        public string Character { get; set; }
+        public string CharacterName { get; set; }
+        /// <summary>
+        /// Crypt of the NecroDancer character
+        /// </summary>
+        [DataMember(Name = "_character")]
+        public CharacterDTO Character { get; set; }
         /// <summary>
         /// Total number of entries
         /// </summary>

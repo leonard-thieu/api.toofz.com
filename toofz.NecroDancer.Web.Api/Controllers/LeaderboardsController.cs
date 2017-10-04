@@ -70,10 +70,34 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                             UpdatedAt = l.LastUpdate,
                             DisplayName = l.DisplayName,
                             IsProduction = l.IsProduction,
-                            Product = l.Product.Name,
-                            Mode = l.Mode.Name,
-                            Run = l.Run.Name,
-                            Character = l.Character.Name,
+                            ProductName = l.Product.Name,
+                            Product = new ProductDTO
+                            {
+                                Id = l.Product.ProductId,
+                                Name = l.Product.Name,
+                                DisplayName = l.Product.DisplayName,
+                            },
+                            ModeName = l.Mode.Name,
+                            Mode = new ModeDTO
+                            {
+                                Id = l.Mode.ModeId,
+                                Name = l.Mode.Name,
+                                DisplayName = l.Mode.DisplayName,
+                            },
+                            RunName = l.Run.Name,
+                            Run = new RunDTO
+                            {
+                                Id = l.Run.RunId,
+                                Name = l.Run.Name,
+                                DisplayName = l.Run.DisplayName,
+                            },
+                            CharacterName = l.Character.Name,
+                            Character = new CharacterDTO
+                            {
+                                Id = l.Character.CharacterId,
+                                Name = l.Character.Name,
+                                DisplayName = l.Character.DisplayName,
+                            },
                             Total = l.Entries.Count,
                         };
 
@@ -114,10 +138,34 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                          UpdatedAt = l.LastUpdate,
                                          DisplayName = l.DisplayName,
                                          IsProduction = l.IsProduction,
-                                         Product = l.Product.Name,
-                                         Mode = l.Mode.Name,
-                                         Run = l.Run.Name,
-                                         Character = l.Character.Name,
+                                         ProductName = l.Product.Name,
+                                         Product = new ProductDTO
+                                         {
+                                             Id = l.Product.ProductId,
+                                             Name = l.Product.Name,
+                                             DisplayName = l.Product.DisplayName,
+                                         },
+                                         ModeName = l.Mode.Name,
+                                         Mode = new ModeDTO
+                                         {
+                                             Id = l.Mode.ModeId,
+                                             Name = l.Mode.Name,
+                                             DisplayName = l.Mode.DisplayName,
+                                         },
+                                         RunName = l.Run.Name,
+                                         Run = new RunDTO
+                                         {
+                                             Id = l.Run.RunId,
+                                             Name = l.Run.Name,
+                                             DisplayName = l.Run.DisplayName,
+                                         },
+                                         CharacterName = l.Character.Name,
+                                         Character = new CharacterDTO
+                                         {
+                                             Id = l.Character.CharacterId,
+                                             Name = l.Character.Name,
+                                             DisplayName = l.Character.DisplayName,
+                                         },
                                          Total = l.Entries.Count,
                                      })
                                      .FirstOrDefaultAsync(cancellationToken);
@@ -228,7 +276,13 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                             UpdatedAt = l.LastUpdate,
                             DisplayName = l.DisplayName,
                             IsProduction = l.IsProduction,
-                            Product = l.Product.Name,
+                            ProductName = l.Product.Name,
+                            Product = new ProductDTO
+                            {
+                                Id = l.Product.ProductId,
+                                Name = l.Product.Name,
+                                DisplayName = l.Product.DisplayName,
+                            },
                             Date = l.Date,
                             Total = l.Entries.Count,
                         };
@@ -273,7 +327,13 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                          UpdatedAt = l.LastUpdate,
                                          DisplayName = l.DisplayName,
                                          IsProduction = l.IsProduction,
-                                         Product = l.Product.Name,
+                                         ProductName = l.Product.Name,
+                                         Product = new ProductDTO
+                                         {
+                                             Id = l.Product.ProductId,
+                                             Name = l.Product.Name,
+                                             DisplayName = l.Product.DisplayName,
+                                         },
                                          Date = l.Date,
                                          Total = l.Entries.Count,
                                      })

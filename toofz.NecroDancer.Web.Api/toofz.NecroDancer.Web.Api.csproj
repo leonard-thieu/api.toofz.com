@@ -260,8 +260,8 @@
     <Reference Include="toofz.NecroDancer.Leaderboards, Version=11.1.0.202, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.NecroDancer.Leaderboards.11.1.0\lib\net45\toofz.NecroDancer.Leaderboards.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer.Leaderboards.Data, Version=4.0.2.36, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.Data.4.0.2\lib\net45\toofz.NecroDancer.Leaderboards.Data.dll</HintPath>
+    <Reference Include="toofz.NecroDancer.Leaderboards.Data, Version=4.1.0.38, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.Data.4.1.0\lib\net45\toofz.NecroDancer.Leaderboards.Data.dll</HintPath>
     </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
@@ -354,6 +354,7 @@
     <Compile Include="Infrastructure\ProductsBinder.cs" />
     <Compile Include="Infrastructure\RunsBinder.cs" />
     <Compile Include="Models\BulkStoreDTO.cs" />
+    <Compile Include="Models\CharacterDTO.cs" />
     <Compile Include="Models\Characters.cs" />
     <Compile Include="Models\CommaSeparatedValues.cs" />
     <Compile Include="Models\DailyEntryDTO.cs" />
@@ -375,6 +376,7 @@
     <Compile Include="Models\LeaderboardEntriesDTO.cs" />
     <Compile Include="Models\LeaderboardsEnvelope.cs" />
     <Compile Include="Models\LeaderboardsPagination.cs" />
+    <Compile Include="Models\ModeDTO.cs" />
     <Compile Include="Models\Modes.cs" />
     <Compile Include="Models\PlayerDailyEntriesDTO.cs" />
     <Compile Include="Models\PlayerDTO.cs" />
@@ -383,11 +385,13 @@
     <Compile Include="Models\PlayersEnvelope.cs" />
     <Compile Include="Models\PlayersPagination.cs" />
     <Compile Include="Models\PlayersSortParams.cs" />
+    <Compile Include="Models\ProductDTO.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\ReplayDTO.cs" />
     <Compile Include="Models\ReplayModel.cs" />
     <Compile Include="Models\ReplaysEnvelope.cs" />
     <Compile Include="Models\ReplaysPagination.cs" />
+    <Compile Include="Models\RunDTO.cs" />
     <Compile Include="Models\Runs.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Content Include="Views\Shared\_FaviconPartial.cshtml" />

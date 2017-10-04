@@ -30,10 +30,15 @@ namespace toofz.NecroDancer.Web.Api.Models
         [DataMember(Name = "production")]
         public bool IsProduction { get; set; }
         /// <summary>
-        /// Crypt of the NecroDancer product (e.g. classic, amplified)
+        /// Crypt of the NecroDancer product name (e.g. classic, amplified)
         /// </summary>
         [DataMember(Name = "product")]
-        public string Product { get; set; }
+        public string ProductName { get; set; }
+        /// <summary>
+        /// Crypt of the NecroDancer product
+        /// </summary>
+        [DataMember(Name = "_product")]
+        public ProductDTO Product { get; set; }
         /// <summary>
         /// The date of the daily leaderboard.
         /// </summary>
