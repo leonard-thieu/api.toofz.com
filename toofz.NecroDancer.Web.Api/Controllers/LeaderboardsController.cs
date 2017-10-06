@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -45,6 +46,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// Valid values are 'all-characters', 'all-characters-amplified', 'aria', 'bard', 'bolt', 'cadence', 'coda', 'diamond', 'dorian', 'dove', 'eli', 'mary', 'melody', 'monk', 'nocturna', 'story-mode', and 'tempo'. 
         /// If not provided, returns leaderboards from all characters.
         /// </param>
+        /// <param name="production">
+        /// If true, returns production leaderboards. If false, returns Early Access leaderboards.
+        /// If not provided, returns both production and Early Access leaderboards.
+        /// </param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer leaderboards.
@@ -56,6 +61,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             Modes modes,
             Runs runs,
             Characters characters,
+            bool? production = null,
             CancellationToken cancellationToken = default)
         {
             var query = from l in db.Leaderboards.AsNoTracking()
@@ -100,6 +106,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                             },
                             Total = l.Entries.Count,
                         };
+            if (production != null)
+            {
+                query = query.Where(l => l.IsProduction == production);
+            }
 
             var total = await query.CountAsync(cancellationToken);
             var leaderboards = await query.ToListAsync(cancellationToken);
@@ -253,6 +263,15 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// Valid values are 'classic' and 'amplified'. 
         /// If not provided, returns daily leaderboards from all products.
         /// </param>
+        /// <param name="date">
+        /// The date of the daily leaderboard.
+        /// If not provided, returns daily leaderboards from all dates.
+        /// The date format is <c>yyyy-MM-dd</c> (e.g. 2017-10-04).
+        /// </param>
+        /// <param name="production">
+        /// If true, returns production leaderboards. If false, returns Early Access leaderboards.
+        /// If not provided, returns both production and Early Access leaderboards.
+        /// </param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer daily leaderboards.
@@ -265,11 +284,13 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         public async Task<IHttpActionResult> GetDailyLeaderboards(
             LeaderboardsPagination pagination,
             Products products,
+            DateTime? date = null,
+            bool? production = null,
             CancellationToken cancellationToken = default)
         {
             var query = from l in db.DailyLeaderboards.AsNoTracking()
                         where products.Contains(l.Product.Name)
-                        orderby l.Date descending, l.ProductId
+                        orderby l.Date descending, l.ProductId descending, l.IsProduction descending
                         select new DailyLeaderboardDTO
                         {
                             Id = l.LeaderboardId,
@@ -286,6 +307,14 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                             Date = l.Date,
                             Total = l.Entries.Count,
                         };
+            if (date != null)
+            {
+                query = query.Where(l => l.Date == date);
+            }
+            if (production != null)
+            {
+                query = query.Where(l => l.IsProduction == production);
+            }
 
             var total = await query.CountAsync(cancellationToken);
             var leaderboards = await query

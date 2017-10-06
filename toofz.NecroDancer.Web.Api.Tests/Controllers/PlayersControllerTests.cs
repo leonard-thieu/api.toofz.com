@@ -319,9 +319,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
                 var controller = new PlayersController(db, storeClient);
                 var steamId = 1;
+                var products = new Products(LeaderboardCategories.Products.Select(p => p.Name));
 
                 // Act
-                var result = await controller.GetPlayerEntries(steamId);
+                var result = await controller.GetPlayerEntries(steamId, products);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(NotFoundResult));
@@ -345,9 +346,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var db = mockDb.Object;
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
                 var controller = new PlayersController(db, storeClient);
+                var products = new Products(LeaderboardCategories.Products.Select(p => p.Name));
 
                 // Act
-                var result = await controller.GetPlayerEntries(steamId);
+                var result = await controller.GetPlayerEntries(steamId, products);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<PlayerEntriesDTO>));
@@ -465,9 +467,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
                 var controller = new PlayersController(db, storeClient);
                 var steamId = 1;
+                var products = new Products(LeaderboardCategories.Products.Select(p => p.Name));
 
                 // Act
-                var result = await controller.GetPlayerDailyEntries(steamId);
+                var result = await controller.GetPlayerDailyEntries(steamId, products);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(NotFoundResult));
@@ -491,9 +494,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var db = mockDb.Object;
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
                 var controller = new PlayersController(db, storeClient);
+                var products = new Products(LeaderboardCategories.Products.Select(p => p.Name));
 
                 // Act
-                var result = await controller.GetPlayerDailyEntries(steamId);
+                var result = await controller.GetPlayerDailyEntries(steamId, products);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<PlayerDailyEntriesDTO>));

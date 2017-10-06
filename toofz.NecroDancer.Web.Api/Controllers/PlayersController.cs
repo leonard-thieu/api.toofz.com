@@ -99,6 +99,14 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// Gets a Steam player's leaderboard entries.
         /// </summary>
         /// <param name="steamId">The Steam ID of the player.</param>
+        /// <param name="products">
+        /// Valid values are 'classic' and 'amplified'. 
+        /// If not provided, returns daily leaderboards from all products.
+        /// </param>
+        /// <param name="production">
+        /// If true, returns production leaderboards. If false, returns Early Access leaderboards.
+        /// If not provided, returns both production and Early Access leaderboards.
+        /// </param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>
         /// Returns a Steam player's leaderboard entries.
@@ -110,6 +118,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [Route("{steamId}/entries")]
         public async Task<IHttpActionResult> GetPlayerEntries(
             long steamId,
+            Products products,
+            bool? production = null,
             CancellationToken cancellationToken = default)
         {
             var player = await (from p in db.Players.AsNoTracking()
@@ -128,20 +138,22 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             }
 
             var query = from e in db.Entries.AsNoTracking()
+                        let l = e.Leaderboard
                         where e.SteamId == steamId
+                        where products.Contains(l.Product.Name)
                         select new
                         {
                             Leaderboard = new
                             {
-                                e.Leaderboard.LeaderboardId,
-                                e.Leaderboard.LastUpdate,
-                                e.Leaderboard.DisplayName,
-                                e.Leaderboard.IsProduction,
-                                e.Leaderboard.Product,
-                                e.Leaderboard.Mode,
-                                e.Leaderboard.Run,
-                                e.Leaderboard.Character,
-                                Total = e.Leaderboard.Entries.Count,
+                                l.LeaderboardId,
+                                l.LastUpdate,
+                                l.DisplayName,
+                                l.IsProduction,
+                                l.Product,
+                                l.Mode,
+                                l.Run,
+                                l.Character,
+                                Total = l.Entries.Count,
                             },
                             Rank = e.Rank,
                             Score = e.Score,
@@ -152,6 +164,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                             },
                             ReplayId = e.ReplayId,
                         };
+            if (production != null)
+            {
+                query = query.Where(e => e.Leaderboard.IsProduction == production);
+            }
 
             var total = await query.CountAsync(cancellationToken);
             var playerEntries = await query.ToListAsync(cancellationToken);
@@ -171,7 +187,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                            join r in replays on e.ReplayId equals r.ReplayId into g
                            from x in g.DefaultIfEmpty()
                            let l = e.Leaderboard
-                           orderby l.Product.Name, l.Run.RunId, l.Character.Name
+                           orderby l.Product.ProductId descending, l.Mode.ModeId, l.Run.RunId, l.Character.Name
                            select new EntryDTO
                            {
                                Leaderboard = new LeaderboardDTO
@@ -253,8 +269,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var playerEntry = await (from e in db.Entries.AsNoTracking()
-                                     where e.LeaderboardId == lbid && e.SteamId == steamId
-                                     orderby e.Rank
+                                     where e.LeaderboardId == lbid
+                                     where e.SteamId == steamId
                                      select new
                                      {
                                          Player = new
@@ -318,6 +334,14 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// Gets a Steam player's daily leaderboard entries.
         /// </summary>
         /// <param name="steamId">The Steam ID of the player.</param>
+        /// <param name="products">
+        /// Valid values are 'classic' and 'amplified'. 
+        /// If not provided, returns daily leaderboards from all products.
+        /// </param>
+        /// <param name="production">
+        /// If true, returns production leaderboards. If false, returns Early Access leaderboards.
+        /// If not provided, returns both production and Early Access leaderboards.
+        /// </param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>
         /// Returns a Steam player's daily leaderboard entries.
@@ -329,6 +353,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [Route("{steamId}/entries/dailies")]
         public async Task<IHttpActionResult> GetPlayerDailyEntries(
             long steamId,
+            Products products,
+            bool? production = null,
             CancellationToken cancellationToken = default)
         {
             var player = await (from p in db.Players.AsNoTracking()
@@ -347,18 +373,20 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             }
 
             var query = from e in db.DailyEntries.AsNoTracking()
+                        let l = e.Leaderboard
                         where e.SteamId == steamId
+                        where products.Contains(l.Product.Name)
                         select new
                         {
                             Leaderboard = new
                             {
-                                e.Leaderboard.LeaderboardId,
-                                e.Leaderboard.LastUpdate,
-                                e.Leaderboard.DisplayName,
-                                e.Leaderboard.IsProduction,
-                                e.Leaderboard.Product,
-                                e.Leaderboard.Date,
-                                Total = e.Leaderboard.Entries.Count,
+                                l.LeaderboardId,
+                                l.LastUpdate,
+                                l.DisplayName,
+                                l.IsProduction,
+                                l.Product,
+                                l.Date,
+                                Total = l.Entries.Count,
                             },
                             Rank = e.Rank,
                             Score = e.Score,
@@ -369,6 +397,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                             },
                             ReplayId = e.ReplayId,
                         };
+            if (production != null)
+            {
+                query = query.Where(e => e.Leaderboard.IsProduction == production);
+            }
 
             var total = await query.CountAsync(cancellationToken);
             var playerEntries = await query.ToListAsync(cancellationToken);
@@ -388,7 +420,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                            join r in replays on e.ReplayId equals r.ReplayId into g
                            from x in g.DefaultIfEmpty()
                            let l = e.Leaderboard
-                           orderby l.Product.Name, l.IsProduction
+                           orderby l.Date descending, l.Product.ProductId descending, l.IsProduction descending
                            select new DailyEntryDTO
                            {
                                Leaderboard = new DailyLeaderboardDTO
@@ -450,16 +482,17 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var playerEntry = await (from e in db.DailyEntries.AsNoTracking()
-                                     where e.LeaderboardId == lbid && e.SteamId == steamId
-                                     orderby e.Rank
+                                     where e.LeaderboardId == lbid
+                                     where e.SteamId == steamId
+                                     let p = e.Player
                                      select new
                                      {
                                          Player = new
                                          {
-                                             e.Player.SteamId,
-                                             e.Player.LastUpdate,
-                                             e.Player.Name,
-                                             e.Player.Avatar,
+                                             p.SteamId,
+                                             p.LastUpdate,
+                                             p.Name,
+                                             p.Avatar,
                                          },
                                          Rank = e.Rank,
                                          Score = e.Score,
