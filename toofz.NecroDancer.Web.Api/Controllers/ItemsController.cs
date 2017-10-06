@@ -159,24 +159,20 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         {
             var query = from i in baseQuery
                         orderby i.Name
-                        select i;
+                        select new ItemDTO
+                        {
+                            Name = i.Name,
+                            DisplayName = i.DisplayName,
+                            Slot = i.Slot,
+                            Cost = i.CoinCost,
+                            Unlock = i.DiamondCost,
+                        };
 
             var total = await query.CountAsync(cancellationToken);
-            // Have to double project because DisplayName is a calculated property.
-            var dbItems = await query
+            var items = await query
                 .Skip(pagination.Offset)
                 .Take(pagination.Limit)
                 .ToListAsync(cancellationToken);
-            var items = (from i in dbItems
-                         select new ItemDTO
-                         {
-                             Name = i.Name,
-                             DisplayName = i.DisplayName,
-                             Slot = i.Slot,
-                             Cost = i.CoinCost,
-                             Unlock = i.DiamondCost,
-                         })
-                         .ToList();
 
             return new ItemsEnvelope
             {

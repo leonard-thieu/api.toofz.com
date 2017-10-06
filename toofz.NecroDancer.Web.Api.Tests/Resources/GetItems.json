@@ -3,70 +3,70 @@
   "items": [
     {
       "name": "armor_glass",
-      "display_name": "Armor Glass",
+      "display_name": "Glass Armor",
       "slot": "body",
       "unlock": 4,
       "cost": 50
     },
     {
       "name": "feet_ballet_shoes",
-      "display_name": "Feet Ballet Shoes",
+      "display_name": "Ballet Shoes",
       "slot": "feet",
       "unlock": null,
       "cost": 25
     },
     {
       "name": "food_1",
-      "display_name": "Food 1",
+      "display_name": "Apple",
       "slot": "action",
       "unlock": null,
       "cost": 10
     },
     {
       "name": "head_blast_helm",
-      "display_name": "Head Blast Helm",
+      "display_name": "Blast Helm",
       "slot": "head",
       "unlock": 5,
       "cost": 60
     },
     {
       "name": "misc_heart_container",
-      "display_name": "Misc Heart Container",
+      "display_name": "Heart Container",
       "slot": null,
       "unlock": null,
       "cost": 50
     },
     {
       "name": "ring_becoming",
-      "display_name": "Ring Becoming",
+      "display_name": "Ring of Becoming",
       "slot": "ring",
       "unlock": 5,
       "cost": 100
     },
     {
       "name": "scroll_earthquake",
-      "display_name": "Scroll Earthquake",
+      "display_name": "Earthquake Scroll",
       "slot": "action",
       "unlock": 3,
       "cost": 20
     },
     {
       "name": "spell_bomb",
-      "display_name": "Spell Bomb",
+      "display_name": "Bomb Spell",
       "slot": "spell",
       "unlock": 6,
       "cost": 150
     },
     {
       "name": "spell_fireball",
-      "display_name": "Spell Fireball",
+      "display_name": "Fireball Spell",
       "slot": "spell",
       "unlock": 1,
       "cost": 50
     },
     {
       "name": "torch_1",
-      "display_name": "Torch 1",
+      "display_name": "Torch",
       "slot": "torch",
       "unlock": null,
       "cost": 3

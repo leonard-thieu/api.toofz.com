@@ -4,7 +4,7 @@
     {
       "name": "necrodancer",
       "type": 1,
-      "display_name": "Necrodancer",
+      "display_name": "The Necrodancer",
       "health": 6,
       "damage": 3,
       "beats_per_move": 2,

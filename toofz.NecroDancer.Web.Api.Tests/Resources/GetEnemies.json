@@ -4,7 +4,7 @@
     {
       "name": "bat",
       "type": 1,
-      "display_name": "Bat",
+      "display_name": "Blue Bat",
       "health": 1,
       "damage": 1,
       "beats_per_move": 2,
@@ -13,7 +13,7 @@
     {
       "name": "dragon",
       "type": 2,
-      "display_name": "Dragon",
+      "display_name": "Red Dragon",
       "health": 6,
       "damage": 6,
       "beats_per_move": 2,
@@ -22,7 +22,7 @@
     {
       "name": "monkey",
       "type": 3,
-      "display_name": "Monkey",
+      "display_name": "Green Monkey",
       "health": 1,
       "damage": 0,
       "beats_per_move": 1,
@@ -31,7 +31,7 @@
     {
       "name": "monkey",
       "type": 4,
-      "display_name": "Monkey",
+      "display_name": "Magic Monkey",
       "health": 2,
       "damage": 0,
       "beats_per_move": 1,
@@ -40,7 +40,7 @@
     {
       "name": "necrodancer",
       "type": 1,
-      "display_name": "Necrodancer",
+      "display_name": "The Necrodancer",
       "health": 6,
       "damage": 3,
       "beats_per_move": 2,

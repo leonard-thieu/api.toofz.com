@@ -29,6 +29,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         CoinsToDrop = 2,
                     },
                     OptionalStats = new OptionalStats { IsMonkeyLike = true },
+                    DisplayName = "Magic Monkey",
                 },
                 new Enemy("necrodancer", 1)
                 {
@@ -40,6 +41,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         CoinsToDrop = 0,
                     },
                     OptionalStats = new OptionalStats { Boss = true },
+                    DisplayName = "The Necrodancer",
                 },
                 new Enemy("bat", 1)
                 {
@@ -51,6 +53,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         CoinsToDrop = 2,
                     },
                     OptionalStats = new OptionalStats { Floating = true },
+                    DisplayName = "Blue Bat",
                 },
                 new Enemy("tarmonster", 1)
                 {
@@ -62,6 +65,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         CoinsToDrop = 3,
                     },
                     OptionalStats = new OptionalStats { IgnoreLiquids = true },
+                    DisplayName = "Tarmonster",
                 },
                 new Enemy("spider", 1)
                 {
@@ -73,6 +77,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         CoinsToDrop = 3,
                     },
                     OptionalStats = new OptionalStats { IgnoreWalls = true },
+                    DisplayName = "Spider",
                 },
                 new Enemy("monkey", 3)
                 {
@@ -84,6 +89,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         CoinsToDrop = 1,
                     },
                     OptionalStats = new OptionalStats { IsMonkeyLike = true },
+                    DisplayName = "Green Monkey",
                 },
                 new Enemy("dragon", 2)
                 {
@@ -95,6 +101,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         CoinsToDrop = 20,
                     },
                     OptionalStats = new OptionalStats { Massive = true },
+                    DisplayName = "Red Dragon",
                 },
                 new Enemy("ogre", 1)
                 {
@@ -106,6 +113,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         CoinsToDrop = 15,
                     },
                     OptionalStats = new OptionalStats { Miniboss = true },
+                    DisplayName = "Ogre",
                 },
             };
         }

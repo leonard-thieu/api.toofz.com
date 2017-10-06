@@ -25,6 +25,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     DiamondCost = 4,
                     CoinCost = 50,
                     IsArmor = true,
+                    DisplayName = "Glass Armor",
                 },
                 new Item("misc_heart_container", "")
                 {
@@ -32,12 +33,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     DiamondCost = null,
                     CoinCost = 50,
                     Consumable = true,
+                    DisplayName = "Heart Container",
                 },
                 new Item("feet_ballet_shoes", "")
                 {
                     Slot = "feet",
                     DiamondCost = null,
                     CoinCost = 25,
+                    DisplayName = "Ballet Shoes",
                 },
                 new Item("food_1", "")
                 {
@@ -45,18 +48,21 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     DiamondCost = null,
                     CoinCost = 10,
                     IsFood = true,
+                    DisplayName = "Apple",
                 },
                 new Item("head_blast_helm","")
                 {
                     Slot = "head",
                     DiamondCost = 5,
                     CoinCost = 60,
+                    DisplayName = "Blast Helm",
                 },
                 new Item("ring_becoming", "")
                 {
                     Slot = "ring",
                     DiamondCost = 5,
                     CoinCost = 100,
+                    DisplayName = "Ring of Becoming",
                 },
                 new Item("scroll_earthquake", "")
                 {
@@ -64,6 +70,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     DiamondCost = 3,
                     CoinCost = 20,
                     IsScroll = true,
+                    DisplayName = "Earthquake Scroll",
                 },
                 new Item("spell_bomb", "")
                 {
@@ -71,6 +78,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     DiamondCost = 6,
                     CoinCost = 150,
                     IsSpell = true,
+                    DisplayName = "Bomb Spell",
                 },
                 new Item("spell_fireball", "")
                 {
@@ -78,6 +86,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     DiamondCost = 1,
                     CoinCost = 50,
                     IsSpell = true,
+                    DisplayName = "Fireball Spell",
                 },
                 new Item("torch_1", "")
                 {
@@ -85,6 +94,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     DiamondCost = null,
                     CoinCost = 3,
                     IsTorch = true,
+                    DisplayName = "Torch",
                 },
                 new Item("weapon_axe", "")
                 {
@@ -93,6 +103,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     CoinCost = 60,
                     IsWeapon = true,
                     IsAxe = true,
+                    DisplayName = "Axe",
                 },
                 new Item("weapon_blood_bow", "")
                 {
@@ -101,6 +112,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     CoinCost = 250,
                     IsWeapon = true,
                     IsBow = true,
+                    DisplayName = "Blood Bow",
                 },
                 new Item("weapon_blood_broadsword", "")
                 {
@@ -109,6 +121,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     CoinCost = 40,
                     IsWeapon = true,
                     IsBroadsword = true,
+                    DisplayName = "Blood Broadsword",
                 },
                 new Item("weapon_blood_cat", "")
                 {
@@ -117,6 +130,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     CoinCost = 85,
                     IsWeapon = true,
                     IsCat = true,
+                    DisplayName = "Blood Cat",
                 },
                 new Item("weapon_blood_crossbow", "")
                 {
@@ -125,6 +139,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     CoinCost = 225,
                     IsWeapon = true,
                     IsCrossbow = true,
+                    DisplayName = "Blood Crossbow",
                 },
                 new Item("weapon_blood_dagger", "")
                 {
@@ -133,6 +148,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     CoinCost = 5,
                     IsWeapon = true,
                     IsDagger = true,
+                    DisplayName = "Blood Dagger",
                 },
                 new Item("weapon_blood_flail", "")
                 {
@@ -141,6 +157,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     CoinCost = 80,
                     IsWeapon = true,
                     IsFlail = true,
+                    DisplayName = "Blood Flail",
                 },
                 new Item("weapon_blood_longsword", "")
                 {
@@ -149,6 +166,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     CoinCost = 65,
                     IsWeapon = true,
                     IsLongsword = true,
+                    DisplayName = "Blood Longsword",
                 },
                 new Item("weapon_blood_rapier", "")
                 {
@@ -157,6 +175,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     CoinCost = 75,
                     IsWeapon = true,
                     IsRapier = true,
+                    DisplayName = "Blood Rapier",
                 },
                 new Item("weapon_golden_spear", "")
                 {
@@ -165,6 +184,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     CoinCost = 100,
                     IsWeapon = true,
                     IsSpear = true,
+                    DisplayName = "Golden Spear",
                 },
                 new Item("weapon_obsidian_whip", "")
                 {
@@ -173,6 +193,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     CoinCost = 150,
                     IsWeapon = true,
                     IsWhip = true,
+                    DisplayName = "Obsidian Whip",
                 },
             };
         }
