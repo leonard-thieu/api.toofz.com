@@ -136,8 +136,8 @@
     <Reference Include="SqlBulkUpsert, Version=4.1.5.127, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.SqlBulkUpsert.4.1.5\lib\net45\SqlBulkUpsert.dll</HintPath>
     </Reference>
-    <Reference Include="SteamKit2, Version=1.8.3.0, Culture=neutral, PublicKeyToken=ed3ce47ed5aad940, processorArchitecture=MSIL">
-      <HintPath>..\packages\SteamKit2.1.8.3\lib\net45\SteamKit2.dll</HintPath>
+    <Reference Include="SteamKit2, Version=2.0.4.21, Culture=neutral, PublicKeyToken=ed3ce47ed5aad940, processorArchitecture=MSIL">
+      <HintPath>..\packages\SteamKit2.2.0.4\lib\net45\SteamKit2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -185,8 +185,8 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="toofz, Version=7.2.0.182, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.7.2.0\lib\net45\toofz.dll</HintPath>
+    <Reference Include="toofz, Version=9.0.0.187, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.9.0.0\lib\net45\toofz.dll</HintPath>
     </Reference>
     <Reference Include="toofz.NecroDancer, Version=4.1.0.91, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.NecroDancer.4.1.0\lib\net45\toofz.NecroDancer.dll</HintPath>
@@ -194,8 +194,8 @@
     <Reference Include="toofz.NecroDancer.Data, Version=6.0.1.40, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.NecroDancer.Data.6.0.1\lib\net45\toofz.NecroDancer.Data.dll</HintPath>
     </Reference>
-    <Reference Include="toofz.NecroDancer.Leaderboards, Version=11.1.0.202, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.11.1.0\lib\net45\toofz.NecroDancer.Leaderboards.dll</HintPath>
+    <Reference Include="toofz.NecroDancer.Leaderboards, Version=14.0.1.252, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\toofz.NecroDancer.Leaderboards.14.0.1\lib\net45\toofz.NecroDancer.Leaderboards.dll</HintPath>
     </Reference>
     <Reference Include="toofz.NecroDancer.Leaderboards.Data, Version=4.1.0.38, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\toofz.NecroDancer.Leaderboards.Data.4.1.0\lib\net45\toofz.NecroDancer.Leaderboards.Data.dll</HintPath>
