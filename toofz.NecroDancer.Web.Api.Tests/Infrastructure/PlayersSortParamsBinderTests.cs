@@ -36,7 +36,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 HttpActionContext actionContext = null;
                 var modelName = "myModelName";
                 var mockValueProvider = new Mock<IValueProvider>();
-                mockValueProvider.Setup(v => v.GetValue("myModelName")).Returns(Util.CreateValueProviderResult("id"));
+                mockValueProvider.Setup(v => v.GetValue("myModelName")).ReturnsValueProviderResult("id");
                 var valueProvider = mockValueProvider.Object;
                 var data = new DataAnnotationsModelMetadataProvider();
                 var modelMetadata = data.GetMetadataForType(null, typeof(PlayersSortParams));

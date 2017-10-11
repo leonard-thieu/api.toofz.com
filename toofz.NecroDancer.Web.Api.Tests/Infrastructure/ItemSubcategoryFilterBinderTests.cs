@@ -36,9 +36,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void CategoryIsInvalid_AddsModelError()
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(p => p.GetValue("category"))
-                    .Returns(Util.CreateValueProviderResult("a"));
+                mockValueProvider.Setup(p => p.GetValue("category")).ReturnsValueProviderResult("a");
 
                 // Act
                 binder.BindModel(actionContext, bindingContext);
@@ -51,9 +49,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void CategoryIsInvalid_ReturnsFalse()
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(p => p.GetValue("category"))
-                    .Returns(Util.CreateValueProviderResult("a"));
+                mockValueProvider.Setup(p => p.GetValue("category")).ReturnsValueProviderResult("a");
 
                 // Act
                 var success = binder.BindModel(actionContext, bindingContext);
@@ -66,12 +62,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void WeaponsSubcategoryIsInvalid_AddsModelError()
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(p => p.GetValue("category"))
-                    .Returns(Util.CreateValueProviderResult("weapons"));
-                mockValueProvider
-                    .Setup(p => p.GetValue("subcategory"))
-                    .Returns(Util.CreateValueProviderResult("a"));
+                mockValueProvider.Setup(p => p.GetValue("category")).ReturnsValueProviderResult("weapons");
+                mockValueProvider.Setup(p => p.GetValue("subcategory")).ReturnsValueProviderResult("a");
 
                 // Act
                 binder.BindModel(actionContext, bindingContext);
@@ -84,12 +76,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void WeaponsSubcategoryIsInvalid_ReturnsFalse()
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(p => p.GetValue("category"))
-                    .Returns(Util.CreateValueProviderResult("weapons"));
-                mockValueProvider
-                    .Setup(p => p.GetValue("subcategory"))
-                    .Returns(Util.CreateValueProviderResult("a"));
+                mockValueProvider.Setup(p => p.GetValue("category")).ReturnsValueProviderResult("weapons");
+                mockValueProvider.Setup(p => p.GetValue("subcategory")).ReturnsValueProviderResult("a");
 
                 // Act
                 var success = binder.BindModel(actionContext, bindingContext);
@@ -102,12 +90,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void ChestSubcategoryIsInvalid_AddsModelError()
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(p => p.GetValue("category"))
-                    .Returns(Util.CreateValueProviderResult("chest"));
-                mockValueProvider
-                    .Setup(p => p.GetValue("subcategory"))
-                    .Returns(Util.CreateValueProviderResult("a"));
+                mockValueProvider.Setup(p => p.GetValue("category")).ReturnsValueProviderResult("chest");
+                mockValueProvider.Setup(p => p.GetValue("subcategory")).ReturnsValueProviderResult("a");
 
                 // Act
                 binder.BindModel(actionContext, bindingContext);
@@ -120,12 +104,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void ChestSubcategoryIsInvalid_ReturnsFalse()
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(p => p.GetValue("category"))
-                    .Returns(Util.CreateValueProviderResult("chest"));
-                mockValueProvider
-                    .Setup(p => p.GetValue("subcategory"))
-                    .Returns(Util.CreateValueProviderResult("a"));
+                mockValueProvider.Setup(p => p.GetValue("category")).ReturnsValueProviderResult("chest");
+                mockValueProvider.Setup(p => p.GetValue("subcategory")).ReturnsValueProviderResult("a");
 
                 // Act
                 var success = binder.BindModel(actionContext, bindingContext);
@@ -152,12 +132,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void CategoryAndSubcategoryAreValid_SetsModel(string category, string subcategory)
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(p => p.GetValue("category"))
-                    .Returns(Util.CreateValueProviderResult(category));
-                mockValueProvider
-                    .Setup(p => p.GetValue("subcategory"))
-                    .Returns(Util.CreateValueProviderResult(subcategory));
+                mockValueProvider.Setup(p => p.GetValue("category")).ReturnsValueProviderResult(category);
+                mockValueProvider.Setup(p => p.GetValue("subcategory")).ReturnsValueProviderResult(subcategory);
 
                 // Act
                 binder.BindModel(actionContext, bindingContext);
@@ -186,12 +162,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void CategoryAndSubcategoryAreValid_ReturnsTrue(string category, string subcategory)
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(p => p.GetValue("category"))
-                    .Returns(Util.CreateValueProviderResult(category));
-                mockValueProvider
-                    .Setup(p => p.GetValue("subcategory"))
-                    .Returns(Util.CreateValueProviderResult(subcategory));
+                mockValueProvider.Setup(p => p.GetValue("category")).ReturnsValueProviderResult(category);
+                mockValueProvider.Setup(p => p.GetValue("subcategory")).ReturnsValueProviderResult(subcategory);
 
                 // Act
                 var success = binder.BindModel(actionContext, bindingContext);

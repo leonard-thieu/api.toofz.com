@@ -62,9 +62,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void ValueIsNull_SetsModelWithDefaultValues()
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(v => v.GetValue(modelName))
-                    .Returns((ValueProviderResult)null);
+                mockValueProvider.Setup(v => v.GetValue(modelName)).Returns((ValueProviderResult)null);
 
                 // Act
                 binder.BindModel(null, bindingContext);
@@ -96,9 +94,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void ValueIsValidCommaSeparatedValues_SetsModelWithValues()
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(v => v.GetValue(modelName))
-                    .Returns(Util.CreateValueProviderResult("item1,item3"));
+                mockValueProvider.Setup(v => v.GetValue(modelName)).ReturnsValueProviderResult("item1,item3");
 
                 // Act
                 binder.BindModel(null, bindingContext);
@@ -115,9 +111,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void ValueIsValidCommaSeparatedValues_ReturnsTrue()
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(v => v.GetValue(modelName))
-                    .Returns(Util.CreateValueProviderResult("item1,item3"));
+                mockValueProvider.Setup(v => v.GetValue(modelName)).ReturnsValueProviderResult("item1,item3");
 
                 // Act
                 var canBind = binder.BindModel(null, bindingContext);
@@ -130,9 +124,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void ValueContainsInvalidValues_AddsModelErrorsForInvalidValues()
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(v => v.GetValue(modelName))
-                    .Returns(Util.CreateValueProviderResult("item1,itemA,item3"));
+                mockValueProvider.Setup(v => v.GetValue(modelName)).ReturnsValueProviderResult("item1,itemA,item3");
 
                 // Act
                 binder.BindModel(null, bindingContext);
@@ -147,9 +139,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void ValueContainsInvalidValues_ReturnsFalse()
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(v => v.GetValue(modelName))
-                    .Returns(Util.CreateValueProviderResult("item1,itemA,item3"));
+                mockValueProvider.Setup(v => v.GetValue(modelName)).ReturnsValueProviderResult("item1,itemA,item3");
 
                 // Act
                 var success = binder.BindModel(null, bindingContext);

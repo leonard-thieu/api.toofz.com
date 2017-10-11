@@ -7,7 +7,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using toofz.NecroDancer.Web.Api.Infrastructure;
 using toofz.NecroDancer.Web.Api.Models;
-using toofz.NecroDancer.Web.Api.Tests.Models;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 {
@@ -16,14 +15,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
         [TestClass]
         public class BindModel
         {
-            HttpActionContext actionContext;
-            const string modelName = "mockModelName";
-            PaginationBinder<StubPagination> binder;
-            ModelBindingContext bindingContext;
-            Mock<IValueProvider> mock_ValueProvider;
-
-            [TestInitialize]
-            public void Initialize()
+            public BindModel()
             {
                 actionContext = ContextUtil.CreateActionContext();
 
@@ -31,22 +23,26 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
                 var data = new DataAnnotationsModelMetadataProvider();
                 var modelMetadata = data.GetMetadataForType(null, typeof(IPagination));
-                mock_ValueProvider = new Mock<IValueProvider>();
+                mockValueProvider = new Mock<IValueProvider>();
                 bindingContext = new ModelBindingContext
                 {
                     ModelName = modelName,
-                    ValueProvider = mock_ValueProvider.Object,
+                    ValueProvider = mockValueProvider.Object,
                     ModelMetadata = modelMetadata,
                 };
             }
+
+            HttpActionContext actionContext;
+            const string modelName = "mockModelName";
+            PaginationBinder<StubPagination> binder;
+            ModelBindingContext bindingContext;
+            Mock<IValueProvider> mockValueProvider;
 
             [TestMethod]
             public void OffsetValueIsNull_SetsModelWithDefaultOFfsetValueAndReturnsTrue()
             {
                 // Arrange
-                mock_ValueProvider
-                    .Setup(v => v.GetValue("offset"))
-                    .Returns((ValueProviderResult)null);
+                mockValueProvider.Setup(v => v.GetValue("offset")).Returns((ValueProviderResult)null);
 
                 // Act
                 var canBind = binder.BindModel(actionContext, bindingContext);
@@ -62,9 +58,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void OffsetValueIsANumber_SetsModelWithOffsetValueAndReturnsTrue()
             {
                 // Arrange
-                mock_ValueProvider
-                    .Setup(v => v.GetValue("offset"))
-                    .Returns(new ValueProviderResult(3, null, null));
+                mockValueProvider.Setup(v => v.GetValue("offset")).ReturnsValueProviderResult(3);
 
                 // Act
                 var canBind = binder.BindModel(actionContext, bindingContext);
@@ -80,9 +74,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void OffsetValueIsNotANumber_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
-                mock_ValueProvider
-                    .Setup(v => v.GetValue("offset"))
-                    .Returns(new ValueProviderResult("ten", null, null));
+                mockValueProvider.Setup(v => v.GetValue("offset")).ReturnsValueProviderResult("ten");
 
                 // Act
                 var canBind = binder.BindModel(actionContext, bindingContext);
@@ -99,9 +91,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void OffsetValueIsLessThanMin_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
-                mock_ValueProvider
-                    .Setup(v => v.GetValue("offset"))
-                    .Returns(new ValueProviderResult(int.MinValue, null, null));
+                mockValueProvider.Setup(v => v.GetValue("offset")).ReturnsValueProviderResult(int.MinValue);
 
                 // Act
                 var canBind = binder.BindModel(actionContext, bindingContext);
@@ -118,9 +108,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void OffsetValueIsMoreThanMax_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
-                mock_ValueProvider
-                    .Setup(v => v.GetValue("offset"))
-                    .Returns(new ValueProviderResult(int.MaxValue, null, null));
+                mockValueProvider.Setup(v => v.GetValue("offset")).ReturnsValueProviderResult(int.MaxValue);
 
                 // Act
                 var canBind = binder.BindModel(actionContext, bindingContext);
@@ -136,9 +124,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void LimitValueIsNull_SetsModelWithDefaultLimitValueAndReturnsTrue()
             {
                 // Arrange
-                mock_ValueProvider
-                    .Setup(v => v.GetValue("limit"))
-                    .Returns((ValueProviderResult)null);
+                mockValueProvider.Setup(v => v.GetValue("limit")).Returns((ValueProviderResult)null);
 
                 // Act
                 var canBind = binder.BindModel(actionContext, bindingContext);
@@ -154,9 +140,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void LimitValueIsANumber_SetsModelWithLimitValueAndReturnsTrue()
             {
                 // Arrange
-                mock_ValueProvider
-                    .Setup(v => v.GetValue("limit"))
-                    .Returns(new ValueProviderResult(3, null, null));
+                mockValueProvider.Setup(v => v.GetValue("limit")).ReturnsValueProviderResult(3);
 
                 // Act
                 var canBind = binder.BindModel(actionContext, bindingContext);
@@ -172,9 +156,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void LimitValueIsNotANumber_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
-                mock_ValueProvider
-                    .Setup(v => v.GetValue("limit"))
-                    .Returns(new ValueProviderResult("ten", null, null));
+                mockValueProvider.Setup(v => v.GetValue("limit")).ReturnsValueProviderResult("ten");
 
                 // Act
                 var canBind = binder.BindModel(actionContext, bindingContext);
@@ -191,9 +173,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void LimitValueIsLessThanMin_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
-                mock_ValueProvider
-                    .Setup(v => v.GetValue("limit"))
-                    .Returns(new ValueProviderResult(int.MinValue, null, null));
+                mockValueProvider.Setup(v => v.GetValue("limit")).ReturnsValueProviderResult(int.MinValue);
 
                 // Act
                 var canBind = binder.BindModel(actionContext, bindingContext);
@@ -210,9 +190,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void LimitValueIsMoreThanMax_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
-                mock_ValueProvider
-                    .Setup(v => v.GetValue("limit"))
-                    .Returns(new ValueProviderResult(int.MaxValue, null, null));
+                mockValueProvider.Setup(v => v.GetValue("limit")).ReturnsValueProviderResult(int.MaxValue);
 
                 // Act
                 var canBind = binder.BindModel(actionContext, bindingContext);
@@ -228,12 +206,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void OffsetValueAndLimitValueAreNull_SetsModelWithDefaultValuesAndReturnsTrue()
             {
                 // Arrange
-                mock_ValueProvider
-                    .Setup(v => v.GetValue("limit"))
-                    .Returns((ValueProviderResult)null);
-                mock_ValueProvider
-                    .Setup(v => v.GetValue("offset"))
-                    .Returns((ValueProviderResult)null);
+                mockValueProvider.Setup(v => v.GetValue("limit")).Returns((ValueProviderResult)null);
+                mockValueProvider.Setup(v => v.GetValue("offset")).Returns((ValueProviderResult)null);
 
                 // Act
                 var canBind = binder.BindModel(actionContext, bindingContext);

@@ -35,9 +35,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void ValueIsInvalid_AddsModelError()
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(p => p.GetValue(modelName))
-                    .Returns(Util.CreateValueProviderResult("a"));
+                mockValueProvider.Setup(p => p.GetValue(modelName)).ReturnsValueProviderResult("a");
 
                 // Act
                 binder.BindModel(actionContext, bindingContext);
@@ -50,9 +48,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void ValueIsInvalid_ReturnsFalse()
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(p => p.GetValue(modelName))
-                    .Returns(Util.CreateValueProviderResult("a"));
+                mockValueProvider.Setup(p => p.GetValue(modelName)).ReturnsValueProviderResult("a");
 
                 // Act
                 var success = binder.BindModel(actionContext, bindingContext);
@@ -75,9 +71,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void ValueIsValid_SetsModelToValue(string category)
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(p => p.GetValue(modelName))
-                    .Returns(Util.CreateValueProviderResult(category));
+                mockValueProvider.Setup(p => p.GetValue(modelName)).ReturnsValueProviderResult(category);
 
                 // Act
                 binder.BindModel(actionContext, bindingContext);
@@ -100,9 +94,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             public void ValueIsValid_ReturnsTrue(string category)
             {
                 // Arrange
-                mockValueProvider
-                    .Setup(p => p.GetValue(modelName))
-                    .Returns(Util.CreateValueProviderResult(category));
+                mockValueProvider.Setup(p => p.GetValue(modelName)).ReturnsValueProviderResult(category);
 
                 // Act
                 var success = binder.BindModel(actionContext, bindingContext);
