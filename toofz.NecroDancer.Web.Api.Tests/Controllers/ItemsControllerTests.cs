@@ -222,7 +222,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             {
                 var mockItems = new MockDbSet<Item>(Items);
                 var items = mockItems.Object;
-                var mockDb = new Mock<NecroDancerContext>();
+                var mockDb = new Mock<INecroDancerContext>();
                 mockDb.Setup(x => x.Items).Returns(items);
                 var db = mockDb.Object;
                 controller = new ItemsController(db);
@@ -306,7 +306,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             {
                 var mockItems = new MockDbSet<Item>(Items);
                 var items = mockItems.Object;
-                var mockDb = new Mock<NecroDancerContext>();
+                var mockDb = new Mock<INecroDancerContext>();
                 mockDb.Setup(x => x.Items).Returns(items);
                 var db = mockDb.Object;
                 controller = new ItemsController(db);
@@ -367,7 +367,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             {
                 var mockItems = new MockDbSet<Item>(Items);
                 var items = mockItems.Object;
-                var mockDb = new Mock<NecroDancerContext>();
+                var mockDb = new Mock<INecroDancerContext>();
                 mockDb.Setup(x => x.Items).Returns(items);
                 var db = mockDb.Object;
                 controller = new ItemsController(db);
