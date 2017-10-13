@@ -199,7 +199,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             {
                 var mockPlayers = new MockDbSet<Player>(Players);
                 var players = mockPlayers.Object;
-                var mockDb = new Mock<LeaderboardsContext>();
+                var mockDb = new Mock<ILeaderboardsContext>();
                 mockDb.Setup(d => d.Players).Returns(players);
                 var db = mockDb.Object;
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
