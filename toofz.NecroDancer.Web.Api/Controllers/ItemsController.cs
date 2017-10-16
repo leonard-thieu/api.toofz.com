@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -64,7 +65,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer items in the category.
         /// </returns>
-        /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
+        /// <httpStatusCode cref="HttpStatusCode.BadRequest">
         /// Item category is invalid.
         /// </httpStatusCode>
         [ResponseType(typeof(ItemsEnvelope))]
@@ -104,10 +105,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer items in the subcategory.
         /// </returns>
-        /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
+        /// <httpStatusCode cref="HttpStatusCode.BadRequest">
         /// Item category is invalid.
         /// </httpStatusCode>
-        /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
+        /// <httpStatusCode cref="HttpStatusCode.BadRequest">
         /// Item subcategory is invalid.
         /// </httpStatusCode>
         [ResponseType(typeof(ItemsEnvelope))]

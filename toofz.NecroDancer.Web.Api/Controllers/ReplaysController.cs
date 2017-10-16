@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -76,10 +77,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns the number of replays updated.
         /// </returns>
-        /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
+        /// <httpStatusCode cref="HttpStatusCode.BadRequest">
         /// Any replays failed validation.
         /// </httpStatusCode>
-        /// <httpStatusCode cref="System.Net.HttpStatusCode.Conflict">
+        /// <httpStatusCode cref="HttpStatusCode.Conflict">
         /// There are duplicate IDs.
         /// </httpStatusCode>
         [ResponseType(typeof(BulkStoreDTO))]

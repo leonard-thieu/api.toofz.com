@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -111,7 +112,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a Steam player's leaderboard entries.
         /// </returns>
-        /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
+        /// <httpStatusCode cref="HttpStatusCode.NotFound">
         /// A player with that Steam ID was not found.
         /// </httpStatusCode>
         [ResponseType(typeof(PlayerEntriesDTO))]
@@ -255,10 +256,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <param name="steamId">The Steam ID of the player.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns a player's leaderboard entry for a leaderboard.</returns>
-        /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
+        /// <httpStatusCode cref="HttpStatusCode.NotFound">
         /// A player with that Steam ID was not found.
         /// </httpStatusCode>
-        /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
+        /// <httpStatusCode cref="HttpStatusCode.NotFound">
         /// An entry for the player on the leaderboard was not found.
         /// </httpStatusCode>
         [ResponseType(typeof(EntryDTO))]
@@ -346,7 +347,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a Steam player's daily leaderboard entries.
         /// </returns>
-        /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
+        /// <httpStatusCode cref="HttpStatusCode.NotFound">
         /// A player with that Steam ID was not found.
         /// </httpStatusCode>
         [ResponseType(typeof(PlayerDailyEntriesDTO))]
@@ -468,10 +469,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <param name="steamId">The Steam ID of the player.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns a player's leaderboard entry for a daily leaderboard.</returns>
-        /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
+        /// <httpStatusCode cref="HttpStatusCode.NotFound">
         /// A player with that Steam ID was not found.
         /// </httpStatusCode>
-        /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
+        /// <httpStatusCode cref="HttpStatusCode.NotFound">
         /// An entry for the player on the dao;y leaderboard was not found.
         /// </httpStatusCode>
         [ResponseType(typeof(EntryDTO))]
@@ -552,7 +553,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns the number of Steam players updated.
         /// </returns>
-        /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
+        /// <httpStatusCode cref="HttpStatusCode.BadRequest">
         /// Any players failed validation.
         /// </httpStatusCode>
         [ResponseType(typeof(BulkStoreDTO))]

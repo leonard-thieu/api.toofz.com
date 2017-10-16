@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -62,7 +63,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer enemies with the attribute.
         /// </returns>
-        /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
+        /// <httpStatusCode cref="HttpStatusCode.BadRequest">
         /// Enemy attribute is invalid.
         /// </httpStatusCode>
         [ResponseType(typeof(EnemiesEnvelope))]

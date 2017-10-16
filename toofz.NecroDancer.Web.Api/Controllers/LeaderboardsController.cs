@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -130,7 +131,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <param name="lbid">The leaderboard ID.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns a list of Crypt of the NecroDancer leaderboard entries.</returns>
-        /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
+        /// <httpStatusCode cref="HttpStatusCode.NotFound">
         /// The leaderboard does not exist.
         /// </httpStatusCode>
         [ResponseType(typeof(LeaderboardEntriesDTO))]
@@ -276,7 +277,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer daily leaderboards.
         /// </returns>
-        /// <httpStatusCode cref="System.Net.HttpStatusCode.BadRequest">
+        /// <httpStatusCode cref="HttpStatusCode.BadRequest">
         /// A product is invalid.
         /// </httpStatusCode>
         [ResponseType(typeof(DailyLeaderboardsEnvelope))]
@@ -338,7 +339,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <param name="lbid">The daily leaderboard ID.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>Returns a list of Crypt of the NecroDancer daily leaderboard entries.</returns>
-        /// <httpStatusCode cref="System.Net.HttpStatusCode.NotFound">
+        /// <httpStatusCode cref="HttpStatusCode.NotFound">
         /// The daily leaderboard does not exist.
         /// </httpStatusCode>
         [ResponseType(typeof(DailyLeaderboardEntriesDTO))]
