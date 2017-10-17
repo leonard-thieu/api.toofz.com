@@ -209,8 +209,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
 
             var total = await query.CountAsync(cancellationToken);
             var entriesPage = await query
-                .Skip(pagination.Offset)
-                .Take(pagination.Limit)
+                .Page(pagination)
                 .ToListAsync(cancellationToken);
 
             var replayIds = entriesPage.Select(entry => entry.ReplayId);
@@ -319,8 +318,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
 
             var total = await query.CountAsync(cancellationToken);
             var leaderboards = await query
-                .Skip(pagination.Offset)
-                .Take(pagination.Limit)
+                .Page(pagination)
                 .ToListAsync(cancellationToken);
 
             var content = new DailyLeaderboardsEnvelope
@@ -397,8 +395,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
 
             var total = await query.CountAsync(cancellationToken);
             var entriesPage = await query
-                .Skip(pagination.Offset)
-                .Take(pagination.Limit)
+                .Page(pagination)
                 .ToListAsync(cancellationToken);
 
             var replayIds = entriesPage.Select(entry => entry.ReplayId);

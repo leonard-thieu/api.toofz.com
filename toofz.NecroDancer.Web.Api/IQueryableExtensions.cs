@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
+using System.Data.Entity;
+using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api
 {
@@ -43,6 +45,26 @@ namespace toofz.NecroDancer.Web.Api
             var ordering = string.Join(", ", sortExpressions);
 
             return source.OrderBy(ordering);
+        }
+
+        public static IQueryable<T> Page<T>(
+            this IQueryable<T> source,
+            IPagination pagination)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (pagination == null)
+                throw new ArgumentNullException(nameof(pagination));
+
+            // Using properties of a non-mapped object prevents a query from being cached.
+            var offset = pagination.Offset;
+            var limit = pagination.Limit;
+
+            // Query plans are not parameterized when using the constant overloads for Skip/Take.
+            // Using lambda overloads for Skip/Take allows reusing the same query plan for different values.
+            return source
+                .Skip(() => offset)
+                .Take(() => limit);
         }
     }
 }

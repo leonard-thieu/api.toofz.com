@@ -112,8 +112,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
 
             var total = await query.CountAsync(cancellationToken);
             var enemies = await query
-                .Skip(pagination.Offset)
-                .Take(pagination.Limit)
+                .Page(pagination)
                 .ToListAsync(cancellationToken);
 
             return new EnemiesEnvelope
