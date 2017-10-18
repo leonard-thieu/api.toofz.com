@@ -4,7 +4,7 @@ using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api.Infrastructure
 {
-    public sealed class ModesBinder : CommaSeparatedValuesBinder
+    public sealed class ModesBinder : CommaSeparatedValuesBinder<string>
     {
         public ModesBinder(IEnumerable<string> modes)
         {
@@ -13,6 +13,6 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
 
         readonly IEnumerable<string> modes;
 
-        protected override CommaSeparatedValues GetModel() => new Modes(modes);
+        protected override CommaSeparatedValues<string> GetModel() => new Modes(modes);
     }
 }

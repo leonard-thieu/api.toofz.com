@@ -67,7 +67,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///    {
         ///      &quot;name&quot;: &quot;bat&quot;,
         ///      &quot;type&quot;: 1,
-        ///      &quot;display_name&quot;: &quot;Bat&quot;,
+        ///      &quot;display_name&quot;: &quot;Blue Bat&quot;,
         ///      &quot;health&quot;: 1,
         ///      &quot;damage&quot;: 1,
         ///      &quot;beats_per_move&quot;: 2,
@@ -76,7 +76,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///    {
         ///      &quot;name&quot;: &quot;dragon&quot;,
         ///      &quot;type&quot;: 2,
-        ///      &quot;display_name&quot;: &quot;Dragon&quot;,
+        ///      &quot;display_name&quot;: &quot;Red Dragon&quot;,
         ///      &quot;health&quot;: 6,
         ///      &quot;damage&quot;: 6,
         ///      &quot;beats_per_move&quot;: 2,
@@ -85,10 +85,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///    {
         ///      &quot;name&quot;: &quot;monkey&quot;,
         ///      &quot;type&quot;: 3,
-        ///      &quot;display_name&quot;: &quot;Monkey&quot;,
+        ///      &quot;display_name&quot;: &quot;Green Monkey&quot;,
         ///      &quot;health&quot;: 1,
-        ///      &quot;damage&quot;: 0,
-        ///       [rest of string was truncated]&quot;;.
+        ///      &quot;dama [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GetEnemies {
             get {
@@ -103,7 +102,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///    {
         ///      &quot;name&quot;: &quot;necrodancer&quot;,
         ///      &quot;type&quot;: 1,
-        ///      &quot;display_name&quot;: &quot;Necrodancer&quot;,
+        ///      &quot;display_name&quot;: &quot;The Necrodancer&quot;,
         ///      &quot;health&quot;: 6,
         ///      &quot;damage&quot;: 3,
         ///      &quot;beats_per_move&quot;: 2,
@@ -124,27 +123,28 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///  &quot;items&quot;: [
         ///    {
         ///      &quot;name&quot;: &quot;armor_glass&quot;,
-        ///      &quot;display_name&quot;: &quot;Armor Glass&quot;,
+        ///      &quot;display_name&quot;: &quot;Glass Armor&quot;,
         ///      &quot;slot&quot;: &quot;body&quot;,
         ///      &quot;unlock&quot;: 4,
         ///      &quot;cost&quot;: 50
         ///    },
         ///    {
         ///      &quot;name&quot;: &quot;feet_ballet_shoes&quot;,
-        ///      &quot;display_name&quot;: &quot;Feet Ballet Shoes&quot;,
+        ///      &quot;display_name&quot;: &quot;Ballet Shoes&quot;,
         ///      &quot;slot&quot;: &quot;feet&quot;,
         ///      &quot;unlock&quot;: null,
         ///      &quot;cost&quot;: 25
         ///    },
         ///    {
         ///      &quot;name&quot;: &quot;food_1&quot;,
-        ///      &quot;display_name&quot;: &quot;Food 1&quot;,
+        ///      &quot;display_name&quot;: &quot;Apple&quot;,
         ///      &quot;slot&quot;: &quot;action&quot;,
         ///      &quot;unlock&quot;: null,
         ///      &quot;cost&quot;: 10
         ///    },
         ///    {
-        ///      &quot;name&quot;: &quot;head_blast_helm [rest of string was truncated]&quot;;.
+        ///      &quot;name&quot;: &quot;head_blast_helm&quot;,
+        ///   [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GetItems {
             get {
@@ -158,7 +158,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///  &quot;items&quot;: [
         ///    {
         ///      &quot;name&quot;: &quot;armor_glass&quot;,
-        ///      &quot;display_name&quot;: &quot;Armor Glass&quot;,
+        ///      &quot;display_name&quot;: &quot;Glass Armor&quot;,
         ///      &quot;slot&quot;: &quot;body&quot;,
         ///      &quot;unlock&quot;: 4,
         ///      &quot;cost&quot;: 50
@@ -178,7 +178,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///  &quot;items&quot;: [
         ///    {
         ///      &quot;name&quot;: &quot;weapon_blood_bow&quot;,
-        ///      &quot;display_name&quot;: &quot;Weapon Blood Bow&quot;,
+        ///      &quot;display_name&quot;: &quot;Blood Bow&quot;,
         ///      &quot;slot&quot;: &quot;weapon&quot;,
         ///      &quot;unlock&quot;: null,
         ///      &quot;cost&quot;: 250
@@ -202,13 +202,21 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///      &quot;display_name&quot;: null,
         ///      &quot;production&quot;: false,
         ///      &quot;product&quot;: &quot;amplified&quot;,
+        ///      &quot;_product&quot;: {
+        ///        &quot;id&quot;: 1,
+        ///        &quot;name&quot;: &quot;amplified&quot;,
+        ///        &quot;display_name&quot;: &quot;Amplified&quot;
+        ///      },
         ///      &quot;mode&quot;: &quot;standard&quot;,
+        ///      &quot;_mode&quot;: {
+        ///        &quot;id&quot;: 0,
+        ///        &quot;name&quot;: &quot;standard&quot;,
+        ///        &quot;display_name&quot;: &quot;Standard&quot;
+        ///      },
         ///      &quot;run&quot;: &quot;speed&quot;,
-        ///      &quot;character&quot;: &quot;cadence&quot;,
-        ///      &quot;total&quot;: 0
-        ///    }
-        ///  ]
-        ///}.
+        ///      &quot;_run&quot;: {
+        ///        &quot;id&quot;: 1,
+        ///        &quot;name&quot;: &quot;speed&quot; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GetLeaderboards {
             get {
@@ -233,20 +241,50 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///        &quot;display_name&quot;: null,
         ///        &quot;production&quot;: false,
         ///        &quot;product&quot;: &quot;classic&quot;,
+        ///        &quot;_product&quot;: {
+        ///          &quot;id&quot;: 1,
+        ///          &quot;name&quot;: &quot;classic&quot;,
+        ///          &quot;display_name&quot;: &quot;Classic&quot;
+        ///        },
         ///        &quot;date&quot;: &quot;0001-01-01T00:00:00Z&quot;,
         ///        &quot;total&quot;: 0
-        ///      },
-        ///      &quot;rank&quot;: 0,
-        ///      &quot;score&quot;: 0,
-        ///      &quot;end&quot;: {
-        ///        &quot;zone&quot;: 0,
-        ///        &quot;level&quot;: 0
-        ///      },
-        ///      &quot;killed_b [rest of string was truncated]&quot;;.
+        ///       [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GetPlayerDailyEntries {
             get {
                 return ResourceManager.GetString("GetPlayerDailyEntries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;player&quot;: {
+        ///    &quot;id&quot;: &quot;2&quot;,
+        ///    &quot;updated_at&quot;: null,
+        ///    &quot;display_name&quot;: &quot;Julianna&quot;,
+        ///    &quot;avatar&quot;: null
+        ///  },
+        ///  &quot;total&quot;: 2,
+        ///  &quot;entries&quot;: [
+        ///    {
+        ///      &quot;leaderboard&quot;: {
+        ///        &quot;id&quot;: 739796,
+        ///        &quot;updated_at&quot;: null,
+        ///        &quot;display_name&quot;: null,
+        ///        &quot;production&quot;: false,
+        ///        &quot;product&quot;: &quot;classic&quot;,
+        ///        &quot;_product&quot;: {
+        ///          &quot;id&quot;: 1,
+        ///          &quot;name&quot;: &quot;classic&quot;,
+        ///          &quot;display_name&quot;: &quot;Classic&quot;
+        ///        },
+        ///        &quot;date&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+        ///        &quot;total&quot;: 0
+        ///      [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string GetPlayerDailyEntriesFilteredByLbids {
+            get {
+                return ResourceManager.GetString("GetPlayerDailyEntriesFilteredByLbids", resourceCulture);
             }
         }
         
@@ -267,19 +305,50 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///        &quot;display_name&quot;: null,
         ///        &quot;production&quot;: false,
         ///        &quot;product&quot;: &quot;classic&quot;,
+        ///        &quot;_product&quot;: {
+        ///          &quot;id&quot;: 1,
+        ///          &quot;name&quot;: &quot;classic&quot;,
+        ///          &quot;display_name&quot;: &quot;Classic&quot;
+        ///        },
         ///        &quot;mode&quot;: &quot;standard&quot;,
-        ///        &quot;run&quot;: &quot;score&quot;,
-        ///        &quot;character&quot;: &quot;cadence&quot;,
-        ///        &quot;total&quot;: 0
-        ///      },
-        ///      &quot;rank&quot;: 0,
-        ///      &quot;score&quot;: 0,
-        ///      &quot;end&quot;: {
-        ///        &quot;zone&quot;: 0,        /// [rest of string was truncated]&quot;;.
+        ///        &quot;_mode&quot;: {
+        ///          &quot;id&quot;: 1, [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GetPlayerEntries {
             get {
                 return ResourceManager.GetString("GetPlayerEntries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;player&quot;: {
+        ///    &quot;id&quot;: &quot;2&quot;,
+        ///    &quot;updated_at&quot;: null,
+        ///    &quot;display_name&quot;: &quot;Julianna&quot;,
+        ///    &quot;avatar&quot;: null
+        ///  },
+        ///  &quot;total&quot;: 2,
+        ///  &quot;entries&quot;: [
+        ///    {
+        ///      &quot;leaderboard&quot;: {
+        ///        &quot;id&quot;: 739796,
+        ///        &quot;updated_at&quot;: null,
+        ///        &quot;display_name&quot;: null,
+        ///        &quot;production&quot;: false,
+        ///        &quot;product&quot;: &quot;classic&quot;,
+        ///        &quot;_product&quot;: {
+        ///          &quot;id&quot;: 1,
+        ///          &quot;name&quot;: &quot;classic&quot;,
+        ///          &quot;display_name&quot;: &quot;Classic&quot;
+        ///        },
+        ///        &quot;mode&quot;: &quot;standard&quot;,
+        ///        &quot;_mode&quot;: {
+        ///          &quot;id&quot;: 1 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string GetPlayerEntriesFilteredByLbids {
+            get {
+                return ResourceManager.GetString("GetPlayerEntriesFilteredByLbids", resourceCulture);
             }
         }
         

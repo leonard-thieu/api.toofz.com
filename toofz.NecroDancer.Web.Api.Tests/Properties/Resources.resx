@@ -139,8 +139,14 @@
   <data name="GetPlayerDailyEntries" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GetPlayerDailyEntries.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="GetPlayerDailyEntriesFilteredByLbids" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GetPlayerDailyEntriesFilteredByLbids.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="GetPlayerEntries" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GetPlayerEntries.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="GetPlayerEntriesFilteredByLbids" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GetPlayerEntriesFilteredByLbids.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="GetPlayerEntry" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GetPlayerEntry.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>

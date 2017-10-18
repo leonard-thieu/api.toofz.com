@@ -5,7 +5,8 @@ using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api.Infrastructure
 {
-    public abstract class CommaSeparatedValuesBinder : IModelBinder
+    public abstract class CommaSeparatedValuesBinder<T> : IModelBinder
+        where T : IEquatable<T>
     {
         public virtual bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
         {
@@ -28,6 +29,7 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
                     {
                         model.Add(value);
                     }
+                    // TODO: This should catch all exceptions instead of just ArgumentException.
                     catch (ArgumentException ex)
                     {
                         bindingContext.ModelState.AddModelError(bindingContext.ModelName, ex.Message);
@@ -49,6 +51,6 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
             }
         }
 
-        protected abstract CommaSeparatedValues GetModel();
+        protected abstract CommaSeparatedValues<T> GetModel();
     }
 }

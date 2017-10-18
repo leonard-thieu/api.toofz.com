@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace toofz.NecroDancer.Web.Api.Models
 {
-    public abstract class LeaderboardCategoryBase : CommaSeparatedValues
+    public abstract class LeaderboardCategoryBase : CommaSeparatedValues<string>
     {
         protected LeaderboardCategoryBase(IEnumerable<string> values)
         {
@@ -18,12 +18,12 @@ namespace toofz.NecroDancer.Web.Api.Models
 
         readonly IEnumerable<string> values;
 
-        public override void Add(string item)
+        protected override string Convert(string item)
         {
             if (!values.Contains(item))
                 throw new ArgumentException($"'{item}' is not a valid value.");
 
-            base.Add(item);
+            return item;
         }
 
         protected override IEnumerable<string> GetDefaults() => values;
