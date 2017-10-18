@@ -1,29 +1,34 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace toofz.NecroDancer.Web.Api.Models
 {
-    public abstract class CommaSeparatedValues : IEnumerable<string>
+    public abstract class CommaSeparatedValues<T> : IEnumerable<T>
+        where T : IEquatable<T>
     {
-        readonly HashSet<string> items = new HashSet<string>();
+        readonly HashSet<T> items = new HashSet<T>();
 
-        public virtual void Add(string item)
+        public void Add(string item)
         {
-            items.Add(item);
+            items.Add(Convert(item));
         }
+
+        protected abstract T Convert(string item);
 
         public void AddDefaults()
         {
             var defaults = GetDefaults();
             foreach (var item in defaults)
             {
-                Add(item);
+                items.Add(item);
             }
         }
 
-        protected abstract IEnumerable<string> GetDefaults();
+        protected virtual IEnumerable<T> GetDefaults() => Enumerable.Empty<T>();
 
-        public IEnumerator<string> GetEnumerator() => ((IEnumerable<string>)items).GetEnumerator();
+        public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>)items).GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)items).GetEnumerator();
     }

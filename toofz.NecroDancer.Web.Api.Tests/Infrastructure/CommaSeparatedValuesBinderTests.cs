@@ -23,12 +23,12 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var binder = new CommaSeparatedValuesBinderAdapter();
 
                 // Assert
-                Assert.IsInstanceOfType(binder, typeof(CommaSeparatedValuesBinder));
+                Assert.IsInstanceOfType(binder, typeof(CommaSeparatedValuesBinder<string>));
             }
 
-            sealed class CommaSeparatedValuesBinderAdapter : CommaSeparatedValuesBinder
+            sealed class CommaSeparatedValuesBinderAdapter : CommaSeparatedValuesBinder<string>
             {
-                protected override CommaSeparatedValues GetModel() => throw new NotImplementedException();
+                protected override CommaSeparatedValues<string> GetModel() => throw new NotImplementedException();
             }
         }
 
@@ -42,7 +42,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 binder = new CommaSeparatedValuesBinderAdapter(model);
 
                 var data = new EmptyModelMetadataProvider();
-                var modelMetadata = data.GetMetadataForType(null, typeof(CommaSeparatedValues));
+                var modelMetadata = data.GetMetadataForType(null, typeof(CommaSeparatedValues<string>));
                 mockValueProvider = new Mock<IValueProvider>();
                 var valueProvider = mockValueProvider.Object;
                 bindingContext = new ModelBindingContext
@@ -54,7 +54,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             }
 
             string modelName = "myModelName";
-            CommaSeparatedValuesBinder binder;
+            CommaSeparatedValuesBinder<string> binder;
             ModelBindingContext bindingContext;
             Mock<IValueProvider> mockValueProvider;
 
@@ -68,8 +68,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 binder.BindModel(null, bindingContext);
 
                 // Assert
-                Assert.IsInstanceOfType(bindingContext.Model, typeof(CommaSeparatedValues));
-                var model = (CommaSeparatedValues)bindingContext.Model;
+                Assert.IsInstanceOfType(bindingContext.Model, typeof(CommaSeparatedValues<string>));
+                var model = (CommaSeparatedValues<string>)bindingContext.Model;
                 var expected = new[] { "item1", "item2", "item3" };
                 var actual = model.ToArray();
                 CollectionAssert.AreEqual(expected, actual);
@@ -100,8 +100,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 binder.BindModel(null, bindingContext);
 
                 // Assert
-                Assert.IsInstanceOfType(bindingContext.Model, typeof(CommaSeparatedValues));
-                var model = (CommaSeparatedValues)bindingContext.Model;
+                Assert.IsInstanceOfType(bindingContext.Model, typeof(CommaSeparatedValues<string>));
+                var model = (CommaSeparatedValues<string>)bindingContext.Model;
                 var expected = new[] { "item1", "item3" };
                 var actual = model.ToArray();
                 CollectionAssert.AreEqual(expected, actual);
@@ -148,19 +148,19 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.IsFalse(success);
             }
 
-            sealed class CommaSeparatedValuesBinderAdapter : CommaSeparatedValuesBinder
+            sealed class CommaSeparatedValuesBinderAdapter : CommaSeparatedValuesBinder<string>
             {
-                public CommaSeparatedValuesBinderAdapter(CommaSeparatedValues model)
+                public CommaSeparatedValuesBinderAdapter(CommaSeparatedValues<string> model)
                 {
                     this.model = model;
                 }
 
-                readonly CommaSeparatedValues model;
+                readonly CommaSeparatedValues<string> model;
 
-                protected override CommaSeparatedValues GetModel() => model;
+                protected override CommaSeparatedValues<string> GetModel() => model;
             }
 
-            sealed class CommaSeparatedValuesAdapter : CommaSeparatedValues
+            sealed class CommaSeparatedValuesAdapter : CommaSeparatedValues<string>
             {
                 public CommaSeparatedValuesAdapter(IEnumerable<string> defaults)
                 {
@@ -169,13 +169,12 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
                 readonly IEnumerable<string> defaults;
 
-                public override void Add(string item)
+                protected override string Convert(string item)
                 {
                     if (!defaults.Contains(item))
-                    {
                         throw new ArgumentException();
-                    }
-                    base.Add(item);
+
+                    return item;
                 }
 
                 protected override IEnumerable<string> GetDefaults() => defaults;

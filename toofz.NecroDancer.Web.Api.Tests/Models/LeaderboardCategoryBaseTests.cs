@@ -53,9 +53,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
         }
 
         [TestClass]
-        public class AddMethod
+        public class ConvertMethod
         {
-            public AddMethod()
+            public ConvertMethod()
             {
                 values = new[] { "item1", "item2", "item3" };
                 leaderboardCategory = new LeaderboardCategoryBaseAdapter(values);

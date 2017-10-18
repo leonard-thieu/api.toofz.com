@@ -348,6 +348,7 @@
     <Compile Include="Infrastructure\EnemyAttributeBinder.cs" />
     <Compile Include="Infrastructure\ItemCategoryBinder.cs" />
     <Compile Include="Infrastructure\ItemSubcategoryFilterBinder.cs" />
+    <Compile Include="Infrastructure\LeaderboardIdParamsBinder.cs" />
     <Compile Include="Infrastructure\ModesBinder.cs" />
     <Compile Include="Infrastructure\PaginationBinder.cs" />
     <Compile Include="Infrastructure\PlayersSortParamsBinder.cs" />
@@ -374,6 +375,7 @@
     <Compile Include="Models\LeaderboardCategoryBase.cs" />
     <Compile Include="Models\LeaderboardDTO.cs" />
     <Compile Include="Models\LeaderboardEntriesDTO.cs" />
+    <Compile Include="Models\LeaderboardIdParams.cs" />
     <Compile Include="Models\LeaderboardsEnvelope.cs" />
     <Compile Include="Models\LeaderboardsPagination.cs" />
     <Compile Include="Models\ModeDTO.cs" />

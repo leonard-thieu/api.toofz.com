@@ -22,7 +22,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
         }
 
         [TestClass]
-        public class AddMethod
+        public class ConvertMethod
         {
             [DataTestMethod]
             [DataRow("id")]

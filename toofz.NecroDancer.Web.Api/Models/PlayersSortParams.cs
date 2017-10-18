@@ -6,9 +6,9 @@ using toofz.NecroDancer.Web.Api.Infrastructure;
 namespace toofz.NecroDancer.Web.Api.Models
 {
     [ModelBinder(BinderType = typeof(PlayersSortParamsBinder))]
-    public sealed class PlayersSortParams : CommaSeparatedValues
+    public sealed class PlayersSortParams : CommaSeparatedValues<string>
     {
-        public override void Add(string item)
+        protected override string Convert(string item)
         {
             switch (item)
             {
@@ -20,8 +20,7 @@ namespace toofz.NecroDancer.Web.Api.Models
                 case "-display_name":
                 case "-updated_at":
                 case "-entries":
-                    base.Add(item);
-                    break;
+                    return item;
                 default:
                     throw new ArgumentException($"'{item}' is not a valid property to sort by.");
             }

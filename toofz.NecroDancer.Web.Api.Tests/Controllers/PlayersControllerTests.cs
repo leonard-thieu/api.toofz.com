@@ -67,7 +67,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 {
                     new Entry
                     {
-                        Leaderboard = new Leaderboard { LeaderboardId = 739795 },
+                        Leaderboard = new Leaderboard
+                        {
+                            LeaderboardId = 739795,
+                            Product = new Product(1, "classic", "Classic"),
+                            Mode = new Mode(1, "standard", "Standard"),
+                            Run = new Run(1, "score", "Score"),
+                            Character = new Character(1, "cadence", "Cadence"),
+                        },
                         LeaderboardId = 739795,
                         Player = p2,
                         SteamId = 2,
@@ -75,7 +82,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     },
                     new Entry
                     {
-                        Leaderboard = new Leaderboard { LeaderboardId = 739796 },
+                        Leaderboard = new Leaderboard
+                        {
+                            LeaderboardId = 739796,
+                            Product = new Product(1, "classic", "Classic"),
+                            Mode = new Mode(1, "standard", "Standard"),
+                            Run = new Run(1, "score", "Score"),
+                            Character = new Character(1, "cadence", "Cadence"),
+                        },
                         LeaderboardId = 739796,
                         Player = p2,
                         SteamId = 2,
@@ -83,7 +97,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     },
                     new Entry
                     {
-                        Leaderboard = new Leaderboard { LeaderboardId = 739999 },
+                        Leaderboard = new Leaderboard
+                        {
+                            LeaderboardId = 739999,
+                            Product = new Product(1, "classic", "Classic"),
+                            Mode = new Mode(1, "standard", "Standard"),
+                            Run = new Run(1, "score", "Score"),
+                            Character = new Character(1, "cadence", "Cadence"),
+                        },
                         LeaderboardId = 739999,
                         Player = p2,
                         SteamId = 2,
@@ -92,6 +113,30 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 });
                 p2.DailyEntries.AddRange(new[]
                 {
+                    new DailyEntry
+                    {
+                        Leaderboard = new DailyLeaderboard
+                        {
+                            LeaderboardId = 739795,
+                            Product = new Product(1, "classic", "Classic"),
+                        },
+                        LeaderboardId = 739795,
+                        Player = p2,
+                        SteamId = 2,
+                        ReplayId = 26236580330596509,
+                    },
+                    new DailyEntry
+                    {
+                        Leaderboard = new DailyLeaderboard
+                        {
+                            LeaderboardId = 739796,
+                            Product = new Product(1, "classic", "Classic"),
+                        },
+                        LeaderboardId = 739796,
+                        Player = p2,
+                        SteamId = 2,
+                        ReplayId = 26236580330596596,
+                    },
                     new DailyEntry
                     {
                         Leaderboard = new DailyLeaderboard
@@ -319,10 +364,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
                 var controller = new PlayersController(db, storeClient);
                 var steamId = 1;
+                var lbids = new LeaderboardIdParams();
                 var products = new Products(LeaderboardCategories.Products.Select(p => p.Name));
 
                 // Act
-                var result = await controller.GetPlayerEntries(steamId, products);
+                var result = await controller.GetPlayerEntries(steamId, lbids, products);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(NotFoundResult));
@@ -346,10 +392,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var db = mockDb.Object;
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
                 var controller = new PlayersController(db, storeClient);
+                var lbids = new LeaderboardIdParams();
                 var products = new Products(LeaderboardCategories.Products.Select(p => p.Name));
 
                 // Act
-                var result = await controller.GetPlayerEntries(steamId, products);
+                var result = await controller.GetPlayerEntries(steamId, lbids, products);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<PlayerEntriesDTO>));
@@ -467,10 +514,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
                 var controller = new PlayersController(db, storeClient);
                 var steamId = 1;
+                var lbids = new LeaderboardIdParams();
                 var products = new Products(LeaderboardCategories.Products.Select(p => p.Name));
 
                 // Act
-                var result = await controller.GetPlayerDailyEntries(steamId, products);
+                var result = await controller.GetPlayerDailyEntries(steamId, lbids, products);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(NotFoundResult));
@@ -494,10 +542,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var db = mockDb.Object;
                 var storeClient = Mock.Of<ILeaderboardsStoreClient>();
                 var controller = new PlayersController(db, storeClient);
+                var lbids = new LeaderboardIdParams();
                 var products = new Products(LeaderboardCategories.Products.Select(p => p.Name));
 
                 // Act
-                var result = await controller.GetPlayerDailyEntries(steamId, products);
+                var result = await controller.GetPlayerDailyEntries(steamId, lbids, products);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<PlayerDailyEntriesDTO>));
@@ -676,7 +725,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         public class IntegrationTests : IntegrationTestsBase
         {
             [TestMethod]
-            public async Task GetPlayersMethod()
+            public async Task GetPlayers()
             {
                 // Arrange
                 var db = Kernel.Get<ILeaderboardsContext>();
@@ -694,7 +743,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
 
             [TestMethod]
-            public async Task GetPlayerEntriesMethod()
+            public async Task GetPlayerEntries()
             {
                 // Arrange
                 var db = Kernel.Get<ILeaderboardsContext>();
@@ -722,7 +771,35 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
 
             [TestMethod]
-            public async Task GetPlayerEntryMethod()
+            public async Task GetPlayerEntriesFilteredByLbids()
+            {
+                // Arrange
+                var db = Kernel.Get<ILeaderboardsContext>();
+                var mockDb = Mock.Get(db);
+                var players = Players;
+                var mockDbPlayers = new MockDbSet<Player>(players);
+                var dbPlayers = mockDbPlayers.Object;
+                mockDb.Setup(d => d.Players).Returns(dbPlayers);
+                var entries = from p in players
+                              from e in p.Entries
+                              select e;
+                var mockDbEntries = new MockDbSet<Entry>(entries);
+                var dbEntries = mockDbEntries.Object;
+                mockDb.Setup(d => d.Entries).Returns(dbEntries);
+                var mockDbReplays = new MockDbSet<Replay>();
+                var dbReplays = mockDbReplays.Object;
+                mockDb.Setup(d => d.Replays).Returns(dbReplays);
+
+                // Act
+                var response = await Server.HttpClient.GetAsync("/players/2/entries?lbids=739796,739999");
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Assert
+                Assert.That.NormalizedAreEqual(Resources.GetPlayerEntriesFilteredByLbids, content);
+            }
+
+            [TestMethod]
+            public async Task GetPlayerEntry()
             {
                 // Arrange
                 var db = Kernel.Get<ILeaderboardsContext>();
@@ -747,7 +824,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
 
             [TestMethod]
-            public async Task GetPlayerDailyEntriesMethod()
+            public async Task GetPlayerDailyEntries()
             {
                 // Arrange
                 var db = Kernel.Get<ILeaderboardsContext>();
@@ -775,7 +852,35 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
 
             [TestMethod]
-            public async Task GetPlayerDailyEntryMethod()
+            public async Task GetPlayerDailyEntriesFilteredByLbids()
+            {
+                // Arrange
+                var db = Kernel.Get<ILeaderboardsContext>();
+                var mockDb = Mock.Get(db);
+                var players = Players;
+                var mockDbPlayers = new MockDbSet<Player>(players);
+                var dbPlayers = mockDbPlayers.Object;
+                mockDb.Setup(d => d.Players).Returns(dbPlayers);
+                var entries = from p in players
+                              from e in p.DailyEntries
+                              select e;
+                var mockDbEntries = new MockDbSet<DailyEntry>(entries);
+                var dbEntries = mockDbEntries.Object;
+                mockDb.Setup(d => d.DailyEntries).Returns(dbEntries);
+                var mockDbReplays = new MockDbSet<Replay>();
+                var dbReplays = mockDbReplays.Object;
+                mockDb.Setup(d => d.Replays).Returns(dbReplays);
+
+                // Act
+                var response = await Server.HttpClient.GetAsync("/players/2/entries/dailies?lbids=739796,739999");
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Assert
+                Assert.That.NormalizedAreEqual(Resources.GetPlayerDailyEntriesFilteredByLbids, content);
+            }
+
+            [TestMethod]
+            public async Task GetPlayerDailyEntry()
             {
                 // Arrange
                 var db = Kernel.Get<ILeaderboardsContext>();

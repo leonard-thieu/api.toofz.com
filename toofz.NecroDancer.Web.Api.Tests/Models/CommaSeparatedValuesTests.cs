@@ -18,7 +18,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 var csv = new CommaSeparatedValuesAdapter();
 
                 // Assert
-                Assert.IsInstanceOfType(csv, typeof(CommaSeparatedValues));
+                Assert.IsInstanceOfType(csv, typeof(CommaSeparatedValues<string>));
             }
         }
 
@@ -95,7 +95,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
             }
         }
 
-        sealed class CommaSeparatedValuesAdapter : CommaSeparatedValues
+        sealed class CommaSeparatedValuesAdapter : CommaSeparatedValues<string>
         {
             public CommaSeparatedValuesAdapter() { }
 
@@ -105,6 +105,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
             }
 
             readonly IEnumerable<string> defaults;
+
+            protected override string Convert(string item) => item;
 
             protected override IEnumerable<string> GetDefaults() => defaults;
         }

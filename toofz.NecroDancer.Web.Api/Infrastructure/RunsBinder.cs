@@ -4,7 +4,7 @@ using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api.Infrastructure
 {
-    public sealed class RunsBinder : CommaSeparatedValuesBinder
+    public sealed class RunsBinder : CommaSeparatedValuesBinder<string>
     {
         public RunsBinder(IEnumerable<string> runs)
         {
@@ -13,6 +13,6 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
 
         readonly IEnumerable<string> runs;
 
-        protected override CommaSeparatedValues GetModel() => new Runs(runs);
+        protected override CommaSeparatedValues<string> GetModel() => new Runs(runs);
     }
 }

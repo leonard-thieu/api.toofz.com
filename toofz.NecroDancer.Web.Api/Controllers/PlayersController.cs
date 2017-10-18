@@ -99,9 +99,12 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// Gets a Steam player's leaderboard entries.
         /// </summary>
         /// <param name="steamId">The Steam ID of the player.</param>
+        /// <param name="lbids">
+        /// Comma-separated leaderboard IDs.
+        /// </param>
         /// <param name="products">
         /// Valid values are 'classic' and 'amplified'. 
-        /// If not provided, returns daily leaderboards from all products.
+        /// If not provided, returns leaderboards from all products.
         /// </param>
         /// <param name="production">
         /// If true, returns production leaderboards. If false, returns Early Access leaderboards.
@@ -118,6 +121,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [Route("{steamId}/entries")]
         public async Task<IHttpActionResult> GetPlayerEntries(
             long steamId,
+            LeaderboardIdParams lbids,
             Products products,
             bool? production = null,
             CancellationToken cancellationToken = default)
@@ -164,6 +168,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                             },
                             ReplayId = e.ReplayId,
                         };
+            if (lbids.Any())
+            {
+                query = query.Where(e => lbids.Contains(e.Leaderboard.LeaderboardId));
+            }
             if (production != null)
             {
                 query = query.Where(e => e.Leaderboard.IsProduction == production);
@@ -334,6 +342,9 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// Gets a Steam player's daily leaderboard entries.
         /// </summary>
         /// <param name="steamId">The Steam ID of the player.</param>
+        /// <param name="lbids">
+        /// Comma-separated leaderboard IDs.
+        /// </param>
         /// <param name="products">
         /// Valid values are 'classic' and 'amplified'. 
         /// If not provided, returns daily leaderboards from all products.
@@ -353,6 +364,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         [Route("{steamId}/entries/dailies")]
         public async Task<IHttpActionResult> GetPlayerDailyEntries(
             long steamId,
+            LeaderboardIdParams lbids,
             Products products,
             bool? production = null,
             CancellationToken cancellationToken = default)
@@ -397,6 +409,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                             },
                             ReplayId = e.ReplayId,
                         };
+            if (lbids.Any())
+            {
+                query = query.Where(e => lbids.Contains(e.Leaderboard.LeaderboardId));
+            }
             if (production != null)
             {
                 query = query.Where(e => e.Leaderboard.IsProduction == production);

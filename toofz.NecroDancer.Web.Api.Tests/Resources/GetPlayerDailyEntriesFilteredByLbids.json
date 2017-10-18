@@ -1,0 +1,59 @@
+{
+  "player": {
+    "id": "2",
+    "updated_at": null,
+    "display_name": "Julianna",
+    "avatar": null
+  },
+  "total": 2,
+  "entries": [
+    {
+      "leaderboard": {
+        "id": 739796,
+        "updated_at": null,
+        "display_name": null,
+        "production": false,
+        "product": "classic",
+        "_product": {
+          "id": 1,
+          "name": "classic",
+          "display_name": "Classic"
+        },
+        "date": "0001-01-01T00:00:00Z",
+        "total": 0
+      },
+      "rank": 0,
+      "score": 0,
+      "end": {
+        "zone": 0,
+        "level": 0
+      },
+      "killed_by": null,
+      "version": null
+    },
+    {
+      "leaderboard": {
+        "id": 739999,
+        "updated_at": null,
+        "display_name": null,
+        "production": false,
+        "product": "classic",
+        "_product": {
+          "id": 1,
+          "name": "classic",
+          "display_name": "Classic"
+        },
+        "date": "0001-01-01T00:00:00Z",
+        "total": 0
+      },
+      "rank": 0,
+      "score": 0,
+      "end": {
+        "zone": 0,
+        "level": 0
+      },
+      "killed_by": null,
+      "version": null
+    }
+  ]
+}
