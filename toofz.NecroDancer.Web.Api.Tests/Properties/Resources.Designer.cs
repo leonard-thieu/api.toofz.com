@@ -231,6 +231,22 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///    &quot;updated_at&quot;: null,
         ///    &quot;display_name&quot;: &quot;Leonard&quot;,
         ///    &quot;avatar&quot;: null
+        ///  }
+        ///}.
+        /// </summary>
+        internal static string GetPlayer {
+            get {
+                return ResourceManager.GetString("GetPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;player&quot;: {
+        ///    &quot;id&quot;: &quot;1&quot;,
+        ///    &quot;updated_at&quot;: null,
+        ///    &quot;display_name&quot;: &quot;Leonard&quot;,
+        ///    &quot;avatar&quot;: null
         ///  },
         ///  &quot;total&quot;: 1,
         ///  &quot;entries&quot;: [

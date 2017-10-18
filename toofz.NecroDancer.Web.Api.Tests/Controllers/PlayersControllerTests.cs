@@ -350,6 +350,50 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         }
 
         [TestClass]
+        public class GetPlayerMethod
+        {
+            [TestMethod]
+            public async Task PlayerNotFound_ReturnsNotFound()
+            {
+                // Arrange
+                var mockPlayers = new MockDbSet<Player>();
+                var players = mockPlayers.Object;
+                var mockDb = new Mock<ILeaderboardsContext>();
+                mockDb.Setup(x => x.Players).Returns(players);
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var controller = new PlayersController(db, storeClient);
+                var steamId = 1;
+
+                // Act
+                var result = await controller.GetPlayer(steamId);
+
+                // Assert
+                Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+            }
+
+            [TestMethod]
+            public async Task ReturnsPlayerEntries()
+            {
+                // Arrange
+                var steamId = 76561197960481221;
+                var mockPlayers = new MockDbSet<Player>(new Player { SteamId = steamId });
+                var players = mockPlayers.Object;
+                var mockDb = new Mock<ILeaderboardsContext>();
+                mockDb.Setup(x => x.Players).Returns(players);
+                var db = mockDb.Object;
+                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
+                var controller = new PlayersController(db, storeClient);
+
+                // Act
+                var result = await controller.GetPlayer(steamId);
+
+                // Assert
+                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<PlayerEnvelope>));
+            }
+        }
+
+        [TestClass]
         public class GetPlayerEntriesMethod
         {
             [TestMethod]
@@ -740,6 +784,25 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Assert
                 Assert.That.NormalizedAreEqual(Resources.GetPlayers, content);
+            }
+
+            [TestMethod]
+            public async Task GetPlayer()
+            {
+                // Arrange
+                var db = Kernel.Get<ILeaderboardsContext>();
+                var mockDb = Mock.Get(db);
+                var players = Players;
+                var mockDbPlayers = new MockDbSet<Player>(players);
+                var dbPlayers = mockDbPlayers.Object;
+                mockDb.Setup(d => d.Players).Returns(dbPlayers);
+
+                // Act
+                var response = await Server.HttpClient.GetAsync("/players/1");
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Assert
+                Assert.That.NormalizedAreEqual(Resources.GetPlayer, content);
             }
 
             [TestMethod]

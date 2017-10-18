@@ -383,6 +383,7 @@
     <Compile Include="Models\PlayerDailyEntriesDTO.cs" />
     <Compile Include="Models\PlayerDTO.cs" />
     <Compile Include="Models\PlayerEntriesDTO.cs" />
+    <Compile Include="Models\PlayerEnvelope.cs" />
     <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Models\PlayersEnvelope.cs" />
     <Compile Include="Models\PlayersPagination.cs" />

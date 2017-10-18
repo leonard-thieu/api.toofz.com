@@ -96,6 +96,46 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         }
 
         /// <summary>
+        /// Gets a Steam player.
+        /// </summary>
+        /// <param name="steamId">The Steam ID of the player.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
+        /// <returns>
+        /// Returns a Steam player.
+        /// </returns>
+        /// <httpStatusCode cref="HttpStatusCode.NotFound">
+        /// A player with that Steam ID was not found.
+        /// </httpStatusCode>
+        [ResponseType(typeof(PlayerEnvelope))]
+        [Route("{steamId}")]
+        public async Task<IHttpActionResult> GetPlayer(
+            long steamId,
+            CancellationToken cancellationToken = default)
+        {
+            var player = await (from p in db.Players.AsNoTracking()
+                                where p.SteamId == steamId
+                                select new PlayerDTO
+                                {
+                                    Id = p.SteamId.ToString(),
+                                    UpdatedAt = p.LastUpdate,
+                                    DisplayName = p.Name,
+                                    Avatar = p.Avatar,
+                                })
+                                .FirstOrDefaultAsync(cancellationToken);
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            var content = new PlayerEnvelope
+            {
+                Player = player,
+            };
+
+            return Ok(content);
+        }
+
+        /// <summary>
         /// Gets a Steam player's leaderboard entries.
         /// </summary>
         /// <param name="steamId">The Steam ID of the player.</param>

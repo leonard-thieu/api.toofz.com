@@ -234,6 +234,7 @@
     <None Include="Resources\GetItemsByCategory.json" />
     <None Include="Resources\GetItemsBySubcategory.json" />
     <None Include="Resources\GetLeaderboards.json" />
+    <None Include="Resources\GetPlayer.json" />
     <None Include="Resources\GetPlayerDailyEntries.json" />
     <None Include="Resources\GetPlayerDailyEntriesFilteredByLbids.json" />
     <None Include="Resources\GetPlayerEntries.json" />
