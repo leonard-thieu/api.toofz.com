@@ -157,6 +157,9 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// <httpStatusCode cref="HttpStatusCode.NotFound">
         /// A player with that Steam ID was not found.
         /// </httpStatusCode>
+        /// <httpStatusCode cref="HttpStatusCode.NotFound">
+        /// One or more leaderboards were not found.
+        /// </httpStatusCode>
         [ResponseType(typeof(PlayerEntriesDTO))]
         [Route("{steamId}/entries")]
         public async Task<IHttpActionResult> GetPlayerEntries(
@@ -409,6 +412,9 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// </returns>
         /// <httpStatusCode cref="HttpStatusCode.NotFound">
         /// A player with that Steam ID was not found.
+        /// </httpStatusCode>
+        /// <httpStatusCode cref="HttpStatusCode.NotFound">
+        /// One or more leaderboards were not found.
         /// </httpStatusCode>
         [ResponseType(typeof(PlayerDailyEntriesDTO))]
         [Route("{steamId}/entries/dailies")]
