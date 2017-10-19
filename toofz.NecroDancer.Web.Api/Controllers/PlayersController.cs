@@ -181,6 +181,16 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 return NotFound();
             }
 
+            var validLbids = await (from l in db.Leaderboards.AsNoTracking()
+                                    where lbids.Contains(l.LeaderboardId)
+                                    select l.LeaderboardId)
+                                    .ToListAsync(cancellationToken);
+            var invalidLbids = lbids.Except(validLbids).ToList();
+            if (invalidLbids.Any())
+            {
+                return NotFound();
+            }
+
             var query = from e in db.Entries.AsNoTracking()
                         let l = e.Leaderboard
                         where e.SteamId == steamId
@@ -420,6 +430,16 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                 })
                                 .FirstOrDefaultAsync(cancellationToken);
             if (player == null)
+            {
+                return NotFound();
+            }
+
+            var validLbids = await (from l in db.DailyLeaderboards.AsNoTracking()
+                                    where lbids.Contains(l.LeaderboardId)
+                                    select l.LeaderboardId)
+                                    .ToListAsync(cancellationToken);
+            var invalidLbids = lbids.Except(validLbids).ToList();
+            if (invalidLbids.Any())
             {
                 return NotFound();
             }

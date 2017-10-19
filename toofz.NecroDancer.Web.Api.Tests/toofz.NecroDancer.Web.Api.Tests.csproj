@@ -269,6 +269,7 @@
     <Compile Include="Models\LeaderboardIdParamsTests.cs" />
     <Compile Include="Models\PlayersSortParamsTests.cs" />
     <Compile Include="Providers\ApplicationOAuthProviderTests.cs" />
+    <Compile Include="AssertExtensions.cs" />
     <Compile Include="ContextUtil.cs" />
     <Compile Include="IntegrationTestsBase.cs" />
     <Compile Include="IQueryableExtensionsTests.cs" />
@@ -276,6 +277,7 @@
     <Compile Include="LeaderboardCategories.cs" />
     <Compile Include="MaxValueAttributeTests.cs" />
     <Compile Include="MinValueAttributeTests.cs" />
+    <Compile Include="MockLeaderboardsContext.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="ValidateModelAttributeTests.cs" />
     <Compile Include="ValueProviderResultExtensionsTests.cs" />
