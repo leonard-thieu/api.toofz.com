@@ -2,7 +2,7 @@ version: 3.3.0.{build}
 image: Visual Studio 2017
 
 configuration:
-  - Release
+  - Production
 environment:
   APPVEYOR_CACHE_ENTRY_ZIP_ARGS: -t7z -m0=lzma -mx=9
   PROJECT: toofz.NecroDancer.Web.Api
