@@ -250,7 +250,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         public class IntegrationTests : IntegrationTestsBase
         {
             [TestMethod]
-            public async Task GetLeaderboardsMethod()
+            public async Task GetLeaderboards()
             {
                 // Arrange
                 var db = Kernel.Get<ILeaderboardsContext>();

@@ -17,7 +17,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
     [RoutePrefix("players")]
     public sealed class PlayersController : ApiController
     {
-        static Dictionary<string, string> SortKeySelectorMap = new Dictionary<string, string>
+        private static Dictionary<string, string> SortKeySelectorMap = new Dictionary<string, string>
         {
             ["id"] = $"{nameof(Player.SteamId)}",
             ["display_name"] = $"{nameof(Player.Name)}",
@@ -38,8 +38,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             this.storeClient = storeClient;
         }
 
-        readonly ILeaderboardsContext db;
-        readonly ILeaderboardsStoreClient storeClient;
+        private readonly ILeaderboardsContext db;
+        private readonly ILeaderboardsStoreClient storeClient;
 
         /// <summary>
         /// Search for Steam players.
@@ -169,6 +169,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             bool? production = null,
             CancellationToken cancellationToken = default)
         {
+            // Validate steamId
             var player = await (from p in db.Players.AsNoTracking()
                                 where p.SteamId == steamId
                                 select new PlayerDTO
@@ -184,6 +185,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 return NotFound();
             }
 
+            // Validate lbids
             var validLbids = await (from l in db.Leaderboards.AsNoTracking()
                                     where lbids.Contains(l.LeaderboardId)
                                     select l.LeaderboardId)
@@ -195,43 +197,40 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             }
 
             var query = from e in db.Entries.AsNoTracking()
-                        let l = e.Leaderboard
                         where e.SteamId == steamId
-                        where products.Contains(l.Product.Name)
-                        select new
-                        {
-                            Leaderboard = new
-                            {
-                                l.LeaderboardId,
-                                l.LastUpdate,
-                                l.DisplayName,
-                                l.IsProduction,
-                                l.Product,
-                                l.Mode,
-                                l.Run,
-                                l.Character,
-                                Total = l.Entries.Count,
-                            },
-                            Rank = e.Rank,
-                            Score = e.Score,
-                            End = new
-                            {
-                                e.Zone,
-                                e.Level,
-                            },
-                            ReplayId = e.ReplayId,
-                        };
-            if (lbids.Any())
-            {
-                query = query.Where(e => lbids.Contains(e.Leaderboard.LeaderboardId));
-            }
-            if (production != null)
-            {
-                query = query.Where(e => e.Leaderboard.IsProduction == production);
-            }
+                        where products.Contains(e.Leaderboard.Product.Name)
+                        select e;
+            if (lbids.Any()) { query = query.Where(e => lbids.Contains(e.Leaderboard.LeaderboardId)); }
+            if (production != null) { query = query.Where(e => e.Leaderboard.IsProduction == production); }
 
             var total = await query.CountAsync(cancellationToken);
-            var playerEntries = await query.ToListAsync(cancellationToken);
+            var playerEntries = await (from e in query
+                                       let l = e.Leaderboard
+                                       select new
+                                       {
+                                           Leaderboard = new
+                                           {
+                                               l.LeaderboardId,
+                                               l.LastUpdate,
+                                               l.DisplayName,
+                                               l.IsProduction,
+                                               l.Product,
+                                               l.Mode,
+                                               l.Run,
+                                               l.Character,
+                                               l.IsCoOp,
+                                               l.IsCustomMusic,
+                                               Total = l.Entries.Count,
+                                           },
+                                           Rank = e.Rank,
+                                           Score = e.Score,
+                                           End = new
+                                           {
+                                               e.Zone,
+                                               e.Level,
+                                           },
+                                           ReplayId = e.ReplayId,
+                                       }).ToListAsync(cancellationToken);
 
             var replayIds = playerEntries.Select(entry => entry.ReplayId);
             var replays = await (from r in db.Replays.AsNoTracking()
@@ -285,6 +284,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                        Name = l.Character.Name,
                                        DisplayName = l.Character.DisplayName,
                                    },
+                                   IsCoOp = l.IsCoOp,
+                                   IsCustomMusic = l.IsCustomMusic,
                                    Total = l.Total,
                                },
                                Rank = e.Rank,
@@ -662,7 +663,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
 
         #region IDisposable Members
 
-        bool disposed;
+        private bool disposed;
 
         /// <summary>
         /// Releases the unmanaged resources that are used by the object and, optionally, releases the managed resources.

@@ -70,6 +70,16 @@ namespace toofz.NecroDancer.Web.Api.Models
         [DataMember(Name = "_character")]
         public CharacterDTO Character { get; set; }
         /// <summary>
+        /// Indicates if the leaderboard is a Co-op leaderboard.
+        /// </summary>
+        [DataMember(Name = "coOp")]
+        public bool IsCoOp { get; set; }
+        /// <summary>
+        /// Indicates if the leaderboard is a Custom Music leaderboard.
+        /// </summary>
+        [DataMember(Name = "customMusic")]
+        public bool IsCustomMusic { get; set; }
+        /// <summary>
         /// Total number of entries
         /// </summary>
         [DataMember(Name = "total")]

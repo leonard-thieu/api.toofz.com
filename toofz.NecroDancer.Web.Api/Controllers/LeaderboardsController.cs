@@ -26,7 +26,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             this.db = db;
         }
 
-        readonly ILeaderboardsContext db;
+        private readonly ILeaderboardsContext db;
 
         /// <summary>
         /// Gets a list of Crypt of the NecroDancer leaderboards.
@@ -51,6 +51,14 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// If true, returns production leaderboards. If false, returns Early Access leaderboards.
         /// If not provided, returns both production and Early Access leaderboards.
         /// </param>
+        /// <param name="coOp">
+        /// If true, returns Co-op leaderboards. If false, returns non-Co-op leaderboards.
+        /// If not provided, returns both Co-op and non-Co-op leaderboards.
+        /// </param>
+        /// <param name="customMusic">
+        /// If true, returns Custom Music leaderboards. If false, returns non-Custom Music leaderboards.
+        /// If not provided, returns both Custom Music and non-Custom Music leaderboards.
+        /// </param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>
         /// Returns a list of Crypt of the NecroDancer leaderboards.
@@ -63,57 +71,61 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             Runs runs,
             Characters characters,
             bool? production = null,
+            bool? coOp = null,
+            bool? customMusic = null,
             CancellationToken cancellationToken = default)
         {
-            var query = from l in db.Leaderboards.AsNoTracking()
-                        where products.Contains(l.Product.Name)
-                        where modes.Contains(l.Mode.Name)
-                        where runs.Contains(l.Run.Name)
-                        where characters.Contains(l.Character.Name)
-                        orderby l.Product.Name, l.Character.Name, l.RunId
-                        select new LeaderboardDTO
-                        {
-                            Id = l.LeaderboardId,
-                            UpdatedAt = l.LastUpdate,
-                            DisplayName = l.DisplayName,
-                            IsProduction = l.IsProduction,
-                            ProductName = l.Product.Name,
-                            Product = new ProductDTO
-                            {
-                                Id = l.Product.ProductId,
-                                Name = l.Product.Name,
-                                DisplayName = l.Product.DisplayName,
-                            },
-                            ModeName = l.Mode.Name,
-                            Mode = new ModeDTO
-                            {
-                                Id = l.Mode.ModeId,
-                                Name = l.Mode.Name,
-                                DisplayName = l.Mode.DisplayName,
-                            },
-                            RunName = l.Run.Name,
-                            Run = new RunDTO
-                            {
-                                Id = l.Run.RunId,
-                                Name = l.Run.Name,
-                                DisplayName = l.Run.DisplayName,
-                            },
-                            CharacterName = l.Character.Name,
-                            Character = new CharacterDTO
-                            {
-                                Id = l.Character.CharacterId,
-                                Name = l.Character.Name,
-                                DisplayName = l.Character.DisplayName,
-                            },
-                            Total = l.Entries.Count,
-                        };
-            if (production != null)
-            {
-                query = query.Where(l => l.IsProduction == production);
-            }
+            IQueryable<Leaderboard> baseQuery = from l in db.Leaderboards.AsNoTracking()
+                                                where products.Contains(l.Product.Name)
+                                                where modes.Contains(l.Mode.Name)
+                                                where runs.Contains(l.Run.Name)
+                                                where characters.Contains(l.Character.Name)
+                                                orderby l.Product.ProductId descending, l.Character.Name, l.RunId
+                                                select l;
+            if (production != null) { baseQuery = baseQuery.Where(l => l.IsProduction == production); }
+            if (coOp != null) { baseQuery = baseQuery.Where(l => l.IsCoOp == coOp); }
+            if (customMusic != null) { baseQuery = baseQuery.Where(l => l.IsCustomMusic == customMusic); }
 
-            var total = await query.CountAsync(cancellationToken);
-            var leaderboards = await query.ToListAsync(cancellationToken);
+            var total = await baseQuery.CountAsync(cancellationToken);
+            var leaderboards = await (from l in baseQuery
+                                      select new LeaderboardDTO
+                                      {
+                                          Id = l.LeaderboardId,
+                                          UpdatedAt = l.LastUpdate,
+                                          DisplayName = l.DisplayName,
+                                          IsProduction = l.IsProduction,
+                                          ProductName = l.Product.Name,
+                                          Product = new ProductDTO
+                                          {
+                                              Id = l.Product.ProductId,
+                                              Name = l.Product.Name,
+                                              DisplayName = l.Product.DisplayName,
+                                          },
+                                          ModeName = l.Mode.Name,
+                                          Mode = new ModeDTO
+                                          {
+                                              Id = l.Mode.ModeId,
+                                              Name = l.Mode.Name,
+                                              DisplayName = l.Mode.DisplayName,
+                                          },
+                                          RunName = l.Run.Name,
+                                          Run = new RunDTO
+                                          {
+                                              Id = l.Run.RunId,
+                                              Name = l.Run.Name,
+                                              DisplayName = l.Run.DisplayName,
+                                          },
+                                          CharacterName = l.Character.Name,
+                                          Character = new CharacterDTO
+                                          {
+                                              Id = l.Character.CharacterId,
+                                              Name = l.Character.Name,
+                                              DisplayName = l.Character.DisplayName,
+                                          },
+                                          IsCoOp = l.IsCoOp,
+                                          IsCustomMusic = l.IsCustomMusic,
+                                          Total = l.Entries.Count,
+                                      }).ToListAsync(cancellationToken);
 
             var content = new LeaderboardsEnvelope
             {
@@ -445,7 +457,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
 
         #region IDisposable Members
 
-        bool disposed;
+        private bool disposed;
 
         /// <summary>
         /// Releases the unmanaged resources that are used by the object and, optionally, releases the managed resources.

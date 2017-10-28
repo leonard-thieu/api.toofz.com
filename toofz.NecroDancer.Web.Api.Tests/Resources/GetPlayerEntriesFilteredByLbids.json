@@ -37,6 +37,8 @@
           "name": "cadence",
           "display_name": "Cadence"
         },
+        "coOp": false,
+        "customMusic": false,
         "total": 0
       },
       "rank": 0,
@@ -78,6 +80,8 @@
           "name": "cadence",
           "display_name": "Cadence"
         },
+        "coOp": false,
+        "customMusic": false,
         "total": 0
       },
       "rank": 0,
