@@ -27,8 +27,10 @@ namespace toofz.NecroDancer.Web.Api
                 TokenEndpointPath = new PathString("/token"),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
                 AccessTokenExpireTimeSpan = TimeSpan.FromHours(1),
-                AllowInsecureHttp = false,
             };
+#if DEBUG
+            OAuthOptions.AllowInsecureHttp = true;
+#endif
 
             // Enable the application to use bearer tokens to authenticate users
             app.UseOAuthBearerTokens(OAuthOptions);
