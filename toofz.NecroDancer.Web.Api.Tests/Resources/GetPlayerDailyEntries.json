@@ -11,6 +11,7 @@
       "leaderboard": {
         "id": 739999,
         "updated_at": null,
+        "name": null,
         "display_name": null,
         "production": false,
         "product": "classic",

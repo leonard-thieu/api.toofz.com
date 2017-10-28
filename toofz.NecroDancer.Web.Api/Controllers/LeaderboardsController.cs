@@ -92,6 +92,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                       {
                                           Id = l.LeaderboardId,
                                           UpdatedAt = l.LastUpdate,
+                                          Name = l.Name,
                                           DisplayName = l.DisplayName,
                                           IsProduction = l.IsProduction,
                                           ProductName = l.Product.Name,
@@ -159,6 +160,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                      {
                                          Id = l.LeaderboardId,
                                          UpdatedAt = l.LastUpdate,
+                                         Name = l.Name,
                                          DisplayName = l.DisplayName,
                                          IsProduction = l.IsProduction,
                                          ProductName = l.Product.Name,
@@ -309,6 +311,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                         {
                             Id = l.LeaderboardId,
                             UpdatedAt = l.LastUpdate,
+                            Name = l.Name,
                             DisplayName = l.DisplayName,
                             IsProduction = l.IsProduction,
                             ProductName = l.Product.Name,
@@ -367,6 +370,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                      {
                                          Id = l.LeaderboardId,
                                          UpdatedAt = l.LastUpdate,
+                                         Name = l.Name,
                                          DisplayName = l.DisplayName,
                                          IsProduction = l.IsProduction,
                                          ProductName = l.Product.Name,

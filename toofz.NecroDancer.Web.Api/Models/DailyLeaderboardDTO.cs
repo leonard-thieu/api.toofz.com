@@ -20,6 +20,11 @@ namespace toofz.NecroDancer.Web.Api.Models
         [DataMember(Name = "updated_at")]
         public DateTime? UpdatedAt { get; set; }
         /// <summary>
+        /// Name for the leaderboard.
+        /// </summary>
+        [DataMember(Name = "name")]
+        public string Name { get; set; }
+        /// <summary>
         /// Display name for the leaderboard.
         /// </summary>
         [DataMember(Name = "display_name")]
