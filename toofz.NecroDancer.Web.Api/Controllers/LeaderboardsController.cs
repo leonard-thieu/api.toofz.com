@@ -189,6 +189,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                              Name = l.Character.Name,
                                              DisplayName = l.Character.DisplayName,
                                          },
+                                         IsCoOp = l.IsCoOp,
+                                         IsCustomMusic = l.IsCustomMusic,
                                          Total = l.Entries.Count,
                                      })
                                      .FirstOrDefaultAsync(cancellationToken);
