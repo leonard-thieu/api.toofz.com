@@ -209,62 +209,29 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                         select e;
 
             var total = await query.CountAsync(cancellationToken);
-            var entriesPage = await (from e in query
-                                     select new
-                                     {
-                                         Player = new
-                                         {
-                                             e.Player.SteamId,
-                                             e.Player.LastUpdate,
-                                             e.Player.Name,
-                                             e.Player.Avatar,
-                                         },
-                                         Rank = e.Rank,
-                                         Score = e.Score,
-                                         End = new
-                                         {
-                                             e.Zone,
-                                             e.Level,
-                                         },
-                                         ReplayId = e.ReplayId,
-                                     })
-                                     .Page(pagination)
-                                     .ToListAsync(cancellationToken);
-
-            var replayIds = entriesPage.Select(entry => entry.ReplayId);
-            var replays = await (from r in db.Replays.AsNoTracking()
-                                 where replayIds.Contains(r.ReplayId)
-                                 select new
+            var entries = await (from e in query
+                                 let r = e.Replay
+                                 select new EntryDTO
                                  {
-                                     r.ReplayId,
-                                     r.KilledBy,
-                                     r.Version,
+                                     Player = new PlayerDTO
+                                     {
+                                         Id = e.Player.SteamId.ToString(),
+                                         UpdatedAt = e.Player.LastUpdate,
+                                         DisplayName = e.Player.Name,
+                                         Avatar = e.Player.Avatar,
+                                     },
+                                     Rank = e.Rank,
+                                     Score = e.Score,
+                                     End = new EndDTO
+                                     {
+                                         Zone = e.Zone,
+                                         Level = e.Level
+                                     },
+                                     KilledBy = r.KilledBy,
+                                     Version = r.Version,
                                  })
+                                 .Page(pagination)
                                  .ToListAsync(cancellationToken);
-
-            var entries = (from e in entriesPage
-                           join r in replays on e.ReplayId equals r.ReplayId into g
-                           from x in g.DefaultIfEmpty()
-                           select new EntryDTO
-                           {
-                               Player = new PlayerDTO
-                               {
-                                   Id = e.Player.SteamId.ToString(),
-                                   UpdatedAt = e.Player.LastUpdate,
-                                   DisplayName = e.Player.Name,
-                                   Avatar = e.Player.Avatar,
-                               },
-                               Rank = e.Rank,
-                               Score = e.Score,
-                               End = new EndDTO
-                               {
-                                   Zone = e.End.Zone,
-                                   Level = e.End.Level
-                               },
-                               KilledBy = x?.KilledBy,
-                               Version = x?.Version,
-                           })
-                           .ToList();
 
             var content = new LeaderboardEntriesDTO
             {
@@ -396,62 +363,30 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                         select e;
 
             var total = await query.CountAsync(cancellationToken);
-            var entriesPage = await (from e in query
-                                     select new
-                                     {
-                                         Player = new
-                                         {
-                                             e.Player.SteamId,
-                                             e.Player.LastUpdate,
-                                             e.Player.Name,
-                                             e.Player.Avatar,
-                                         },
-                                         Rank = e.Rank,
-                                         Score = e.Score,
-                                         End = new
-                                         {
-                                             e.Zone,
-                                             e.Level,
-                                         },
-                                         ReplayId = e.ReplayId,
-                                     })
-                                     .Page(pagination)
-                                     .ToListAsync(cancellationToken);
-
-            var replayIds = entriesPage.Select(entry => entry.ReplayId);
-            var replays = await (from r in db.Replays.AsNoTracking()
-                                 where replayIds.Contains(r.ReplayId)
-                                 select new
+            var entries = await (from e in query
+                                 let p = e.Player
+                                 let r = e.Replay
+                                 select new EntryDTO
                                  {
-                                     r.ReplayId,
-                                     r.KilledBy,
-                                     r.Version,
+                                     Player = new PlayerDTO
+                                     {
+                                         Id = p.SteamId.ToString(),
+                                         UpdatedAt = p.LastUpdate,
+                                         DisplayName = p.Name,
+                                         Avatar = p.Avatar,
+                                     },
+                                     Rank = e.Rank,
+                                     Score = e.Score,
+                                     End = new EndDTO
+                                     {
+                                         Zone = e.Zone,
+                                         Level = e.Level,
+                                     },
+                                     KilledBy = r.KilledBy,
+                                     Version = r.Version,
                                  })
+                                 .Page(pagination)
                                  .ToListAsync(cancellationToken);
-
-            var entries = (from e in entriesPage
-                           join r in replays on e.ReplayId equals r.ReplayId into g
-                           from x in g.DefaultIfEmpty()
-                           select new EntryDTO
-                           {
-                               Player = new PlayerDTO
-                               {
-                                   Id = e.Player.SteamId.ToString(),
-                                   UpdatedAt = e.Player.LastUpdate,
-                                   DisplayName = e.Player.Name,
-                                   Avatar = e.Player.Avatar,
-                               },
-                               Rank = e.Rank,
-                               Score = e.Score,
-                               End = new EndDTO
-                               {
-                                   Zone = e.End.Zone,
-                                   Level = e.End.Level,
-                               },
-                               KilledBy = x?.KilledBy,
-                               Version = x?.Version,
-                           })
-                           .ToList();
 
             var content = new DailyLeaderboardEntriesDTO
             {

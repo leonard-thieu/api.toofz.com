@@ -212,103 +212,61 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             if (customMusic != null) { query = query.Where(e => e.Leaderboard.IsCustomMusic == customMusic); }
 
             var total = await query.CountAsync(cancellationToken);
-            var playerEntries = await (from e in query
-                                       let l = e.Leaderboard
-                                       select new
-                                       {
-                                           Leaderboard = new
-                                           {
-                                               l.LeaderboardId,
-                                               l.LastUpdate,
-                                               l.Name,
-                                               l.DisplayName,
-                                               l.IsProduction,
-                                               l.Product,
-                                               l.Mode,
-                                               l.Run,
-                                               l.Character,
-                                               l.IsCoOp,
-                                               l.IsCustomMusic,
-                                               Total = l.Entries.Count,
-                                           },
-                                           Rank = e.Rank,
-                                           Score = e.Score,
-                                           End = new
-                                           {
-                                               e.Zone,
-                                               e.Level,
-                                           },
-                                           ReplayId = e.ReplayId,
-                                       }).ToListAsync(cancellationToken);
-
-            var replayIds = playerEntries.Select(entry => entry.ReplayId);
-            var replays = await (from r in db.Replays.AsNoTracking()
-                                 where replayIds.Contains(r.ReplayId)
-                                 select new
+            var entries = await (from e in query
+                                 let l = e.Leaderboard
+                                 let r = e.Replay
+                                 select new EntryDTO
                                  {
-                                     r.ReplayId,
-                                     r.KilledBy,
-                                     r.Version,
+                                     Leaderboard = new LeaderboardDTO
+                                     {
+                                         Id = l.LeaderboardId,
+                                         UpdatedAt = l.LastUpdate,
+                                         Name = l.Name,
+                                         DisplayName = l.DisplayName,
+                                         IsProduction = l.IsProduction,
+                                         ProductName = l.Product.Name,
+                                         Product = new ProductDTO
+                                         {
+                                             Id = l.Product.ProductId,
+                                             Name = l.Product.Name,
+                                             DisplayName = l.Product.DisplayName,
+                                         },
+                                         ModeName = l.Mode.Name,
+                                         Mode = new ModeDTO
+                                         {
+                                             Id = l.Mode.ModeId,
+                                             Name = l.Mode.Name,
+                                             DisplayName = l.Mode.DisplayName,
+                                         },
+                                         RunName = l.Run.Name,
+                                         Run = new RunDTO
+                                         {
+                                             Id = l.Run.RunId,
+                                             Name = l.Run.Name,
+                                             DisplayName = l.Run.DisplayName,
+                                         },
+                                         CharacterName = l.Character.Name,
+                                         Character = new CharacterDTO
+                                         {
+                                             Id = l.Character.CharacterId,
+                                             Name = l.Character.Name,
+                                             DisplayName = l.Character.DisplayName,
+                                         },
+                                         IsCoOp = l.IsCoOp,
+                                         IsCustomMusic = l.IsCustomMusic,
+                                         Total = l.Entries.Count(),
+                                     },
+                                     Rank = e.Rank,
+                                     Score = e.Score,
+                                     End = new EndDTO
+                                     {
+                                         Zone = e.Zone,
+                                         Level = e.Level,
+                                     },
+                                     KilledBy = r.KilledBy,
+                                     Version = r.Version,
                                  })
                                  .ToListAsync(cancellationToken);
-
-            var entries = (from e in playerEntries
-                           join r in replays on e.ReplayId equals r.ReplayId into g
-                           from x in g.DefaultIfEmpty()
-                           let l = e.Leaderboard
-                           orderby l.Product.ProductId descending, l.Mode.ModeId, l.Run.RunId, l.Character.Name
-                           select new EntryDTO
-                           {
-                               Leaderboard = new LeaderboardDTO
-                               {
-                                   Id = l.LeaderboardId,
-                                   UpdatedAt = l.LastUpdate,
-                                   Name = l.Name,
-                                   DisplayName = l.DisplayName,
-                                   IsProduction = l.IsProduction,
-                                   ProductName = l.Product.Name,
-                                   Product = new ProductDTO
-                                   {
-                                       Id = l.Product.ProductId,
-                                       Name = l.Product.Name,
-                                       DisplayName = l.Product.DisplayName,
-                                   },
-                                   ModeName = l.Mode.Name,
-                                   Mode = new ModeDTO
-                                   {
-                                       Id = l.Mode.ModeId,
-                                       Name = l.Mode.Name,
-                                       DisplayName = l.Mode.DisplayName,
-                                   },
-                                   RunName = l.Run.Name,
-                                   Run = new RunDTO
-                                   {
-                                       Id = l.Run.RunId,
-                                       Name = l.Run.Name,
-                                       DisplayName = l.Run.DisplayName,
-                                   },
-                                   CharacterName = l.Character.Name,
-                                   Character = new CharacterDTO
-                                   {
-                                       Id = l.Character.CharacterId,
-                                       Name = l.Character.Name,
-                                       DisplayName = l.Character.DisplayName,
-                                   },
-                                   IsCoOp = l.IsCoOp,
-                                   IsCustomMusic = l.IsCustomMusic,
-                                   Total = l.Total,
-                               },
-                               Rank = e.Rank,
-                               Score = e.Score,
-                               End = new EndDTO
-                               {
-                                   Zone = e.End.Zone,
-                                   Level = e.End.Level,
-                               },
-                               KilledBy = x?.KilledBy,
-                               Version = x?.Version,
-                           })
-                           .ToList();
 
             var content = new PlayerEntriesDTO
             {
@@ -340,98 +298,77 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             long steamId,
             CancellationToken cancellationToken = default)
         {
-            var playerEntry = await (from e in db.Entries.AsNoTracking()
-                                     where e.LeaderboardId == lbid
-                                     where e.SteamId == steamId
-                                     let l = e.Leaderboard
-                                     let p = e.Player
-                                     select new
-                                     {
-                                         Leaderboard = new LeaderboardDTO
-                                         {
-                                             Id = l.LeaderboardId,
-                                             UpdatedAt = l.LastUpdate,
-                                             Name = l.Name,
-                                             DisplayName = l.DisplayName,
-                                             IsProduction = l.IsProduction,
-                                             ProductName = l.Product.Name,
-                                             Product = new ProductDTO
-                                             {
-                                                 Id = l.Product.ProductId,
-                                                 Name = l.Product.Name,
-                                                 DisplayName = l.Product.DisplayName,
-                                             },
-                                             ModeName = l.Mode.Name,
-                                             Mode = new ModeDTO
-                                             {
-                                                 Id = l.Mode.ModeId,
-                                                 Name = l.Mode.Name,
-                                                 DisplayName = l.Mode.DisplayName,
-                                             },
-                                             RunName = l.Run.Name,
-                                             Run = new RunDTO
-                                             {
-                                                 Id = l.Run.RunId,
-                                                 Name = l.Run.Name,
-                                                 DisplayName = l.Run.DisplayName,
-                                             },
-                                             CharacterName = l.Character.Name,
-                                             Character = new CharacterDTO
-                                             {
-                                                 Id = l.Character.CharacterId,
-                                                 Name = l.Character.Name,
-                                                 DisplayName = l.Character.DisplayName,
-                                             },
-                                             IsCoOp = l.IsCoOp,
-                                             IsCustomMusic = l.IsCustomMusic,
-                                             Total = l.Entries.Count(),
-                                         },
-                                         Player = new PlayerDTO
-                                         {
-                                             Id = p.SteamId.ToString(),
-                                             UpdatedAt = p.LastUpdate,
-                                             DisplayName = p.Name,
-                                             Avatar = p.Avatar,
-                                         },
-                                         Rank = e.Rank,
-                                         Score = e.Score,
-                                         End = new EndDTO
-                                         {
-                                             Zone = e.Zone,
-                                             Level = e.Level,
-                                         },
-                                         ReplayId = e.ReplayId,
-                                     })
-                                     .FirstOrDefaultAsync(cancellationToken);
-            if (playerEntry == null)
+            var entry = await (from e in db.Entries.AsNoTracking()
+                               where e.LeaderboardId == lbid
+                               where e.SteamId == steamId
+                               let l = e.Leaderboard
+                               let p = e.Player
+                               let r = e.Replay
+                               select new EntryDTO
+                               {
+                                   Leaderboard = new LeaderboardDTO
+                                   {
+                                       Id = l.LeaderboardId,
+                                       UpdatedAt = l.LastUpdate,
+                                       Name = l.Name,
+                                       DisplayName = l.DisplayName,
+                                       IsProduction = l.IsProduction,
+                                       ProductName = l.Product.Name,
+                                       Product = new ProductDTO
+                                       {
+                                           Id = l.Product.ProductId,
+                                           Name = l.Product.Name,
+                                           DisplayName = l.Product.DisplayName,
+                                       },
+                                       ModeName = l.Mode.Name,
+                                       Mode = new ModeDTO
+                                       {
+                                           Id = l.Mode.ModeId,
+                                           Name = l.Mode.Name,
+                                           DisplayName = l.Mode.DisplayName,
+                                       },
+                                       RunName = l.Run.Name,
+                                       Run = new RunDTO
+                                       {
+                                           Id = l.Run.RunId,
+                                           Name = l.Run.Name,
+                                           DisplayName = l.Run.DisplayName,
+                                       },
+                                       CharacterName = l.Character.Name,
+                                       Character = new CharacterDTO
+                                       {
+                                           Id = l.Character.CharacterId,
+                                           Name = l.Character.Name,
+                                           DisplayName = l.Character.DisplayName,
+                                       },
+                                       IsCoOp = l.IsCoOp,
+                                       IsCustomMusic = l.IsCustomMusic,
+                                       Total = l.Entries.Count(),
+                                   },
+                                   Player = new PlayerDTO
+                                   {
+                                       Id = p.SteamId.ToString(),
+                                       UpdatedAt = p.LastUpdate,
+                                       DisplayName = p.Name,
+                                       Avatar = p.Avatar,
+                                   },
+                                   Rank = e.Rank,
+                                   Score = e.Score,
+                                   End = new EndDTO
+                                   {
+                                       Zone = e.Zone,
+                                       Level = e.Level,
+                                   },
+                                   KilledBy = r.KilledBy,
+                                   Version = r.Version,
+                               })
+                               .FirstOrDefaultAsync(cancellationToken);
+            if (entry == null)
             {
                 return NotFound();
             }
 
-            var content = new EntryDTO
-            {
-                Leaderboard = playerEntry.Leaderboard,
-                Player = playerEntry.Player,
-                Rank = playerEntry.Rank,
-                Score = playerEntry.Score,
-                End = playerEntry.End,
-            };
-
-            var replay = await (from r in db.Replays.AsNoTracking()
-                                where r.ReplayId == playerEntry.ReplayId
-                                select new
-                                {
-                                    r.KilledBy,
-                                    r.Version,
-                                })
-                                .FirstOrDefaultAsync(cancellationToken);
-            if (replay != null)
-            {
-                content.KilledBy = replay.KilledBy;
-                content.Version = replay.Version;
-            }
-
-            return Ok(content);
+            return Ok(entry);
         }
 
         /// <summary>
@@ -503,78 +440,39 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             if (production != null) { query = query.Where(e => e.Leaderboard.IsProduction == production); }
 
             var total = await query.CountAsync(cancellationToken);
-            var playerEntries = await (from e in query
-                                       let l = e.Leaderboard
-                                       select new
-                                       {
-                                           Leaderboard = new
-                                           {
-                                               l.LeaderboardId,
-                                               l.LastUpdate,
-                                               l.Name,
-                                               l.DisplayName,
-                                               l.IsProduction,
-                                               l.Product,
-                                               l.Date,
-                                               Total = l.Entries.Count,
-                                           },
-                                           Rank = e.Rank,
-                                           Score = e.Score,
-                                           End = new
-                                           {
-                                               e.Zone,
-                                               e.Level,
-                                           },
-                                           ReplayId = e.ReplayId,
-                                       })
-                                       .ToListAsync(cancellationToken);
-
-            var replayIds = playerEntries.Select(e => e.ReplayId);
-            var replays = await (from r in db.Replays.AsNoTracking()
-                                 where replayIds.Contains(r.ReplayId)
-                                 select new
+            var entries = await (from e in query
+                                 let l = e.Leaderboard
+                                 let r = e.Replay
+                                 select new DailyEntryDTO
                                  {
-                                     r.ReplayId,
-                                     r.KilledBy,
-                                     r.Version,
+                                     Leaderboard = new DailyLeaderboardDTO
+                                     {
+                                         Id = l.LeaderboardId,
+                                         UpdatedAt = l.LastUpdate,
+                                         Name = l.Name,
+                                         DisplayName = l.DisplayName,
+                                         IsProduction = l.IsProduction,
+                                         ProductName = l.Product.Name,
+                                         Product = new ProductDTO
+                                         {
+                                             Id = l.Product.ProductId,
+                                             Name = l.Product.Name,
+                                             DisplayName = l.Product.DisplayName,
+                                         },
+                                         Date = l.Date,
+                                         Total = l.Entries.Count(),
+                                     },
+                                     Rank = e.Rank,
+                                     Score = e.Score,
+                                     End = new EndDTO
+                                     {
+                                         Zone = e.Zone,
+                                         Level = e.Level,
+                                     },
+                                     KilledBy = r.KilledBy,
+                                     Version = r.Version,
                                  })
                                  .ToListAsync(cancellationToken);
-
-            var entries = (from e in playerEntries
-                           join r in replays on e.ReplayId equals r.ReplayId into g
-                           from x in g.DefaultIfEmpty()
-                           let l = e.Leaderboard
-                           orderby l.Date descending, l.Product.ProductId descending, l.IsProduction descending
-                           select new DailyEntryDTO
-                           {
-                               Leaderboard = new DailyLeaderboardDTO
-                               {
-                                   Id = l.LeaderboardId,
-                                   UpdatedAt = l.LastUpdate,
-                                   Name = l.Name,
-                                   DisplayName = l.DisplayName,
-                                   IsProduction = l.IsProduction,
-                                   ProductName = l.Product.Name,
-                                   Product = new ProductDTO
-                                   {
-                                       Id = l.Product.ProductId,
-                                       Name = l.Product.Name,
-                                       DisplayName = l.Product.DisplayName,
-                                   },
-                                   Date = l.Date,
-                                   Total = l.Total,
-                               },
-                               Rank = e.Rank,
-                               Score = e.Score,
-                               End = new EndDTO
-                               {
-                                   Zone = e.End.Zone,
-                                   Level = e.End.Level,
-                               },
-                               KilledBy = x?.KilledBy,
-                               Version = x?.Version,
-                           })
-                           .ToList();
 
             var content = new PlayerDailyEntriesDTO
             {
@@ -606,76 +504,55 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             long steamId,
             CancellationToken cancellationToken = default)
         {
-            var playerEntry = await (from e in db.DailyEntries.AsNoTracking().Include(x => x.Player)
-                                     where e.LeaderboardId == lbid
-                                     where e.SteamId == steamId
-                                     let l = e.Leaderboard
-                                     let p = e.Player
-                                     select new
-                                     {
-                                         Leaderboard = new DailyLeaderboardDTO
-                                         {
-                                             Id = l.LeaderboardId,
-                                             UpdatedAt = l.LastUpdate,
-                                             Name = l.Name,
-                                             DisplayName = l.DisplayName,
-                                             IsProduction = l.IsProduction,
-                                             ProductName = l.Product.Name,
-                                             Product = new ProductDTO
-                                             {
-                                                 Id = l.Product.ProductId,
-                                                 Name = l.Product.Name,
-                                                 DisplayName = l.Product.DisplayName,
-                                             },
-                                             Date = l.Date,
-                                             Total = l.Entries.Count(),
-                                         },
-                                         Player = new PlayerDTO
-                                         {
-                                             Id = p.SteamId.ToString(),
-                                             UpdatedAt = p.LastUpdate,
-                                             DisplayName = p.Name,
-                                             Avatar = p.Avatar,
-                                         },
-                                         Rank = e.Rank,
-                                         Score = e.Score,
-                                         End = new EndDTO
-                                         {
-                                             Zone = e.Zone,
-                                             Level = e.Level,
-                                         },
-                                         ReplayId = e.ReplayId,
-                                     })
-                                     .FirstOrDefaultAsync(cancellationToken);
-            if (playerEntry == null)
+            var entry = await (from e in db.DailyEntries.AsNoTracking().Include(x => x.Player)
+                               where e.LeaderboardId == lbid
+                               where e.SteamId == steamId
+                               let l = e.Leaderboard
+                               let p = e.Player
+                               let r = e.Replay
+                               select new DailyEntryDTO
+                               {
+                                   Leaderboard = new DailyLeaderboardDTO
+                                   {
+                                       Id = l.LeaderboardId,
+                                       UpdatedAt = l.LastUpdate,
+                                       Name = l.Name,
+                                       DisplayName = l.DisplayName,
+                                       IsProduction = l.IsProduction,
+                                       ProductName = l.Product.Name,
+                                       Product = new ProductDTO
+                                       {
+                                           Id = l.Product.ProductId,
+                                           Name = l.Product.Name,
+                                           DisplayName = l.Product.DisplayName,
+                                       },
+                                       Date = l.Date,
+                                       Total = l.Entries.Count(),
+                                   },
+                                   Player = new PlayerDTO
+                                   {
+                                       Id = p.SteamId.ToString(),
+                                       UpdatedAt = p.LastUpdate,
+                                       DisplayName = p.Name,
+                                       Avatar = p.Avatar,
+                                   },
+                                   Rank = e.Rank,
+                                   Score = e.Score,
+                                   End = new EndDTO
+                                   {
+                                       Zone = e.Zone,
+                                       Level = e.Level,
+                                   },
+                                   KilledBy = r.KilledBy,
+                                   Version = r.Version,
+                               })
+                               .FirstOrDefaultAsync(cancellationToken);
+            if (entry == null)
             {
                 return NotFound();
             }
 
-            var content = new DailyEntryDTO
-            {
-                Leaderboard = playerEntry.Leaderboard,
-                Player = playerEntry.Player,
-                Rank = playerEntry.Rank,
-                Score = playerEntry.Score,
-                End = playerEntry.End,
-            };
-
-            var replay = await (from r in db.Replays.AsNoTracking()
-                                where r.ReplayId == playerEntry.ReplayId
-                                select new
-                                {
-                                    r.KilledBy,
-                                    r.Version,
-                                })
-                                .FirstOrDefaultAsync(cancellationToken);
-            if (replay != null)
-            {
-                content.KilledBy = replay.KilledBy;
-                content.Version = replay.Version;
-            }
-
-            return Ok(content);
+            return Ok(entry);
         }
 
         /// <summary>
@@ -704,7 +581,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                              Name = p.Name,
                              LastUpdate = p.LastUpdate,
                              Avatar = p.Avatar,
-                         }).ToList();
+                         })
+                         .ToList();
             var rowsAffected = await storeClient.SaveChangesAsync(model, true, cancellationToken);
 
             var content = new BulkStoreDTO { RowsAffected = rowsAffected };

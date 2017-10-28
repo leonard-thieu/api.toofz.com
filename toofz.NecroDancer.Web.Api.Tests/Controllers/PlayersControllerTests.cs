@@ -41,6 +41,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         Player = p1,
                         SteamId = 1,
                         ReplayId = 421438228643743438,
+                        Replay = new Replay(),
                     },
                 });
                 p1.DailyEntries.AddRange(new[]
@@ -56,6 +57,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         Player = p1,
                         SteamId = 1,
                         ReplayId = 421438228643743438,
+                        Replay = new Replay(),
                     },
                 });
                 var p2 = new Player
@@ -79,6 +81,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         Player = p2,
                         SteamId = 2,
                         ReplayId = 26236580330596509,
+                        Replay = new Replay(),
                     },
                     new Entry
                     {
@@ -94,6 +97,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         Player = p2,
                         SteamId = 2,
                         ReplayId = 26236580330596596,
+                        Replay = new Replay(),
                     },
                     new Entry
                     {
@@ -109,6 +113,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         Player = p2,
                         SteamId = 2,
                         ReplayId = 422567813941329155,
+                        Replay = new Replay(),
                     },
                 });
                 p2.DailyEntries.AddRange(new[]
@@ -124,6 +129,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         Player = p2,
                         SteamId = 2,
                         ReplayId = 26236580330596509,
+                        Replay = new Replay(),
                     },
                     new DailyEntry
                     {
@@ -136,6 +142,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         Player = p2,
                         SteamId = 2,
                         ReplayId = 26236580330596596,
+                        Replay = new Replay(),
                     },
                     new DailyEntry
                     {
@@ -148,6 +155,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         Player = p2,
                         SteamId = 2,
                         ReplayId = 421438228643743438,
+                        Replay = new Replay(),
                     },
                 });
                 var p3 = new Player
@@ -161,11 +169,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     {
                         Leaderboard = new Leaderboard(),
                         SteamId = 3,
+                        Replay = new Replay(),
                     },
                     new Entry
                     {
                         Leaderboard = new Leaderboard(),
                         SteamId = 3,
+                        Replay = new Replay(),
                     },
                 });
                 var p4 = new Player
@@ -179,16 +189,19 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     {
                         Leaderboard = new Leaderboard(),
                         SteamId = 4,
+                        Replay = new Replay(),
                     },
                     new Entry
                     {
                         Leaderboard = new Leaderboard(),
                         SteamId = 4,
+                        Replay = new Replay(),
                     },
                     new Entry
                     {
                         Leaderboard = new Leaderboard(),
                         SteamId = 4,
+                        Replay = new Replay(),
                     },
                 });
                 var p5 = new Player
@@ -202,16 +215,19 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     {
                         Leaderboard = new Leaderboard(),
                         SteamId = 5,
+                        Replay = new Replay(),
                     },
                     new Entry
                     {
                         Leaderboard = new Leaderboard(),
                         SteamId = 5,
+                        Replay = new Replay(),
                     },
                     new Entry
                     {
                         Leaderboard = new Leaderboard(),
                         SteamId = 5,
+                        Replay = new Replay(),
                     },
                 });
 
@@ -452,6 +468,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     },
                     SteamId = steamId,
                     Player = new Player { SteamId = steamId },
+                    Replay = new Replay(),
                 };
                 mockDb.Entries.Add(entry);
 
@@ -482,15 +499,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     SteamId = steamId,
                     Player = new Player { SteamId = steamId },
                     ReplayId = 234,
+                    Replay = new Replay
+                    {
+                        ReplayId = 234,
+                        Version = 74,
+                        KilledBy = "BOMB",
+                    },
                 };
                 mockDb.Entries.Add(entry);
-                var replay = new Replay
-                {
-                    ReplayId = 234,
-                    Version = 74,
-                    KilledBy = "BOMB",
-                };
-                mockDb.Replays.Add(replay);
 
                 // Act
                 var result = await controller.GetPlayerEntry(lbid, steamId);
@@ -575,6 +591,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     },
                     SteamId = steamId,
                     Player = new Player { SteamId = steamId },
+                    Replay = new Replay(),
                 };
                 mockDb.DailyEntries.Add(entry);
 
@@ -602,15 +619,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                     SteamId = steamId,
                     Player = new Player { SteamId = steamId },
                     ReplayId = 234,
+                    Replay = new Replay
+                    {
+                        ReplayId = 234,
+                        Version = 74,
+                        KilledBy = "BOMB",
+                    },
                 };
                 mockDb.DailyEntries.Add(entry);
-                var replay = new Replay
-                {
-                    ReplayId = 234,
-                    Version = 74,
-                    KilledBy = "BOMB",
-                };
-                mockDb.Replays.Add(replay);
 
                 // Act
                 var result = await controller.GetPlayerDailyEntry(lbid, steamId);
