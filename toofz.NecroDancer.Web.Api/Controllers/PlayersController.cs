@@ -146,6 +146,14 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// If true, returns production leaderboards. If false, returns Early Access leaderboards.
         /// If not provided, returns both production and Early Access leaderboards.
         /// </param>
+        /// <param name="coOp">
+        /// If true, returns Co-op leaderboards. If false, returns non-Co-op leaderboards.
+        /// If not provided, returns both Co-op and non-Co-op leaderboards.
+        /// </param>
+        /// <param name="customMusic">
+        /// If true, returns Custom Music leaderboards. If false, returns non-Custom Music leaderboards.
+        /// If not provided, returns both Custom Music and non-Custom Music leaderboards.
+        /// </param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>
         /// Returns a Steam player's leaderboard entries.
@@ -163,6 +171,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             LeaderboardIdParams lbids,
             Products products,
             bool? production = null,
+            bool? coOp = null,
+            bool? customMusic = null,
             CancellationToken cancellationToken = default)
         {
             // Validate steamId
@@ -198,6 +208,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                         select e;
             if (lbids.Any()) { query = query.Where(e => lbids.Contains(e.Leaderboard.LeaderboardId)); }
             if (production != null) { query = query.Where(e => e.Leaderboard.IsProduction == production); }
+            if (coOp != null) { query = query.Where(e => e.Leaderboard.IsCoOp == coOp); }
+            if (customMusic != null) { query = query.Where(e => e.Leaderboard.IsCustomMusic == customMusic); }
 
             var total = await query.CountAsync(cancellationToken);
             var playerEntries = await (from e in query
