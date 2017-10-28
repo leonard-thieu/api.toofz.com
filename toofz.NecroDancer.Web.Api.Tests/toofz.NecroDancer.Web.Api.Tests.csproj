@@ -247,6 +247,7 @@
     <None Include="Resources\GetPlayer.json" />
     <None Include="Resources\GetPlayerDailyEntries.json" />
     <None Include="Resources\GetPlayerDailyEntriesFilteredByLbids.json" />
+    <None Include="Resources\GetPlayerDailyEntry.json" />
     <None Include="Resources\GetPlayerEntries.json" />
     <None Include="Resources\GetPlayerEntriesFilteredByLbids.json" />
     <None Include="Resources\GetPlayerEntry.json" />

@@ -416,18 +416,18 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         [TestClass]
         public class GetPlayerEntryMethod : PlayersControllerTests
         {
-            protected int leaderboardId;
+            protected int lbid;
             protected int steamId;
 
             [TestMethod]
             public async Task PlayerNotFound_ReturnsNotFound()
             {
                 // Arrange
-                leaderboardId = 234265;
+                lbid = 234265;
                 steamId = 1;
 
                 // Act
-                var result = await controller.GetPlayerEntry(leaderboardId, steamId);
+                var result = await controller.GetPlayerEntry(lbid, steamId);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(NotFoundResult));
@@ -437,18 +437,26 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsPlayerEntry()
             {
                 // Arrange
-                leaderboardId = 234265;
+                lbid = 234265;
                 steamId = 1;
                 var entry = new Entry
                 {
-                    LeaderboardId = leaderboardId,
+                    LeaderboardId = lbid,
+                    Leaderboard = new Leaderboard
+                    {
+                        LeaderboardId = lbid,
+                        Product = new Product(0, "", ""),
+                        Mode = new Mode(0, "", ""),
+                        Run = new Run(0, "", ""),
+                        Character = new Character(0, "", ""),
+                    },
                     SteamId = steamId,
                     Player = new Player { SteamId = steamId },
                 };
                 mockDb.Entries.Add(entry);
 
                 // Act
-                var result = await controller.GetPlayerEntry(leaderboardId, steamId);
+                var result = await controller.GetPlayerEntry(lbid, steamId);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EntryDTO>));
@@ -458,11 +466,19 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReplayFound_AddsReplayInformation()
             {
                 // Arrange
-                leaderboardId = 234265;
+                lbid = 234265;
                 steamId = 1;
                 var entry = new Entry
                 {
-                    LeaderboardId = leaderboardId,
+                    LeaderboardId = lbid,
+                    Leaderboard = new Leaderboard
+                    {
+                        LeaderboardId = lbid,
+                        Product = new Product(0, "", ""),
+                        Mode = new Mode(0, "", ""),
+                        Run = new Run(0, "", ""),
+                        Character = new Character(0, "", ""),
+                    },
                     SteamId = steamId,
                     Player = new Player { SteamId = steamId },
                     ReplayId = 234,
@@ -477,7 +493,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Replays.Add(replay);
 
                 // Act
-                var result = await controller.GetPlayerEntry(leaderboardId, steamId);
+                var result = await controller.GetPlayerEntry(lbid, steamId);
 
                 // Assert
                 Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EntryDTO>));
@@ -552,6 +568,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var entry = new DailyEntry
                 {
                     LeaderboardId = lbid,
+                    Leaderboard = new DailyLeaderboard
+                    {
+                        LeaderboardId = lbid,
+                        Product = new Product(0, "", ""),
+                    },
                     SteamId = steamId,
                     Player = new Player { SteamId = steamId },
                 };
@@ -573,6 +594,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var entry = new DailyEntry
                 {
                     LeaderboardId = lbid,
+                    Leaderboard = new DailyLeaderboard
+                    {
+                        LeaderboardId = lbid,
+                        Product = new Product(0, "", ""),
+                    },
                     SteamId = steamId,
                     Player = new Player { SteamId = steamId },
                     ReplayId = 234,
@@ -863,7 +889,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var response = await Server.HttpClient.GetAsync("/players/2/entries/dailies/739999");
 
                 // Assert
-                await Assert.That.RespondsWithAsync(response, Resources.GetPlayerEntry);
+                await Assert.That.RespondsWithAsync(response, Resources.GetPlayerDailyEntry);
             }
         }
     }

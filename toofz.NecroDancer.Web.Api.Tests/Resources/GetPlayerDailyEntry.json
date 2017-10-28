@@ -11,26 +11,7 @@
       "name": "classic",
       "display_name": "Classic"
     },
-    "mode": "standard",
-    "_mode": {
-      "id": 1,
-      "name": "standard",
-      "display_name": "Standard"
-    },
-    "run": "score",
-    "_run": {
-      "id": 1,
-      "name": "score",
-      "display_name": "Score"
-    },
-    "character": "cadence",
-    "_character": {
-      "id": 1,
-      "name": "cadence",
-      "display_name": "Cadence"
-    },
-    "coOp": false,
-    "customMusic": false,
+    "date": "0001-01-01T00:00:00Z",
     "total": 0
   },
   "player": {
