@@ -27,7 +27,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             this.db = db;
         }
 
-        readonly INecroDancerContext db;
+        private readonly INecroDancerContext db;
 
         /// <summary>
         /// Gets a list of Crypt of the NecroDancer enemies.
@@ -92,28 +92,29 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             return Ok(content);
         }
 
-        async Task<EnemiesEnvelope> GetEnemiesAsync(
+        private async Task<EnemiesEnvelope> GetEnemiesAsync(
             EnemiesPagination pagination,
             IQueryable<Enemy> baseQuery,
             CancellationToken cancellationToken)
         {
             var query = from e in baseQuery
                         orderby e.Name, e.Type
-                        select new EnemyDTO
-                        {
-                            Name = e.Name,
-                            Type = e.Type,
-                            DisplayName = e.DisplayName,
-                            Health = e.Stats.Health,
-                            Damage = e.Stats.DamagePerHit,
-                            BeatsPerMove = e.Stats.BeatsPerMove,
-                            Drops = e.Stats.CoinsToDrop,
-                        };
+                        select e;
 
             var total = await query.CountAsync(cancellationToken);
-            var enemies = await query
-                .Page(pagination)
-                .ToListAsync(cancellationToken);
+            var enemies = await (from e in query
+                                 select new EnemyDTO
+                                 {
+                                     Name = e.Name,
+                                     Type = e.Type,
+                                     DisplayName = e.DisplayName,
+                                     Health = e.Stats.Health,
+                                     Damage = e.Stats.DamagePerHit,
+                                     BeatsPerMove = e.Stats.BeatsPerMove,
+                                     Drops = e.Stats.CoinsToDrop,
+                                 })
+                                 .Page(pagination)
+                                 .ToListAsync(cancellationToken);
 
             return new EnemiesEnvelope
             {
@@ -124,7 +125,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
 
         #region IDisposable Members
 
-        bool disposed;
+        private bool disposed;
 
         /// <summary>
         /// Releases the unmanaged resources that are used by the object and, optionally, releases the managed resources.

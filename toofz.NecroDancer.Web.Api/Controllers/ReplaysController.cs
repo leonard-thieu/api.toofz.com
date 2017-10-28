@@ -31,8 +31,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             this.storeClient = storeClient;
         }
 
-        readonly ILeaderboardsContext db;
-        readonly ILeaderboardsStoreClient storeClient;
+        private readonly ILeaderboardsContext db;
+        private readonly ILeaderboardsStoreClient storeClient;
 
         [ResponseType(typeof(ReplaysEnvelope))]
         [Route("")]
@@ -45,19 +45,20 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var query = from r in db.Replays.AsNoTracking()
                         where r.Version == version && r.ErrorCode == error
                         orderby r.ReplayId
-                        select new ReplayDTO
-                        {
-                            Id = r.ReplayId.ToString(),
-                            Error = r.ErrorCode,
-                            Seed = r.Seed,
-                            Version = r.Version,
-                            KilledBy = r.KilledBy,
-                        };
+                        select r;
 
             var total = await query.CountAsync(cancellationToken);
-            var replays = await query
-                .Page(pagination)
-                .ToListAsync(cancellationToken);
+            var replays = await (from r in query
+                                 select new ReplayDTO
+                                 {
+                                     Id = r.ReplayId.ToString(),
+                                     Error = r.ErrorCode,
+                                     Seed = r.Seed,
+                                     Version = r.Version,
+                                     KilledBy = r.KilledBy,
+                                 })
+                                 .Page(pagination)
+                                 .ToListAsync(cancellationToken);
 
             var content = new ReplaysEnvelope
             {
@@ -97,7 +98,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                              Seed = r.Seed,
                              Version = r.Version,
                              KilledBy = r.KilledBy,
-                         }).ToList();
+                         })
+                         .ToList();
 
             var rowsAffected = 0;
             try
@@ -117,7 +119,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
 
         #region IDisposable Members
 
-        bool disposed;
+        private bool disposed;
 
         /// <summary>
         /// Releases the unmanaged resources that are used by the object and, optionally, releases the managed resources.
@@ -136,6 +138,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             }
 
             disposed = true;
+
             base.Dispose(disposing);
         }
 

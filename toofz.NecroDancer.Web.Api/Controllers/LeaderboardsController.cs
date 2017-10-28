@@ -75,19 +75,19 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             bool? customMusic = null,
             CancellationToken cancellationToken = default)
         {
-            IQueryable<Leaderboard> baseQuery = from l in db.Leaderboards.AsNoTracking()
-                                                where products.Contains(l.Product.Name)
-                                                where modes.Contains(l.Mode.Name)
-                                                where runs.Contains(l.Run.Name)
-                                                where characters.Contains(l.Character.Name)
-                                                orderby l.Product.ProductId descending, l.Character.Name, l.RunId
-                                                select l;
-            if (production != null) { baseQuery = baseQuery.Where(l => l.IsProduction == production); }
-            if (coOp != null) { baseQuery = baseQuery.Where(l => l.IsCoOp == coOp); }
-            if (customMusic != null) { baseQuery = baseQuery.Where(l => l.IsCustomMusic == customMusic); }
+            IQueryable<Leaderboard> query = from l in db.Leaderboards.AsNoTracking()
+                                            where products.Contains(l.Product.Name)
+                                            where modes.Contains(l.Mode.Name)
+                                            where runs.Contains(l.Run.Name)
+                                            where characters.Contains(l.Character.Name)
+                                            orderby l.Product.ProductId descending, l.Character.Name, l.RunId
+                                            select l;
+            if (production != null) { query = query.Where(l => l.IsProduction == production); }
+            if (coOp != null) { query = query.Where(l => l.IsCoOp == coOp); }
+            if (customMusic != null) { query = query.Where(l => l.IsCustomMusic == customMusic); }
 
-            var total = await baseQuery.CountAsync(cancellationToken);
-            var leaderboards = await (from l in baseQuery
+            var total = await query.CountAsync(cancellationToken);
+            var leaderboards = await (from l in query
                                       select new LeaderboardDTO
                                       {
                                           Id = l.LeaderboardId,
@@ -126,7 +126,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                           IsCoOp = l.IsCoOp,
                                           IsCustomMusic = l.IsCustomMusic,
                                           Total = l.Entries.Count,
-                                      }).ToListAsync(cancellationToken);
+                                      })
+                                      .ToListAsync(cancellationToken);
 
             var content = new LeaderboardsEnvelope
             {
@@ -154,6 +155,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             int lbid,
             CancellationToken cancellationToken = default)
         {
+            // Validate lbid
             var leaderboard = await (from l in db.Leaderboards.AsNoTracking()
                                      where l.LeaderboardId == lbid
                                      select new LeaderboardDTO
@@ -204,29 +206,30 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var query = from e in db.Entries.AsNoTracking()
                         where e.LeaderboardId == lbid
                         orderby e.Rank
-                        select new
-                        {
-                            Player = new
-                            {
-                                e.Player.SteamId,
-                                e.Player.LastUpdate,
-                                e.Player.Name,
-                                e.Player.Avatar,
-                            },
-                            Rank = e.Rank,
-                            Score = e.Score,
-                            End = new
-                            {
-                                e.Zone,
-                                e.Level,
-                            },
-                            ReplayId = e.ReplayId,
-                        };
+                        select e;
 
             var total = await query.CountAsync(cancellationToken);
-            var entriesPage = await query
-                .Page(pagination)
-                .ToListAsync(cancellationToken);
+            var entriesPage = await (from e in query
+                                     select new
+                                     {
+                                         Player = new
+                                         {
+                                             e.Player.SteamId,
+                                             e.Player.LastUpdate,
+                                             e.Player.Name,
+                                             e.Player.Avatar,
+                                         },
+                                         Rank = e.Rank,
+                                         Score = e.Score,
+                                         End = new
+                                         {
+                                             e.Zone,
+                                             e.Level,
+                                         },
+                                         ReplayId = e.ReplayId,
+                                     })
+                                     .Page(pagination)
+                                     .ToListAsync(cancellationToken);
 
             var replayIds = entriesPage.Select(entry => entry.ReplayId);
             var replays = await (from r in db.Replays.AsNoTracking()
@@ -236,7 +239,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                      r.ReplayId,
                                      r.KilledBy,
                                      r.Version,
-                                 }).ToListAsync(cancellationToken);
+                                 })
+                                 .ToListAsync(cancellationToken);
 
             var entries = (from e in entriesPage
                            join r in replays on e.ReplayId equals r.ReplayId into g
@@ -259,7 +263,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                                },
                                KilledBy = x?.KilledBy,
                                Version = x?.Version,
-                           }).ToList();
+                           })
+                           .ToList();
 
             var content = new LeaderboardEntriesDTO
             {
@@ -304,39 +309,34 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             bool? production = null,
             CancellationToken cancellationToken = default)
         {
-            var query = from l in db.DailyLeaderboards.AsNoTracking()
-                        where products.Contains(l.Product.Name)
-                        orderby l.Date descending, l.ProductId descending, l.IsProduction descending
-                        select new DailyLeaderboardDTO
-                        {
-                            Id = l.LeaderboardId,
-                            UpdatedAt = l.LastUpdate,
-                            Name = l.Name,
-                            DisplayName = l.DisplayName,
-                            IsProduction = l.IsProduction,
-                            ProductName = l.Product.Name,
-                            Product = new ProductDTO
-                            {
-                                Id = l.Product.ProductId,
-                                Name = l.Product.Name,
-                                DisplayName = l.Product.DisplayName,
-                            },
-                            Date = l.Date,
-                            Total = l.Entries.Count,
-                        };
-            if (date != null)
-            {
-                query = query.Where(l => l.Date == date);
-            }
-            if (production != null)
-            {
-                query = query.Where(l => l.IsProduction == production);
-            }
+            IQueryable<DailyLeaderboard> query = from l in db.DailyLeaderboards.AsNoTracking()
+                                                 where products.Contains(l.Product.Name)
+                                                 orderby l.Date descending, l.ProductId descending, l.IsProduction descending
+                                                 select l;
+            if (date != null) { query = query.Where(l => l.Date == date); }
+            if (production != null) { query = query.Where(l => l.IsProduction == production); }
 
             var total = await query.CountAsync(cancellationToken);
-            var leaderboards = await query
-                .Page(pagination)
-                .ToListAsync(cancellationToken);
+            var leaderboards = await (from l in query
+                                      select new DailyLeaderboardDTO
+                                      {
+                                          Id = l.LeaderboardId,
+                                          UpdatedAt = l.LastUpdate,
+                                          Name = l.Name,
+                                          DisplayName = l.DisplayName,
+                                          IsProduction = l.IsProduction,
+                                          ProductName = l.Product.Name,
+                                          Product = new ProductDTO
+                                          {
+                                              Id = l.Product.ProductId,
+                                              Name = l.Product.Name,
+                                              DisplayName = l.Product.DisplayName,
+                                          },
+                                          Date = l.Date,
+                                          Total = l.Entries.Count,
+                                      })
+                                      .Page(pagination)
+                                      .ToListAsync(cancellationToken);
 
             var content = new DailyLeaderboardsEnvelope
             {
@@ -364,6 +364,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             int lbid,
             CancellationToken cancellationToken = default)
         {
+            // Validate lbid
             var leaderboard = await (from l in db.DailyLeaderboards.AsNoTracking()
                                      where l.LeaderboardId == lbid
                                      select new DailyLeaderboardDTO
@@ -392,29 +393,30 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var query = from e in db.DailyEntries.AsNoTracking()
                         where e.LeaderboardId == lbid
                         orderby e.Rank
-                        select new
-                        {
-                            Player = new
-                            {
-                                e.Player.SteamId,
-                                e.Player.LastUpdate,
-                                e.Player.Name,
-                                e.Player.Avatar,
-                            },
-                            Rank = e.Rank,
-                            Score = e.Score,
-                            End = new
-                            {
-                                e.Zone,
-                                e.Level,
-                            },
-                            ReplayId = e.ReplayId,
-                        };
+                        select e;
 
             var total = await query.CountAsync(cancellationToken);
-            var entriesPage = await query
-                .Page(pagination)
-                .ToListAsync(cancellationToken);
+            var entriesPage = await (from e in query
+                                     select new
+                                     {
+                                         Player = new
+                                         {
+                                             e.Player.SteamId,
+                                             e.Player.LastUpdate,
+                                             e.Player.Name,
+                                             e.Player.Avatar,
+                                         },
+                                         Rank = e.Rank,
+                                         Score = e.Score,
+                                         End = new
+                                         {
+                                             e.Zone,
+                                             e.Level,
+                                         },
+                                         ReplayId = e.ReplayId,
+                                     })
+                                     .Page(pagination)
+                                     .ToListAsync(cancellationToken);
 
             var replayIds = entriesPage.Select(entry => entry.ReplayId);
             var replays = await (from r in db.Replays.AsNoTracking()
@@ -482,6 +484,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             }
 
             disposed = true;
+
             base.Dispose(disposing);
         }
 

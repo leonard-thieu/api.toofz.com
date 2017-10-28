@@ -19,9 +19,9 @@ namespace toofz.NecroDancer.Web.Api.Controllers
     [RoutePrefix("items")]
     public sealed class ItemsController : ApiController
     {
-        static readonly IEnumerable<string> RedChestSlots = new[] { "head", "hud", "hud_weapon", "action", "bomb", "shovel" };
-        static readonly IEnumerable<string> PurpleChestSlots = new[] { "ring" };
-        static readonly IEnumerable<string> BlackChestSlots = new[] { "feet" };
+        private static readonly IEnumerable<string> RedChestSlots = new[] { "head", "hud", "hud_weapon", "action", "bomb", "shovel" };
+        private static readonly IEnumerable<string> PurpleChestSlots = new[] { "ring" };
+        private static readonly IEnumerable<string> BlackChestSlots = new[] { "feet" };
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ItemsController"/> class.
@@ -32,7 +32,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             this.db = db;
         }
 
-        readonly INecroDancerContext db;
+        private readonly INecroDancerContext db;
 
         /// <summary>
         /// Gets a list of Crypt of the NecroDancer items.
@@ -143,7 +143,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                         case "red": baseQuery = baseQuery.Where(i => (i.IsFood || i.IsTorch || i.IsShovel || RedChestSlots.Contains(i.Slot)) && !i.IsScroll); break;
                         case "purple": baseQuery = baseQuery.Where(i => i.IsSpell || i.IsScroll || PurpleChestSlots.Contains(i.Slot)); break;
                         case "black": baseQuery = baseQuery.Where(i => i.IsArmor || i.IsWeapon || BlackChestSlots.Contains(i.Slot)); break;
-                        case "mimic": baseQuery = baseQuery.Where(i => true); break;
+                        case "mimic": break; // All items
                     }
                     break;
             }
@@ -153,26 +153,27 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             return Ok(content);
         }
 
-        async Task<ItemsEnvelope> GetItemsAsync(
+        private async Task<ItemsEnvelope> GetItemsAsync(
             ItemsPagination pagination,
             IQueryable<Item> baseQuery,
             CancellationToken cancellationToken)
         {
             var query = from i in baseQuery
                         orderby i.Name
-                        select new ItemDTO
-                        {
-                            Name = i.Name,
-                            DisplayName = i.DisplayName,
-                            Slot = i.Slot,
-                            Cost = i.CoinCost,
-                            Unlock = i.DiamondCost,
-                        };
+                        select i;
 
             var total = await query.CountAsync(cancellationToken);
-            var items = await query
-                .Page(pagination)
-                .ToListAsync(cancellationToken);
+            var items = await (from i in query
+                               select new ItemDTO
+                               {
+                                   Name = i.Name,
+                                   DisplayName = i.DisplayName,
+                                   Slot = i.Slot,
+                                   Cost = i.CoinCost,
+                                   Unlock = i.DiamondCost,
+                               })
+                               .Page(pagination)
+                               .ToListAsync(cancellationToken);
 
             return new ItemsEnvelope
             {
@@ -183,7 +184,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
 
         #region IDisposable Members
 
-        bool disposed;
+        private bool disposed;
 
         /// <summary>
         /// Releases the unmanaged resources that are used by the object and, optionally, releases the managed resources.

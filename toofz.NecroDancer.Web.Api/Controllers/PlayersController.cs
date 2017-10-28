@@ -63,28 +63,23 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             string q = null,
             CancellationToken cancellationToken = default)
         {
-            IQueryable<Player> queryBase = db.Players.AsNoTracking();
+            IQueryable<Player> query = db.Players.AsNoTracking();
             // Filtering
-            if (q != null)
-            {
-                queryBase = queryBase.Where(p => p.Name.StartsWith(q));
-            }
+            if (q != null) { query = query.Where(p => p.Name.StartsWith(q)); }
             // Sorting
-            queryBase = queryBase.OrderBy(SortKeySelectorMap, sort);
-
-            var query = from p in queryBase
-                        select new PlayerDTO
-                        {
-                            Id = p.SteamId.ToString(),
-                            UpdatedAt = p.LastUpdate,
-                            DisplayName = p.Name,
-                            Avatar = p.Avatar,
-                        };
+            query = query.OrderBy(SortKeySelectorMap, sort);
 
             var total = await query.CountAsync(cancellationToken);
-            var players = await query
-                .Page(pagination)
-                .ToListAsync(cancellationToken);
+            var players = await (from p in query
+                                 select new PlayerDTO
+                                 {
+                                     Id = p.SteamId.ToString(),
+                                     UpdatedAt = p.LastUpdate,
+                                     DisplayName = p.Name,
+                                     Avatar = p.Avatar,
+                                 })
+                                 .Page(pagination)
+                                 .ToListAsync(cancellationToken);
 
             var content = new PlayersEnvelope
             {
@@ -112,6 +107,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             long steamId,
             CancellationToken cancellationToken = default)
         {
+            // Validate steamId
             var player = await (from p in db.Players.AsNoTracking()
                                 where p.SteamId == steamId
                                 select new PlayerDTO
@@ -332,27 +328,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             long steamId,
             CancellationToken cancellationToken = default)
         {
-            var playerEntry = await (from e in db.Entries.AsNoTracking()
+            var playerEntry = await (from e in db.Entries.AsNoTracking().Include(x => x.Player)
                                      where e.LeaderboardId == lbid
                                      where e.SteamId == steamId
-                                     select new
-                                     {
-                                         Player = new
-                                         {
-                                             e.Player.SteamId,
-                                             e.Player.LastUpdate,
-                                             e.Player.Name,
-                                             e.Player.Avatar,
-                                         },
-                                         Rank = e.Rank,
-                                         Score = e.Score,
-                                         End = new
-                                         {
-                                             e.Zone,
-                                             e.Level,
-                                         },
-                                         ReplayId = e.ReplayId,
-                                     })
+                                     select e)
                                      .FirstOrDefaultAsync(cancellationToken);
             if (playerEntry == null)
             {
@@ -372,8 +351,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 Score = playerEntry.Score,
                 End = new EndDTO
                 {
-                    Zone = playerEntry.End.Zone,
-                    Level = playerEntry.End.Level,
+                    Zone = playerEntry.Zone,
+                    Level = playerEntry.Level,
                 },
             };
 
@@ -428,6 +407,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             bool? production = null,
             CancellationToken cancellationToken = default)
         {
+            // Validate steamId
             var player = await (from p in db.Players.AsNoTracking()
                                 where p.SteamId == steamId
                                 select new PlayerDTO
@@ -443,6 +423,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 return NotFound();
             }
 
+            // Validate lbids
             var validLbids = await (from l in db.DailyLeaderboards.AsNoTracking()
                                     where lbids.Contains(l.LeaderboardId)
                                     select l.LeaderboardId)
@@ -454,42 +435,38 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             }
 
             var query = from e in db.DailyEntries.AsNoTracking()
-                        let l = e.Leaderboard
                         where e.SteamId == steamId
-                        where products.Contains(l.Product.Name)
-                        select new
-                        {
-                            Leaderboard = new
-                            {
-                                l.LeaderboardId,
-                                l.LastUpdate,
-                                l.Name,
-                                l.DisplayName,
-                                l.IsProduction,
-                                l.Product,
-                                l.Date,
-                                Total = l.Entries.Count,
-                            },
-                            Rank = e.Rank,
-                            Score = e.Score,
-                            End = new
-                            {
-                                e.Zone,
-                                e.Level,
-                            },
-                            ReplayId = e.ReplayId,
-                        };
-            if (lbids.Any())
-            {
-                query = query.Where(e => lbids.Contains(e.Leaderboard.LeaderboardId));
-            }
-            if (production != null)
-            {
-                query = query.Where(e => e.Leaderboard.IsProduction == production);
-            }
+                        where products.Contains(e.Leaderboard.Product.Name)
+                        select e;
+            if (lbids.Any()) { query = query.Where(e => lbids.Contains(e.Leaderboard.LeaderboardId)); }
+            if (production != null) { query = query.Where(e => e.Leaderboard.IsProduction == production); }
 
             var total = await query.CountAsync(cancellationToken);
-            var playerEntries = await query.ToListAsync(cancellationToken);
+            var playerEntries = await (from e in query
+                                       let l = e.Leaderboard
+                                       select new
+                                       {
+                                           Leaderboard = new
+                                           {
+                                               l.LeaderboardId,
+                                               l.LastUpdate,
+                                               l.Name,
+                                               l.DisplayName,
+                                               l.IsProduction,
+                                               l.Product,
+                                               l.Date,
+                                               Total = l.Entries.Count,
+                                           },
+                                           Rank = e.Rank,
+                                           Score = e.Score,
+                                           End = new
+                                           {
+                                               e.Zone,
+                                               e.Level,
+                                           },
+                                           ReplayId = e.ReplayId,
+                                       })
+                                       .ToListAsync(cancellationToken);
 
             var replayIds = playerEntries.Select(e => e.ReplayId);
             var replays = await (from r in db.Replays.AsNoTracking()
@@ -568,28 +545,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             long steamId,
             CancellationToken cancellationToken = default)
         {
-            var playerEntry = await (from e in db.DailyEntries.AsNoTracking()
+            var playerEntry = await (from e in db.DailyEntries.AsNoTracking().Include(x => x.Player)
                                      where e.LeaderboardId == lbid
                                      where e.SteamId == steamId
-                                     let p = e.Player
-                                     select new
-                                     {
-                                         Player = new
-                                         {
-                                             p.SteamId,
-                                             p.LastUpdate,
-                                             p.Name,
-                                             p.Avatar,
-                                         },
-                                         Rank = e.Rank,
-                                         Score = e.Score,
-                                         End = new
-                                         {
-                                             e.Zone,
-                                             e.Level,
-                                         },
-                                         ReplayId = e.ReplayId,
-                                     })
+                                     select e)
                                      .FirstOrDefaultAsync(cancellationToken);
             if (playerEntry == null)
             {
@@ -609,8 +568,8 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 Score = playerEntry.Score,
                 End = new EndDTO
                 {
-                    Zone = playerEntry.End.Zone,
-                    Level = playerEntry.End.Level,
+                    Zone = playerEntry.Zone,
+                    Level = playerEntry.Level,
                 },
             };
 
