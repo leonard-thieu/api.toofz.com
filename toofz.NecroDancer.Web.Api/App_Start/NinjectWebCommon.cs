@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Web.Common;
+using Ninject.Web.Common.WebHost;
 using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Web.Api;
 using toofz.NecroDancer.Web.Api.Infrastructure;
