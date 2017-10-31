@@ -1,6 +1,9 @@
 version: 3.5.0.{build}
 image: Visual Studio 2017
 
+branches:
+  only:
+    - master
 configuration:
   - Production
 environment:
