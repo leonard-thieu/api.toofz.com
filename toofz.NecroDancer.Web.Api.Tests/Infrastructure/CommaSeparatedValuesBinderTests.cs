@@ -4,26 +4,25 @@ using System.Linq;
 using System.Web.Http.Metadata.Providers;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.ValueProviders;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using toofz.NecroDancer.Web.Api.Infrastructure;
 using toofz.NecroDancer.Web.Api.Models;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 {
-    class CommaSeparatedValuesBinderTests
+    public class CommaSeparatedValuesBinderTests
     {
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange -> Act
                 var binder = new CommaSeparatedValuesBinderAdapter();
 
                 // Assert
-                Assert.IsInstanceOfType(binder, typeof(CommaSeparatedValuesBinder<string>));
+                Assert.IsAssignableFrom<CommaSeparatedValuesBinder<string>>(binder);
             }
 
             sealed class CommaSeparatedValuesBinderAdapter : CommaSeparatedValuesBinder<string>
@@ -32,7 +31,6 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             }
         }
 
-        [TestClass]
         public class BindModelMethod
         {
             public BindModelMethod()
@@ -53,12 +51,12 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 };
             }
 
-            string modelName = "myModelName";
-            CommaSeparatedValuesBinder<string> binder;
-            ModelBindingContext bindingContext;
-            Mock<IValueProvider> mockValueProvider;
+            private string modelName = "myModelName";
+            private CommaSeparatedValuesBinder<string> binder;
+            private ModelBindingContext bindingContext;
+            private Mock<IValueProvider> mockValueProvider;
 
-            [TestMethod]
+            [Fact]
             public void ValueIsNull_SetsModelWithDefaultValues()
             {
                 // Arrange
@@ -68,14 +66,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 binder.BindModel(null, bindingContext);
 
                 // Assert
-                Assert.IsInstanceOfType(bindingContext.Model, typeof(CommaSeparatedValues<string>));
+                Assert.IsAssignableFrom<CommaSeparatedValues<string>>(bindingContext.Model);
                 var model = (CommaSeparatedValues<string>)bindingContext.Model;
                 var expected = new[] { "item1", "item2", "item3" };
                 var actual = model.ToArray();
-                CollectionAssert.AreEqual(expected, actual);
+                Assert.Equal(expected, actual);
             }
 
-            [TestMethod]
+            [Fact]
             public void ValueIsNull_ReturnsTrue()
             {
                 // Arrange
@@ -87,10 +85,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var canBind = binder.BindModel(null, bindingContext);
 
                 // Assert
-                Assert.IsTrue(canBind);
+                Assert.True(canBind);
             }
 
-            [TestMethod]
+            [Fact]
             public void ValueIsValidCommaSeparatedValues_SetsModelWithValues()
             {
                 // Arrange
@@ -100,14 +98,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 binder.BindModel(null, bindingContext);
 
                 // Assert
-                Assert.IsInstanceOfType(bindingContext.Model, typeof(CommaSeparatedValues<string>));
+                Assert.IsAssignableFrom<CommaSeparatedValues<string>>(bindingContext.Model);
                 var model = (CommaSeparatedValues<string>)bindingContext.Model;
                 var expected = new[] { "item1", "item3" };
                 var actual = model.ToArray();
-                CollectionAssert.AreEqual(expected, actual);
+                Assert.Equal(expected, actual);
             }
 
-            [TestMethod]
+            [Fact]
             public void ValueIsValidCommaSeparatedValues_ReturnsTrue()
             {
                 // Arrange
@@ -117,10 +115,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var canBind = binder.BindModel(null, bindingContext);
 
                 // Assert
-                Assert.IsTrue(canBind);
+                Assert.True(canBind);
             }
 
-            [TestMethod]
+            [Fact]
             public void ValueContainsInvalidValues_AddsModelErrorsForInvalidValues()
             {
                 // Arrange
@@ -131,11 +129,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
                 // Assert
                 var hasErrors = bindingContext.ModelState.TryGetValue(modelName, out var modelState);
-                Assert.IsTrue(hasErrors);
-                Assert.AreEqual(1, modelState.Errors.Count);
+                Assert.True(hasErrors);
+                Assert.Equal(1, modelState.Errors.Count);
             }
 
-            [TestMethod]
+            [Fact]
             public void ValueContainsInvalidValues_ReturnsFalse()
             {
                 // Arrange
@@ -145,29 +143,29 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var success = binder.BindModel(null, bindingContext);
 
                 // Assert
-                Assert.IsFalse(success);
+                Assert.False(success);
             }
 
-            sealed class CommaSeparatedValuesBinderAdapter : CommaSeparatedValuesBinder<string>
+            private sealed class CommaSeparatedValuesBinderAdapter : CommaSeparatedValuesBinder<string>
             {
                 public CommaSeparatedValuesBinderAdapter(CommaSeparatedValues<string> model)
                 {
                     this.model = model;
                 }
 
-                readonly CommaSeparatedValues<string> model;
+                private readonly CommaSeparatedValues<string> model;
 
                 protected override CommaSeparatedValues<string> GetModel() => model;
             }
 
-            sealed class CommaSeparatedValuesAdapter : CommaSeparatedValues<string>
+            private sealed class CommaSeparatedValuesAdapter : CommaSeparatedValues<string>
             {
                 public CommaSeparatedValuesAdapter(IEnumerable<string> defaults)
                 {
                     this.defaults = defaults;
                 }
 
-                readonly IEnumerable<string> defaults;
+                private readonly IEnumerable<string> defaults;
 
                 protected override string Convert(string item)
                 {

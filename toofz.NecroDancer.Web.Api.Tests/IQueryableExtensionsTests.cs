@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using toofz.NecroDancer.Web.Api.Models;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests
 {
-    class IQueryableExtensionsTests
+    public class IQueryableExtensionsTests
     {
-        [TestClass]
         public class OrderByMethod
         {
-            [TestMethod]
+            [Fact]
             public void SourceIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
@@ -21,13 +20,13 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 var sort = new List<string>();
 
                 // Act -> Assert
-                Assert.ThrowsException<ArgumentNullException>(() =>
+                Assert.Throws<ArgumentNullException>(() =>
                 {
                     IQueryableExtensions.OrderBy(source, keySelectorMap, sort);
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void KeySelectorMapIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
@@ -36,13 +35,13 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 var sort = new List<string>();
 
                 // Act -> Assert
-                Assert.ThrowsException<ArgumentNullException>(() =>
+                Assert.Throws<ArgumentNullException>(() =>
                 {
                     IQueryableExtensions.OrderBy(source, keySelectorMap, sort);
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void SortIsNull_ReturnsSource()
             {
                 // Arrange
@@ -54,10 +53,10 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 var ordered = IQueryableExtensions.OrderBy(source, keySelectorMap, sort);
 
                 // Assert
-                Assert.AreSame(source, ordered);
+                Assert.Same(source, ordered);
             }
 
-            [TestMethod]
+            [Fact]
             public void SortIsEmpty_ReturnsSource()
             {
                 // Arrange
@@ -69,10 +68,10 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 var ordered = IQueryableExtensions.OrderBy(source, keySelectorMap, sort);
 
                 // Assert
-                Assert.AreSame(source, ordered);
+                Assert.Same(source, ordered);
             }
 
-            [TestMethod]
+            [Fact]
             public void ReturnsQueryableWithOrdering()
             {
                 // Arrange
@@ -87,14 +86,13 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 var ordered = IQueryableExtensions.OrderBy(source, keySelectorMap, sort);
 
                 // Assert
-                Assert.AreNotSame(source, ordered);
+                Assert.NotSame(source, ordered);
             }
         }
 
-        [TestClass]
         public class PageMethod
         {
-            [TestMethod]
+            [Fact]
             public void SourceIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
@@ -102,13 +100,13 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 var pagination = Mock.Of<IPagination>();
 
                 // Act -> Assert
-                Assert.ThrowsException<ArgumentNullException>(() =>
+                Assert.Throws<ArgumentNullException>(() =>
                 {
                     source.Page(pagination);
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void PaginationIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
@@ -116,13 +114,13 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 IPagination pagination = null;
 
                 // Act -> Assert
-                Assert.ThrowsException<ArgumentNullException>(() =>
+                Assert.Throws<ArgumentNullException>(() =>
                 {
                     source.Page(pagination);
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ReturnsQueryable()
             {
                 // Arrange
@@ -133,7 +131,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 var paginated = source.Page(pagination);
 
                 // Assert
-                Assert.IsInstanceOfType(paginated, typeof(IQueryable<string>));
+                Assert.IsAssignableFrom<IQueryable<string>>(paginated);
             }
         }
     }

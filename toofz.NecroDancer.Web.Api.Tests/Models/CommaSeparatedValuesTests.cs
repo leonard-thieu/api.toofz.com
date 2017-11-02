@@ -1,31 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using toofz.NecroDancer.Web.Api.Models;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Models
 {
-    class CommaSeparatedValuesTests
+    public class CommaSeparatedValuesTests
     {
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange -> Act
                 var csv = new CommaSeparatedValuesAdapter();
 
                 // Assert
-                Assert.IsInstanceOfType(csv, typeof(CommaSeparatedValues<string>));
+                Assert.IsAssignableFrom<CommaSeparatedValues<string>>(csv);
             }
         }
 
-        [TestClass]
         public class AddMethod
         {
-            [TestMethod]
+            [Fact]
             public void AddsItem()
             {
                 // Arrange
@@ -37,14 +35,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
 
                 // Assert
                 var item2 = csv.First();
-                Assert.AreEqual(item, item2);
+                Assert.Equal(item, item2);
             }
         }
 
-        [TestClass]
         public class AddDefaultsMethod
         {
-            [TestMethod]
+            [Fact]
             public void AddsDefaults()
             {
                 // Arrange
@@ -56,14 +53,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
 
                 // Assert
                 var actual = csv.ToArray();
-                CollectionAssert.AreEqual(defaults, actual);
+                Assert.Equal(defaults, actual);
             }
         }
 
-        [TestClass]
         public class GetEnumeratorMethod
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsEnumerator()
             {
                 // Arrange
@@ -73,14 +69,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 var enumerator = csv.GetEnumerator();
 
                 // Assert
-                Assert.IsInstanceOfType(enumerator, typeof(IEnumerator<string>));
+                Assert.IsAssignableFrom<IEnumerator<string>>(enumerator);
             }
         }
 
-        [TestClass]
         public class IEnumerable_GetEnumeratorMethod
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsEnumerator()
             {
                 // Arrange
@@ -91,11 +86,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 var enumerator = enumerable.GetEnumerator();
 
                 // Assert
-                Assert.IsInstanceOfType(enumerator, typeof(IEnumerator));
+                Assert.IsAssignableFrom<IEnumerator>(enumerator);
             }
         }
 
-        sealed class CommaSeparatedValuesAdapter : CommaSeparatedValues<string>
+        private sealed class CommaSeparatedValuesAdapter : CommaSeparatedValues<string>
         {
             public CommaSeparatedValuesAdapter() { }
 
@@ -104,7 +99,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 this.defaults = defaults;
             }
 
-            readonly IEnumerable<string> defaults;
+            private readonly IEnumerable<string> defaults;
 
             protected override string Convert(string item) => item;
 

@@ -1,6 +1,5 @@
 using System;
 using System.Data.SqlClient;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
@@ -16,10 +15,9 @@ using WebActivatorEx;
 
 namespace toofz.NecroDancer.Web.Api
 {
-    [ExcludeFromCodeCoverage]
-    static class NinjectWebCommon
+    internal static class NinjectWebCommon
     {
-        static readonly Bootstrapper bootstrapper = new Bootstrapper();
+        private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
@@ -43,7 +41,7 @@ namespace toofz.NecroDancer.Web.Api
         /// Creates the kernel that will manage your application.
         /// </summary>
         /// <returns>The created kernel.</returns>
-        internal static IKernel CreateKernel()
+        private static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
             try
@@ -65,7 +63,7 @@ namespace toofz.NecroDancer.Web.Api
         /// Load your modules or register your services here!
         /// </summary>
         /// <param name="kernel">The kernel.</param>
-        static void RegisterServices(IKernel kernel)
+        internal static void RegisterServices(IKernel kernel)
         {
             var necroDancerConnectionString = Util.GetEnvVar("NecroDancerConnectionString");
             var leaderboardsConnectionString = Util.GetEnvVar("LeaderboardsConnectionString");

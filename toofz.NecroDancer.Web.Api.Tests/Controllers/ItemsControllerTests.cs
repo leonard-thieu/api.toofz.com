@@ -3,19 +3,19 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using toofz.NecroDancer.Data;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
 using toofz.TestsShared;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
-    class ItemsControllerTests
+    public class ItemsControllerTests
     {
-        static IEnumerable<Item> Items
+        private static IEnumerable<Item> Items
         {
             get => new[]
             {
@@ -198,10 +198,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             };
         }
 
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -211,11 +210,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var controller = new ItemsController(db);
 
                 // Assert
-                Assert.IsInstanceOfType(controller, typeof(ItemsController));
+                Assert.IsAssignableFrom<ItemsController>(controller);
             }
         }
 
-        [TestClass]
         public class GetItemsMethod
         {
             public GetItemsMethod()
@@ -229,20 +227,20 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 pagination = new ItemsPagination();
             }
 
-            ItemsController controller;
-            ItemsPagination pagination;
+            private ItemsController controller;
+            private ItemsPagination pagination;
 
-            [TestMethod]
+            [Fact]
             public async Task ReturnsOk()
             {
                 // Arrange -> Act
                 var result = await controller.GetItems(pagination);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ItemsEnvelope>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<ItemsEnvelope>>(result);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ReturnsItems()
             {
                 // Arrange -> Act
@@ -251,10 +249,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Assert
                 var contentResult = (OkNegotiatedContentResult<ItemsEnvelope>)result;
                 var contentItems = contentResult.Content.Items;
-                Assert.AreEqual(10, contentItems.Count());
+                Assert.Equal(10, contentItems.Count());
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ReturnsItemsOrderedByElementName()
             {
                 // Arrange -> Act
@@ -264,10 +262,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var contentResult = (OkNegotiatedContentResult<ItemsEnvelope>)result;
                 var contentItems = contentResult.Content.Items;
                 var first = contentItems.First();
-                Assert.AreEqual("armor_glass", first.Name);
+                Assert.Equal("armor_glass", first.Name);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task LimitIsLessThanResultsCount_ReturnsLimitResults()
             {
                 // Arrange
@@ -279,10 +277,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Assert
                 var contentResult = (OkNegotiatedContentResult<ItemsEnvelope>)result;
                 var contentItems = contentResult.Content.Items;
-                Assert.AreEqual(2, contentItems.Count());
+                Assert.Equal(2, contentItems.Count());
             }
 
-            [TestMethod]
+            [Fact]
             public async Task OffsetIsSpecified_ReturnsOffsetResults()
             {
                 // Arrange
@@ -295,11 +293,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var contentResult = (OkNegotiatedContentResult<ItemsEnvelope>)result;
                 var contentItems = contentResult.Content.Items;
                 var first = contentItems.First();
-                Assert.AreEqual("food_1", first.Name);
+                Assert.Equal("food_1", first.Name);
             }
         }
 
-        [TestClass]
         public class GetItemsByCategoryMethod
         {
             public GetItemsByCategoryMethod()
@@ -313,40 +310,40 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 pagination = new ItemsPagination();
             }
 
-            ItemsController controller;
-            ItemsPagination pagination;
+            private ItemsController controller;
+            private ItemsPagination pagination;
 
-            [DataTestMethod]
-            [DataRow("armor")]
-            [DataRow("consumable")]
-            [DataRow("feet")]
-            [DataRow("food")]
-            [DataRow("head")]
-            [DataRow("rings")]
-            [DataRow("scrolls")]
-            [DataRow("spells")]
-            [DataRow("torches")]
-            [DataRow("weapons")]
+            [Theory]
+            [InlineData("armor")]
+            [InlineData("consumable")]
+            [InlineData("feet")]
+            [InlineData("food")]
+            [InlineData("head")]
+            [InlineData("rings")]
+            [InlineData("scrolls")]
+            [InlineData("spells")]
+            [InlineData("torches")]
+            [InlineData("weapons")]
             public async Task ReturnsOk(string category)
             {
                 // Arrange -> Act
                 var result = await controller.GetItemsByCategory(pagination, category);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ItemsEnvelope>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<ItemsEnvelope>>(result);
             }
 
-            [DataTestMethod]
-            [DataRow("armor", "armor_glass")]
-            [DataRow("consumable", "misc_heart_container")]
-            [DataRow("feet", "feet_ballet_shoes")]
-            [DataRow("food", "food_1")]
-            [DataRow("head", "head_blast_helm")]
-            [DataRow("rings", "ring_becoming")]
-            [DataRow("scrolls", "scroll_earthquake")]
-            [DataRow("spells", "spell_bomb")]
-            [DataRow("torches", "torch_1")]
-            [DataRow("weapons", "weapon_axe")]
+            [Theory]
+            [InlineData("armor", "armor_glass")]
+            [InlineData("consumable", "misc_heart_container")]
+            [InlineData("feet", "feet_ballet_shoes")]
+            [InlineData("food", "food_1")]
+            [InlineData("head", "head_blast_helm")]
+            [InlineData("rings", "ring_becoming")]
+            [InlineData("scrolls", "scroll_earthquake")]
+            [InlineData("spells", "spell_bomb")]
+            [InlineData("torches", "torch_1")]
+            [InlineData("weapons", "weapon_axe")]
             public async Task ReturnsItemsFilteredByCategory(string category, string name)
             {
                 // Arrange -> Act
@@ -356,11 +353,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var contentResult = (OkNegotiatedContentResult<ItemsEnvelope>)result;
                 var contentItems = contentResult.Content.Items;
                 var first = contentItems.First();
-                Assert.AreEqual(name, first.Name);
+                Assert.Equal(name, first.Name);
             }
         }
 
-        [TestClass]
         public class GetItemsBySubcategoryMethod
         {
             public GetItemsBySubcategoryMethod()
@@ -374,24 +370,24 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 pagination = new ItemsPagination();
             }
 
-            ItemsController controller;
-            ItemsPagination pagination;
+            private ItemsController controller;
+            private ItemsPagination pagination;
 
-            [DataTestMethod]
-            [DataRow("weapons", "bows")]
-            [DataRow("weapons", "broadswords")]
-            [DataRow("weapons", "cats")]
-            [DataRow("weapons", "crossbows")]
-            [DataRow("weapons", "daggers")]
-            [DataRow("weapons", "flails")]
-            [DataRow("weapons", "longswords")]
-            [DataRow("weapons", "rapiers")]
-            [DataRow("weapons", "spears")]
-            [DataRow("weapons", "whips")]
-            [DataRow("chest", "red")]
-            [DataRow("chest", "purple")]
-            [DataRow("chest", "black")]
-            [DataRow("chest", "mimic")]
+            [Theory]
+            [InlineData("weapons", "bows")]
+            [InlineData("weapons", "broadswords")]
+            [InlineData("weapons", "cats")]
+            [InlineData("weapons", "crossbows")]
+            [InlineData("weapons", "daggers")]
+            [InlineData("weapons", "flails")]
+            [InlineData("weapons", "longswords")]
+            [InlineData("weapons", "rapiers")]
+            [InlineData("weapons", "spears")]
+            [InlineData("weapons", "whips")]
+            [InlineData("chest", "red")]
+            [InlineData("chest", "purple")]
+            [InlineData("chest", "black")]
+            [InlineData("chest", "mimic")]
             public async Task ReturnsOk(string category, string subcategory)
             {
                 // Arrange
@@ -403,24 +399,24 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetItemsBySubcategory(pagination, filter);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ItemsEnvelope>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<ItemsEnvelope>>(result);
             }
 
-            [DataTestMethod]
-            [DataRow("weapons", "bows", "weapon_blood_bow")]
-            [DataRow("weapons", "broadswords", "weapon_blood_broadsword")]
-            [DataRow("weapons", "cats", "weapon_blood_cat")]
-            [DataRow("weapons", "crossbows", "weapon_blood_crossbow")]
-            [DataRow("weapons", "daggers", "weapon_blood_dagger")]
-            [DataRow("weapons", "flails", "weapon_blood_flail")]
-            [DataRow("weapons", "longswords", "weapon_blood_longsword")]
-            [DataRow("weapons", "rapiers", "weapon_blood_rapier")]
-            [DataRow("weapons", "spears", "weapon_golden_spear")]
-            [DataRow("weapons", "whips", "weapon_obsidian_whip")]
-            [DataRow("chest", "red", "food_1")]
-            [DataRow("chest", "purple", "ring_becoming")]
-            [DataRow("chest", "black", "armor_glass")]
-            [DataRow("chest", "mimic", "armor_glass")]
+            [Theory]
+            [InlineData("weapons", "bows", "weapon_blood_bow")]
+            [InlineData("weapons", "broadswords", "weapon_blood_broadsword")]
+            [InlineData("weapons", "cats", "weapon_blood_cat")]
+            [InlineData("weapons", "crossbows", "weapon_blood_crossbow")]
+            [InlineData("weapons", "daggers", "weapon_blood_dagger")]
+            [InlineData("weapons", "flails", "weapon_blood_flail")]
+            [InlineData("weapons", "longswords", "weapon_blood_longsword")]
+            [InlineData("weapons", "rapiers", "weapon_blood_rapier")]
+            [InlineData("weapons", "spears", "weapon_golden_spear")]
+            [InlineData("weapons", "whips", "weapon_obsidian_whip")]
+            [InlineData("chest", "red", "food_1")]
+            [InlineData("chest", "purple", "ring_becoming")]
+            [InlineData("chest", "black", "armor_glass")]
+            [InlineData("chest", "mimic", "armor_glass")]
             public async Task ReturnsItemsFilteredBySubcategory(string category, string subcategory, string name)
             {
                 // Arrange -> Act
@@ -435,14 +431,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var contentResult = (OkNegotiatedContentResult<ItemsEnvelope>)result;
                 var contentItems = contentResult.Content.Items;
                 var first = contentItems.First();
-                Assert.AreEqual(name, first.Name);
+                Assert.Equal(name, first.Name);
             }
         }
 
-        [TestClass]
         public class DisposeMethod
         {
-            [TestMethod]
+            [Fact]
             public void DisposesDb()
             {
                 // Arrange
@@ -457,7 +452,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Verify(d => d.Dispose(), Times.Once);
             }
 
-            [TestMethod]
+            [Fact]
             public void DisposeMoreThanOnce_DisposesDbOnlyOnce()
             {
                 // Arrange
@@ -474,10 +469,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        [TestClass]
         public class IntegrationTests : IntegrationTestsBase
         {
-            [TestMethod]
+            [Fact]
             public async Task GetItemsMethod()
             {
                 // Arrange
@@ -493,11 +487,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var content = await response.Content.ReadAsStringAsync();
 
                 // Assert
-                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-                Assert.That.NormalizedAreEqual(Resources.GetItems, content);
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                Assert.Equal(Resources.GetItems, content, ignoreLineEndingDifferences: true);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task GetItemsByCategoryMethod()
             {
                 // Arrange
@@ -513,11 +507,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var content = await response.Content.ReadAsStringAsync();
 
                 // Assert
-                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-                Assert.That.NormalizedAreEqual(Resources.GetItemsByCategory, content);
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                Assert.Equal(Resources.GetItemsByCategory, content, ignoreLineEndingDifferences: true);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task GetItemsBySubcategoryMethod()
             {
                 // Arrange
@@ -533,8 +527,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var content = await response.Content.ReadAsStringAsync();
 
                 // Assert
-                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-                Assert.That.NormalizedAreEqual(Resources.GetItemsBySubcategory, content);
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                Assert.Equal(Resources.GetItemsBySubcategory, content, ignoreLineEndingDifferences: true);
             }
         }
     }

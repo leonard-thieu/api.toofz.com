@@ -1,13 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests
 {
-    class MinValueAttributeTests
+    public class MinValueAttributeTests
     {
-        [TestClass]
         public class IsValid
         {
-            [TestMethod]
+            [Fact]
             public void LessThanMin_ReturnsFalse()
             {
                 // Arrange
@@ -18,12 +17,12 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 var result = minValueAttribute.IsValid(value);
 
                 // Assert
-                Assert.IsFalse(result);
+                Assert.False(result);
             }
 
-            [DataTestMethod]
-            [DataRow(5)]
-            [DataRow(32)]
+            [Theory]
+            [InlineData(5)]
+            [InlineData(32)]
             public void GreaterThanEqualMin_ReturnsTrue(int value)
             {
                 // Arrange
@@ -33,7 +32,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 var result = minValueAttribute.IsValid(value);
 
                 // Assert
-                Assert.IsTrue(result);
+                Assert.True(result);
             }
         }
     }

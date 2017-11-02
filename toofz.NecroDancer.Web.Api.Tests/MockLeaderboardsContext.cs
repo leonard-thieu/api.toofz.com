@@ -5,7 +5,7 @@ using toofz.TestsShared;
 
 namespace toofz.NecroDancer.Web.Api.Tests
 {
-    class MockLeaderboardsContext : Mock<ILeaderboardsContext>
+    public class MockLeaderboardsContext : Mock<ILeaderboardsContext>
     {
         public MockLeaderboardsContext()
         {

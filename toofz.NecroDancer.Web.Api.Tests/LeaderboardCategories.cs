@@ -3,7 +3,7 @@ using toofz.NecroDancer.Leaderboards;
 
 namespace toofz.NecroDancer.Web.Api.Tests
 {
-    static class LeaderboardCategories
+    internal static class LeaderboardCategories
     {
         public static IEnumerable<Product> Products
         {

@@ -2,7 +2,7 @@
 
 namespace toofz.NecroDancer.Web.Api
 {
-    static class Util
+    internal static class Util
     {
         public static string GetEnvVar(string variable)
         {

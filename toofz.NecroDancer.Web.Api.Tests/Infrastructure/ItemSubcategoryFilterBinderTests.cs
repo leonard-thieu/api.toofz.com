@@ -1,16 +1,15 @@
 ﻿using System.Web.Http.Controllers;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.ValueProviders;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using toofz.NecroDancer.Web.Api.Infrastructure;
 using toofz.NecroDancer.Web.Api.Models;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 {
-    class ItemSubcategoryFilterBinderTests
+    public class ItemSubcategoryFilterBinderTests
     {
-        [TestClass]
         public class BindModelMethod
         {
             public BindModelMethod()
@@ -25,14 +24,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 };
             }
 
-            ItemSubcategoryFilterBinder binder = new ItemSubcategoryFilterBinder();
-            HttpActionContext actionContext = null;
-            string modelName = "filter";
-            Mock<IValueProvider> mockValueProvider = new Mock<IValueProvider>();
-            IValueProvider valueProvider;
-            ModelBindingContext bindingContext;
+            private ItemSubcategoryFilterBinder binder = new ItemSubcategoryFilterBinder();
+            private HttpActionContext actionContext = null;
+            private string modelName = "filter";
+            private Mock<IValueProvider> mockValueProvider = new Mock<IValueProvider>();
+            private IValueProvider valueProvider;
+            private ModelBindingContext bindingContext;
 
-            [TestMethod]
+            [Fact]
             public void CategoryIsInvalid_AddsModelError()
             {
                 // Arrange
@@ -42,10 +41,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.AreEqual(1, bindingContext.ModelState.Count);
+                Assert.Equal(1, bindingContext.ModelState.Count);
             }
 
-            [TestMethod]
+            [Fact]
             public void CategoryIsInvalid_ReturnsFalse()
             {
                 // Arrange
@@ -55,10 +54,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var success = binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.IsFalse(success);
+                Assert.False(success);
             }
 
-            [TestMethod]
+            [Fact]
             public void WeaponsSubcategoryIsInvalid_AddsModelError()
             {
                 // Arrange
@@ -69,10 +68,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.AreEqual(1, bindingContext.ModelState.Count);
+                Assert.Equal(1, bindingContext.ModelState.Count);
             }
 
-            [TestMethod]
+            [Fact]
             public void WeaponsSubcategoryIsInvalid_ReturnsFalse()
             {
                 // Arrange
@@ -83,10 +82,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var success = binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.IsFalse(success);
+                Assert.False(success);
             }
 
-            [TestMethod]
+            [Fact]
             public void ChestSubcategoryIsInvalid_AddsModelError()
             {
                 // Arrange
@@ -97,10 +96,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.AreEqual(1, bindingContext.ModelState.Count);
+                Assert.Equal(1, bindingContext.ModelState.Count);
             }
 
-            [TestMethod]
+            [Fact]
             public void ChestSubcategoryIsInvalid_ReturnsFalse()
             {
                 // Arrange
@@ -111,24 +110,24 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var success = binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.IsFalse(success);
+                Assert.False(success);
             }
 
-            [DataTestMethod]
-            [DataRow("weapons", "bows")]
-            [DataRow("weapons", "broadswords")]
-            [DataRow("weapons", "cats")]
-            [DataRow("weapons", "crossbows")]
-            [DataRow("weapons", "daggers")]
-            [DataRow("weapons", "flails")]
-            [DataRow("weapons", "longswords")]
-            [DataRow("weapons", "rapiers")]
-            [DataRow("weapons", "spears")]
-            [DataRow("weapons", "whips")]
-            [DataRow("chest", "red")]
-            [DataRow("chest", "purple")]
-            [DataRow("chest", "black")]
-            [DataRow("chest", "mimic")]
+            [Theory]
+            [InlineData("weapons", "bows")]
+            [InlineData("weapons", "broadswords")]
+            [InlineData("weapons", "cats")]
+            [InlineData("weapons", "crossbows")]
+            [InlineData("weapons", "daggers")]
+            [InlineData("weapons", "flails")]
+            [InlineData("weapons", "longswords")]
+            [InlineData("weapons", "rapiers")]
+            [InlineData("weapons", "spears")]
+            [InlineData("weapons", "whips")]
+            [InlineData("chest", "red")]
+            [InlineData("chest", "purple")]
+            [InlineData("chest", "black")]
+            [InlineData("chest", "mimic")]
             public void CategoryAndSubcategoryAreValid_SetsModel(string category, string subcategory)
             {
                 // Arrange
@@ -140,25 +139,25 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
                 // Assert
                 var filter = (ItemSubcategoryFilter)bindingContext.Model;
-                Assert.AreEqual(category, filter.Category);
-                Assert.AreEqual(subcategory, filter.Subcategory);
+                Assert.Equal(category, filter.Category);
+                Assert.Equal(subcategory, filter.Subcategory);
             }
 
-            [DataTestMethod]
-            [DataRow("weapons", "bows")]
-            [DataRow("weapons", "broadswords")]
-            [DataRow("weapons", "cats")]
-            [DataRow("weapons", "crossbows")]
-            [DataRow("weapons", "daggers")]
-            [DataRow("weapons", "flails")]
-            [DataRow("weapons", "longswords")]
-            [DataRow("weapons", "rapiers")]
-            [DataRow("weapons", "spears")]
-            [DataRow("weapons", "whips")]
-            [DataRow("chest", "red")]
-            [DataRow("chest", "purple")]
-            [DataRow("chest", "black")]
-            [DataRow("chest", "mimic")]
+            [Theory]
+            [InlineData("weapons", "bows")]
+            [InlineData("weapons", "broadswords")]
+            [InlineData("weapons", "cats")]
+            [InlineData("weapons", "crossbows")]
+            [InlineData("weapons", "daggers")]
+            [InlineData("weapons", "flails")]
+            [InlineData("weapons", "longswords")]
+            [InlineData("weapons", "rapiers")]
+            [InlineData("weapons", "spears")]
+            [InlineData("weapons", "whips")]
+            [InlineData("chest", "red")]
+            [InlineData("chest", "purple")]
+            [InlineData("chest", "black")]
+            [InlineData("chest", "mimic")]
             public void CategoryAndSubcategoryAreValid_ReturnsTrue(string category, string subcategory)
             {
                 // Arrange
@@ -169,7 +168,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var success = binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.IsTrue(success);
+                Assert.True(success);
             }
         }
     }

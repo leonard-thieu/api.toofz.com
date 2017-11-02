@@ -11,7 +11,7 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
             this.products = products ?? throw new ArgumentNullException(nameof(products));
         }
 
-        readonly IEnumerable<string> products;
+        private readonly IEnumerable<string> products;
 
         protected override CommaSeparatedValues<string> GetModel() => new Products(products);
     }

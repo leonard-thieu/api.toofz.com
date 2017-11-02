@@ -7,32 +7,31 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.Owin.Security.OAuth.Messages;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using toofz.NecroDancer.Web.Api.Identity;
 using toofz.NecroDancer.Web.Api.Providers;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Providers
 {
     public class ApplicationOAuthProviderTests
     {
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void PublicClientIdIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
                 string publicClientId = null;
 
                 // Act -> Assert
-                Assert.ThrowsException<ArgumentNullException>(() =>
+                Assert.Throws<ArgumentNullException>(() =>
                 {
                     new ApplicationOAuthProvider(publicClientId);
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -42,14 +41,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Providers
                 var provider = new ApplicationOAuthProvider(publicClientId);
 
                 // Assert
-                Assert.IsInstanceOfType(provider, typeof(ApplicationOAuthProvider));
+                Assert.IsAssignableFrom<ApplicationOAuthProvider>(provider);
             }
         }
 
-        [TestClass]
         public class GrantResourceOwnerCredentialsMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task UserNotFound_SetsError()
             {
                 // Arrange
@@ -70,10 +68,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Providers
                 await provider.GrantResourceOwnerCredentials(context);
 
                 // Assert
-                Assert.AreEqual("invalid_grant", context.Error);
+                Assert.Equal("invalid_grant", context.Error);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task Validates()
             {
                 // Arrange
@@ -103,11 +101,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Providers
                 await provider.GrantResourceOwnerCredentials(context);
 
                 // Assert
-                Assert.IsTrue(context.IsValidated);
-                Assert.IsFalse(context.HasError);
+                Assert.True(context.IsValidated);
+                Assert.False(context.HasError);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task SignsIn()
             {
                 // Arrange
@@ -146,10 +144,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Providers
             }
         }
 
-        [TestClass]
         public class TokenEndpointMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task AddsAdditionalResponseParameters()
             {
                 // Arrange
@@ -169,16 +166,15 @@ namespace toofz.NecroDancer.Web.Api.Tests.Providers
                 await provider.TokenEndpoint(context);
 
                 // Assert
-                Assert.IsTrue(context.AdditionalResponseParameters.ContainsKey("myKey"));
+                Assert.True(context.AdditionalResponseParameters.ContainsKey("myKey"));
                 var value = context.AdditionalResponseParameters["myKey"];
-                Assert.AreEqual("myValue", value);
+                Assert.Equal("myValue", value);
             }
         }
 
-        [TestClass]
         public class ValidateClientAuthenticationMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task ClientIdIsNull_Validates()
             {
                 // Arrange
@@ -193,11 +189,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Providers
                 await provider.ValidateClientAuthentication(context);
 
                 // Assert
-                Assert.IsTrue(context.IsValidated);
-                Assert.IsFalse(context.HasError);
+                Assert.True(context.IsValidated);
+                Assert.False(context.HasError);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ClientIdIsNotNull_DoesNotValidate()
             {
                 // Arrange
@@ -213,10 +209,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Providers
                 await provider.ValidateClientAuthentication(context);
 
                 // Assert
-                Assert.IsFalse(context.IsValidated);
+                Assert.False(context.IsValidated);
             }
 
-            sealed class OAuthValidateClientAuthenticationContextAdapter : OAuthValidateClientAuthenticationContext
+            private sealed class OAuthValidateClientAuthenticationContextAdapter : OAuthValidateClientAuthenticationContext
             {
                 public OAuthValidateClientAuthenticationContextAdapter(IOwinContext context, OAuthAuthorizationServerOptions options, IReadableStringCollection parameters, string clientId) :
                     base(context, options, parameters)
@@ -226,10 +222,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Providers
             }
         }
 
-        [TestClass]
         public class ValidateClientRedirectUriMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task ClientIdAndRedirectUriMatch_Validates()
             {
                 // Arrange
@@ -250,11 +245,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Providers
                 await provider.ValidateClientRedirectUri(context);
 
                 // Assert
-                Assert.IsTrue(context.IsValidated);
-                Assert.IsFalse(context.HasError);
+                Assert.True(context.IsValidated);
+                Assert.False(context.HasError);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ClientIdMatchesAndRedirectUriDoesNotMatch_DoesNotValidate()
             {
                 // Arrange
@@ -275,10 +270,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Providers
                 await provider.ValidateClientRedirectUri(context);
 
                 // Assert
-                Assert.IsFalse(context.IsValidated);
+                Assert.False(context.IsValidated);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ClientIdDoesNotMatch_DoesNotValidate()
             {
                 // Arrange
@@ -299,14 +294,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Providers
                 await provider.ValidateClientRedirectUri(context);
 
                 // Assert
-                Assert.IsFalse(context.IsValidated);
+                Assert.False(context.IsValidated);
             }
         }
 
-        [TestClass]
         public class CreatePropertiesMethod
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsAuthenticationProperties()
             {
                 // Arrange
@@ -316,8 +310,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Providers
                 var properties = ApplicationOAuthProvider.CreateProperties(userName);
 
                 // Assert
-                Assert.IsTrue(properties.Dictionary.ContainsKey("userName"));
-                Assert.AreEqual(userName, properties.Dictionary["userName"]);
+                Assert.True(properties.Dictionary.ContainsKey("userName"));
+                Assert.Equal(userName, properties.Dictionary["userName"]);
             }
         }
     }

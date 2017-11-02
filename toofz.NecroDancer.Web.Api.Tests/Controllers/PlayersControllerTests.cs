@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ninject;
 using toofz.NecroDancer.Leaderboards;
@@ -11,12 +10,13 @@ using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
 using toofz.TestsShared;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
-    class PlayersControllerTests
+    public class PlayersControllerTests
     {
-        static IEnumerable<Player> Players
+        private static IEnumerable<Player> Players
         {
             get
             {
@@ -246,10 +246,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         protected ILeaderboardsStoreClient storeClient;
         protected PlayersController controller;
 
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -260,11 +259,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var controller = new PlayersController(db, storeClient);
 
                 // Assert
-                Assert.IsInstanceOfType(controller, typeof(PlayersController));
+                Assert.IsAssignableFrom<PlayersController>(controller);
             }
         }
 
-        [TestClass]
         public class GetPlayersMethod : PlayersControllerTests
         {
             public GetPlayersMethod()
@@ -275,7 +273,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             protected PlayersPagination pagination = new PlayersPagination();
             protected PlayersSortParams sort = new PlayersSortParams();
 
-            [TestMethod]
+            [Fact]
             public async Task LimitIsLessThanResultsCount_ReturnsLimitResults()
             {
                 // Arrange
@@ -285,15 +283,15 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var actionResult = await controller.GetPlayers(pagination, sort);
 
                 // Assert
-                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<PlayersEnvelope>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<PlayersEnvelope>>(actionResult);
                 var contentResult = (OkNegotiatedContentResult<PlayersEnvelope>)actionResult;
                 var playerDTOs = contentResult.Content.Players;
                 var expectedIds = new[] { "1", "2" };
                 var actualIds = playerDTOs.Select(p => p.Id).ToList();
-                CollectionAssert.AreEqual(expectedIds, actualIds);
+                Assert.Equal(expectedIds, actualIds);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task OffsetIsSpecified_ReturnsOffsetResults()
             {
                 // Arrange
@@ -303,15 +301,15 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var actionResult = await controller.GetPlayers(pagination, sort);
 
                 // Assert
-                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<PlayersEnvelope>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<PlayersEnvelope>>(actionResult);
                 var contentResult = (OkNegotiatedContentResult<PlayersEnvelope>)actionResult;
                 var playerDTOs = contentResult.Content.Players;
                 var expectedIds = new[] { "3", "4", "5" };
                 var actualIds = playerDTOs.Select(p => p.Id).ToList();
-                CollectionAssert.AreEqual(expectedIds, actualIds);
+                Assert.Equal(expectedIds, actualIds);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task SortIsSpecified_ReturnsSortedResults()
             {
                 // Arrange
@@ -321,15 +319,15 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var actionResult = await controller.GetPlayers(pagination, sort);
 
                 // Assert
-                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<PlayersEnvelope>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<PlayersEnvelope>>(actionResult);
                 var contentResult = (OkNegotiatedContentResult<PlayersEnvelope>)actionResult;
                 var playerDTOs = contentResult.Content.Players;
                 var expectedIds = new[] { "5", "4", "3", "2", "1" };
                 var actualIds = playerDTOs.Select(p => p.Id).ToList();
-                CollectionAssert.AreEqual(expectedIds, actualIds);
+                Assert.Equal(expectedIds, actualIds);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task QIsSpecified_ReturnsFilteredPlayers()
             {
                 // Arrange
@@ -339,34 +337,33 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var actionResult = await controller.GetPlayers(pagination, sort, q);
 
                 // Assert
-                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<PlayersEnvelope>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<PlayersEnvelope>>(actionResult);
                 var contentResult = (OkNegotiatedContentResult<PlayersEnvelope>)actionResult;
                 var playerDTOs = contentResult.Content.Players;
                 var expectedIds = new[] { "5" };
                 var actualIds = playerDTOs.Select(p => p.Id).ToList();
-                CollectionAssert.AreEqual(expectedIds, actualIds);
+                Assert.Equal(expectedIds, actualIds);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task QIsNotSpecified_ReturnsPlayers()
             {
                 // Arrange -> Act
                 var actionResult = await controller.GetPlayers(pagination, sort);
 
                 // Assert
-                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<PlayersEnvelope>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<PlayersEnvelope>>(actionResult);
                 var contentResult = (OkNegotiatedContentResult<PlayersEnvelope>)actionResult;
                 var playerDTOs = contentResult.Content.Players;
-                Assert.AreEqual(5, playerDTOs.Count());
+                Assert.Equal(5, playerDTOs.Count());
             }
         }
 
-        [TestClass]
         public class GetPlayerMethod : PlayersControllerTests
         {
             protected long steamId;
 
-            [TestMethod]
+            [Fact]
             public async Task PlayerNotFound_ReturnsNotFound()
             {
                 // Arrange
@@ -376,10 +373,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetPlayer(steamId);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+                Assert.IsAssignableFrom<NotFoundResult>(result);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ReturnsPlayerEntries()
             {
                 // Arrange
@@ -390,18 +387,17 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetPlayer(steamId);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<PlayerEnvelope>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<PlayerEnvelope>>(result);
             }
         }
 
-        [TestClass]
         public class GetPlayerEntriesMethod : PlayersControllerTests
         {
             protected long steamId;
             protected LeaderboardIdParams lbids = new LeaderboardIdParams();
             protected Products products = new Products(LeaderboardCategories.Products.Select(p => p.Name));
 
-            [TestMethod]
+            [Fact]
             public async Task PlayerNotFound_ReturnsNotFound()
             {
                 // Arrange
@@ -411,10 +407,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetPlayerEntries(steamId, lbids, products);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+                Assert.IsAssignableFrom<NotFoundResult>(result);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ReturnsPlayerEntries()
             {
                 // Arrange
@@ -425,17 +421,16 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetPlayerEntries(steamId, lbids, products);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<PlayerEntriesDTO>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<PlayerEntriesDTO>>(result);
             }
         }
 
-        [TestClass]
         public class GetPlayerEntryMethod : PlayersControllerTests
         {
             protected int lbid;
             protected int steamId;
 
-            [TestMethod]
+            [Fact]
             public async Task PlayerNotFound_ReturnsNotFound()
             {
                 // Arrange
@@ -446,10 +441,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetPlayerEntry(lbid, steamId);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+                Assert.IsAssignableFrom<NotFoundResult>(result);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ReturnsPlayerEntry()
             {
                 // Arrange
@@ -476,10 +471,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetPlayerEntry(lbid, steamId);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EntryDTO>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<EntryDTO>>(result);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ReplayFound_AddsReplayInformation()
             {
                 // Arrange
@@ -512,22 +507,21 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetPlayerEntry(lbid, steamId);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EntryDTO>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<EntryDTO>>(result);
                 var contentResult = (OkNegotiatedContentResult<EntryDTO>)result;
                 var content = contentResult.Content;
-                Assert.AreEqual(74, content.Version);
-                Assert.AreEqual("BOMB", content.KilledBy);
+                Assert.Equal(74, content.Version);
+                Assert.Equal("BOMB", content.KilledBy);
             }
         }
 
-        [TestClass]
         public class GetPlayerDailyEntriesMethod : PlayersControllerTests
         {
             protected long steamId;
             protected LeaderboardIdParams leaderboardIds = new LeaderboardIdParams();
             protected Products products = new Products(LeaderboardCategories.Products.Select(p => p.Name));
 
-            [TestMethod]
+            [Fact]
             public async Task PlayerNotFound_ReturnsNotFound()
             {
                 // Arrange
@@ -537,10 +531,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetPlayerDailyEntries(steamId, leaderboardIds, products);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+                Assert.IsAssignableFrom<NotFoundResult>(result);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ReturnsPlayerEntries()
             {
                 // Arrange
@@ -551,17 +545,16 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetPlayerDailyEntries(steamId, leaderboardIds, products);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<PlayerDailyEntriesDTO>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<PlayerDailyEntriesDTO>>(result);
             }
         }
 
-        [TestClass]
         public class GetPlayerDailyEntryMethod : PlayersControllerTests
         {
             protected int lbid;
             protected long steamId;
 
-            [TestMethod]
+            [Fact]
             public async Task PlayerNotFound_ReturnsNotFound()
             {
                 // Arrange
@@ -572,10 +565,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetPlayerDailyEntry(lbid, steamId);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+                Assert.IsAssignableFrom<NotFoundResult>(result);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ReturnsPlayerEntry()
             {
                 // Arrange
@@ -599,10 +592,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetPlayerDailyEntry(lbid, steamId);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<DailyEntryDTO>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<DailyEntryDTO>>(result);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ReplayFound_AddsReplayInformation()
             {
                 // Arrange
@@ -632,18 +625,17 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetPlayerDailyEntry(lbid, steamId);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<DailyEntryDTO>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<DailyEntryDTO>>(result);
                 var contentResult = (OkNegotiatedContentResult<DailyEntryDTO>)result;
                 var content = contentResult.Content;
-                Assert.AreEqual(74, content.Version);
-                Assert.AreEqual("BOMB", content.KilledBy);
+                Assert.Equal(74, content.Version);
+                Assert.Equal("BOMB", content.KilledBy);
             }
         }
 
-        [TestClass]
         public class PostPlayersMethod : PlayersControllerTests
         {
-            [TestMethod]
+            [Fact]
             public async Task ReturnsBulkStoreDTO()
             {
                 // Arrange
@@ -664,17 +656,16 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var actionResult = await controller.PostPlayers(players);
 
                 // Assert
-                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<BulkStoreDTO>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<BulkStoreDTO>>(actionResult);
                 var contentResult = (OkNegotiatedContentResult<BulkStoreDTO>)actionResult;
                 var content = contentResult.Content;
-                Assert.AreEqual(1, content.RowsAffected);
+                Assert.Equal(1, content.RowsAffected);
             }
         }
 
-        [TestClass]
         public class DisposeMethod : PlayersControllerTests
         {
-            [TestMethod]
+            [Fact]
             public void DisposesDb()
             {
                 // Arrange -> Act
@@ -684,7 +675,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.MockDb.Verify(d => d.Dispose(), Times.Once);
             }
 
-            [TestMethod]
+            [Fact]
             public void DisposesMoreThanOnce_OnlyDisposesDbOnce()
             {
                 // Arrange -> Act
@@ -696,10 +687,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        [TestClass]
         public class IntegrationTests : IntegrationTestsBase
         {
-            [TestMethod]
+            [Fact]
             public async Task GetPlayers()
             {
                 // Arrange
@@ -713,10 +703,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var response = await Server.HttpClient.GetAsync("/players?q=St");
 
                 // Assert
-                await Assert.That.RespondsWithAsync(response, Resources.GetPlayers);
+                await AssertHelpers.RespondsWithAsync(response, Resources.GetPlayers);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task GetPlayer()
             {
                 // Arrange
@@ -731,10 +721,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var response = await Server.HttpClient.GetAsync("/players/1");
 
                 // Assert
-                await Assert.That.RespondsWithAsync(response, Resources.GetPlayer);
+                await AssertHelpers.RespondsWithAsync(response, Resources.GetPlayer);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task GetPlayerEntries()
             {
                 // Arrange
@@ -761,10 +751,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var response = await Server.HttpClient.GetAsync("/players/1/entries");
 
                 // Assert
-                await Assert.That.RespondsWithAsync(response, Resources.GetPlayerEntries);
+                await AssertHelpers.RespondsWithAsync(response, Resources.GetPlayerEntries);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task GetPlayerEntriesFilteredByLbids()
             {
                 // Arrange
@@ -794,10 +784,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var response = await Server.HttpClient.GetAsync("/players/2/entries?lbids=739796,739999");
 
                 // Assert
-                await Assert.That.RespondsWithAsync(response, Resources.GetPlayerEntriesFilteredByLbids);
+                await AssertHelpers.RespondsWithAsync(response, Resources.GetPlayerEntriesFilteredByLbids);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task GetPlayerEntry()
             {
                 // Arrange
@@ -818,10 +808,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var response = await Server.HttpClient.GetAsync("/players/2/entries/739999");
 
                 // Assert
-                await Assert.That.RespondsWithAsync(response, Resources.GetPlayerEntry);
+                await AssertHelpers.RespondsWithAsync(response, Resources.GetPlayerEntry);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task GetPlayerDailyEntries()
             {
                 // Arrange
@@ -848,10 +838,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var response = await Server.HttpClient.GetAsync("/players/1/entries/dailies");
 
                 // Assert
-                await Assert.That.RespondsWithAsync(response, Resources.GetPlayerDailyEntries);
+                await AssertHelpers.RespondsWithAsync(response, Resources.GetPlayerDailyEntries);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task GetPlayerDailyEntriesFilteredByLbids()
             {
                 // Arrange
@@ -881,10 +871,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var response = await Server.HttpClient.GetAsync("/players/2/entries/dailies?lbids=739796,739999");
 
                 // Assert
-                await Assert.That.RespondsWithAsync(response, Resources.GetPlayerDailyEntriesFilteredByLbids);
+                await AssertHelpers.RespondsWithAsync(response, Resources.GetPlayerDailyEntriesFilteredByLbids);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task GetPlayerDailyEntry()
             {
                 // Arrange
@@ -905,7 +895,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var response = await Server.HttpClient.GetAsync("/players/2/entries/dailies/739999");
 
                 // Assert
-                await Assert.That.RespondsWithAsync(response, Resources.GetPlayerDailyEntry);
+                await AssertHelpers.RespondsWithAsync(response, Resources.GetPlayerDailyEntry);
             }
         }
     }

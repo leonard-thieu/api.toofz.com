@@ -6,7 +6,7 @@ using Microsoft.Owin.Security.OAuth;
 
 namespace toofz.NecroDancer.Web.Api
 {
-    static class WebApiConfig
+    internal static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
         {
@@ -25,13 +25,13 @@ namespace toofz.NecroDancer.Web.Api
             FluentValidationModelValidatorProvider.Configure(config);
         }
 
-        static void RegisterCors(HttpConfiguration config)
+        private static void RegisterCors(HttpConfiguration config)
         {
             var cors = new EnableCorsAttribute("*", "*", "*", "Date");
             config.EnableCors(cors);
         }
 
-        static void RegisterRoutes(HttpConfiguration config)
+        private static void RegisterRoutes(HttpConfiguration config)
         {
             // Web API routes
             config.MapHttpAttributeRoutes();

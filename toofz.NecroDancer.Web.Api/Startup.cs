@@ -1,10 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Owin;
+﻿using Owin;
 
 namespace toofz.NecroDancer.Web.Api
 {
-    [ExcludeFromCodeCoverage]
-    sealed partial class Startup
+    internal sealed partial class Startup
     {
         public void Configuration(IAppBuilder app)
         {

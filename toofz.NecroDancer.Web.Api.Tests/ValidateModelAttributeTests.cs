@@ -2,30 +2,28 @@
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Controllers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests
 {
-    class ValidateModelAttributeTests
+    public class ValidateModelAttributeTests
     {
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange -> Act
                 var validate = new ValidateModelAttribute();
 
                 // Assert
-                Assert.IsInstanceOfType(validate, typeof(ValidateModelAttribute));
+                Assert.IsAssignableFrom<ValidateModelAttribute>(validate);
             }
         }
 
-        [TestClass]
         public class OnActionExecutingMethod
         {
-            [TestMethod]
+            [Fact]
             public void ModelStateIsValid_DoesNotSetResponse()
             {
                 // Arrange
@@ -36,10 +34,10 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 validate.OnActionExecuting(actionContext);
 
                 // Assert
-                Assert.IsNull(actionContext.Response);
+                Assert.Null(actionContext.Response);
             }
 
-            [TestMethod]
+            [Fact]
             public void ModelStateIsInvalid_SetsErrorResponse()
             {
                 // Arrange
@@ -53,8 +51,8 @@ namespace toofz.NecroDancer.Web.Api.Tests
 
                 // Assert
                 var response = actionContext.Response;
-                Assert.IsNotNull(response);
-                Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+                Assert.NotNull(response);
+                Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
             }
         }
     }

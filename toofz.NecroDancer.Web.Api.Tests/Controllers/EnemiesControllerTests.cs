@@ -3,19 +3,19 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using toofz.NecroDancer.Data;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
 using toofz.TestsShared;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
-    class EnemiesControllerTests
+    public class EnemiesControllerTests
     {
-        static IEnumerable<Enemy> Enemies
+        private static IEnumerable<Enemy> Enemies
         {
             get => new[]
             {
@@ -118,10 +118,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             };
         }
 
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -132,11 +131,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var controller = new EnemiesController(db);
 
                 // Assert
-                Assert.IsInstanceOfType(controller, typeof(EnemiesController));
+                Assert.IsAssignableFrom<EnemiesController>(controller);
             }
         }
 
-        [TestClass]
         public class GetEnemiesMethod
         {
             public GetEnemiesMethod()
@@ -150,20 +148,20 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 pagination = new EnemiesPagination();
             }
 
-            EnemiesController controller;
-            EnemiesPagination pagination;
+            private EnemiesController controller;
+            private EnemiesPagination pagination;
 
-            [TestMethod]
+            [Fact]
             public async Task ReturnsOk()
             {
                 // Arrange -> Act
                 var result = await controller.GetEnemies(pagination);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EnemiesEnvelope>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<EnemiesEnvelope>>(result);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ReturnsEnemies()
             {
                 // Arrange -> Act
@@ -172,10 +170,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Assert
                 var contentResult = (OkNegotiatedContentResult<EnemiesEnvelope>)result;
                 var contentEnemies = contentResult.Content.Enemies;
-                Assert.AreEqual(8, contentEnemies.Count());
+                Assert.Equal(8, contentEnemies.Count());
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ResultsAreOrderedByElemenyNameThenByType()
             {
                 // Arrange -> Act
@@ -185,14 +183,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var contentResult = (OkNegotiatedContentResult<EnemiesEnvelope>)result;
                 var contentEnemies = contentResult.Content.Enemies;
                 var first = contentEnemies.First();
-                Assert.AreEqual("bat", first.Name);
-                Assert.AreEqual(1, first.Type);
+                Assert.Equal("bat", first.Name);
+                Assert.Equal(1, first.Type);
                 var firstMonkey = contentEnemies.First(e => e.Name == "monkey");
-                Assert.AreEqual("monkey", firstMonkey.Name);
-                Assert.AreEqual(3, firstMonkey.Type);
+                Assert.Equal("monkey", firstMonkey.Name);
+                Assert.Equal(3, firstMonkey.Type);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task LimitIsLessThanResultsCount_ReturnsLimitResults()
             {
                 // Arrange
@@ -204,10 +202,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Assert
                 var contentResult = (OkNegotiatedContentResult<EnemiesEnvelope>)result;
                 var contentEnemies = contentResult.Content.Enemies;
-                Assert.AreEqual(2, contentEnemies.Count());
+                Assert.Equal(2, contentEnemies.Count());
             }
 
-            [TestMethod]
+            [Fact]
             public async Task OffsetIsSpecified_ReturnsOffsetResults()
             {
                 // Arrange
@@ -220,12 +218,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var contentResult = (OkNegotiatedContentResult<EnemiesEnvelope>)result;
                 var contentEnemies = contentResult.Content.Enemies;
                 var first = contentEnemies.First();
-                Assert.AreEqual("monkey", first.Name);
-                Assert.AreEqual(3, first.Type);
+                Assert.Equal("monkey", first.Name);
+                Assert.Equal(3, first.Type);
             }
         }
 
-        [TestClass]
         public class GetEnemiesByAttributeMethod
         {
             public GetEnemiesByAttributeMethod()
@@ -239,35 +236,35 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 pagination = new EnemiesPagination();
             }
 
-            EnemiesController controller;
-            EnemiesPagination pagination;
+            private EnemiesController controller;
+            private EnemiesPagination pagination;
 
-            [DataTestMethod]
-            [DataRow("boss")]
-            [DataRow("bounce-on-movement-fail")]
-            [DataRow("floating")]
-            [DataRow("ignore-liquids")]
-            [DataRow("ignore-walls")]
-            [DataRow("is-monkey-like")]
-            [DataRow("massive")]
-            [DataRow("miniboss")]
+            [Theory]
+            [InlineData("boss")]
+            [InlineData("bounce-on-movement-fail")]
+            [InlineData("floating")]
+            [InlineData("ignore-liquids")]
+            [InlineData("ignore-walls")]
+            [InlineData("is-monkey-like")]
+            [InlineData("massive")]
+            [InlineData("miniboss")]
             public async Task ReturnsOk(string attribute)
             {
                 // Arrange -> Act
                 var result = await controller.GetEnemiesByAttribute(pagination, attribute);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<EnemiesEnvelope>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<EnemiesEnvelope>>(result);
             }
 
-            [DataTestMethod]
-            [DataRow("boss", "necrodancer", 1)]
-            [DataRow("floating", "bat", 1)]
-            [DataRow("ignore-liquids", "tarmonster", 1)]
-            [DataRow("ignore-walls", "spider", 1)]
-            [DataRow("is-monkey-like", "monkey", 3)]
-            [DataRow("massive", "dragon", 2)]
-            [DataRow("miniboss", "ogre", 1)]
+            [Theory]
+            [InlineData("boss", "necrodancer", 1)]
+            [InlineData("floating", "bat", 1)]
+            [InlineData("ignore-liquids", "tarmonster", 1)]
+            [InlineData("ignore-walls", "spider", 1)]
+            [InlineData("is-monkey-like", "monkey", 3)]
+            [InlineData("massive", "dragon", 2)]
+            [InlineData("miniboss", "ogre", 1)]
             public async Task ReturnsEnemiesFilteredByAttribute(string attribute, string name, int type)
             {
                 // Arrange -> Act
@@ -277,15 +274,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var contentResult = (OkNegotiatedContentResult<EnemiesEnvelope>)result;
                 var contentEnemies = contentResult.Content.Enemies;
                 var first = contentEnemies.First();
-                Assert.AreEqual(name, first.Name);
-                Assert.AreEqual(type, first.Type);
+                Assert.Equal(name, first.Name);
+                Assert.Equal(type, first.Type);
             }
         }
 
-        [TestClass]
         public class DisposeMethod
         {
-            [TestMethod]
+            [Fact]
             public void DisposesDb()
             {
                 // Arrange
@@ -300,7 +296,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Verify(d => d.Dispose(), Times.Once);
             }
 
-            [TestMethod]
+            [Fact]
             public void DisposeMoreThanOnce_DisposesDbOnlyOnce()
             {
                 // Arrange
@@ -317,10 +313,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        [TestClass]
         public class IntegrationTests : IntegrationTestsBase
         {
-            [TestMethod]
+            [Fact]
             public async Task GetEnemiesMethod()
             {
                 // Arrange
@@ -336,11 +331,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var content = await response.Content.ReadAsStringAsync();
 
                 // Assert
-                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-                Assert.That.NormalizedAreEqual(Resources.GetEnemies, content);
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                Assert.Equal(Resources.GetEnemies, content, ignoreLineEndingDifferences: true);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task GetEnemiesByAttributeMethod()
             {
                 // Arrange
@@ -356,8 +351,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var content = await response.Content.ReadAsStringAsync();
 
                 // Assert
-                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-                Assert.That.NormalizedAreEqual(Resources.GetEnemiesByAttribute, content);
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                Assert.Equal(Resources.GetEnemiesByAttribute, content, ignoreLineEndingDifferences: true);
             }
         }
     }

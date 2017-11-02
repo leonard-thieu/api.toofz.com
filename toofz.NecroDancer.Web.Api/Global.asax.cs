@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Web;
 using System.Web.Http;
@@ -13,7 +12,6 @@ namespace toofz.NecroDancer.Web.Api
     /// <summary>
     /// The web API application.
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public class WebApiApplication : HttpApplication
     {
         public static string InstrumentationKey
