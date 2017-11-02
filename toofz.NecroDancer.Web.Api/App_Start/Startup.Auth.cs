@@ -16,8 +16,8 @@ namespace toofz.NecroDancer.Web.Api
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context and user manager to use a single instance per request
-            var toofzApiConnectionString = Util.GetEnvVar("toofzApiConnectionString");
-            app.CreatePerOwinContext(() => new ApplicationDbContext(toofzApiConnectionString));
+            var applicationConnectionString = Util.GetConnectionString("ApplicationDbContext");
+            app.CreatePerOwinContext(() => new ApplicationDbContext(applicationConnectionString));
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
             // Configure the application for OAuth based flow

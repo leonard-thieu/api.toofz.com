@@ -65,8 +65,8 @@ namespace toofz.NecroDancer.Web.Api
         /// <param name="kernel">The kernel.</param>
         internal static void RegisterServices(IKernel kernel)
         {
-            var necroDancerConnectionString = Util.GetEnvVar("NecroDancerConnectionString");
-            var leaderboardsConnectionString = Util.GetEnvVar("LeaderboardsConnectionString");
+            var necroDancerConnectionString = Util.GetConnectionString("NecroDancerContext");
+            var leaderboardsConnectionString = Util.GetConnectionString("LeaderboardsContext");
 
             kernel.Bind<INecroDancerContext>().ToConstructor(s => new NecroDancerContext(necroDancerConnectionString));
             kernel.Bind<ILeaderboardsContext>().ToConstructor(s => new LeaderboardsContext(leaderboardsConnectionString));

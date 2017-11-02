@@ -70,6 +70,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -133,6 +134,8 @@
     <None Include="Properties\PublishProfiles\api.toofz.com - Web Deploy.pubxml" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="App_Data\XmlDocument.xml" />
+    <Content Include="Config\AppSettings.config" />
+    <Content Include="Config\ConnectionStrings.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
@@ -263,7 +266,6 @@
     <Content Include="Views\Web.config" />
     <Compile Include="AiExceptionLogger.cs" />
     <Compile Include="BrowserJsonFormatter.cs" />
-    <Compile Include="Constants.cs" />
     <Compile Include="IQueryableExtensions.cs" />
     <Compile Include="MaxValueAttribute.cs" />
     <Compile Include="MinValueAttribute.cs" />

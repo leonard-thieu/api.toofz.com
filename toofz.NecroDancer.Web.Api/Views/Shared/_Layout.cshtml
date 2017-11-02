@@ -3,11 +3,11 @@
 @{
     if (ViewBag.Title != null)
     {
-        ViewBag.Title = string.Join(" | ", ViewBag.Title, Constants.SiteName);
+        ViewBag.Title = string.Join(" | ", ViewBag.Title, ConfigurationManager.AppSettings["SiteName"]);
     }
     else
     {
-        ViewBag.Title = Constants.SiteName + " Documentation";
+        ViewBag.Title = ConfigurationManager.AppSettings["SiteName"] + " Documentation";
     }
 }
 <head>
@@ -206,7 +206,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="@Constants.MainServer/" class="navbar-brand">toofz</a>
+                <a href="@ConfigurationManager.AppSettings["toofzUrl"]/" class="navbar-brand">toofz</a>
             </div>
 
             <div class="collapse navbar-collapse">

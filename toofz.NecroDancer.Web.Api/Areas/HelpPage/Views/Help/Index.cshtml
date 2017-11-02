@@ -48,7 +48,7 @@ HttpResponseMessage response = await PostAsync(""{TokenEndpoint}"", content);";
 <header class="help-page">
     <div class="content-wrapper">
         <div class="float-left">
-            <h1>@Constants.SiteName Documentation</h1>
+            <h1>@ConfigurationManager.AppSettings["SiteName"] Documentation</h1>
         </div>
     </div>
 </header>

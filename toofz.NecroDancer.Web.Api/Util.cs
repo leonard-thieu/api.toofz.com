@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Configuration;
 
 namespace toofz.NecroDancer.Web.Api
 {
     internal static class Util
     {
-        public static string GetEnvVar(string variable)
+        public static string GetConnectionString(string name)
         {
-            return Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.Machine) ??
-                throw new ArgumentNullException(null, $"The environment variable '{variable}' must be set.");
+            return ConfigurationManager.ConnectionStrings[name]?.ConnectionString ??
+                throw new InvalidOperationException($"A connection string with the name '{name}' could not be found.");
         }
     }
 }
