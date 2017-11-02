@@ -7,10 +7,7 @@ branches:
 configuration:
   - Production
 environment:
-  APPVEYOR_CACHE_ENTRY_ZIP_ARGS: -t7z -m0=lzma -mx=9
   PROJECT: toofz.NecroDancer.Web.Api
-cache:
-  - packages -> **\packages.config
 notifications:
   - provider: Slack
     incoming_webhook:
@@ -21,6 +18,7 @@ assembly_info:
   assembly_version: $(appveyor_build_version)
 
 install:
+  - nuget update -Self
   - git clone https://github.com/leonard-thieu/toofz-build.git Scripts
 
 before_build:
