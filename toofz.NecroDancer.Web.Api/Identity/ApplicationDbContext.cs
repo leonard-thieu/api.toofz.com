@@ -20,7 +20,7 @@ namespace toofz.NecroDancer.Web.Api.Identity
             Initialize();
         }
 
-        void Initialize()
+        private void Initialize()
         {
             Configuration.AutoDetectChangesEnabled = false;
             Configuration.LazyLoadingEnabled = false;

@@ -6,7 +6,7 @@ namespace toofz.NecroDancer.Web.Api
     /// <summary>
     /// Provides extension methods for <see cref="ValueProviderResult"/>.
     /// </summary>
-    static class ValueProviderResultExtensions
+    internal static class ValueProviderResultExtensions
     {
         /// <summary>
         /// Converts the value that is encapsulated by this result to the specified type.

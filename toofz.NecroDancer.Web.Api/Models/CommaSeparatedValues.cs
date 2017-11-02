@@ -8,7 +8,7 @@ namespace toofz.NecroDancer.Web.Api.Models
     public abstract class CommaSeparatedValues<T> : IEnumerable<T>
         where T : IEquatable<T>
     {
-        readonly HashSet<T> items = new HashSet<T>();
+        private readonly HashSet<T> items = new HashSet<T>();
 
         public void Add(string item)
         {

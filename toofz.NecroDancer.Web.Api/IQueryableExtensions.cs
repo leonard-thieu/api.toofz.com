@@ -7,7 +7,7 @@ using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api
 {
-    static class IQueryableExtensions
+    internal static class IQueryableExtensions
     {
         // Modified from http://www.itorian.com/2015/12/sorting-in-webapi-generic-way-to-apply.html
         public static IQueryable<T> OrderBy<T>(

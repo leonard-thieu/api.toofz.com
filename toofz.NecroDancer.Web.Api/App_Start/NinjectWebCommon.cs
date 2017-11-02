@@ -1,6 +1,5 @@
 using System;
 using System.Data.SqlClient;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
@@ -16,10 +15,9 @@ using WebActivatorEx;
 
 namespace toofz.NecroDancer.Web.Api
 {
-    [ExcludeFromCodeCoverage]
-    static class NinjectWebCommon
+    internal static class NinjectWebCommon
     {
-        static readonly Bootstrapper bootstrapper = new Bootstrapper();
+        private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
