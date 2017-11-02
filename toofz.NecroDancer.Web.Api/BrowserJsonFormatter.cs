@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 
 namespace toofz.NecroDancer.Web.Api
 {
-    [ExcludeFromCodeCoverage]
-    sealed class BrowserJsonFormatter : JsonMediaTypeFormatter
+    internal sealed class BrowserJsonFormatter : JsonMediaTypeFormatter
     {
         public BrowserJsonFormatter(JsonSerializerSettings serializerSettings)
         {

@@ -11,7 +11,7 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
             this.modes = modes ?? throw new ArgumentNullException(nameof(modes));
         }
 
-        readonly IEnumerable<string> modes;
+        private readonly IEnumerable<string> modes;
 
         protected override CommaSeparatedValues<string> GetModel() => new Modes(modes);
     }

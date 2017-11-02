@@ -1,11 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using toofz.NecroDancer.Web.Api.ErrorHandler;
 
 namespace toofz.NecroDancer.Web.Api
 {
-    [ExcludeFromCodeCoverage]
-    static class FilterConfig
+    internal static class FilterConfig
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {

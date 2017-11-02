@@ -4,32 +4,31 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Metadata.Providers;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.ValueProviders;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using toofz.NecroDancer.Web.Api.Infrastructure;
 using toofz.NecroDancer.Web.Api.Models;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 {
-    class CharactersBinderTests
+    public class CharactersBinderTests
     {
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void LeaderboardCategoriesIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
                 IEnumerable<string> characters = null;
 
                 // Act -> Assert
-                Assert.ThrowsException<ArgumentNullException>(() =>
+                Assert.Throws<ArgumentNullException>(() =>
                 {
                     new CharactersBinder(characters);
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -39,14 +38,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var binder = new CharactersBinder(characters);
 
                 // Assert
-                Assert.IsInstanceOfType(binder, typeof(CharactersBinder));
+                Assert.IsAssignableFrom<CharactersBinder>(binder);
             }
         }
 
-        [TestClass]
         public class GetModelMethod
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsModel()
             {
                 // Arrange
@@ -71,7 +69,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
                 // Assert
                 var model = bindingContext.Model;
-                Assert.IsInstanceOfType(model, typeof(Characters));
+                Assert.IsAssignableFrom<Characters>(model);
             }
         }
     }

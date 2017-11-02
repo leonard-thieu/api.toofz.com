@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace toofz.NecroDancer.Web.Api.Models
 {
+    // TODO: Look over validation here.
     /// <summary>
     /// Represents a Steam player.
     /// </summary>

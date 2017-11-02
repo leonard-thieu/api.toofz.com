@@ -1,28 +1,26 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using toofz.NecroDancer.Web.Api.Identity;
+﻿using toofz.NecroDancer.Web.Api.Identity;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Identity
 {
-    class ApplicationDbContextTests
+    public class ApplicationDbContextTests
     {
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange -> Act
                 var db = new ApplicationDbContext();
 
                 // Assert
-                Assert.IsInstanceOfType(db, typeof(ApplicationDbContext));
+                Assert.IsAssignableFrom<ApplicationDbContext>(db);
             }
         }
 
-        [TestClass]
         public class Constructor_String
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -32,7 +30,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Identity
                 var db = new ApplicationDbContext(connectionString);
 
                 // Assert
-                Assert.IsInstanceOfType(db, typeof(ApplicationDbContext));
+                Assert.IsAssignableFrom<ApplicationDbContext>(db);
             }
         }
     }

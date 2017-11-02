@@ -4,7 +4,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace toofz.NecroDancer.Web.Api
 {
-    static class FormatterConfiguration
+    internal static class FormatterConfiguration
     {
         public static void Configure(HttpConfiguration config)
         {

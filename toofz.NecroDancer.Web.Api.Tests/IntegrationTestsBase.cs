@@ -1,25 +1,24 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 using Microsoft.Owin.Testing;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ninject;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Owin;
 using toofz.NecroDancer.Leaderboards;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests
 {
-    [TestCategory("Uses OWIN self hosting")]
-    abstract class IntegrationTestsBase
+    [Trait("Category", "Uses OWIN self hosting")]
+    public abstract class IntegrationTestsBase : IDisposable
     {
-        protected TestServer Server { get; private set; }
-        protected IKernel Kernel { get; private set; }
-
-        [TestInitialize]
-        public void TestInitialize()
+        public IntegrationTestsBase()
         {
-            Kernel = NinjectWebCommon.CreateKernel();
+            Kernel = new StandardKernel();
+            Kernel.Unbind<HttpConfiguration>();
+            NinjectWebCommon.RegisterServices(Kernel);
             Kernel.Rebind<INecroDancerContext>().ToConstant(Mock.Of<INecroDancerContext>());
             Kernel.Rebind<ILeaderboardsContext>().ToConstant(Util.CreateLeaderboardsContext());
             Kernel.Rebind<ILeaderboardsStoreClient>().ToConstant(Mock.Of<ILeaderboardsStoreClient>());
@@ -33,8 +32,10 @@ namespace toofz.NecroDancer.Web.Api.Tests
             });
         }
 
-        [TestCleanup]
-        public void TestCleanup()
+        protected TestServer Server { get; private set; }
+        protected IKernel Kernel { get; private set; }
+
+        public void Dispose()
         {
             Server?.Dispose();
         }

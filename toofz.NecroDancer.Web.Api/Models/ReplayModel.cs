@@ -30,7 +30,7 @@ namespace toofz.NecroDancer.Web.Api.Models
         /// </summary>
         public string KilledBy { get; set; }
 
-        sealed class ReplayModelValidator : AbstractValidator<ReplayModel>
+        private sealed class ReplayModelValidator : AbstractValidator<ReplayModel>
         {
             public ReplayModelValidator()
             {

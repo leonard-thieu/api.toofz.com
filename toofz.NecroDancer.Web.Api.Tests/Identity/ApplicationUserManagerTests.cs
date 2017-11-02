@@ -2,18 +2,17 @@
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.DataProtection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using toofz.NecroDancer.Web.Api.Identity;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Identity
 {
-    class ApplicationUserManagerTests
+    public class ApplicationUserManagerTests
     {
-        [TestClass]
         public class CreateMethod
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -26,10 +25,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Identity
                 var manager = ApplicationUserManager.Create(options, context);
 
                 // Assert
-                Assert.IsInstanceOfType(manager, typeof(ApplicationUserManager));
+                Assert.IsAssignableFrom<ApplicationUserManager>(manager);
             }
 
-            [TestMethod]
+            [Fact]
             public void DataProtectionProviderIsSet_SetsUserTokenProvider()
             {
                 // Arrange
@@ -46,14 +45,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Identity
                 var manager = ApplicationUserManager.Create(options, context);
 
                 // Assert
-                Assert.IsNotNull(manager.UserTokenProvider);
+                Assert.NotNull(manager.UserTokenProvider);
             }
         }
 
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -63,7 +61,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Identity
                 var manager = new ApplicationUserManager(store);
 
                 // Assert
-                Assert.IsInstanceOfType(manager, typeof(ApplicationUserManager));
+                Assert.IsAssignableFrom<ApplicationUserManager>(manager);
             }
         }
     }

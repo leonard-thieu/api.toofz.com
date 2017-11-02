@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace toofz.NecroDancer.Web.Api
 {
-    sealed class MinValueAttribute : ValidationAttribute
+    internal sealed class MinValueAttribute : ValidationAttribute
     {
         public MinValueAttribute(int minimum)
         {

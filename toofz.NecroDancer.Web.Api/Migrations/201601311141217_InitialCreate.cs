@@ -2,7 +2,6 @@ namespace toofz.NecroDancer.Web.Api.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public partial class InitialCreate : DbMigration
     {
         public override void Up()
@@ -74,7 +73,6 @@ namespace toofz.NecroDancer.Web.Api.Migrations
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
-
         }
 
         public override void Down()

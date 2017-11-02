@@ -11,7 +11,7 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
             this.characters = characters ?? throw new ArgumentNullException(nameof(characters));
         }
 
-        readonly IEnumerable<string> characters;
+        private readonly IEnumerable<string> characters;
 
         protected override CommaSeparatedValues<string> GetModel() => new Characters(characters);
     }

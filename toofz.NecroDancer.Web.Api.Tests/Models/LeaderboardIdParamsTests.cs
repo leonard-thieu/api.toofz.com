@@ -1,30 +1,28 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using toofz.NecroDancer.Web.Api.Models;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Models
 {
-    class LeaderboardIdParamsTests
+    public class LeaderboardIdParamsTests
     {
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange -> Act
                 var lbids = new LeaderboardIdParams();
 
                 // Assert
-                Assert.IsInstanceOfType(lbids, typeof(LeaderboardIdParams));
+                Assert.IsAssignableFrom<LeaderboardIdParams>(lbids);
             }
         }
 
-        [TestClass]
         public class ConvertMethod
         {
-            [TestMethod]
+            [Fact]
             public void ItemIsValid_AddsConvertedItem()
             {
                 // Arrange
@@ -36,28 +34,27 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
 
                 // Assert
                 var item2 = lbids.First();
-                Assert.AreEqual(2047616, item2);
+                Assert.Equal(2047616, item2);
             }
 
-            [TestMethod]
-            public void ItemIsInvalid_ThrowsException()
+            [Fact]
+            public void ItemIsInvalid_Throws()
             {
                 // Arrange
                 var lbids = new LeaderboardIdParams();
                 var item = "a";
 
                 // Act -> Assert
-                Assert.ThrowsException<FormatException>(() =>
+                Assert.Throws<FormatException>(() =>
                 {
                     lbids.Add(item);
                 });
             }
         }
 
-        [TestClass]
         public class GetDefaultsMethod
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsDefaults()
             {
                 // Arrange
@@ -67,7 +64,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 lbids.AddDefaults();
 
                 // Assert
-                Assert.IsFalse(lbids.Any());
+                Assert.False(lbids.Any());
             }
         }
     }

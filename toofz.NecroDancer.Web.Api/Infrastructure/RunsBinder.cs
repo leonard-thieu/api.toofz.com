@@ -11,7 +11,7 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
             this.runs = runs ?? throw new ArgumentNullException(nameof(runs));
         }
 
-        readonly IEnumerable<string> runs;
+        private readonly IEnumerable<string> runs;
 
         protected override CommaSeparatedValues<string> GetModel() => new Runs(runs);
     }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace toofz.NecroDancer.Web.Api
 {
-    sealed class MaxValueAttribute : ValidationAttribute
+    internal sealed class MaxValueAttribute : ValidationAttribute
     {
         public MaxValueAttribute(int maximum)
         {

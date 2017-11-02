@@ -16,7 +16,7 @@ namespace toofz.NecroDancer.Web.Api.Models
             this.values = values.ToList().AsReadOnly();
         }
 
-        readonly IEnumerable<string> values;
+        private readonly IEnumerable<string> values;
 
         protected override string Convert(string item)
         {
