@@ -6,7 +6,7 @@ using toofz.TestsShared;
 
 namespace toofz.NecroDancer.Web.Api.Tests
 {
-    static class Util
+    internal static class Util
     {
         public static ModelMetadata CreateModelMetadata<T>()
         {

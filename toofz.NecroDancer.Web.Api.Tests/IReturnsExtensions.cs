@@ -5,7 +5,7 @@ using Moq.Language.Flow;
 
 namespace toofz.NecroDancer.Web.Api.Tests
 {
-    static class IReturnsExtensions
+    internal static class IReturnsExtensions
     {
         public static IReturnsResult<TMock> ReturnsValueProviderResult<TMock>(this IReturns<TMock, ValueProviderResult> returns, object rawValue)
             where TMock : class

@@ -1,29 +1,28 @@
 ﻿using System;
 using System.Globalization;
 using System.Web.Http.ValueProviders;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests
 {
-    class ValueProviderResultExtensionsTests
+    public class ValueProviderResultExtensionsTests
     {
-        [TestClass]
         public class ConvertToMethod
         {
-            [TestMethod]
+            [Fact]
             public void ResultIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
                 ValueProviderResult result = null;
 
                 // Act -> Assert
-                Assert.ThrowsException<ArgumentNullException>(() =>
+                Assert.Throws<ArgumentNullException>(() =>
                 {
                     ValueProviderResultExtensions.ConvertTo<object>(result);
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ValueIsConvertibleToType_ReturnsValueAsType()
             {
                 // Arrange
@@ -33,10 +32,10 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 var value = result.ConvertTo<int>();
 
                 // Assert
-                Assert.AreEqual(15, value);
+                Assert.Equal(15, value);
             }
 
-            [TestMethod]
+            [Fact]
             public void ValueIsNotConvertibleToType_ReturnsDefaultOfType()
             {
                 // Arrange
@@ -46,7 +45,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 var value = result.ConvertTo<uint>();
 
                 // Assert
-                Assert.AreEqual(default, value);
+                Assert.Equal(default, value);
             }
         }
     }

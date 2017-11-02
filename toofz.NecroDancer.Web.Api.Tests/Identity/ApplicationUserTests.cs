@@ -1,32 +1,30 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using toofz.NecroDancer.Web.Api.Identity;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Identity
 {
-    class ApplicationUserTests
+    public class ApplicationUserTests
     {
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange -> Act
                 var user = new ApplicationUser();
 
                 // Assert
-                Assert.IsInstanceOfType(user, typeof(ApplicationUser));
+                Assert.IsAssignableFrom<ApplicationUser>(user);
             }
         }
 
-        [TestClass]
         public class GenerateUserIdentityAsyncMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task ReturnsClaimsIdentity()
             {
                 // Arrange
@@ -39,7 +37,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Identity
                 var claimsIdentity = await user.GenerateUserIdentityAsync(manager, authenticationType);
 
                 // Assert
-                Assert.IsInstanceOfType(claimsIdentity, typeof(ClaimsIdentity));
+                Assert.IsAssignableFrom<ClaimsIdentity>(claimsIdentity);
             }
         }
     }

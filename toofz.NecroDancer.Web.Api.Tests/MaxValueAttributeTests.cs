@@ -1,13 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests
 {
-    class MaxValueAttributeTests
+    public class MaxValueAttributeTests
     {
-        [TestClass]
         public class IsValid
         {
-            [TestMethod]
+            [Fact]
             public void GreaterThanMax_ReturnsFalse()
             {
                 // Arrange
@@ -18,12 +17,12 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 var result = maxValueAttribute.IsValid(value);
 
                 // Assert
-                Assert.IsFalse(result);
+                Assert.False(result);
             }
 
-            [DataTestMethod]
-            [DataRow(5)]
-            [DataRow(1)]
+            [Theory]
+            [InlineData(5)]
+            [InlineData(1)]
             public void LessThanEqualMax_ReturnsTrue(int value)
             {
                 // Arrange
@@ -33,7 +32,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 var result = maxValueAttribute.IsValid(value);
 
                 // Assert
-                Assert.IsTrue(result);
+                Assert.True(result);
             }
         }
     }

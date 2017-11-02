@@ -3,16 +3,15 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Metadata.Providers;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.ValueProviders;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using toofz.NecroDancer.Web.Api.Infrastructure;
 using toofz.NecroDancer.Web.Api.Models;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 {
-    class PaginationBinderTests
+    public class PaginationBinderTests
     {
-        [TestClass]
         public class BindModel
         {
             public BindModel()
@@ -32,13 +31,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 };
             }
 
-            HttpActionContext actionContext;
-            const string modelName = "mockModelName";
-            PaginationBinder<StubPagination> binder;
-            ModelBindingContext bindingContext;
-            Mock<IValueProvider> mockValueProvider;
+            private HttpActionContext actionContext;
+            private const string modelName = "mockModelName";
+            private PaginationBinder<StubPagination> binder;
+            private ModelBindingContext bindingContext;
+            private Mock<IValueProvider> mockValueProvider;
 
-            [TestMethod]
+            [Fact]
             public void OffsetValueIsNull_SetsModelWithDefaultOFfsetValueAndReturnsTrue()
             {
                 // Arrange
@@ -48,13 +47,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var canBind = binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.IsInstanceOfType(bindingContext.Model, typeof(StubPagination));
+                Assert.IsAssignableFrom<StubPagination>(bindingContext.Model);
                 var model = (StubPagination)bindingContext.Model;
-                Assert.AreEqual(13, model.Offset);
-                Assert.IsTrue(canBind);
+                Assert.Equal(13, model.Offset);
+                Assert.True(canBind);
             }
 
-            [TestMethod]
+            [Fact]
             public void OffsetValueIsANumber_SetsModelWithOffsetValueAndReturnsTrue()
             {
                 // Arrange
@@ -64,13 +63,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var canBind = binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.IsInstanceOfType(bindingContext.Model, typeof(StubPagination));
+                Assert.IsAssignableFrom<StubPagination>(bindingContext.Model);
                 var model = (StubPagination)bindingContext.Model;
-                Assert.AreEqual(3, model.Offset);
-                Assert.IsTrue(canBind);
+                Assert.Equal(3, model.Offset);
+                Assert.True(canBind);
             }
 
-            [TestMethod]
+            [Fact]
             public void OffsetValueIsNotANumber_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
@@ -81,13 +80,12 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
                 // Assert
                 var hasErrors = bindingContext.ModelState.TryGetValue("offset", out var modelState);
-                Assert.IsTrue(hasErrors);
-                Assert.AreEqual(1, modelState.Errors.Count);
-                Assert.IsTrue(canBind);
+                Assert.True(hasErrors);
+                Assert.Equal(1, modelState.Errors.Count);
+                Assert.True(canBind);
             }
 
-            [Ignore("Determine how to properly set up for testing validation.")]
-            [TestMethod]
+            [Fact(Skip = "Determine how to properly set up for testing validation.")]
             public void OffsetValueIsLessThanMin_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
@@ -98,13 +96,12 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
                 // Assert
                 var hasErrors = bindingContext.ModelState.TryGetValue("offset", out var modelState);
-                Assert.IsTrue(hasErrors);
-                Assert.AreEqual(1, modelState.Errors.Count);
-                Assert.IsTrue(canBind);
+                Assert.True(hasErrors);
+                Assert.Equal(1, modelState.Errors.Count);
+                Assert.True(canBind);
             }
 
-            [Ignore("Determine how to properly set up for testing validation.")]
-            [TestMethod]
+            [Fact(Skip = "Determine how to properly set up for testing validation.")]
             public void OffsetValueIsMoreThanMax_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
@@ -115,12 +112,12 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
                 // Assert
                 var hasErrors = bindingContext.ModelState.TryGetValue("offset", out var modelState);
-                Assert.IsTrue(hasErrors);
-                Assert.AreEqual(1, modelState.Errors.Count);
-                Assert.IsTrue(canBind);
+                Assert.True(hasErrors);
+                Assert.Equal(1, modelState.Errors.Count);
+                Assert.True(canBind);
             }
 
-            [TestMethod]
+            [Fact]
             public void LimitValueIsNull_SetsModelWithDefaultLimitValueAndReturnsTrue()
             {
                 // Arrange
@@ -130,13 +127,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var canBind = binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.IsInstanceOfType(bindingContext.Model, typeof(StubPagination));
+                Assert.IsAssignableFrom<StubPagination>(bindingContext.Model);
                 var model = (StubPagination)bindingContext.Model;
-                Assert.AreEqual(7, model.Limit);
-                Assert.IsTrue(canBind);
+                Assert.Equal(7, model.Limit);
+                Assert.True(canBind);
             }
 
-            [TestMethod]
+            [Fact]
             public void LimitValueIsANumber_SetsModelWithLimitValueAndReturnsTrue()
             {
                 // Arrange
@@ -146,13 +143,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var canBind = binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.IsInstanceOfType(bindingContext.Model, typeof(StubPagination));
+                Assert.IsAssignableFrom<StubPagination>(bindingContext.Model);
                 var model = (StubPagination)bindingContext.Model;
-                Assert.AreEqual(3, model.Limit);
-                Assert.IsTrue(canBind);
+                Assert.Equal(3, model.Limit);
+                Assert.True(canBind);
             }
 
-            [TestMethod]
+            [Fact]
             public void LimitValueIsNotANumber_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
@@ -163,13 +160,12 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
                 // Assert
                 var hasErrors = bindingContext.ModelState.TryGetValue("limit", out var modelState);
-                Assert.IsTrue(hasErrors);
-                Assert.AreEqual(1, modelState.Errors.Count);
-                Assert.IsTrue(canBind);
+                Assert.True(hasErrors);
+                Assert.Equal(1, modelState.Errors.Count);
+                Assert.True(canBind);
             }
 
-            [Ignore("Determine how to properly set up for testing validation.")]
-            [TestMethod]
+            [Fact(Skip = "Determine how to properly set up for testing validation.")]
             public void LimitValueIsLessThanMin_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
@@ -180,13 +176,12 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
                 // Assert
                 var hasErrors = bindingContext.ModelState.TryGetValue("limit", out var modelState);
-                Assert.IsTrue(hasErrors);
-                Assert.AreEqual(1, modelState.Errors.Count);
-                Assert.IsTrue(canBind);
+                Assert.True(hasErrors);
+                Assert.Equal(1, modelState.Errors.Count);
+                Assert.True(canBind);
             }
 
-            [Ignore("Determine how to properly set up for testing validation.")]
-            [TestMethod]
+            [Fact(Skip = "Determine how to properly set up for testing validation.")]
             public void LimitValueIsMoreThanMax_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
@@ -197,12 +192,12 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
                 // Assert
                 var hasErrors = bindingContext.ModelState.TryGetValue("limit", out var modelState);
-                Assert.IsTrue(hasErrors);
-                Assert.AreEqual(1, modelState.Errors.Count);
-                Assert.IsTrue(canBind);
+                Assert.True(hasErrors);
+                Assert.Equal(1, modelState.Errors.Count);
+                Assert.True(canBind);
             }
 
-            [TestMethod]
+            [Fact]
             public void OffsetValueAndLimitValueAreNull_SetsModelWithDefaultValuesAndReturnsTrue()
             {
                 // Arrange
@@ -213,14 +208,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var canBind = binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.IsInstanceOfType(bindingContext.Model, typeof(StubPagination));
+                Assert.IsAssignableFrom<StubPagination>(bindingContext.Model);
                 var model = (StubPagination)bindingContext.Model;
-                Assert.AreEqual(7, model.Limit);
-                Assert.AreEqual(13, model.Offset);
-                Assert.IsTrue(canBind);
+                Assert.Equal(7, model.Limit);
+                Assert.Equal(13, model.Offset);
+                Assert.True(canBind);
             }
 
-            sealed class StubPagination : IPagination
+            private sealed class StubPagination : IPagination
             {
                 [MinValue(0)]
                 [MaxValue(30)]

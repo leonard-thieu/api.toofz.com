@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ninject;
 using toofz.NecroDancer.Leaderboards;
@@ -9,12 +8,13 @@ using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
 using toofz.TestsShared;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
-    class ReplaysControllerTests
+    public class ReplaysControllerTests
     {
-        static IEnumerable<Replay> Replays
+        private static IEnumerable<Replay> Replays
         {
             get
             {
@@ -27,10 +27,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -41,14 +40,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var controller = new ReplaysController(db, storeClient);
 
                 // Assert
-                Assert.IsInstanceOfType(controller, typeof(ReplaysController));
+                Assert.IsAssignableFrom<ReplaysController>(controller);
             }
         }
 
-        [TestClass]
         public class GetReplaysMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task ReturnsReplays()
             {
                 // Arrange
@@ -65,14 +63,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetReplays(pagination);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<ReplaysEnvelope>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<ReplaysEnvelope>>(result);
             }
         }
 
-        [TestClass]
         public class PostReplaysMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task ReturnsBulkStoreDTO()
             {
                 // Arrange
@@ -97,17 +94,16 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var actionResult = await controller.PostReplays(replays);
 
                 // Assert
-                Assert.IsInstanceOfType(actionResult, typeof(OkNegotiatedContentResult<BulkStoreDTO>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<BulkStoreDTO>>(actionResult);
                 var contentResult = (OkNegotiatedContentResult<BulkStoreDTO>)actionResult;
                 var content = contentResult.Content;
-                Assert.AreEqual(1, content.RowsAffected);
+                Assert.Equal(1, content.RowsAffected);
             }
         }
 
-        [TestClass]
         public class DisposeMethod
         {
-            [TestMethod]
+            [Fact]
             public void DisposesDb()
             {
                 // Arrange
@@ -123,7 +119,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Verify(d => d.Dispose(), Times.Once);
             }
 
-            [TestMethod]
+            [Fact]
             public void DisposesMoreThanOnce_OnlyDisposesDbOnce()
             {
                 // Arrange
@@ -141,10 +137,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        [TestClass]
         public class IntegrationTests : IntegrationTestsBase
         {
-            [TestMethod]
+            [Fact]
             public async Task GetReplaysMethod()
             {
                 // Arrange
@@ -160,7 +155,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var content = await response.Content.ReadAsStringAsync();
 
                 // Assert
-                Assert.That.NormalizedAreEqual(Resources.GetReplays, content);
+                Assert.Equal(Resources.GetReplays, content, ignoreLineEndingDifferences: true);
             }
         }
     }

@@ -1,15 +1,14 @@
 ﻿using System.Web.Http.Controllers;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.ValueProviders;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using toofz.NecroDancer.Web.Api.Infrastructure;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 {
-    class ItemCategoryBinderTests
+    public class ItemCategoryBinderTests
     {
-        [TestClass]
         public class BindModelMethod
         {
             public BindModelMethod()
@@ -24,14 +23,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 };
             }
 
-            ItemCategoryBinder binder = new ItemCategoryBinder();
-            HttpActionContext actionContext = null;
-            string modelName = "myModelName";
-            Mock<IValueProvider> mockValueProvider = new Mock<IValueProvider>();
-            IValueProvider valueProvider;
-            ModelBindingContext bindingContext;
+            private ItemCategoryBinder binder = new ItemCategoryBinder();
+            private HttpActionContext actionContext = null;
+            private string modelName = "myModelName";
+            private Mock<IValueProvider> mockValueProvider = new Mock<IValueProvider>();
+            private IValueProvider valueProvider;
+            private ModelBindingContext bindingContext;
 
-            [TestMethod]
+            [Fact]
             public void ValueIsInvalid_AddsModelError()
             {
                 // Arrange
@@ -41,10 +40,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.AreEqual(1, bindingContext.ModelState.Count);
+                Assert.Equal(1, bindingContext.ModelState.Count);
             }
 
-            [TestMethod]
+            [Fact]
             public void ValueIsInvalid_ReturnsFalse()
             {
                 // Arrange
@@ -54,20 +53,20 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var success = binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.IsFalse(success);
+                Assert.False(success);
             }
 
-            [DataTestMethod]
-            [DataRow("armor")]
-            [DataRow("consumable")]
-            [DataRow("feet")]
-            [DataRow("food")]
-            [DataRow("head")]
-            [DataRow("rings")]
-            [DataRow("scrolls")]
-            [DataRow("spells")]
-            [DataRow("torches")]
-            [DataRow("weapons")]
+            [Theory]
+            [InlineData("armor")]
+            [InlineData("consumable")]
+            [InlineData("feet")]
+            [InlineData("food")]
+            [InlineData("head")]
+            [InlineData("rings")]
+            [InlineData("scrolls")]
+            [InlineData("spells")]
+            [InlineData("torches")]
+            [InlineData("weapons")]
             public void ValueIsValid_SetsModelToValue(string category)
             {
                 // Arrange
@@ -77,20 +76,20 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.AreEqual(category, bindingContext.Model);
+                Assert.Equal(category, bindingContext.Model);
             }
 
-            [DataTestMethod]
-            [DataRow("armor")]
-            [DataRow("consumable")]
-            [DataRow("feet")]
-            [DataRow("food")]
-            [DataRow("head")]
-            [DataRow("rings")]
-            [DataRow("scrolls")]
-            [DataRow("spells")]
-            [DataRow("torches")]
-            [DataRow("weapons")]
+            [Theory]
+            [InlineData("armor")]
+            [InlineData("consumable")]
+            [InlineData("feet")]
+            [InlineData("food")]
+            [InlineData("head")]
+            [InlineData("rings")]
+            [InlineData("scrolls")]
+            [InlineData("spells")]
+            [InlineData("torches")]
+            [InlineData("weapons")]
             public void ValueIsValid_ReturnsTrue(string category)
             {
                 // Arrange
@@ -100,7 +99,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var success = binder.BindModel(actionContext, bindingContext);
 
                 // Assert
-                Assert.IsTrue(success);
+                Assert.True(success);
             }
         }
     }

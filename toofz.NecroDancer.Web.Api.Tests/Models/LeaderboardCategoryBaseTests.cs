@@ -2,43 +2,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using toofz.NecroDancer.Web.Api.Models;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Models
 {
-    class LeaderboardCategoryBaseTests
+    public class LeaderboardCategoryBaseTests
     {
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void CategoryIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
                 IEnumerable<string> values = null;
 
                 // Act -> Assert
-                Assert.ThrowsException<ArgumentNullException>(() =>
+                Assert.Throws<ArgumentNullException>(() =>
                 {
                     new LeaderboardCategoryBaseAdapter(values);
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void CategoryIsEmpty_ThrowsArgumentException()
             {
                 // Arrange
                 var values = new List<string>();
 
                 // Act -> Assert
-                Assert.ThrowsException<ArgumentException>(() =>
+                Assert.Throws<ArgumentException>(() =>
                 {
                     new LeaderboardCategoryBaseAdapter(values);
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -48,11 +47,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 var leaderboardCategory = new LeaderboardCategoryBaseAdapter(values);
 
                 // Assert
-                Assert.IsInstanceOfType(leaderboardCategory, typeof(LeaderboardCategoryBase));
+                Assert.IsAssignableFrom<LeaderboardCategoryBase>(leaderboardCategory);
             }
         }
 
-        [TestClass]
         public class ConvertMethod
         {
             public ConvertMethod()
@@ -61,23 +59,23 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 leaderboardCategory = new LeaderboardCategoryBaseAdapter(values);
             }
 
-            IEnumerable<string> values;
-            LeaderboardCategoryBase leaderboardCategory;
+            private IEnumerable<string> values;
+            private LeaderboardCategoryBase leaderboardCategory;
 
-            [TestMethod]
+            [Fact]
             public void ItemIsNotValid_ThrowsArgumentException()
             {
                 // Arrange
                 var item = "itemA";
 
                 // Act -> Assert
-                Assert.ThrowsException<ArgumentException>(() =>
+                Assert.Throws<ArgumentException>(() =>
                 {
                     leaderboardCategory.Add(item);
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ItemIsValid_AddsItem()
             {
                 // Arrange
@@ -87,15 +85,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 leaderboardCategory.Add(item);
 
                 // Assert
-                Assert.AreEqual(1, leaderboardCategory.Count());
-                Assert.IsTrue(leaderboardCategory.Contains(item));
+                Assert.Equal(1, leaderboardCategory.Count());
+                Assert.Contains(item, leaderboardCategory);
             }
         }
 
-        [TestClass]
         public class GetDefaults
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsDefaults()
             {
                 // Arrange
@@ -106,14 +103,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 leaderboardCategory.AddDefaults();
 
                 // Assert
-                CollectionAssert.AreEqual(values, leaderboardCategory.ToArray());
+                Assert.Equal(values, leaderboardCategory.ToArray());
             }
         }
 
-        [TestClass]
         public class GetEnumeratorMethod
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsEnumerator()
             {
                 // Arrange
@@ -124,14 +120,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 var enumerator = leaderboardCategory.GetEnumerator();
 
                 // Assert
-                Assert.IsInstanceOfType(enumerator, typeof(IEnumerator<string>));
+                Assert.IsAssignableFrom<IEnumerator<string>>(enumerator);
             }
         }
 
-        [TestClass]
         public class IEnumerable_GetEnumeratorMethod
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsEnumerator()
             {
                 // Arrange
@@ -143,11 +138,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 var enumerator = enumerable.GetEnumerator();
 
                 // Assert
-                Assert.IsInstanceOfType(enumerator, typeof(IEnumerator));
+                Assert.IsAssignableFrom<IEnumerator>(enumerator);
             }
         }
 
-        sealed class LeaderboardCategoryBaseAdapter : LeaderboardCategoryBase
+        private sealed class LeaderboardCategoryBaseAdapter : LeaderboardCategoryBase
         {
             public LeaderboardCategoryBaseAdapter(IEnumerable<string> values) : base(values) { }
         }

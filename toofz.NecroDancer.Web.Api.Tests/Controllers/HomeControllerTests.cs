@@ -1,29 +1,27 @@
 ﻿using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using toofz.NecroDancer.Web.Api.Controllers;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
-    class HomeControllerTests
+    public class HomeControllerTests
     {
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange -> Act
                 var controller = new HomeController();
 
                 // Assert
-                Assert.IsInstanceOfType(controller, typeof(HomeController));
+                Assert.IsAssignableFrom<HomeController>(controller);
             }
         }
 
-        [TestClass]
         public class IndexMethod
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsRedirect()
             {
                 // Arrange
@@ -33,7 +31,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = controller.Index();
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+                Assert.IsAssignableFrom<RedirectToRouteResult>(result);
             }
         }
     }

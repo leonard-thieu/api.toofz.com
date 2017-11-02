@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ninject;
 using toofz.NecroDancer.Leaderboards;
@@ -10,12 +9,13 @@ using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
 using toofz.TestsShared;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
-    class LeaderboardsControllerTests
+    public class LeaderboardsControllerTests
     {
-        static IEnumerable<Leaderboard> Leaderboards
+        private static IEnumerable<Leaderboard> Leaderboards
         {
             get
             {
@@ -32,10 +32,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -45,14 +44,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var controller = new LeaderboardsController(db);
 
                 // Assert
-                Assert.IsInstanceOfType(controller, typeof(LeaderboardsController));
+                Assert.IsAssignableFrom<LeaderboardsController>(controller);
             }
         }
 
-        [TestClass]
         public class GetLeaderboardsMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task ReturnsLeaderboards()
             {
                 // Arrange
@@ -71,14 +69,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetLeaderboards(products, modes, runs, characters);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<LeaderboardsEnvelope>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<LeaderboardsEnvelope>>(result);
             }
         }
 
-        [TestClass]
         public class GetLeaderboardEntriesMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task LeaderboardNotFound_ReturnsNotFound()
             {
                 // Arrange
@@ -94,10 +91,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var actionResult = await controller.GetLeaderboardEntries(pagination, 0);
 
                 // Assert
-                Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
+                Assert.IsAssignableFrom<NotFoundResult>(actionResult);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ReturnsLeaderboardEntries()
             {
                 // Arrange
@@ -128,14 +125,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetLeaderboardEntries(pagination, 741312);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<LeaderboardEntriesDTO>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<LeaderboardEntriesDTO>>(result);
             }
         }
 
-        [TestClass]
         public class GetDailyLeaderboardsMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task ReturnsDailyLeaderboards()
             {
                 // Arrange
@@ -152,14 +148,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetDailyLeaderboards(pagination, productsParams);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<DailyLeaderboardsEnvelope>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<DailyLeaderboardsEnvelope>>(result);
             }
         }
 
-        [TestClass]
         public class GetDailyLeaderboardEntriesMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task DailyLeaderboardNotFound_ReturnsNotFound()
             {
                 // Arrange
@@ -175,10 +170,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var actionResult = await controller.GetDailyLeaderboardEntries(pagination, 0);
 
                 // Assert
-                Assert.IsInstanceOfType(actionResult, typeof(NotFoundResult));
+                Assert.IsAssignableFrom<NotFoundResult>(actionResult);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ReturnsDailyLeaderboardEntries()
             {
                 // Arrange
@@ -207,14 +202,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var result = await controller.GetDailyLeaderboardEntries(pagination, lbid);
 
                 // Assert
-                Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<DailyLeaderboardEntriesDTO>));
+                Assert.IsAssignableFrom<OkNegotiatedContentResult<DailyLeaderboardEntriesDTO>>(result);
             }
         }
 
-        [TestClass]
         public class DisposeMethod
         {
-            [TestMethod]
+            [Fact]
             public void DisposesDb()
             {
                 // Arrange
@@ -229,7 +223,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Verify(d => d.Dispose(), Times.Once);
             }
 
-            [TestMethod]
+            [Fact]
             public void DisposesMoreThanOnce_OnlyDisposesDbOnce()
             {
                 // Arrange
@@ -246,10 +240,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        [TestClass]
         public class IntegrationTests : IntegrationTestsBase
         {
-            [TestMethod]
+            [Fact]
             public async Task GetLeaderboards()
             {
                 // Arrange
@@ -266,7 +259,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var content = await response.Content.ReadAsStringAsync();
 
                 // Assert
-                Assert.That.NormalizedAreEqual(Resources.GetLeaderboards, content);
+                Assert.Equal(Resources.GetLeaderboards, content, ignoreLineEndingDifferences: true);
             }
         }
     }

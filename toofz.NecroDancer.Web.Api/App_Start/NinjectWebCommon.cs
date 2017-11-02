@@ -43,7 +43,7 @@ namespace toofz.NecroDancer.Web.Api
         /// Creates the kernel that will manage your application.
         /// </summary>
         /// <returns>The created kernel.</returns>
-        internal static IKernel CreateKernel()
+        private static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
             try
@@ -65,7 +65,7 @@ namespace toofz.NecroDancer.Web.Api
         /// Load your modules or register your services here!
         /// </summary>
         /// <param name="kernel">The kernel.</param>
-        static void RegisterServices(IKernel kernel)
+        internal static void RegisterServices(IKernel kernel)
         {
             var necroDancerConnectionString = Util.GetEnvVar("NecroDancerConnectionString");
             var leaderboardsConnectionString = Util.GetEnvVar("LeaderboardsConnectionString");

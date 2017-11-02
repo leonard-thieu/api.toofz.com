@@ -2,17 +2,15 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Newtonsoft.Json;
 using toofz.NecroDancer.Leaderboards.toofz;
-using toofz.TestsShared;
 
 namespace toofz.NecroDancer.Web.Api.Tests
 {
-    internal static class AssertExtensions
+    internal static class AssertHelpers
     {
         public static async Task RespondsWithAsync(
-            this Assert assert,
             HttpResponseMessage response,
             string expectedContent,
             HttpStatusCode expectedStatusCode = HttpStatusCode.OK)
@@ -20,7 +18,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
             Exception statusCodeEx = null;
             try
             {
-                Assert.AreEqual(expectedStatusCode, response.StatusCode);
+                Assert.Equal(expectedStatusCode, response.StatusCode);
             }
             catch (Exception ex)
             {
@@ -31,7 +29,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
             Exception contentEx = null;
             try
             {
-                assert.NormalizedAreEqual(expectedContent, content);
+                Assert.Equal(expectedContent, content, ignoreLineEndingDifferences: true);
             }
             catch (Exception ex)
             {
@@ -47,7 +45,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
                     throw new HttpErrorException(httpError, response.StatusCode, response.RequestMessage.RequestUri);
                 }
 
-                Assert.Fail(string.Join(Environment.NewLine, statusCodeEx?.Message, contentEx?.Message));
+                Assert.True(false, string.Join(Environment.NewLine, statusCodeEx?.Message, contentEx?.Message));
             }
         }
     }

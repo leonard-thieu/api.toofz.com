@@ -1,38 +1,36 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using toofz.NecroDancer.Web.Api.Models;
+using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Models
 {
-    class PlayersSortParamsTests
+    public class PlayersSortParamsTests
     {
-        [TestClass]
         public class Constructor
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsInstance()
             {
                 // Arrange -> Act
                 var sort = new PlayersSortParams();
 
                 // Assert
-                Assert.IsInstanceOfType(sort, typeof(PlayersSortParams));
+                Assert.IsAssignableFrom<PlayersSortParams>(sort);
             }
         }
 
-        [TestClass]
         public class ConvertMethod
         {
-            [DataTestMethod]
-            [DataRow("id")]
-            [DataRow("display_name")]
-            [DataRow("updated_at")]
-            [DataRow("entries")]
-            [DataRow("-id")]
-            [DataRow("-display_name")]
-            [DataRow("-updated_at")]
-            [DataRow("-entries")]
+            [Theory]
+            [InlineData("id")]
+            [InlineData("display_name")]
+            [InlineData("updated_at")]
+            [InlineData("entries")]
+            [InlineData("-id")]
+            [InlineData("-display_name")]
+            [InlineData("-updated_at")]
+            [InlineData("-entries")]
             public void ItemIsValid_AddsItem(string item)
             {
                 // Arrange
@@ -43,10 +41,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
 
                 // Assert
                 var item2 = sort.First();
-                Assert.AreEqual(item, item2);
+                Assert.Equal(item, item2);
             }
 
-            [TestMethod]
+            [Fact]
             public void ItemIsInvalid_ThrowsArgumentException()
             {
                 // Arrange
@@ -54,18 +52,17 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 var item = "myInvalidItem";
 
                 // Act -> Assert
-                var ex = Assert.ThrowsException<ArgumentException>(() =>
+                var ex = Assert.Throws<ArgumentException>(() =>
                 {
                     sort.Add(item);
                 });
-                Assert.IsNull(ex.ParamName);
+                Assert.Null(ex.ParamName);
             }
         }
 
-        [TestClass]
         public class GetDefaultsMethod
         {
-            [TestMethod]
+            [Fact]
             public void ReturnsDefaults()
             {
                 // Arrange
@@ -77,7 +74,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 // Assert
                 var expected = new[] { "-entries", "display_name", "id" };
                 var actual = sort.ToArray();
-                CollectionAssert.AreEqual(expected, actual);
+                Assert.Equal(expected, actual);
             }
         }
     }
