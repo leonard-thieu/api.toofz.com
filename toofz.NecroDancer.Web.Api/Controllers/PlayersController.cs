@@ -583,7 +583,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                              Avatar = p.Avatar,
                          })
                          .ToList();
-            var rowsAffected = await storeClient.SaveChangesAsync(model, true, cancellationToken);
+            var rowsAffected = await storeClient.BulkUpsertAsync(model, cancellationToken);
 
             var content = new BulkStoreDTO { RowsAffected = rowsAffected };
 

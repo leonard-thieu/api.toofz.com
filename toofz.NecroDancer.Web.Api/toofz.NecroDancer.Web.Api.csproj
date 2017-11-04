@@ -116,10 +116,10 @@
       <Version>1.0.7</Version>
     </PackageReference>
     <PackageReference Include="toofz.NecroDancer.Data">
-      <Version>8.0.0</Version>
+      <Version>8.0.2</Version>
     </PackageReference>
     <PackageReference Include="toofz.NecroDancer.Leaderboards.Data">
-      <Version>10.0.0</Version>
+      <Version>11.0.5</Version>
     </PackageReference>
     <PackageReference Include="toofz.RemoveServerHeader">
       <Version>1.0.0</Version>

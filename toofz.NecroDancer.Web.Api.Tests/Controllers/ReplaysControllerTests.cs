@@ -86,7 +86,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 };
                 var db = Mock.Of<ILeaderboardsContext>();
                 var mockStoreClient = new Mock<ILeaderboardsStoreClient>();
-                mockStoreClient.Setup(s => s.SaveChangesAsync(It.IsAny<IEnumerable<Replay>>(), true, default)).Returns(Task.FromResult(replays.Count));
+                mockStoreClient.Setup(s => s.BulkUpsertAsync(It.IsAny<IEnumerable<Replay>>(), default)).Returns(Task.FromResult(replays.Count));
                 var storeClient = mockStoreClient.Object;
                 var controller = new ReplaysController(db, storeClient);
 

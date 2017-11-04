@@ -104,7 +104,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var rowsAffected = 0;
             try
             {
-                rowsAffected = await storeClient.SaveChangesAsync(model, true, cancellationToken);
+                rowsAffected = await storeClient.BulkUpsertAsync(model, cancellationToken);
             }
             // Violation of PRIMARY KEY constraint
             catch (SqlException ex) when (ex.Number == 2627)

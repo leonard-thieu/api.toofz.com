@@ -650,7 +650,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         Avatar = "http://example.org/"
                     },
                 };
-                mockStoreClient.Setup(s => s.SaveChangesAsync(It.IsAny<IEnumerable<Player>>(), true, default)).ReturnsAsync(players.Count);
+                mockStoreClient.Setup(s => s.BulkUpsertAsync(It.IsAny<IEnumerable<Player>>(), default)).ReturnsAsync(players.Count);
 
                 // Act
                 var actionResult = await controller.PostPlayers(players);
