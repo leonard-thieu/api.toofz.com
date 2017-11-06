@@ -70,6 +70,44 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         public class PostReplaysMethod
         {
             [Fact]
+            public async Task ReplaysDoNotHaveUniqueIds_ReturnsConflict()
+            {
+                // Arrange
+                var replays = new List<ReplayModel>
+                {
+                    new ReplayModel
+                    {
+                        ReplayId = 42385384753,
+                        ErrorCode = null,
+                        Seed = 3548,
+                        Version = 75,
+                        KilledBy = "BOMB",
+                    },
+                    new ReplayModel
+                    {
+                        ReplayId = 42385384753,
+                        ErrorCode = null,
+                        Seed = 3548,
+                        Version = 75,
+                        KilledBy = "BOMB",
+                    },
+                };
+                var db = Mock.Of<ILeaderboardsContext>();
+                var mockStoreClient = new Mock<ILeaderboardsStoreClient>();
+                var storeClient = mockStoreClient.Object;
+                var sqlException = SqlClientUtil.CreateSqlException(SqlClientUtil.CreateSqlError(2627));
+                var ex = new SqlCommandException(default, sqlException, default);
+                mockStoreClient.Setup(s => s.BulkUpsertAsync(It.IsAny<IEnumerable<Replay>>(), default)).ThrowsAsync(ex);
+                var controller = new ReplaysController(db, storeClient);
+
+                // Act
+                var actionResult = await controller.PostReplays(replays);
+
+                // Assert
+                Assert.IsAssignableFrom<ConflictResult>(actionResult);
+            }
+
+            [Fact]
             public async Task ReturnsBulkStoreDTO()
             {
                 // Arrange
