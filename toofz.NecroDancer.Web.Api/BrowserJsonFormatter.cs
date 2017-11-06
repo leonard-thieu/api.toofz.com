@@ -9,8 +9,8 @@ namespace toofz.NecroDancer.Web.Api
     {
         public BrowserJsonFormatter(JsonSerializerSettings serializerSettings)
         {
-            SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
             SerializerSettings = serializerSettings;
+            SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
         }
 
         public override void SetDefaultContentHeaders(Type type, HttpContentHeaders headers, MediaTypeHeaderValue mediaType)
