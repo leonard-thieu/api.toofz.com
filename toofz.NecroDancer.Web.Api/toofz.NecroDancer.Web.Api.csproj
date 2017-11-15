@@ -115,11 +115,17 @@
     <PackageReference Include="System.Linq.Dynamic">
       <Version>1.0.7</Version>
     </PackageReference>
+    <PackageReference Include="toofz.NecroDancer">
+      <Version>5.0.2</Version>
+    </PackageReference>
     <PackageReference Include="toofz.NecroDancer.Data">
       <Version>8.0.2</Version>
     </PackageReference>
+    <PackageReference Include="toofz.NecroDancer.Leaderboards">
+      <Version>19.0.2</Version>
+    </PackageReference>
     <PackageReference Include="toofz.NecroDancer.Leaderboards.Data">
-      <Version>12.1.0</Version>
+      <Version>12.2.3</Version>
     </PackageReference>
     <PackageReference Include="toofz.RemoveServerHeader">
       <Version>1.0.1</Version>
