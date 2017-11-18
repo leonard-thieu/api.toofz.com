@@ -5,7 +5,7 @@
 
 ## Overview
 
-(**toofz API**)[https://api.toofz.com/] is a REST API that serves data for [**Crypt of the NecroDancer**](http://necrodancer.com/) items, enemies, leaderboards, and player stats. Its primary purpose 
+[**toofz API**](https://api.toofz.com/) is a REST API that serves data for [**Crypt of the NecroDancer**](http://necrodancer.com/) items, enemies, leaderboards, and player stats. Its primary purpose 
 is to serve as a backend for [toofz](https://crypt.toofz.com/). It also serves other community projects such as [StatsBot](https://github.com/necrommunity/Statsbot).
 
 **toofz API** is an ASP.NET Web API-based service. It uses **Entity Framework** to retrieve data from an MS SQL Server database.
@@ -15,11 +15,12 @@ is to serve as a backend for [toofz](https://crypt.toofz.com/). It also serves o
 ### Dependents
 
 * [toofz](https://github.com/leonard-thieu/crypt.toofz.com)
-* [toofz Players Service](https://github.com/leonard-thieu/players-service)
-* [toofz Replays Service](https://github.com/leonard-thieu/replays-service)
 
 ### Dependencies
 
+* [toofz Leaderboards Service](https://github.com/leonard-thieu/leaderboards-service)
+* [toofz Players Service](https://github.com/leonard-thieu/players-service)
+* [toofz Replays Service](https://github.com/leonard-thieu/replays-service)
 * [toofz Leaderboards Core](https://github.com/leonard-thieu/toofz-leaderboards-core)
 * [toofz Leaderboards Core (Data)](https://github.com/leonard-thieu/toofz-leaderboards-core-data)
 * [toofz NecroDancer Core](https://github.com/leonard-thieu/toofz-necrodancer-core)
