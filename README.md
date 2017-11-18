@@ -5,10 +5,10 @@
 
 ## Overview
 
-[**toofz API**](https://api.toofz.com/) is a REST API that serves data for [**Crypt of the NecroDancer**](http://necrodancer.com/) items, enemies, leaderboards, and player stats. Its primary purpose 
+[**toofz API**](https://api.toofz.com/) is a REST API that serves data for [Crypt of the NecroDancer](http://necrodancer.com/) items, enemies, leaderboards, and player stats. Its primary purpose 
 is to serve as a backend for [toofz](https://crypt.toofz.com/). It also serves other community projects such as [StatsBot](https://github.com/necrommunity/Statsbot).
 
-**toofz API** is an ASP.NET Web API-based service. It uses **Entity Framework** to retrieve data from an MS SQL Server database.
+**toofz API** is an ASP.NET Web API-based service. It uses Entity Framework to retrieve data from an MS SQL Server database.
 
 **toofz API** is a component of [toofz](https://github.com/leonard-thieu/toofz-necrodancer).
 
