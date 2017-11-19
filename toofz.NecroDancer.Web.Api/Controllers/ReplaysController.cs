@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.SqlClient;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -22,18 +19,15 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// Initializes a new instance of the <see cref="ReplaysController"/> class.
         /// </summary>
         /// <param name="db">The leaderboards context.</param>
-        /// <param name="storeClient">The store client used to store submitted data.</param>
-        public ReplaysController(
-            ILeaderboardsContext db,
-            ILeaderboardsStoreClient storeClient)
+        public ReplaysController(ILeaderboardsContext db)
         {
             this.db = db;
-            this.storeClient = storeClient;
         }
 
         private readonly ILeaderboardsContext db;
-        private readonly ILeaderboardsStoreClient storeClient;
 
+        // TODO: This is no longer needed for Replays Service. Determine if there's an public consumers of this and if not, 
+        //       remove it.
         [ResponseType(typeof(ReplaysEnvelope))]
         [Route("")]
         public async Task<IHttpActionResult> GetReplays(
@@ -65,54 +59,6 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                 Total = total,
                 Replays = replays,
             };
-
-            return Ok(content);
-        }
-
-        /// <summary>
-        /// Updates replays.
-        /// </summary>
-        /// <param name="replays">A list of replays.</param>
-        /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
-        /// <returns>
-        /// Returns the number of replays updated.
-        /// </returns>
-        /// <httpStatusCode cref="HttpStatusCode.BadRequest">
-        /// Any replays failed validation.
-        /// </httpStatusCode>
-        /// <httpStatusCode cref="HttpStatusCode.Conflict">
-        /// There are duplicate IDs.
-        /// </httpStatusCode>
-        [ResponseType(typeof(BulkStoreDTO))]
-        [Route("")]
-        [Authorize(Users = "ReplaysService")]
-        public async Task<IHttpActionResult> PostReplays(
-            IEnumerable<ReplayModel> replays,
-            CancellationToken cancellationToken = default)
-        {
-            var model = (from r in replays
-                         select new Replay
-                         {
-                             ReplayId = r.ReplayId,
-                             ErrorCode = r.ErrorCode,
-                             Seed = r.Seed,
-                             Version = r.Version,
-                             KilledBy = r.KilledBy,
-                         })
-                         .ToList();
-
-            var rowsAffected = 0;
-            try
-            {
-                rowsAffected = await storeClient.BulkUpsertAsync(model, cancellationToken);
-            }
-            // Violation of PRIMARY KEY constraint
-            catch (SqlCommandException ex) when (ex.InnerException.Number == 2627)
-            {
-                return Conflict();
-            }
-
-            var content = new BulkStoreDTO { RowsAffected = rowsAffected };
 
             return Ok(content);
         }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
@@ -237,13 +236,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public PlayersControllerTests()
         {
-            storeClient = mockStoreClient.Object;
-            controller = new PlayersController(mockDb.Db, storeClient);
+            controller = new PlayersController(mockDb.Db);
         }
 
         protected MockLeaderboardsContext mockDb = new MockLeaderboardsContext();
-        protected Mock<ILeaderboardsStoreClient> mockStoreClient = new Mock<ILeaderboardsStoreClient>();
-        protected ILeaderboardsStoreClient storeClient;
         protected PlayersController controller;
 
         public class Constructor
@@ -253,10 +249,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             {
                 // Arrange
                 var db = new LeaderboardsContext();
-                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
 
                 // Act
-                var controller = new PlayersController(db, storeClient);
+                var controller = new PlayersController(db);
 
                 // Assert
                 Assert.IsAssignableFrom<PlayersController>(controller);
@@ -630,36 +625,6 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var content = contentResult.Content;
                 Assert.Equal(74, content.Version);
                 Assert.Equal("BOMB", content.KilledBy);
-            }
-        }
-
-        public class PostPlayersMethod : PlayersControllerTests
-        {
-            [Fact]
-            public async Task ReturnsBulkStoreDTO()
-            {
-                // Arrange
-                var players = new List<PlayerModel>
-                {
-                    new PlayerModel
-                    {
-                        SteamId = 1,
-                        Exists = true,
-                        Name = "Mendayen",
-                        LastUpdate = new DateTime(2017, 9, 30, 21, 45, 53, DateTimeKind.Utc),
-                        Avatar = "http://example.org/"
-                    },
-                };
-                mockStoreClient.Setup(s => s.BulkUpsertAsync(It.IsAny<IEnumerable<Player>>(), default)).ReturnsAsync(players.Count);
-
-                // Act
-                var actionResult = await controller.PostPlayers(players);
-
-                // Assert
-                Assert.IsAssignableFrom<OkNegotiatedContentResult<BulkStoreDTO>>(actionResult);
-                var contentResult = (OkNegotiatedContentResult<BulkStoreDTO>)actionResult;
-                var content = contentResult.Content;
-                Assert.Equal(1, content.RowsAffected);
             }
         }
 

@@ -29,17 +29,12 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// Initializes a new instance of the <see cref="PlayersController"/> class.
         /// </summary>
         /// <param name="db">The leaderboards context.</param>
-        /// <param name="storeClient">The leaderboards store client.</param>
-        public PlayersController(
-            ILeaderboardsContext db,
-            ILeaderboardsStoreClient storeClient)
+        public PlayersController(ILeaderboardsContext db)
         {
             this.db = db;
-            this.storeClient = storeClient;
         }
 
         private readonly ILeaderboardsContext db;
-        private readonly ILeaderboardsStoreClient storeClient;
 
         /// <summary>
         /// Search for Steam players.
@@ -555,41 +550,6 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             }
 
             return Ok(entry);
-        }
-
-        /// <summary>
-        /// Updates Steam players.
-        /// </summary>
-        /// <param name="players">A list of players.</param>
-        /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
-        /// <returns>
-        /// Returns the number of Steam players updated.
-        /// </returns>
-        /// <httpStatusCode cref="HttpStatusCode.BadRequest">
-        /// Any players failed validation.
-        /// </httpStatusCode>
-        [ResponseType(typeof(BulkStoreDTO))]
-        [Route("")]
-        [Authorize(Users = "PlayersService")]
-        public async Task<IHttpActionResult> PostPlayers(
-            IEnumerable<PlayerModel> players,
-            CancellationToken cancellationToken = default)
-        {
-            var model = (from p in players
-                         select new Player
-                         {
-                             SteamId = p.SteamId.Value,
-                             Exists = p.Exists,
-                             Name = p.Name,
-                             LastUpdate = p.LastUpdate,
-                             Avatar = p.Avatar,
-                         })
-                         .ToList();
-            var rowsAffected = await storeClient.BulkUpsertAsync(model, cancellationToken);
-
-            var content = new BulkStoreDTO { RowsAffected = rowsAffected };
-
-            return Ok(content);
         }
 
         #region IDisposable Members

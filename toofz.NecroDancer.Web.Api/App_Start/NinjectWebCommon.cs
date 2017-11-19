@@ -1,5 +1,4 @@
 using System;
-using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
@@ -10,8 +9,8 @@ using toofz.NecroDancer.Web.Api;
 using toofz.NecroDancer.Web.Api.Infrastructure;
 using WebActivatorEx;
 
-[assembly: PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
-[assembly: ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
+[assembly: PreApplicationStartMethod(typeof(NinjectWebCommon), nameof(NinjectWebCommon.Start))]
+[assembly: ApplicationShutdownMethod(typeof(NinjectWebCommon), nameof(NinjectWebCommon.Stop))]
 
 namespace toofz.NecroDancer.Web.Api
 {
@@ -70,14 +69,6 @@ namespace toofz.NecroDancer.Web.Api
 
             kernel.Bind<INecroDancerContext>().ToConstructor(s => new NecroDancerContext(necroDancerConnectionString));
             kernel.Bind<ILeaderboardsContext>().ToConstructor(s => new LeaderboardsContext(leaderboardsConnectionString));
-            kernel.Bind<SqlConnection>().ToMethod(s =>
-            {
-                var connection = new SqlConnection(leaderboardsConnectionString);
-                connection.Open();
-
-                return connection;
-            });
-            kernel.Bind<ILeaderboardsStoreClient>().ToConstructor(s => new LeaderboardsStoreClient(s.Inject<SqlConnection>()));
             kernel.Bind<ProductsBinder>().ToMethod(s =>
             {
                 using (var db = kernel.Get<ILeaderboardsContext>())

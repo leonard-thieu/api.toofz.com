@@ -117,9 +117,6 @@
     <Compile Include="Controllers\LeaderboardsControllerTests.cs" />
     <Compile Include="Controllers\PlayersControllerTests.cs" />
     <Compile Include="Controllers\ReplaysControllerTests.cs" />
-    <Compile Include="Identity\ApplicationDbContextTests.cs" />
-    <Compile Include="Identity\ApplicationUserManagerTests.cs" />
-    <Compile Include="Identity\ApplicationUserTests.cs" />
     <Compile Include="Infrastructure\CharactersBinderTests.cs" />
     <Compile Include="Infrastructure\CommaSeparatedValuesBinderTests.cs" />
     <Compile Include="Infrastructure\EnemyAttributeBinderTests.cs" />
@@ -135,7 +132,6 @@
     <Compile Include="Models\LeaderboardCategoryBaseTests.cs" />
     <Compile Include="Models\LeaderboardIdParamsTests.cs" />
     <Compile Include="Models\PlayersSortParamsTests.cs" />
-    <Compile Include="Providers\ApplicationOAuthProviderTests.cs" />
     <Compile Include="AssertHelpers.cs" />
     <Compile Include="BrowserJsonFormatterTests.cs" />
     <Compile Include="ContextUtil.cs" />

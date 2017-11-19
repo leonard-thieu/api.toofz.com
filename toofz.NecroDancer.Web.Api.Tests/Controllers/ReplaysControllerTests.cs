@@ -34,10 +34,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             {
                 // Arrange
                 var db = Mock.Of<ILeaderboardsContext>();
-                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
 
                 // Act
-                var controller = new ReplaysController(db, storeClient);
+                var controller = new ReplaysController(db);
 
                 // Assert
                 Assert.IsAssignableFrom<ReplaysController>(controller);
@@ -55,8 +54,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var mockDb = new Mock<ILeaderboardsContext>();
                 mockDb.Setup(x => x.Replays).Returns(replays);
                 var db = mockDb.Object;
-                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
-                var controller = new ReplaysController(db, storeClient);
+                var controller = new ReplaysController(db);
                 var pagination = new ReplaysPagination();
 
                 // Act
@@ -64,78 +62,6 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
                 // Assert
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<ReplaysEnvelope>>(result);
-            }
-        }
-
-        public class PostReplaysMethod
-        {
-            [Fact]
-            public async Task ReplaysDoNotHaveUniqueIds_ReturnsConflict()
-            {
-                // Arrange
-                var replays = new List<ReplayModel>
-                {
-                    new ReplayModel
-                    {
-                        ReplayId = 42385384753,
-                        ErrorCode = null,
-                        Seed = 3548,
-                        Version = 75,
-                        KilledBy = "BOMB",
-                    },
-                    new ReplayModel
-                    {
-                        ReplayId = 42385384753,
-                        ErrorCode = null,
-                        Seed = 3548,
-                        Version = 75,
-                        KilledBy = "BOMB",
-                    },
-                };
-                var db = Mock.Of<ILeaderboardsContext>();
-                var mockStoreClient = new Mock<ILeaderboardsStoreClient>();
-                var storeClient = mockStoreClient.Object;
-                var sqlException = SqlClientUtil.CreateSqlException(SqlClientUtil.CreateSqlError(2627));
-                var ex = new SqlCommandException(default, sqlException, default);
-                mockStoreClient.Setup(s => s.BulkUpsertAsync(It.IsAny<IEnumerable<Replay>>(), default)).ThrowsAsync(ex);
-                var controller = new ReplaysController(db, storeClient);
-
-                // Act
-                var actionResult = await controller.PostReplays(replays);
-
-                // Assert
-                Assert.IsAssignableFrom<ConflictResult>(actionResult);
-            }
-
-            [Fact]
-            public async Task ReturnsBulkStoreDTO()
-            {
-                // Arrange
-                var replays = new List<ReplayModel>
-                {
-                    new ReplayModel
-                    {
-                        ReplayId = 42385384753,
-                        ErrorCode = null,
-                        Seed = 3548,
-                        Version = 75,
-                        KilledBy = "BOMB",
-                    },
-                };
-                var db = Mock.Of<ILeaderboardsContext>();
-                var mockStoreClient = new Mock<ILeaderboardsStoreClient>();
-                mockStoreClient.Setup(s => s.BulkUpsertAsync(It.IsAny<IEnumerable<Replay>>(), default)).Returns(Task.FromResult(replays.Count));
-                var storeClient = mockStoreClient.Object;
-                var controller = new ReplaysController(db, storeClient);
-
-                // Act
-                var actionResult = await controller.PostReplays(replays);
-
-                // Assert
-                Assert.IsAssignableFrom<OkNegotiatedContentResult<BulkStoreDTO>>(actionResult);
-                var contentResult = (OkNegotiatedContentResult<BulkStoreDTO>)actionResult;
-                var content = contentResult.Content;
-                Assert.Equal(1, content.RowsAffected);
             }
         }
 
@@ -147,8 +73,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Arrange
                 var mockDb = new Mock<ILeaderboardsContext>();
                 var db = mockDb.Object;
-                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
-                var controller = new ReplaysController(db, storeClient);
+                var controller = new ReplaysController(db);
 
                 // Act
                 controller.Dispose();
@@ -163,8 +88,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Arrange
                 var mockDb = new Mock<ILeaderboardsContext>();
                 var db = mockDb.Object;
-                var storeClient = Mock.Of<ILeaderboardsStoreClient>();
-                var controller = new ReplaysController(db, storeClient);
+                var controller = new ReplaysController(db);
 
                 // Act
                 controller.Dispose();
