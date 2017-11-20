@@ -10,7 +10,10 @@ is to serve as a backend for [toofz](https://crypt.toofz.com/). It also serves o
 
 **toofz API** is an ASP.NET Web API-based service. It uses Entity Framework to retrieve data from an MS SQL Server database.
 
-**toofz API** is a component of [toofz](https://github.com/leonard-thieu/toofz-necrodancer).
+---
+
+**toofz API** is a component of **toofz**. 
+Information about other projects that support **toofz** can be found in the [meta-repository](https://github.com/leonard-thieu/toofz-necrodancer).
 
 ### Dependents
 
