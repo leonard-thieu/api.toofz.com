@@ -8,7 +8,6 @@ using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
-using toofz.TestsShared;
 using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
@@ -660,9 +659,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Arrange
                 var db = Kernel.Get<ILeaderboardsContext>();
                 var mockDb = Mock.Get(db);
-                var mockPlayers = new MockDbSet<Player>(Players);
-                var players = mockPlayers.Object;
-                mockDb.Setup(d => d.Players).Returns(players);
+                var dbPlayers = new FakeDbSet<Player>(Players);
+                mockDb.Setup(d => d.Players).Returns(dbPlayers);
 
                 // Act
                 var response = await Server.HttpClient.GetAsync("/players?q=St");
@@ -677,9 +675,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Arrange
                 var db = Kernel.Get<ILeaderboardsContext>();
                 var mockDb = Mock.Get(db);
-                var players = Players;
-                var mockDbPlayers = new MockDbSet<Player>(players);
-                var dbPlayers = mockDbPlayers.Object;
+                var mockDbPlayers = new FakeDbSet<Player>(Players);
+                var dbPlayers = new FakeDbSet<Player>(Players);
                 mockDb.Setup(d => d.Players).Returns(dbPlayers);
 
                 // Act
@@ -696,20 +693,16 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var db = Kernel.Get<ILeaderboardsContext>();
                 var mockDb = Mock.Get(db);
                 var players = Players;
-                var mockDbPlayers = new MockDbSet<Player>(players);
-                var dbPlayers = mockDbPlayers.Object;
+                var dbPlayers = new FakeDbSet<Player>(players);
                 mockDb.Setup(d => d.Players).Returns(dbPlayers);
-                var mockDbLeaderboards = new MockDbSet<Leaderboard>();
-                var dbLeaderboards = mockDbLeaderboards.Object;
+                var dbLeaderboards = new FakeDbSet<Leaderboard>();
                 mockDb.Setup(d => d.Leaderboards).Returns(dbLeaderboards);
                 var entries = from p in players
                               from e in p.Entries
                               select e;
-                var mockDbEntries = new MockDbSet<Entry>(entries);
-                var dbEntries = mockDbEntries.Object;
+                var dbEntries = new FakeDbSet<Entry>(entries);
                 mockDb.Setup(d => d.Entries).Returns(dbEntries);
-                var mockDbReplays = new MockDbSet<Replay>();
-                var dbReplays = mockDbReplays.Object;
+                var dbReplays = new FakeDbSet<Replay>();
                 mockDb.Setup(d => d.Replays).Returns(dbReplays);
 
                 // Act
@@ -726,23 +719,19 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var db = Kernel.Get<ILeaderboardsContext>();
                 var mockDb = Mock.Get(db);
                 var players = Players;
-                var mockDbPlayers = new MockDbSet<Player>(players);
-                var dbPlayers = mockDbPlayers.Object;
+                var dbPlayers = new FakeDbSet<Player>(Players);
                 mockDb.Setup(d => d.Players).Returns(dbPlayers);
                 var leaderboards = from p in players
                                    from e in p.Entries
                                    select e.Leaderboard;
-                var mockDbLeaderboards = new MockDbSet<Leaderboard>(leaderboards);
-                var dbLeaderboards = mockDbLeaderboards.Object;
+                var dbLeaderboards = new FakeDbSet<Leaderboard>(leaderboards);
                 mockDb.Setup(d => d.Leaderboards).Returns(dbLeaderboards);
                 var entries = from p in players
                               from e in p.Entries
                               select e;
-                var mockDbEntries = new MockDbSet<Entry>(entries);
-                var dbEntries = mockDbEntries.Object;
+                var dbEntries = new FakeDbSet<Entry>(entries);
                 mockDb.Setup(d => d.Entries).Returns(dbEntries);
-                var mockDbReplays = new MockDbSet<Replay>();
-                var dbReplays = mockDbReplays.Object;
+                var dbReplays = new FakeDbSet<Replay>();
                 mockDb.Setup(d => d.Replays).Returns(dbReplays);
 
                 // Act
@@ -762,11 +751,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var entries = from p in players
                               from e in p.Entries
                               select e;
-                var mockDbEntries = new MockDbSet<Entry>(entries);
-                var dbEntries = mockDbEntries.Object;
+                var dbEntries = new FakeDbSet<Entry>(entries);
                 mockDb.Setup(d => d.Entries).Returns(dbEntries);
-                var mockDbReplays = new MockDbSet<Replay>();
-                var dbReplays = mockDbReplays.Object;
+                var dbReplays = new FakeDbSet<Replay>();
                 mockDb.Setup(d => d.Replays).Returns(dbReplays);
 
                 // Act
@@ -783,20 +770,16 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var db = Kernel.Get<ILeaderboardsContext>();
                 var mockDb = Mock.Get(db);
                 var players = Players;
-                var mockDbPlayers = new MockDbSet<Player>(players);
-                var dbPlayers = mockDbPlayers.Object;
+                var dbPlayers = new FakeDbSet<Player>(players);
                 mockDb.Setup(d => d.Players).Returns(dbPlayers);
-                var mockDbLeaderboards = new MockDbSet<DailyLeaderboard>();
-                var dbLeaderboards = mockDbLeaderboards.Object;
+                var dbLeaderboards = new FakeDbSet<DailyLeaderboard>();
                 mockDb.Setup(d => d.DailyLeaderboards).Returns(dbLeaderboards);
                 var entries = from p in players
                               from e in p.DailyEntries
                               select e;
-                var mockDbEntries = new MockDbSet<DailyEntry>(entries);
-                var dbEntries = mockDbEntries.Object;
+                var dbEntries = new FakeDbSet<DailyEntry>(entries);
                 mockDb.Setup(d => d.DailyEntries).Returns(dbEntries);
-                var mockDbReplays = new MockDbSet<Replay>();
-                var dbReplays = mockDbReplays.Object;
+                var dbReplays = new FakeDbSet<Replay>();
                 mockDb.Setup(d => d.Replays).Returns(dbReplays);
 
                 // Act
@@ -813,23 +796,19 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var db = Kernel.Get<ILeaderboardsContext>();
                 var mockDb = Mock.Get(db);
                 var players = Players;
-                var mockDbPlayers = new MockDbSet<Player>(players);
-                var dbPlayers = mockDbPlayers.Object;
+                var dbPlayers = new FakeDbSet<Player>(players);
                 mockDb.Setup(d => d.Players).Returns(dbPlayers);
                 var leaderboards = from p in players
                                    from e in p.DailyEntries
                                    select e.Leaderboard;
-                var mockDbLeaderboards = new MockDbSet<DailyLeaderboard>(leaderboards);
-                var dbLeaderboards = mockDbLeaderboards.Object;
+                var dbLeaderboards = new FakeDbSet<DailyLeaderboard>(leaderboards);
                 mockDb.Setup(d => d.DailyLeaderboards).Returns(dbLeaderboards);
                 var entries = from p in players
                               from e in p.DailyEntries
                               select e;
-                var mockDbEntries = new MockDbSet<DailyEntry>(entries);
-                var dbEntries = mockDbEntries.Object;
+                var dbEntries = new FakeDbSet<DailyEntry>(entries);
                 mockDb.Setup(d => d.DailyEntries).Returns(dbEntries);
-                var mockDbReplays = new MockDbSet<Replay>();
-                var dbReplays = mockDbReplays.Object;
+                var dbReplays = new FakeDbSet<Replay>();
                 mockDb.Setup(d => d.Replays).Returns(dbReplays);
 
                 // Act
@@ -849,11 +828,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var entries = from p in players
                               from e in p.DailyEntries
                               select e;
-                var mockDbEntries = new MockDbSet<DailyEntry>(entries);
-                var dbEntries = mockDbEntries.Object;
+                var dbEntries = new FakeDbSet<DailyEntry>(entries);
                 mockDb.Setup(d => d.DailyEntries).Returns(dbEntries);
-                var mockDbReplays = new MockDbSet<Replay>();
-                var dbReplays = mockDbReplays.Object;
+                var dbReplays = new FakeDbSet<Replay>();
                 mockDb.Setup(d => d.Replays).Returns(dbReplays);
 
                 // Act

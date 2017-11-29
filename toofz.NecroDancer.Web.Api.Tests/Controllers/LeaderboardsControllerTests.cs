@@ -8,7 +8,6 @@ using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
-using toofz.TestsShared;
 using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
@@ -54,11 +53,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsLeaderboards()
             {
                 // Arrange
-                var mockLeaderboards = new MockDbSet<Leaderboard>();
-                var leaderboards = mockLeaderboards.Object;
                 var mockDb = new Mock<ILeaderboardsContext>();
-                mockDb.Setup(d => d.Leaderboards).Returns(leaderboards);
                 var db = mockDb.Object;
+                var dbLeaderboards = new FakeDbSet<Leaderboard>();
+                mockDb.Setup(d => d.Leaderboards).Returns(dbLeaderboards);
                 var controller = new LeaderboardsController(db);
                 var products = new Products(LeaderboardCategories.Products.Select(p => p.Name).ToList());
                 var modes = new Modes(LeaderboardCategories.Modes.Select(m => m.Name).ToList());
@@ -79,11 +77,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task LeaderboardNotFound_ReturnsNotFound()
             {
                 // Arrange
-                var mockDbLeaderboards = new MockDbSet<Leaderboard>(new Leaderboard { LeaderboardId = 22 });
-                var dbLeaderboards = mockDbLeaderboards.Object;
                 var mockDb = new Mock<ILeaderboardsContext>();
-                mockDb.Setup(x => x.Leaderboards).Returns(dbLeaderboards);
                 var db = mockDb.Object;
+                var leaderboards = new List<Leaderboard>
+                {
+                    new Leaderboard { LeaderboardId = 22 },
+                };
+                var dbLeaderboards = new FakeDbSet<Leaderboard>(leaderboards);
+                mockDb.Setup(d => d.Leaderboards).Returns(dbLeaderboards);
                 var controller = new LeaderboardsController(db);
                 var pagination = new LeaderboardsPagination();
 
@@ -98,7 +99,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsLeaderboardEntries()
             {
                 // Arrange
-                var mockDbLeaderboards = new MockDbSet<Leaderboard>(
+                var mockDb = new Mock<ILeaderboardsContext>();
+                var db = mockDb.Object;
+                var leaderboards = new List<Leaderboard>
+                {
                     new Leaderboard
                     {
                         LeaderboardId = 741312,
@@ -106,18 +110,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                         Mode = new Mode(1, "myName", "myDisplayName"),
                         Run = new Run(1, "myName", "myDisplayName"),
                         Character = new Character(1, "myName", "myDisplayName"),
-                    }
-                );
-                var dbLeaderboards = mockDbLeaderboards.Object;
-                var mockDbEntries = new MockDbSet<Entry>();
-                var dbEntries = mockDbEntries.Object;
-                var mockDbReplays = new MockDbSet<Replay>();
-                var dbReplays = mockDbReplays.Object;
-                var mockDb = new Mock<ILeaderboardsContext>();
+                    },
+                };
+                var dbLeaderboards = new FakeDbSet<Leaderboard>(leaderboards);
                 mockDb.Setup(x => x.Leaderboards).Returns(dbLeaderboards);
+                var dbEntries = new FakeDbSet<Entry>();
                 mockDb.Setup(x => x.Entries).Returns(dbEntries);
+                var dbReplays = new FakeDbSet<Replay>();
                 mockDb.Setup(x => x.Replays).Returns(dbReplays);
-                var db = mockDb.Object;
                 var controller = new LeaderboardsController(db);
                 var pagination = new LeaderboardsPagination();
 
@@ -137,8 +137,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Arrange
                 var db = Util.CreateLeaderboardsContext();
                 var mockDb = Mock.Get(db);
-                var mockDbDailyLeaderboards = new MockDbSet<DailyLeaderboard>();
-                var dbDailyLeaderboards = mockDbDailyLeaderboards.Object;
+                var dbDailyLeaderboards = new FakeDbSet<DailyLeaderboard>();
                 mockDb.Setup(x => x.DailyLeaderboards).Returns(dbDailyLeaderboards);
                 var controller = new LeaderboardsController(db);
                 var pagination = new LeaderboardsPagination();
@@ -159,8 +158,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             {
                 // Arrange
                 var mockDb = new Mock<ILeaderboardsContext>();
-                var mockDbDailyLeaderboards = new MockDbSet<DailyLeaderboard>();
-                var dbDailyLeaderboards = mockDbDailyLeaderboards.Object;
+                var dbDailyLeaderboards = new FakeDbSet<DailyLeaderboard>();
                 mockDb.Setup(d => d.DailyLeaderboards).Returns(dbDailyLeaderboards);
                 var db = mockDb.Object;
                 var controller = new LeaderboardsController(db);
@@ -177,23 +175,22 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsDailyLeaderboardEntries()
             {
                 // Arrange
-                var mockDbDailyLeaderboards = new MockDbSet<DailyLeaderboard>(
+                var mockDb = new Mock<ILeaderboardsContext>();
+                var db = mockDb.Object;
+                var dailyLeaderboards = new List<DailyLeaderboard>
+                {
                     new DailyLeaderboard
                     {
                         LeaderboardId = 1,
                         Product = new Product(1, "myName", "myDisplayName"),
-                    }
-                );
-                var dbDailyLeaderboards = mockDbDailyLeaderboards.Object;
-                var mockDbDailyEntries = new MockDbSet<DailyEntry>();
-                var dbDailyEntries = mockDbDailyEntries.Object;
-                var mockDbReplays = new MockDbSet<Replay>();
-                var dbReplays = mockDbReplays.Object;
-                var mockDb = new Mock<ILeaderboardsContext>();
+                    },
+                };
+                var dbDailyLeaderboards = new FakeDbSet<DailyLeaderboard>(dailyLeaderboards);
                 mockDb.Setup(d => d.DailyLeaderboards).Returns(dbDailyLeaderboards);
+                var dbDailyEntries = new FakeDbSet<DailyEntry>();
                 mockDb.Setup(d => d.DailyEntries).Returns(dbDailyEntries);
+                var dbReplays = new FakeDbSet<Replay>();
                 mockDb.Setup(d => d.Replays).Returns(dbReplays);
-                var db = mockDb.Object;
                 var controller = new LeaderboardsController(db);
                 var pagination = new LeaderboardsPagination();
                 var lbid = 1;
@@ -248,9 +245,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Arrange
                 var db = Kernel.Get<ILeaderboardsContext>();
                 var mockDb = Mock.Get(db);
-                var leaderboards = Leaderboards;
-                var mockDbLeaderboards = new MockDbSet<Leaderboard>(leaderboards);
-                var dbLeaderboards = mockDbLeaderboards.Object;
+                var dbLeaderboards = new FakeDbSet<Leaderboard>(Leaderboards);
                 mockDb.Setup(d => d.Leaderboards).Returns(dbLeaderboards);
                 Kernel.Rebind<ILeaderboardsContext>().ToConstant(db);
 

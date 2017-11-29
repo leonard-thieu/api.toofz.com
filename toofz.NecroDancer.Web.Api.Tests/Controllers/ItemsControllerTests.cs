@@ -8,7 +8,6 @@ using toofz.NecroDancer.Data;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
-using toofz.TestsShared;
 using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
@@ -218,11 +217,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             public GetItemsMethod()
             {
-                var mockItems = new MockDbSet<Item>(Items);
-                var items = mockItems.Object;
                 var mockDb = new Mock<INecroDancerContext>();
-                mockDb.Setup(x => x.Items).Returns(items);
                 var db = mockDb.Object;
+                var dbItems = new FakeDbSet<Item>(Items);
+                mockDb.Setup(x => x.Items).Returns(dbItems);
                 controller = new ItemsController(db);
                 pagination = new ItemsPagination();
             }
@@ -301,11 +299,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             public GetItemsByCategoryMethod()
             {
-                var mockItems = new MockDbSet<Item>(Items);
-                var items = mockItems.Object;
                 var mockDb = new Mock<INecroDancerContext>();
-                mockDb.Setup(x => x.Items).Returns(items);
                 var db = mockDb.Object;
+                var dbItems = new FakeDbSet<Item>(Items);
+                mockDb.Setup(x => x.Items).Returns(dbItems);
                 controller = new ItemsController(db);
                 pagination = new ItemsPagination();
             }
@@ -361,11 +358,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             public GetItemsBySubcategoryMethod()
             {
-                var mockItems = new MockDbSet<Item>(Items);
-                var items = mockItems.Object;
                 var mockDb = new Mock<INecroDancerContext>();
-                mockDb.Setup(x => x.Items).Returns(items);
                 var db = mockDb.Object;
+                var dbItems = new FakeDbSet<Item>(Items);
+                mockDb.Setup(x => x.Items).Returns(dbItems);
                 controller = new ItemsController(db);
                 pagination = new ItemsPagination();
             }
@@ -475,11 +471,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task GetItemsMethod()
             {
                 // Arrange
-                var mockItems = new MockDbSet<Item>(Items);
-                var items = mockItems.Object;
                 var mockDb = new Mock<INecroDancerContext>();
-                mockDb.SetupGet(d => d.Items).Returns(items);
                 var db = mockDb.Object;
+                var dbItems = new FakeDbSet<Item>(Items);
+                mockDb.Setup(x => x.Items).Returns(dbItems);
                 Kernel.Rebind<INecroDancerContext>().ToConstant(db);
 
                 // Act
@@ -495,11 +490,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task GetItemsByCategoryMethod()
             {
                 // Arrange
-                var mockItems = new MockDbSet<Item>(Items);
-                var items = mockItems.Object;
                 var mockDb = new Mock<INecroDancerContext>();
-                mockDb.SetupGet(d => d.Items).Returns(items);
                 var db = mockDb.Object;
+                var dbItems = new FakeDbSet<Item>(Items);
+                mockDb.Setup(x => x.Items).Returns(dbItems);
                 Kernel.Rebind<INecroDancerContext>().ToConstant(db);
 
                 // Act
@@ -515,11 +509,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task GetItemsBySubcategoryMethod()
             {
                 // Arrange
-                var mockItems = new MockDbSet<Item>(Items);
-                var items = mockItems.Object;
                 var mockDb = new Mock<INecroDancerContext>();
-                mockDb.SetupGet(d => d.Items).Returns(items);
                 var db = mockDb.Object;
+                var dbItems = new FakeDbSet<Item>(Items);
+                mockDb.Setup(x => x.Items).Returns(dbItems);
                 Kernel.Rebind<INecroDancerContext>().ToConstant(db);
 
                 // Act

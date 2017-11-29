@@ -7,7 +7,6 @@ using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
-using toofz.TestsShared;
 using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
@@ -49,11 +48,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsReplays()
             {
                 // Arrange
-                var mockReplays = new MockDbSet<Replay>();
-                var replays = mockReplays.Object;
                 var mockDb = new Mock<ILeaderboardsContext>();
-                mockDb.Setup(x => x.Replays).Returns(replays);
                 var db = mockDb.Object;
+                var replays = new List<Replay>();
+                var dbReplays = new FakeDbSet<Replay>(replays);
+                mockDb.Setup(x => x.Replays).Returns(dbReplays);
                 var controller = new ReplaysController(db);
                 var pagination = new ReplaysPagination();
 
@@ -108,8 +107,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var db = Kernel.Get<ILeaderboardsContext>();
                 var mockDb = Mock.Get(db);
                 var replays = Replays;
-                var mockDbReplays = new MockDbSet<Replay>(replays);
-                var dbReplays = mockDbReplays.Object;
+                var dbReplays = new FakeDbSet<Replay>(replays);
                 mockDb.Setup(d => d.Replays).Returns(dbReplays);
 
                 // Act

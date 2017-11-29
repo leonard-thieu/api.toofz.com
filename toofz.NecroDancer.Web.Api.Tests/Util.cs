@@ -2,7 +2,6 @@
 using System.Web.Http.Metadata.Providers;
 using Moq;
 using toofz.NecroDancer.Leaderboards;
-using toofz.TestsShared;
 
 namespace toofz.NecroDancer.Web.Api.Tests
 {
@@ -20,20 +19,20 @@ namespace toofz.NecroDancer.Web.Api.Tests
             var mockDb = new Mock<ILeaderboardsContext>();
 
             var products = LeaderboardCategories.Products;
-            var mockDbProducts = new MockDbSet<Product>(products);
-            mockDb.Setup(d => d.Products).Returns(mockDbProducts.Object);
+            var dbProducts = new FakeDbSet<Product>(products);
+            mockDb.Setup(d => d.Products).Returns(dbProducts);
 
             var modes = LeaderboardCategories.Modes;
-            var mockDbModes = new MockDbSet<Mode>(modes);
-            mockDb.Setup(d => d.Modes).Returns(mockDbModes.Object);
+            var dbModes = new FakeDbSet<Mode>(modes);
+            mockDb.Setup(d => d.Modes).Returns(dbModes);
 
             var runs = LeaderboardCategories.Runs;
-            var mockDbRuns = new MockDbSet<Run>(runs);
-            mockDb.Setup(d => d.Runs).Returns(mockDbRuns.Object);
+            var dbRuns = new FakeDbSet<Run>(runs);
+            mockDb.Setup(d => d.Runs).Returns(dbRuns);
 
             var characters = LeaderboardCategories.Characters;
-            var mockDbCharacters = new MockDbSet<Character>(characters);
-            mockDb.Setup(d => d.Characters).Returns(mockDbCharacters.Object);
+            var dbCharacters = new FakeDbSet<Character>(characters);
+            mockDb.Setup(d => d.Characters).Returns(dbCharacters);
 
             return mockDb.Object;
         }

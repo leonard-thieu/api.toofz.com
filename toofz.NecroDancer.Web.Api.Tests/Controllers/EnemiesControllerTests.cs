@@ -8,7 +8,6 @@ using toofz.NecroDancer.Data;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
-using toofz.TestsShared;
 using Xunit;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
@@ -139,10 +138,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             public GetEnemiesMethod()
             {
-                var mockEnemies = new MockDbSet<Enemy>(Enemies);
-                var enemies = mockEnemies.Object;
+                var dbEnemies = new FakeDbSet<Enemy>(Enemies);
                 var mockDb = new Mock<INecroDancerContext>();
-                mockDb.Setup(x => x.Enemies).Returns(enemies);
+                mockDb.Setup(x => x.Enemies).Returns(dbEnemies);
                 var db = mockDb.Object;
                 controller = new EnemiesController(db);
                 pagination = new EnemiesPagination();
@@ -227,11 +225,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             public GetEnemiesByAttributeMethod()
             {
-                var mockEnemies = new MockDbSet<Enemy>(Enemies);
-                var enemies = mockEnemies.Object;
                 var mockDb = new Mock<INecroDancerContext>();
-                mockDb.Setup(x => x.Enemies).Returns(enemies);
                 var db = mockDb.Object;
+                var dbEnemies = new FakeDbSet<Enemy>(Enemies);
+                mockDb.Setup(x => x.Enemies).Returns(dbEnemies);
                 controller = new EnemiesController(db);
                 pagination = new EnemiesPagination();
             }
@@ -319,11 +316,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task GetEnemiesMethod()
             {
                 // Arrange
-                var mockEnemies = new MockDbSet<Enemy>(Enemies);
-                var enemies = mockEnemies.Object;
                 var mockDb = new Mock<INecroDancerContext>();
-                mockDb.SetupGet(d => d.Enemies).Returns(enemies);
                 var db = mockDb.Object;
+                var dbEnemies = new FakeDbSet<Enemy>(Enemies);
+                mockDb.SetupGet(d => d.Enemies).Returns(dbEnemies);
                 Kernel.Rebind<INecroDancerContext>().ToConstant(db);
 
                 // Act
@@ -339,11 +335,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task GetEnemiesByAttributeMethod()
             {
                 // Arrange
-                var mockEnemies = new MockDbSet<Enemy>(Enemies);
-                var enemies = mockEnemies.Object;
                 var mockDb = new Mock<INecroDancerContext>();
-                mockDb.SetupGet(d => d.Enemies).Returns(enemies);
                 var db = mockDb.Object;
+                var dbEnemies = new FakeDbSet<Enemy>(Enemies);
+                mockDb.SetupGet(d => d.Enemies).Returns(dbEnemies);
                 Kernel.Rebind<INecroDancerContext>().ToConstant(db);
 
                 // Act
