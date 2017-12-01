@@ -7,7 +7,7 @@ namespace toofz.NecroDancer.Web.Api
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new AiHandleErrorAttribute());
+            filters.Add(new AiHandleErrorAttribute(WebApiApplication.TelemetryClient));
         }
     }
 }

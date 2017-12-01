@@ -259,11 +259,11 @@
     <Content Include="Views\Web.config" />
     <Compile Include="AiExceptionLogger.cs" />
     <Compile Include="BrowserJsonFormatter.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="IQueryableExtensions.cs" />
     <Compile Include="MaxValueAttribute.cs" />
     <Compile Include="MinValueAttribute.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Util.cs" />
     <Compile Include="ValidateModelAttribute.cs" />
     <Compile Include="ValueProviderResultExtensions.cs" />
   </ItemGroup>

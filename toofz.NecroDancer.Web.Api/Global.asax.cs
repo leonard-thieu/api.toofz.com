@@ -14,25 +14,7 @@ namespace toofz.NecroDancer.Web.Api
     /// </summary>
     public class WebApiApplication : HttpApplication
     {
-        public static string InstrumentationKey
-        {
-            get { return TelemetryConfiguration.Active.InstrumentationKey; }
-            private set
-            {
-                if (value == null)
-                {
-                    TelemetryConfiguration.Active.InstrumentationKey = "";
-                    TelemetryConfiguration.Active.DisableTelemetry = true;
-                }
-                else
-                {
-                    TelemetryConfiguration.Active.InstrumentationKey = value;
-                    TelemetryConfiguration.Active.DisableTelemetry = false;
-                }
-            }
-        }
-
-        public static readonly TelemetryClient TelemetryClient = new TelemetryClient();
+        internal static readonly TelemetryClient TelemetryClient = new TelemetryClient();
 
         public static readonly string Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
@@ -41,7 +23,11 @@ namespace toofz.NecroDancer.Web.Api
         /// </summary>
         protected void Application_Start()
         {
-            InstrumentationKey = Environment.GetEnvironmentVariable("toofzApiInstrumentationKey", EnvironmentVariableTarget.Machine);
+            var instrumentationKey = Environment.GetEnvironmentVariable("toofzApiInstrumentationKey", EnvironmentVariableTarget.Machine);
+            if (instrumentationKey != null)
+            {
+                TelemetryConfiguration.Active.InstrumentationKey = instrumentationKey;
+            }
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);

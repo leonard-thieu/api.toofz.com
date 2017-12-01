@@ -1,7 +1,10 @@
 using System;
 using System.Linq;
+using System.Web.Http.ExceptionHandling;
+using Microsoft.ApplicationInsights;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
+using Ninject.Activation;
 using Ninject.Web.Common;
 using Ninject.Web.Common.WebHost;
 using toofz.NecroDancer.Leaderboards;
@@ -64,47 +67,82 @@ namespace toofz.NecroDancer.Web.Api
         /// <param name="kernel">The kernel.</param>
         internal static void RegisterServices(IKernel kernel)
         {
-            var necroDancerConnectionString = Util.GetConnectionString("NecroDancerContext");
-            var leaderboardsConnectionString = Util.GetConnectionString("LeaderboardsContext");
+            kernel.Bind<TelemetryClient>()
+                  .ToConstant(WebApiApplication.TelemetryClient);
 
-            kernel.Bind<INecroDancerContext>().ToConstructor(s => new NecroDancerContext(necroDancerConnectionString));
-            kernel.Bind<ILeaderboardsContext>().ToConstructor(s => new LeaderboardsContext(leaderboardsConnectionString));
-            kernel.Bind<ProductsBinder>().ToMethod(s =>
+            kernel.Bind<IExceptionLogger>()
+                  .To<AiExceptionLogger>();
+
+            kernel.Bind<string>()
+                  .ToMethod(GetNecroDancerContextConnectionString)
+                  .WhenInjectedInto<NecroDancerContext>();
+            kernel.Bind<INecroDancerContext>()
+                  .To<NecroDancerContext>();
+
+            kernel.Bind<string>()
+                  .ToMethod(GetLeaderboardsContextConnectionString)
+                  .WhenInjectedInto<LeaderboardsContext>();
+            kernel.Bind<ILeaderboardsContext>()
+                  .To<LeaderboardsContext>();
+
+            kernel.Bind<ProductsBinder>()
+                  .ToMethod(GetProductsBinder);
+            kernel.Bind<ModesBinder>()
+                  .ToMethod(GetModesBinder);
+            kernel.Bind<RunsBinder>()
+                  .ToMethod(GetRunsBinder);
+            kernel.Bind<CharactersBinder>()
+                  .ToMethod(GetCharactersBinder);
+        }
+
+        private static string GetNecroDancerContextConnectionString(IContext c)
+        {
+            return Helper.GetDatabaseConnectionString(nameof(NecroDancerContext));
+        }
+
+        private static string GetLeaderboardsContextConnectionString(IContext c)
+        {
+            return Helper.GetDatabaseConnectionString(nameof(LeaderboardsContext));
+        }
+
+        private static ProductsBinder GetProductsBinder(IContext c)
+        {
+            using (var db = c.Kernel.Get<ILeaderboardsContext>())
             {
-                using (var db = kernel.Get<ILeaderboardsContext>())
-                {
-                    var products = db.Products.Select(p => p.Name).ToList();
+                var products = db.Products.Select(p => p.Name).ToList();
 
-                    return new ProductsBinder(products);
-                }
-            });
-            kernel.Bind<ModesBinder>().ToMethod(s =>
+                return new ProductsBinder(products);
+            }
+        }
+
+        private static ModesBinder GetModesBinder(IContext c)
+        {
+            using (var db = c.Kernel.Get<ILeaderboardsContext>())
             {
-                using (var db = kernel.Get<ILeaderboardsContext>())
-                {
-                    var modes = db.Modes.Select(p => p.Name).ToList();
+                var modes = db.Modes.Select(p => p.Name).ToList();
 
-                    return new ModesBinder(modes);
-                }
-            });
-            kernel.Bind<RunsBinder>().ToMethod(s =>
+                return new ModesBinder(modes);
+            }
+        }
+
+        private static RunsBinder GetRunsBinder(IContext c)
+        {
+            using (var db = c.Kernel.Get<ILeaderboardsContext>())
             {
-                using (var db = kernel.Get<ILeaderboardsContext>())
-                {
-                    var runs = db.Runs.Select(p => p.Name).ToList();
+                var runs = db.Runs.Select(p => p.Name).ToList();
 
-                    return new RunsBinder(runs);
-                }
-            });
-            kernel.Bind<CharactersBinder>().ToMethod(s =>
+                return new RunsBinder(runs);
+            }
+        }
+
+        private static CharactersBinder GetCharactersBinder(IContext c)
+        {
+            using (var db = c.Kernel.Get<ILeaderboardsContext>())
             {
-                using (var db = kernel.Get<ILeaderboardsContext>())
-                {
-                    var characters = db.Characters.Select(p => p.Name).ToList();
+                var characters = db.Characters.Select(p => p.Name).ToList();
 
-                    return new CharactersBinder(characters);
-                }
-            });
+                return new CharactersBinder(characters);
+            }
         }
     }
 }

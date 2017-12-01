@@ -1,6 +1,5 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Cors;
-using System.Web.Http.ExceptionHandling;
 
 namespace toofz.NecroDancer.Web.Api
 {
@@ -13,8 +12,6 @@ namespace toofz.NecroDancer.Web.Api
 
             RegisterCors(config);
             RegisterRoutes(config);
-
-            config.Services.Add(typeof(IExceptionLogger), new AiExceptionLogger());
 
             FormatterConfiguration.Configure(config);
         }
