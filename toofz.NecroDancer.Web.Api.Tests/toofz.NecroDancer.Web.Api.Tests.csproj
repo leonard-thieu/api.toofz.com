@@ -16,10 +16,8 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,7 +27,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -38,7 +35,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Production|AnyCPU'">
     <DebugType>pdbonly</DebugType>
@@ -47,7 +43,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -120,33 +115,33 @@
     <Compile Include="Controllers\LeaderboardsControllerTests.cs" />
     <Compile Include="Controllers\PlayersControllerTests.cs" />
     <Compile Include="Controllers\ReplaysControllerTests.cs" />
+    <Compile Include="Infrastructure\BrowserJsonFormatterTests.cs" />
     <Compile Include="Infrastructure\CharactersBinderTests.cs" />
     <Compile Include="Infrastructure\CommaSeparatedValuesBinderTests.cs" />
     <Compile Include="Infrastructure\EnemyAttributeBinderTests.cs" />
     <Compile Include="Infrastructure\ItemCategoryBinderTests.cs" />
     <Compile Include="Infrastructure\ItemSubcategoryFilterBinderTests.cs" />
     <Compile Include="Infrastructure\LeaderboardIdParamsBinderTests.cs" />
+    <Compile Include="Infrastructure\MaxValueAttributeTests.cs" />
+    <Compile Include="Infrastructure\MinValueAttributeTests.cs" />
     <Compile Include="Infrastructure\ModesBinderTests.cs" />
     <Compile Include="Infrastructure\PaginationBinderTests.cs" />
     <Compile Include="Infrastructure\PlayersSortParamsBinderTests.cs" />
     <Compile Include="Infrastructure\ProductsBinderTests.cs" />
     <Compile Include="Infrastructure\RunsBinderTests.cs" />
+    <Compile Include="Infrastructure\ValidateModelAttributeTests.cs" />
     <Compile Include="Models\CommaSeparatedValuesTests.cs" />
     <Compile Include="Models\LeaderboardCategoryBaseTests.cs" />
     <Compile Include="Models\LeaderboardIdParamsTests.cs" />
     <Compile Include="Models\PlayersSortParamsTests.cs" />
     <Compile Include="AssertHelpers.cs" />
-    <Compile Include="BrowserJsonFormatterTests.cs" />
     <Compile Include="ContextUtil.cs" />
-    <Compile Include="IntegrationTestsBase.cs" />
     <Compile Include="IQueryableExtensionsTests.cs" />
     <Compile Include="IReturnsExtensions.cs" />
+    <Compile Include="IntegrationTestsBase.cs" />
     <Compile Include="LeaderboardCategories.cs" />
-    <Compile Include="MaxValueAttributeTests.cs" />
-    <Compile Include="MinValueAttributeTests.cs" />
     <Compile Include="MockLeaderboardsContext.cs" />
     <Compile Include="Util.cs" />
-    <Compile Include="ValidateModelAttributeTests.cs" />
     <Compile Include="ValueProviderResultExtensionsTests.cs" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

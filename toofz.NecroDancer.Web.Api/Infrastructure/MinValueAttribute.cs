@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace toofz.NecroDancer.Web.Api
+namespace toofz.NecroDancer.Web.Api.Infrastructure
 {
     internal sealed class MinValueAttribute : ValidationAttribute
     {

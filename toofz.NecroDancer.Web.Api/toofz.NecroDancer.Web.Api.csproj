@@ -201,18 +201,21 @@
     <Compile Include="Controllers\LeaderboardsController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Controllers\ReplaysController.cs" />
-    <Compile Include="ErrorHandler\AiHandleErrorAttribute.cs" />
+    <Compile Include="Infrastructure\AiHandleErrorAttribute.cs" />
     <Compile Include="Infrastructure\CharactersBinder.cs" />
     <Compile Include="Infrastructure\CommaSeparatedValuesBinder.cs" />
     <Compile Include="Infrastructure\EnemyAttributeBinder.cs" />
     <Compile Include="Infrastructure\ItemCategoryBinder.cs" />
     <Compile Include="Infrastructure\ItemSubcategoryFilterBinder.cs" />
     <Compile Include="Infrastructure\LeaderboardIdParamsBinder.cs" />
+    <Compile Include="Infrastructure\MaxValueAttribute.cs" />
+    <Compile Include="Infrastructure\MinValueAttribute.cs" />
     <Compile Include="Infrastructure\ModesBinder.cs" />
     <Compile Include="Infrastructure\PaginationBinder.cs" />
     <Compile Include="Infrastructure\PlayersSortParamsBinder.cs" />
     <Compile Include="Infrastructure\ProductsBinder.cs" />
     <Compile Include="Infrastructure\RunsBinder.cs" />
+    <Compile Include="Infrastructure\ValidateModelAttribute.cs" />
     <Compile Include="Models\CharacterDTO.cs" />
     <Compile Include="Models\Characters.cs" />
     <Compile Include="Models\CommaSeparatedValues.cs" />
@@ -257,14 +260,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />
-    <Compile Include="AiExceptionLogger.cs" />
-    <Compile Include="BrowserJsonFormatter.cs" />
+    <Compile Include="Infrastructure\AiExceptionLogger.cs" />
+    <Compile Include="Infrastructure\BrowserJsonFormatter.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="IQueryableExtensions.cs" />
-    <Compile Include="MaxValueAttribute.cs" />
-    <Compile Include="MinValueAttribute.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ValidateModelAttribute.cs" />
     <Compile Include="ValueProviderResultExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

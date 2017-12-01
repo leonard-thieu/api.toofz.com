@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Cors;
+using toofz.NecroDancer.Web.Api.Infrastructure;
 
 namespace toofz.NecroDancer.Web.Api
 {

@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using toofz.NecroDancer.Web.Api.ErrorHandler;
+using toofz.NecroDancer.Web.Api.Infrastructure;
 
 namespace toofz.NecroDancer.Web.Api
 {

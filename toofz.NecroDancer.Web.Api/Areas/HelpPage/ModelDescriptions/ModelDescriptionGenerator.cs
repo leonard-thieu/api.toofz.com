@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using toofz.NecroDancer.Web.Api.Infrastructure;
 
 namespace toofz.NecroDancer.Web.Api.Areas.HelpPage.ModelDescriptions
 {

@@ -1,7 +1,7 @@
 ﻿using System.Web.Http.ExceptionHandling;
 using Microsoft.ApplicationInsights;
 
-namespace toofz.NecroDancer.Web.Api
+namespace toofz.NecroDancer.Web.Api.Infrastructure
 {
     public sealed class AiExceptionLogger : ExceptionLogger
     {

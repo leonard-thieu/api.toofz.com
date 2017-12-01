@@ -1,6 +1,7 @@
-﻿using Xunit;
+﻿using toofz.NecroDancer.Web.Api.Infrastructure;
+using Xunit;
 
-namespace toofz.NecroDancer.Web.Api.Tests
+namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 {
     public class MinValueAttributeTests
     {

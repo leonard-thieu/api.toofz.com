@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using toofz.NecroDancer.Web.Api.Infrastructure;
 
 namespace toofz.NecroDancer.Web.Api
 {

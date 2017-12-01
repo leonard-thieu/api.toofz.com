@@ -3,7 +3,7 @@ using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 
-namespace toofz.NecroDancer.Web.Api
+namespace toofz.NecroDancer.Web.Api.Infrastructure
 {
     internal sealed class BrowserJsonFormatter : JsonMediaTypeFormatter
     {
