@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -23,11 +22,7 @@ namespace toofz.NecroDancer.Web.Api
         /// </summary>
         protected void Application_Start()
         {
-            var instrumentationKey = Environment.GetEnvironmentVariable("toofzApiInstrumentationKey", EnvironmentVariableTarget.Machine);
-            if (instrumentationKey != null)
-            {
-                TelemetryConfiguration.Active.InstrumentationKey = instrumentationKey;
-            }
+            TelemetryConfiguration.Active.InstrumentationKey = Helper.GetInstrumentationKey();
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);

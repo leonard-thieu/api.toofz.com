@@ -21,7 +21,14 @@ namespace toofz.NecroDancer.Web.Api
         private static string GetConnectionString(string baseName)
         {
             return Environment.GetEnvironmentVariable($"{baseName}ConnectionString", EnvironmentVariableTarget.Machine) ??
-                ConfigurationManager.ConnectionStrings[baseName]?.ConnectionString;
+                   ConfigurationManager.ConnectionStrings[baseName]?.ConnectionString;
+        }
+
+        public static string GetInstrumentationKey()
+        {
+            return Environment.GetEnvironmentVariable("toofzApiInstrumentationKey", EnvironmentVariableTarget.Machine) ??
+                   ConfigurationManager.AppSettings["InstrumentationKey"] ??
+                   "";
         }
     }
 }
