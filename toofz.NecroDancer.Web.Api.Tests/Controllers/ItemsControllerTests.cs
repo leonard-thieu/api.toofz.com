@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Moq;
-using toofz.NecroDancer.Data;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
@@ -12,190 +10,17 @@ using Xunit.Abstractions;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
+    [Collection(MockDatabaseCollection.Name)]
     public class ItemsControllerTests
     {
-        private static IEnumerable<Item> Items
+        public ItemsControllerTests(MockDatabaseFixture fixture)
         {
-            get => new[]
-            {
-                new Item("armor_glass", "")
-                {
-                    Slot = "body",
-                    DiamondCost = 4,
-                    CoinCost = 50,
-                    IsArmor = true,
-                    DisplayName = "Glass Armor",
-                },
-                new Item("misc_heart_container", "")
-                {
-                    Slot = null,
-                    DiamondCost = null,
-                    CoinCost = 50,
-                    Consumable = true,
-                    DisplayName = "Heart Container",
-                },
-                new Item("feet_ballet_shoes", "")
-                {
-                    Slot = "feet",
-                    DiamondCost = null,
-                    CoinCost = 25,
-                    DisplayName = "Ballet Shoes",
-                },
-                new Item("food_1", "")
-                {
-                    Slot = "action",
-                    DiamondCost = null,
-                    CoinCost = 10,
-                    IsFood = true,
-                    DisplayName = "Apple",
-                },
-                new Item("head_blast_helm","")
-                {
-                    Slot = "head",
-                    DiamondCost = 5,
-                    CoinCost = 60,
-                    DisplayName = "Blast Helm",
-                },
-                new Item("ring_becoming", "")
-                {
-                    Slot = "ring",
-                    DiamondCost = 5,
-                    CoinCost = 100,
-                    DisplayName = "Ring of Becoming",
-                },
-                new Item("scroll_earthquake", "")
-                {
-                    Slot = "action",
-                    DiamondCost = 3,
-                    CoinCost = 20,
-                    IsScroll = true,
-                    DisplayName = "Earthquake Scroll",
-                },
-                new Item("spell_bomb", "")
-                {
-                    Slot = "spell",
-                    DiamondCost = 6,
-                    CoinCost = 150,
-                    IsSpell = true,
-                    DisplayName = "Bomb Spell",
-                },
-                new Item("spell_fireball", "")
-                {
-                    Slot = "spell",
-                    DiamondCost = 1,
-                    CoinCost = 50,
-                    IsSpell = true,
-                    DisplayName = "Fireball Spell",
-                },
-                new Item("torch_1", "")
-                {
-                    Slot = "torch",
-                    DiamondCost = null,
-                    CoinCost = 3,
-                    IsTorch = true,
-                    DisplayName = "Torch",
-                },
-                new Item("weapon_axe", "")
-                {
-                    Slot = "weapon",
-                    DiamondCost = 8,
-                    CoinCost = 60,
-                    IsWeapon = true,
-                    IsAxe = true,
-                    DisplayName = "Axe",
-                },
-                new Item("weapon_blood_bow", "")
-                {
-                    Slot = "weapon",
-                    DiamondCost = null,
-                    CoinCost = 250,
-                    IsWeapon = true,
-                    IsBow = true,
-                    DisplayName = "Blood Bow",
-                },
-                new Item("weapon_blood_broadsword", "")
-                {
-                    Slot = "weapon",
-                    DiamondCost = null,
-                    CoinCost = 40,
-                    IsWeapon = true,
-                    IsBroadsword = true,
-                    DisplayName = "Blood Broadsword",
-                },
-                new Item("weapon_blood_cat", "")
-                {
-                    Slot = "weapon",
-                    DiamondCost = null,
-                    CoinCost = 85,
-                    IsWeapon = true,
-                    IsCat = true,
-                    DisplayName = "Blood Cat",
-                },
-                new Item("weapon_blood_crossbow", "")
-                {
-                    Slot = "weapon",
-                    DiamondCost = null,
-                    CoinCost = 225,
-                    IsWeapon = true,
-                    IsCrossbow = true,
-                    DisplayName = "Blood Crossbow",
-                },
-                new Item("weapon_blood_dagger", "")
-                {
-                    Slot = "weapon",
-                    DiamondCost = null,
-                    CoinCost = 5,
-                    IsWeapon = true,
-                    IsDagger = true,
-                    DisplayName = "Blood Dagger",
-                },
-                new Item("weapon_blood_flail", "")
-                {
-                    Slot = "weapon",
-                    DiamondCost = null,
-                    CoinCost = 80,
-                    IsWeapon = true,
-                    IsFlail = true,
-                    DisplayName = "Blood Flail",
-                },
-                new Item("weapon_blood_longsword", "")
-                {
-                    Slot = "weapon",
-                    DiamondCost = null,
-                    CoinCost = 65,
-                    IsWeapon = true,
-                    IsLongsword = true,
-                    DisplayName = "Blood Longsword",
-                },
-                new Item("weapon_blood_rapier", "")
-                {
-                    Slot = "weapon",
-                    DiamondCost = null,
-                    CoinCost = 75,
-                    IsWeapon = true,
-                    IsRapier = true,
-                    DisplayName = "Blood Rapier",
-                },
-                new Item("weapon_golden_spear", "")
-                {
-                    Slot = "weapon",
-                    DiamondCost = null,
-                    CoinCost = 100,
-                    IsWeapon = true,
-                    IsSpear = true,
-                    DisplayName = "Golden Spear",
-                },
-                new Item("weapon_obsidian_whip", "")
-                {
-                    Slot = "weapon",
-                    DiamondCost = null,
-                    CoinCost = 150,
-                    IsWeapon = true,
-                    IsWhip = true,
-                    DisplayName = "Obsidian Whip",
-                },
-            };
+            mockDb = fixture.CreateMockNecroDancerContext();
+            controller = new ItemsController(mockDb.Object);
         }
+
+        private readonly Mock<INecroDancerContext> mockDb;
+        private readonly ItemsController controller;
 
         public class Constructor
         {
@@ -213,20 +38,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        public class GetItemsMethod
+        public class GetItemsMethod : ItemsControllerTests
         {
-            public GetItemsMethod()
-            {
-                var mockDb = new Mock<INecroDancerContext>();
-                var db = mockDb.Object;
-                var dbItems = new FakeDbSet<Item>(Items);
-                mockDb.Setup(x => x.Items).Returns(dbItems);
-                controller = new ItemsController(db);
-                pagination = new ItemsPagination();
-            }
+            public GetItemsMethod(MockDatabaseFixture fixture) : base(fixture) { }
 
-            private ItemsController controller;
-            private ItemsPagination pagination;
+            private readonly ItemsPagination pagination = new ItemsPagination();
 
             [Fact]
             public async Task ReturnsOk()
@@ -260,7 +76,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var contentResult = (OkNegotiatedContentResult<ItemsEnvelope>)result;
                 var contentItems = contentResult.Content.Items;
                 var first = contentItems.First();
-                Assert.Equal("armor_glass", first.Name);
+                Assert.Equal("addchest_black", first.Name);
             }
 
             [Fact]
@@ -291,24 +107,15 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var contentResult = (OkNegotiatedContentResult<ItemsEnvelope>)result;
                 var contentItems = contentResult.Content.Items;
                 var first = contentItems.First();
-                Assert.Equal("food_1", first.Name);
+                Assert.Equal("addchest_white", first.Name);
             }
         }
 
-        public class GetItemsByCategoryMethod
+        public class GetItemsByCategoryMethod : ItemsControllerTests
         {
-            public GetItemsByCategoryMethod()
-            {
-                var mockDb = new Mock<INecroDancerContext>();
-                var db = mockDb.Object;
-                var dbItems = new FakeDbSet<Item>(Items);
-                mockDb.Setup(x => x.Items).Returns(dbItems);
-                controller = new ItemsController(db);
-                pagination = new ItemsPagination();
-            }
+            public GetItemsByCategoryMethod(MockDatabaseFixture fixture) : base(fixture) { }
 
-            private ItemsController controller;
-            private ItemsPagination pagination;
+            private readonly ItemsPagination pagination = new ItemsPagination();
 
             [Theory]
             [InlineData("armor")]
@@ -331,7 +138,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
 
             [Theory]
-            [InlineData("armor", "armor_glass")]
+            [InlineData("armor", "armor_chainmail")]
             [InlineData("consumable", "misc_heart_container")]
             [InlineData("feet", "feet_ballet_shoes")]
             [InlineData("food", "food_1")]
@@ -354,20 +161,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        public class GetItemsBySubcategoryMethod
+        public class GetItemsBySubcategoryMethod : ItemsControllerTests
         {
-            public GetItemsBySubcategoryMethod()
-            {
-                var mockDb = new Mock<INecroDancerContext>();
-                var db = mockDb.Object;
-                var dbItems = new FakeDbSet<Item>(Items);
-                mockDb.Setup(x => x.Items).Returns(dbItems);
-                controller = new ItemsController(db);
-                pagination = new ItemsPagination();
-            }
+            public GetItemsBySubcategoryMethod(MockDatabaseFixture fixture) : base(fixture) { }
 
-            private ItemsController controller;
-            private ItemsPagination pagination;
+            private readonly ItemsPagination pagination = new ItemsPagination();
 
             [Theory]
             [InlineData("weapons", "bows")]
@@ -407,12 +205,12 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             [InlineData("weapons", "flails", "weapon_blood_flail")]
             [InlineData("weapons", "longswords", "weapon_blood_longsword")]
             [InlineData("weapons", "rapiers", "weapon_blood_rapier")]
-            [InlineData("weapons", "spears", "weapon_golden_spear")]
-            [InlineData("weapons", "whips", "weapon_obsidian_whip")]
-            [InlineData("chest", "red", "food_1")]
+            [InlineData("weapons", "spears", "weapon_blood_spear")]
+            [InlineData("weapons", "whips", "weapon_blood_whip")]
+            [InlineData("chest", "red", "bag_holding")]
             [InlineData("chest", "purple", "ring_becoming")]
-            [InlineData("chest", "black", "armor_glass")]
-            [InlineData("chest", "mimic", "armor_glass")]
+            [InlineData("chest", "black", "armor_chainmail")]
+            [InlineData("chest", "mimic", "addchest_black")]
             public async Task ReturnsItemsFilteredBySubcategory(string category, string subcategory, string name)
             {
                 // Arrange -> Act
@@ -431,17 +229,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        public class DisposeMethod
+        public class DisposeMethod : ItemsControllerTests
         {
+            public DisposeMethod(MockDatabaseFixture fixture) : base(fixture) { }
+
             [Fact]
             public void DisposesDb()
             {
-                // Arrange
-                var mockDb = new Mock<INecroDancerContext>();
-                var db = mockDb.Object;
-                var controller = new ItemsController(db);
-
-                // Act
+                // Arrange -> Act
                 controller.Dispose();
 
                 // Assert
@@ -451,12 +246,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             [Fact]
             public void DisposeMoreThanOnce_DisposesDbOnlyOnce()
             {
-                // Arrange
-                var mockDb = new Mock<INecroDancerContext>();
-                var db = mockDb.Object;
-                var controller = new ItemsController(db);
-
-                // Act
+                // Arrange -> Act
                 controller.Dispose();
                 controller.Dispose();
 

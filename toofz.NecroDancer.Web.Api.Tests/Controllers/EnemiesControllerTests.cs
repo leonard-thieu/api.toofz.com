@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Moq;
-using toofz.NecroDancer.Data;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
@@ -12,110 +10,17 @@ using Xunit.Abstractions;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
+    [Collection(MockDatabaseCollection.Name)]
     public class EnemiesControllerTests
     {
-        private static IEnumerable<Enemy> Enemies
+        public EnemiesControllerTests(MockDatabaseFixture fixture)
         {
-            get => new[]
-            {
-                new Enemy("monkey", 4)
-                {
-                    Stats = new Stats
-                    {
-                        Health = 2,
-                        DamagePerHit = 0,
-                        BeatsPerMove = 1,
-                        CoinsToDrop = 2,
-                    },
-                    OptionalStats = new OptionalStats { IsMonkeyLike = true },
-                    DisplayName = "Magic Monkey",
-                },
-                new Enemy("necrodancer", 1)
-                {
-                    Stats = new Stats
-                    {
-                        Health = 6,
-                        DamagePerHit = 3,
-                        BeatsPerMove = 2,
-                        CoinsToDrop = 0,
-                    },
-                    OptionalStats = new OptionalStats { Boss = true },
-                    DisplayName = "The Necrodancer",
-                },
-                new Enemy("bat", 1)
-                {
-                    Stats = new Stats
-                    {
-                        Health = 1,
-                        DamagePerHit = 1,
-                        BeatsPerMove = 2,
-                        CoinsToDrop = 2,
-                    },
-                    OptionalStats = new OptionalStats { Floating = true },
-                    DisplayName = "Blue Bat",
-                },
-                new Enemy("tarmonster", 1)
-                {
-                    Stats = new Stats
-                    {
-                        Health = 1,
-                        DamagePerHit = 3,
-                        BeatsPerMove = 1,
-                        CoinsToDrop = 3,
-                    },
-                    OptionalStats = new OptionalStats { IgnoreLiquids = true },
-                    DisplayName = "Tarmonster",
-                },
-                new Enemy("spider", 1)
-                {
-                    Stats = new Stats
-                    {
-                        Health = 1,
-                        DamagePerHit = 2,
-                        BeatsPerMove = 2,
-                        CoinsToDrop = 3,
-                    },
-                    OptionalStats = new OptionalStats { IgnoreWalls = true },
-                    DisplayName = "Spider",
-                },
-                new Enemy("monkey", 3)
-                {
-                    Stats = new Stats
-                    {
-                        Health = 1,
-                        DamagePerHit = 0,
-                        BeatsPerMove = 1,
-                        CoinsToDrop = 1,
-                    },
-                    OptionalStats = new OptionalStats { IsMonkeyLike = true },
-                    DisplayName = "Green Monkey",
-                },
-                new Enemy("dragon", 2)
-                {
-                    Stats = new Stats
-                    {
-                        Health = 6,
-                        DamagePerHit = 6,
-                        BeatsPerMove = 2,
-                        CoinsToDrop = 20,
-                    },
-                    OptionalStats = new OptionalStats { Massive = true },
-                    DisplayName = "Red Dragon",
-                },
-                new Enemy("ogre", 1)
-                {
-                    Stats = new Stats
-                    {
-                        Health = 5,
-                        DamagePerHit = 5,
-                        BeatsPerMove = 4,
-                        CoinsToDrop = 15,
-                    },
-                    OptionalStats = new OptionalStats { Miniboss = true },
-                    DisplayName = "Ogre",
-                },
-            };
+            mockDb = fixture.CreateMockNecroDancerContext();
+            controller = new EnemiesController(mockDb.Object);
         }
+
+        private readonly Mock<INecroDancerContext> mockDb;
+        private readonly EnemiesController controller;
 
         public class Constructor
         {
@@ -123,8 +28,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public void ReturnsInstance()
             {
                 // Arrange
-                var mockDb = new Mock<INecroDancerContext>();
-                var db = mockDb.Object;
+                var db = Mock.Of<INecroDancerContext>();
 
                 // Act
                 var controller = new EnemiesController(db);
@@ -134,20 +38,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        public class GetEnemiesMethod
+        public class GetEnemiesMethod : EnemiesControllerTests
         {
-            public GetEnemiesMethod()
-            {
-                var dbEnemies = new FakeDbSet<Enemy>(Enemies);
-                var mockDb = new Mock<INecroDancerContext>();
-                mockDb.Setup(x => x.Enemies).Returns(dbEnemies);
-                var db = mockDb.Object;
-                controller = new EnemiesController(db);
-                pagination = new EnemiesPagination();
-            }
+            public GetEnemiesMethod(MockDatabaseFixture fixture) : base(fixture) { }
 
-            private EnemiesController controller;
-            private EnemiesPagination pagination;
+            private readonly EnemiesPagination pagination = new EnemiesPagination();
 
             [Fact]
             public async Task ReturnsOk()
@@ -168,7 +63,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Assert
                 var contentResult = (OkNegotiatedContentResult<EnemiesEnvelope>)result;
                 var contentEnemies = contentResult.Content.Enemies;
-                Assert.Equal(8, contentEnemies.Count());
+                Assert.Equal(10, contentEnemies.Count());
             }
 
             [Fact]
@@ -180,12 +75,32 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Assert
                 var contentResult = (OkNegotiatedContentResult<EnemiesEnvelope>)result;
                 var contentEnemies = contentResult.Content.Enemies;
-                var first = contentEnemies.First();
-                Assert.Equal("bat", first.Name);
-                Assert.Equal(1, first.Type);
-                var firstMonkey = contentEnemies.First(e => e.Name == "monkey");
-                Assert.Equal("monkey", firstMonkey.Name);
-                Assert.Equal(3, firstMonkey.Type);
+                Assert.Equal(new[]
+                {
+                    "armadillo",
+                    "armadillo",
+                    "armadillo",
+                    "armoredskeleton",
+                    "armoredskeleton",
+                    "armoredskeleton",
+                    "armoredskeleton",
+                    "banshee",
+                    "banshee",
+                    "bat",
+                }, contentEnemies.Select(e => e.Name));
+                Assert.Equal(new[]
+                {
+                    1,
+                    2,
+                    3,
+                    1,
+                    2,
+                    3,
+                    4,
+                    1,
+                    2,
+                    1,
+                }, contentEnemies.Select(e => e.Type));
             }
 
             [Fact]
@@ -216,25 +131,16 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var contentResult = (OkNegotiatedContentResult<EnemiesEnvelope>)result;
                 var contentEnemies = contentResult.Content.Enemies;
                 var first = contentEnemies.First();
-                Assert.Equal("monkey", first.Name);
+                Assert.Equal("armadillo", first.Name);
                 Assert.Equal(3, first.Type);
             }
         }
 
-        public class GetEnemiesByAttributeMethod
+        public class GetEnemiesByAttributeMethod : EnemiesControllerTests
         {
-            public GetEnemiesByAttributeMethod()
-            {
-                var mockDb = new Mock<INecroDancerContext>();
-                var db = mockDb.Object;
-                var dbEnemies = new FakeDbSet<Enemy>(Enemies);
-                mockDb.Setup(x => x.Enemies).Returns(dbEnemies);
-                controller = new EnemiesController(db);
-                pagination = new EnemiesPagination();
-            }
+            public GetEnemiesByAttributeMethod(MockDatabaseFixture fixture) : base(fixture) { }
 
-            private EnemiesController controller;
-            private EnemiesPagination pagination;
+            private readonly EnemiesPagination pagination = new EnemiesPagination();
 
             [Theory]
             [InlineData("boss")]
@@ -255,13 +161,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
 
             [Theory]
-            [InlineData("boss", "necrodancer", 1)]
-            [InlineData("floating", "bat", 1)]
+            [InlineData("boss", "bishop", 1)]
+            [InlineData("floating", "banshee", 1)]
             [InlineData("ignore-liquids", "tarmonster", 1)]
-            [InlineData("ignore-walls", "spider", 1)]
-            [InlineData("is-monkey-like", "monkey", 3)]
-            [InlineData("massive", "dragon", 2)]
-            [InlineData("miniboss", "ogre", 1)]
+            [InlineData("ignore-walls", "ghast", 1)]
+            [InlineData("is-monkey-like", "gorgon", 1)]
+            [InlineData("massive", "dead_ringer", 1)]
+            [InlineData("miniboss", "banshee", 1)]
             public async Task ReturnsEnemiesFilteredByAttribute(string attribute, string name, int type)
             {
                 // Arrange -> Act
@@ -276,17 +182,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        public class DisposeMethod
+        public class DisposeMethod : EnemiesControllerTests
         {
+            public DisposeMethod(MockDatabaseFixture fixture) : base(fixture) { }
+
             [Fact]
             public void DisposesDb()
             {
-                // Arrange
-                var mockDb = new Mock<INecroDancerContext>();
-                var db = mockDb.Object;
-                var controller = new EnemiesController(db);
-
-                // Act
+                // Arrange -> Act
                 controller.Dispose();
 
                 // Assert
@@ -296,12 +199,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             [Fact]
             public void DisposeMoreThanOnce_DisposesDbOnlyOnce()
             {
-                // Arrange
-                var mockDb = new Mock<INecroDancerContext>();
-                var db = mockDb.Object;
-                var controller = new EnemiesController(db);
-
-                // Act
+                // Arrange -> Act
                 controller.Dispose();
                 controller.Dispose();
 

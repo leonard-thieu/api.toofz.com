@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Moq;
@@ -12,24 +11,19 @@ using Xunit.Abstractions;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
+    [Collection(MockDatabaseCollection.Name)]
     public class LeaderboardsControllerTests
     {
-        private static IEnumerable<Leaderboard> Leaderboards
+        public LeaderboardsControllerTests(MockDatabaseFixture fixture)
         {
-            get
-            {
-                return new[]
-                {
-                    new Leaderboard
-                    {
-                        Product = new Product(1, "amplified", "Amplified"),
-                        Mode = new Mode(0, "standard", "Standard"),
-                        Run = new Run(1, "speed", "Speed"),
-                        Character = new Character(0, "cadence", "Cadence"),
-                    },
-                };
-            }
+            this.fixture = fixture;
+            mockDb = fixture.CreateMockLeaderboardsContext();
+            controller = new LeaderboardsController(mockDb.Object);
         }
+
+        private readonly MockDatabaseFixture fixture;
+        private readonly Mock<ILeaderboardsContext> mockDb;
+        private readonly LeaderboardsController controller;
 
         public class Constructor
         {
@@ -47,21 +41,18 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        public class GetLeaderboardsMethod
+        public class GetLeaderboardsMethod : LeaderboardsControllerTests
         {
+            public GetLeaderboardsMethod(MockDatabaseFixture fixture) : base(fixture) { }
+
             [Fact]
             public async Task ReturnsLeaderboards()
             {
                 // Arrange
-                var mockDb = new Mock<ILeaderboardsContext>();
-                var db = mockDb.Object;
-                var dbLeaderboards = new FakeDbSet<Leaderboard>();
-                mockDb.Setup(d => d.Leaderboards).Returns(dbLeaderboards);
-                var controller = new LeaderboardsController(db);
-                var products = new Products(LeaderboardCategories.Products.Select(p => p.Name).ToList());
-                var modes = new Modes(LeaderboardCategories.Modes.Select(m => m.Name).ToList());
-                var runs = new Runs(LeaderboardCategories.Runs.Select(r => r.Name).ToList());
-                var characters = new Characters(LeaderboardCategories.Characters.Select(c => c.Name).ToList());
+                var products = new Products(fixture.Products.Select(p => p.Name).ToList());
+                var modes = new Modes(fixture.Modes.Select(m => m.Name).ToList());
+                var runs = new Runs(fixture.Runs.Select(r => r.Name).ToList());
+                var characters = new Characters(fixture.Characters.Select(c => c.Name).ToList());
 
                 // Act
                 var result = await controller.GetLeaderboards(products, modes, runs, characters);
@@ -71,25 +62,20 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        public class GetLeaderboardEntriesMethod
+        public class GetLeaderboardEntriesMethod : LeaderboardsControllerTests
         {
+            public GetLeaderboardEntriesMethod(MockDatabaseFixture fixture) : base(fixture) { }
+
+            private readonly LeaderboardsPagination pagination = new LeaderboardsPagination();
+
             [Fact]
             public async Task LeaderboardNotFound_ReturnsNotFound()
             {
                 // Arrange
-                var mockDb = new Mock<ILeaderboardsContext>();
-                var db = mockDb.Object;
-                var leaderboards = new List<Leaderboard>
-                {
-                    new Leaderboard { LeaderboardId = 22 },
-                };
-                var dbLeaderboards = new FakeDbSet<Leaderboard>(leaderboards);
-                mockDb.Setup(d => d.Leaderboards).Returns(dbLeaderboards);
-                var controller = new LeaderboardsController(db);
-                var pagination = new LeaderboardsPagination();
+                var lbid = 0;
 
                 // Act
-                var actionResult = await controller.GetLeaderboardEntries(pagination, 0);
+                var actionResult = await controller.GetLeaderboardEntries(pagination, lbid);
 
                 // Assert
                 Assert.IsAssignableFrom<NotFoundResult>(actionResult);
@@ -99,73 +85,50 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsLeaderboardEntries()
             {
                 // Arrange
-                var mockDb = new Mock<ILeaderboardsContext>();
-                var db = mockDb.Object;
-                var leaderboards = new List<Leaderboard>
-                {
-                    new Leaderboard
-                    {
-                        LeaderboardId = 741312,
-                        Product = new Product(1, "myName", "myDisplayName"),
-                        Mode = new Mode(1, "myName", "myDisplayName"),
-                        Run = new Run(1, "myName", "myDisplayName"),
-                        Character = new Character(1, "myName", "myDisplayName"),
-                    },
-                };
-                var dbLeaderboards = new FakeDbSet<Leaderboard>(leaderboards);
-                mockDb.Setup(x => x.Leaderboards).Returns(dbLeaderboards);
-                var dbEntries = new FakeDbSet<Entry>();
-                mockDb.Setup(x => x.Entries).Returns(dbEntries);
-                var dbReplays = new FakeDbSet<Replay>();
-                mockDb.Setup(x => x.Replays).Returns(dbReplays);
-                var controller = new LeaderboardsController(db);
-                var pagination = new LeaderboardsPagination();
+                var lbid = 741312;
 
                 // Act
-                var result = await controller.GetLeaderboardEntries(pagination, 741312);
+                var result = await controller.GetLeaderboardEntries(pagination, lbid);
 
                 // Assert
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<LeaderboardEntriesDTO>>(result);
             }
         }
 
-        public class GetDailyLeaderboardsMethod
+        public class GetDailyLeaderboardsMethod : LeaderboardsControllerTests
         {
+            public GetDailyLeaderboardsMethod(MockDatabaseFixture fixture) : base(fixture) { }
+
+            private readonly LeaderboardsPagination pagination = new LeaderboardsPagination();
+
             [Fact]
             public async Task ReturnsDailyLeaderboards()
             {
                 // Arrange
-                var db = Util.CreateLeaderboardsContext();
-                var mockDb = Mock.Get(db);
-                var dbDailyLeaderboards = new FakeDbSet<DailyLeaderboard>();
-                mockDb.Setup(x => x.DailyLeaderboards).Returns(dbDailyLeaderboards);
-                var controller = new LeaderboardsController(db);
-                var pagination = new LeaderboardsPagination();
-                var productsParams = new Products(LeaderboardCategories.Products.Select(p => p.Name).ToList());
+                var products = new Products(fixture.Products.Select(p => p.Name).ToList());
 
                 // Act
-                var result = await controller.GetDailyLeaderboards(pagination, productsParams);
+                var result = await controller.GetDailyLeaderboards(pagination, products);
 
                 // Assert
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<DailyLeaderboardsEnvelope>>(result);
             }
         }
 
-        public class GetDailyLeaderboardEntriesMethod
+        public class GetDailyLeaderboardEntriesMethod : LeaderboardsControllerTests
         {
+            public GetDailyLeaderboardEntriesMethod(MockDatabaseFixture fixture) : base(fixture) { }
+
+            private readonly LeaderboardsPagination pagination = new LeaderboardsPagination();
+
             [Fact]
             public async Task DailyLeaderboardNotFound_ReturnsNotFound()
             {
                 // Arrange
-                var mockDb = new Mock<ILeaderboardsContext>();
-                var dbDailyLeaderboards = new FakeDbSet<DailyLeaderboard>();
-                mockDb.Setup(d => d.DailyLeaderboards).Returns(dbDailyLeaderboards);
-                var db = mockDb.Object;
-                var controller = new LeaderboardsController(db);
-                var pagination = new LeaderboardsPagination();
+                var lbid = 0;
 
                 // Act
-                var actionResult = await controller.GetDailyLeaderboardEntries(pagination, 0);
+                var actionResult = await controller.GetDailyLeaderboardEntries(pagination, lbid);
 
                 // Assert
                 Assert.IsAssignableFrom<NotFoundResult>(actionResult);
@@ -175,25 +138,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsDailyLeaderboardEntries()
             {
                 // Arrange
-                var mockDb = new Mock<ILeaderboardsContext>();
-                var db = mockDb.Object;
-                var dailyLeaderboards = new List<DailyLeaderboard>
-                {
-                    new DailyLeaderboard
-                    {
-                        LeaderboardId = 1,
-                        Product = new Product(1, "myName", "myDisplayName"),
-                    },
-                };
-                var dbDailyLeaderboards = new FakeDbSet<DailyLeaderboard>(dailyLeaderboards);
-                mockDb.Setup(d => d.DailyLeaderboards).Returns(dbDailyLeaderboards);
-                var dbDailyEntries = new FakeDbSet<DailyEntry>();
-                mockDb.Setup(d => d.DailyEntries).Returns(dbDailyEntries);
-                var dbReplays = new FakeDbSet<Replay>();
-                mockDb.Setup(d => d.Replays).Returns(dbReplays);
-                var controller = new LeaderboardsController(db);
-                var pagination = new LeaderboardsPagination();
-                var lbid = 1;
+                var lbid = 391760;
 
                 // Act
                 var result = await controller.GetDailyLeaderboardEntries(pagination, lbid);
@@ -203,17 +148,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        public class DisposeMethod
+        public class DisposeMethod : LeaderboardsControllerTests
         {
+            public DisposeMethod(MockDatabaseFixture fixture) : base(fixture) { }
+
             [Fact]
             public void DisposesDb()
             {
-                // Arrange
-                var mockDb = new Mock<ILeaderboardsContext>();
-                var db = mockDb.Object;
-                var controller = new LeaderboardsController(db);
-
-                // Act
+                // Arrange -> Act
                 controller.Dispose();
 
                 // Assert
@@ -223,12 +165,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             [Fact]
             public void DisposesMoreThanOnce_OnlyDisposesDbOnce()
             {
-                // Arrange
-                var mockDb = new Mock<ILeaderboardsContext>();
-                var db = mockDb.Object;
-                var controller = new LeaderboardsController(db);
-
-                // Act
+                // Arrange -> Act
                 controller.Dispose();
                 controller.Dispose();
 

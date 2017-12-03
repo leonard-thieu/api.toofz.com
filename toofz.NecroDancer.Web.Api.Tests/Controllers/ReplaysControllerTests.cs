@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Moq;
 using toofz.NecroDancer.Leaderboards;
@@ -11,20 +10,17 @@ using Xunit.Abstractions;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
+    [Collection(MockDatabaseCollection.Name)]
     public class ReplaysControllerTests
     {
-        private static IEnumerable<Replay> Replays
+        public ReplaysControllerTests(MockDatabaseFixture fixture)
         {
-            get
-            {
-                return new[]
-                {
-                    new Replay { ReplayId = 25094445621522262 },
-                    new Replay { ReplayId = 25094445622197065 },
-                    new Replay { ReplayId = 25094445622344966 },
-                };
-            }
+            mockDb = fixture.CreateMockLeaderboardsContext();
+            controller = new ReplaysController(mockDb.Object);
         }
+
+        private readonly Mock<ILeaderboardsContext> mockDb;
+        private readonly ReplaysController controller;
 
         public class Constructor
         {
@@ -42,21 +38,16 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        public class GetReplaysMethod
+        public class GetReplaysMethod : ReplaysControllerTests
         {
+            public GetReplaysMethod(MockDatabaseFixture fixture) : base(fixture) { }
+
+            private readonly ReplaysPagination pagination = new ReplaysPagination();
+
             [Fact]
             public async Task ReturnsReplays()
             {
-                // Arrange
-                var mockDb = new Mock<ILeaderboardsContext>();
-                var db = mockDb.Object;
-                var replays = new List<Replay>();
-                var dbReplays = new FakeDbSet<Replay>(replays);
-                mockDb.Setup(x => x.Replays).Returns(dbReplays);
-                var controller = new ReplaysController(db);
-                var pagination = new ReplaysPagination();
-
-                // Act
+                // Arrange -> Act
                 var result = await controller.GetReplays(pagination);
 
                 // Assert
@@ -64,17 +55,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        public class DisposeMethod
+        public class DisposeMethod : ReplaysControllerTests
         {
+            public DisposeMethod(MockDatabaseFixture fixture) : base(fixture) { }
+
             [Fact]
             public void DisposesDb()
             {
-                // Arrange
-                var mockDb = new Mock<ILeaderboardsContext>();
-                var db = mockDb.Object;
-                var controller = new ReplaysController(db);
-
-                // Act
+                // Arrange -> Act
                 controller.Dispose();
 
                 // Assert
@@ -84,12 +72,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             [Fact]
             public void DisposesMoreThanOnce_OnlyDisposesDbOnce()
             {
-                // Arrange
-                var mockDb = new Mock<ILeaderboardsContext>();
-                var db = mockDb.Object;
-                var controller = new ReplaysController(db);
-
-                // Act
+                // Arrange -> Act
                 controller.Dispose();
                 controller.Dispose();
 

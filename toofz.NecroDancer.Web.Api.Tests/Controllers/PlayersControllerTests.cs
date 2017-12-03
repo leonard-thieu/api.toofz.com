@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Moq;
@@ -12,234 +11,17 @@ using Xunit.Abstractions;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
+    [Collection(MockDatabaseCollection.Name)]
     public class PlayersControllerTests
     {
-        private static IEnumerable<Player> Players
+        public PlayersControllerTests(MockDatabaseFixture fixture)
         {
-            get
-            {
-                var p1 = new Player
-                {
-                    SteamId = 1,
-                    Name = "Leonard",
-                };
-                p1.Entries.AddRange(new[]
-                {
-                    new Entry
-                    {
-                        Leaderboard = new Leaderboard
-                        {
-                            LeaderboardId = 739999,
-                            Product = new Product(1, "classic", "Classic"),
-                            Mode = new Mode(1, "standard", "Standard"),
-                            Run = new Run(1, "score", "Score"),
-                            Character = new Character(1, "cadence", "Cadence"),
-                        },
-                        LeaderboardId = 739999,
-                        Player = p1,
-                        SteamId = 1,
-                        ReplayId = 421438228643743438,
-                        Replay = new Replay(),
-                    },
-                });
-                p1.DailyEntries.AddRange(new[]
-                {
-                    new DailyEntry
-                    {
-                        Leaderboard = new DailyLeaderboard
-                        {
-                            LeaderboardId = 739999,
-                            Product = new Product(1, "classic", "Classic"),
-                        },
-                        LeaderboardId = 739999,
-                        Player = p1,
-                        SteamId = 1,
-                        ReplayId = 421438228643743438,
-                        Replay = new Replay(),
-                    },
-                });
-                var p2 = new Player
-                {
-                    SteamId = 2,
-                    Name = "Julianna",
-                };
-                p2.Entries.AddRange(new[]
-                {
-                    new Entry
-                    {
-                        Leaderboard = new Leaderboard
-                        {
-                            LeaderboardId = 739795,
-                            Product = new Product(1, "classic", "Classic"),
-                            Mode = new Mode(1, "standard", "Standard"),
-                            Run = new Run(1, "score", "Score"),
-                            Character = new Character(1, "cadence", "Cadence"),
-                        },
-                        LeaderboardId = 739795,
-                        Player = p2,
-                        SteamId = 2,
-                        ReplayId = 26236580330596509,
-                        Replay = new Replay(),
-                    },
-                    new Entry
-                    {
-                        Leaderboard = new Leaderboard
-                        {
-                            LeaderboardId = 739796,
-                            Product = new Product(1, "classic", "Classic"),
-                            Mode = new Mode(1, "standard", "Standard"),
-                            Run = new Run(1, "score", "Score"),
-                            Character = new Character(1, "cadence", "Cadence"),
-                        },
-                        LeaderboardId = 739796,
-                        Player = p2,
-                        SteamId = 2,
-                        ReplayId = 26236580330596596,
-                        Replay = new Replay(),
-                    },
-                    new Entry
-                    {
-                        Leaderboard = new Leaderboard
-                        {
-                            LeaderboardId = 739999,
-                            Product = new Product(1, "classic", "Classic"),
-                            Mode = new Mode(1, "standard", "Standard"),
-                            Run = new Run(1, "score", "Score"),
-                            Character = new Character(1, "cadence", "Cadence"),
-                        },
-                        LeaderboardId = 739999,
-                        Player = p2,
-                        SteamId = 2,
-                        ReplayId = 422567813941329155,
-                        Replay = new Replay(),
-                    },
-                });
-                p2.DailyEntries.AddRange(new[]
-                {
-                    new DailyEntry
-                    {
-                        Leaderboard = new DailyLeaderboard
-                        {
-                            LeaderboardId = 739795,
-                            Product = new Product(1, "classic", "Classic"),
-                        },
-                        LeaderboardId = 739795,
-                        Player = p2,
-                        SteamId = 2,
-                        ReplayId = 26236580330596509,
-                        Replay = new Replay(),
-                    },
-                    new DailyEntry
-                    {
-                        Leaderboard = new DailyLeaderboard
-                        {
-                            LeaderboardId = 739796,
-                            Product = new Product(1, "classic", "Classic"),
-                        },
-                        LeaderboardId = 739796,
-                        Player = p2,
-                        SteamId = 2,
-                        ReplayId = 26236580330596596,
-                        Replay = new Replay(),
-                    },
-                    new DailyEntry
-                    {
-                        Leaderboard = new DailyLeaderboard
-                        {
-                            LeaderboardId = 739999,
-                            Product = new Product(1, "classic", "Classic"),
-                        },
-                        LeaderboardId = 739999,
-                        Player = p2,
-                        SteamId = 2,
-                        ReplayId = 421438228643743438,
-                        Replay = new Replay(),
-                    },
-                });
-                var p3 = new Player
-                {
-                    SteamId = 3,
-                    Name = "Steve",
-                };
-                p3.Entries.AddRange(new[]
-                {
-                    new Entry
-                    {
-                        Leaderboard = new Leaderboard(),
-                        SteamId = 3,
-                        Replay = new Replay(),
-                    },
-                    new Entry
-                    {
-                        Leaderboard = new Leaderboard(),
-                        SteamId = 3,
-                        Replay = new Replay(),
-                    },
-                });
-                var p4 = new Player
-                {
-                    SteamId = 4,
-                    Name = "Julianna",
-                };
-                p4.Entries.AddRange(new[]
-                {
-                    new Entry
-                    {
-                        Leaderboard = new Leaderboard(),
-                        SteamId = 4,
-                        Replay = new Replay(),
-                    },
-                    new Entry
-                    {
-                        Leaderboard = new Leaderboard(),
-                        SteamId = 4,
-                        Replay = new Replay(),
-                    },
-                    new Entry
-                    {
-                        Leaderboard = new Leaderboard(),
-                        SteamId = 4,
-                        Replay = new Replay(),
-                    },
-                });
-                var p5 = new Player
-                {
-                    SteamId = 5,
-                    Name = "Stacey",
-                };
-                p5.Entries.AddRange(new[]
-                {
-                    new Entry
-                    {
-                        Leaderboard = new Leaderboard(),
-                        SteamId = 5,
-                        Replay = new Replay(),
-                    },
-                    new Entry
-                    {
-                        Leaderboard = new Leaderboard(),
-                        SteamId = 5,
-                        Replay = new Replay(),
-                    },
-                    new Entry
-                    {
-                        Leaderboard = new Leaderboard(),
-                        SteamId = 5,
-                        Replay = new Replay(),
-                    },
-                });
-
-                return new[] { p1, p2, p3, p4, p5 };
-            }
+            mockDb = fixture.CreateMockLeaderboardsContext();
+            controller = new PlayersController(mockDb.Object);
         }
 
-        public PlayersControllerTests()
-        {
-            controller = new PlayersController(mockDb.Db);
-        }
-
-        protected MockLeaderboardsContext mockDb = new MockLeaderboardsContext();
-        protected PlayersController controller;
+        private readonly Mock<ILeaderboardsContext> mockDb;
+        private readonly PlayersController controller;
 
         public class Constructor
         {
@@ -259,13 +41,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class GetPlayersMethod : PlayersControllerTests
         {
-            public GetPlayersMethod()
-            {
-                mockDb.Players.AddRange(Players);
-            }
+            public GetPlayersMethod(MockDatabaseFixture fixture) : base(fixture) { }
 
-            protected PlayersPagination pagination = new PlayersPagination();
-            protected PlayersSortParams sort = new PlayersSortParams();
+            private readonly PlayersPagination pagination = new PlayersPagination();
+            private readonly PlayersSortParams sort = new PlayersSortParams();
 
             [Fact]
             public async Task LimitIsLessThanResultsCount_ReturnsLimitResults()
@@ -279,10 +58,12 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Assert
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<PlayersEnvelope>>(actionResult);
                 var contentResult = (OkNegotiatedContentResult<PlayersEnvelope>)actionResult;
-                var playerDTOs = contentResult.Content.Players;
-                var expectedIds = new[] { "1", "2" };
-                var actualIds = playerDTOs.Select(p => p.Id).ToList();
-                Assert.Equal(expectedIds, actualIds);
+                var players = contentResult.Content.Players;
+                Assert.Equal(new[]
+                {
+                    "76561198044686391",
+                    "76561198070596881",
+                }, players.Select(p => p.Id));
             }
 
             [Fact]
@@ -297,10 +78,30 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Assert
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<PlayersEnvelope>>(actionResult);
                 var contentResult = (OkNegotiatedContentResult<PlayersEnvelope>)actionResult;
-                var playerDTOs = contentResult.Content.Players;
-                var expectedIds = new[] { "3", "4", "5" };
-                var actualIds = playerDTOs.Select(p => p.Id).ToList();
-                Assert.Equal(expectedIds, actualIds);
+                var players = contentResult.Content.Players;
+                Assert.Equal(new[]
+                {
+                    "76561198063289187", "76561197970345045", "76561198060310297", "76561198089268754", "76561198042211886",
+                    "76561198066366334", "76561198019090079", "76561198043152248", "76561198051520646", "76561198009941176",
+                    "76561198053569604", "76561198067365023", "76561198165150163", "76561197965804468", "76561198165350197",
+                    "76561198094923763", "76561198014525041", "76561198133195362", "76561198052229724", "76561198097897774",
+                    "76561198044778237", "76561198051380610", "76561198154717415", "76561198077792175", "76561198025119291",
+                    "76561198081127587", "76561197996651110", "76561197983885363", "76561198119176120", "76561198151496151",
+                    "76561198141270473", "76561197995016888", "76561198059437934", "76561198049106029", "76561198055894548",
+                    "76561198171801786", "76561198025462847", "76561198190560728", "76561197985764354", "76561198045260150",
+                    "76561197993680740", "76561198079345283", "76561198116399814", "76561197965776309", "76561198038077223",
+                    "76561198141006932", "76561198062534705", "76561197999613276", "76561198024988025", "76561198079361434",
+                    "76561197976996341", "76561198054034534", "76561197977073983", "76561198096055448", "76561198236008636",
+                    "76561197960799577", "76561197993693567", "76561198004598424", "76561198044677675", "76561198000048416",
+                    "76561198097906515", "76561198078776790", "76561198067116391", "76561198197721531", "76561198163898899",
+                    "76561198057233671", "76561198283190045", "76561198122003545", "76561198036838485", "76561198027716191",
+                    "76561198020400998", "76561198045544962", "76561198033353739", "76561198025231301", "76561197997799915",
+                    "76561198286249466", "76561197970885886", "76561197978294223", "76561198020096110", "76561198128729097",
+                    "76561198013056914", "76561198048052937", "76561198100455018", "76561198093336562", "76561198053984875",
+                    "76561198260704537", "76561198162674123", "76561198041896308", "76561198101702277", "76561198095968951",
+                    "76561197966692309", "76561197999121403", "76561198004551968", "76561198017976778", "76561197987591887",
+                    "76561198007439754", "76561198106146121", "76561198052465462",
+                }, players.Select(p => p.Id));
             }
 
             [Fact]
@@ -315,17 +116,37 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Assert
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<PlayersEnvelope>>(actionResult);
                 var contentResult = (OkNegotiatedContentResult<PlayersEnvelope>)actionResult;
-                var playerDTOs = contentResult.Content.Players;
-                var expectedIds = new[] { "5", "4", "3", "2", "1" };
-                var actualIds = playerDTOs.Select(p => p.Id).ToList();
-                Assert.Equal(expectedIds, actualIds);
+                var players = contentResult.Content.Players;
+                Assert.Equal(new[]
+                {
+                    "76561198286249466", "76561198283190045", "76561198260704537", "76561198236008636", "76561198197721531",
+                    "76561198190560728", "76561198171801786", "76561198165350197", "76561198165150163", "76561198163898899",
+                    "76561198162674123", "76561198154717415", "76561198151496151", "76561198141270473", "76561198141006932",
+                    "76561198133195362", "76561198128729097", "76561198122003545", "76561198119176120", "76561198116399814",
+                    "76561198106146121", "76561198101702277", "76561198100455018", "76561198097906515", "76561198097897774",
+                    "76561198096055448", "76561198095968951", "76561198094923763", "76561198093336562", "76561198089268754",
+                    "76561198081127587", "76561198079361434", "76561198079345283", "76561198078776790", "76561198077792175",
+                    "76561198070596881", "76561198067365023", "76561198067116391", "76561198066366334", "76561198063289187",
+                    "76561198062534705", "76561198060310297", "76561198059437934", "76561198057233671", "76561198055894548",
+                    "76561198054034534", "76561198053984875", "76561198053569604", "76561198052465462", "76561198052229724",
+                    "76561198051520646", "76561198051380610", "76561198049106029", "76561198048052937", "76561198045544962",
+                    "76561198045260150", "76561198044778237", "76561198044686391", "76561198044677675", "76561198043152248",
+                    "76561198042211886", "76561198041896308", "76561198038077223", "76561198036838485", "76561198033353739",
+                    "76561198027716191", "76561198025462847", "76561198025231301", "76561198025119291", "76561198024988025",
+                    "76561198020400998", "76561198020096110", "76561198019090079", "76561198017976778", "76561198014525041",
+                    "76561198013056914", "76561198009941176", "76561198007439754", "76561198004598424", "76561198004551968",
+                    "76561198000048416", "76561197999613276", "76561197999121403", "76561197997799915", "76561197996651110",
+                    "76561197995016888", "76561197993693567", "76561197993680740", "76561197987591887", "76561197985764354",
+                    "76561197983885363", "76561197978294223", "76561197977073983", "76561197976996341", "76561197970885886",
+                    "76561197970345045", "76561197966692309", "76561197965804468", "76561197965776309", "76561197960799577",
+                }, players.Select(p => p.Id));
             }
 
             [Fact]
             public async Task QIsSpecified_ReturnsFilteredPlayers()
             {
                 // Arrange
-                var q = "Sta";
+                var q = "s";
 
                 // Act
                 var actionResult = await controller.GetPlayers(pagination, sort, q);
@@ -333,10 +154,11 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Assert
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<PlayersEnvelope>>(actionResult);
                 var contentResult = (OkNegotiatedContentResult<PlayersEnvelope>)actionResult;
-                var playerDTOs = contentResult.Content.Players;
-                var expectedIds = new[] { "5" };
-                var actualIds = playerDTOs.Select(p => p.Id).ToList();
-                Assert.Equal(expectedIds, actualIds);
+                var players = contentResult.Content.Players;
+                Assert.Equal(new[]
+                {
+                    "76561198042211886", "76561198094923763", "76561198067116391", "76561198122003545", "76561198106146121"
+                }, players.Select(p => p.Id));
             }
 
             [Fact]
@@ -348,14 +170,16 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 // Assert
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<PlayersEnvelope>>(actionResult);
                 var contentResult = (OkNegotiatedContentResult<PlayersEnvelope>)actionResult;
-                var playerDTOs = contentResult.Content.Players;
-                Assert.Equal(5, playerDTOs.Count());
+                var players = contentResult.Content.Players;
+                Assert.Equal(100, players.Count());
             }
         }
 
         public class GetPlayerMethod : PlayersControllerTests
         {
-            protected long steamId;
+            public GetPlayerMethod(MockDatabaseFixture fixture) : base(fixture) { }
+
+            private long steamId;
 
             [Fact]
             public async Task PlayerNotFound_ReturnsNotFound()
@@ -374,8 +198,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsPlayerEntries()
             {
                 // Arrange
-                steamId = 76561197960481221;
-                mockDb.Players.Add(new Player { SteamId = steamId });
+                steamId = 76561198097897774;
 
                 // Act
                 var result = await controller.GetPlayer(steamId);
@@ -387,9 +210,14 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class GetPlayerEntriesMethod : PlayersControllerTests
         {
-            protected long steamId;
-            protected LeaderboardIdParams lbids = new LeaderboardIdParams();
-            protected Products products = new Products(LeaderboardCategories.Products.Select(p => p.Name));
+            public GetPlayerEntriesMethod(MockDatabaseFixture fixture) : base(fixture)
+            {
+                products = new Products(fixture.Products.Select(p => p.Name));
+            }
+
+            private long steamId;
+            private readonly LeaderboardIdParams lbids = new LeaderboardIdParams();
+            private readonly Products products;
 
             [Fact]
             public async Task PlayerNotFound_ReturnsNotFound()
@@ -408,8 +236,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsPlayerEntries()
             {
                 // Arrange
-                steamId = 76561197960481221;
-                mockDb.Players.Add(new Player { SteamId = steamId });
+                steamId = 76561198052229724;
 
                 // Act
                 var result = await controller.GetPlayerEntries(steamId, lbids, products);
@@ -421,8 +248,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class GetPlayerEntryMethod : PlayersControllerTests
         {
-            protected int lbid;
-            protected int steamId;
+            public GetPlayerEntryMethod(MockDatabaseFixture fixture) : base(fixture) { }
+
+            private int lbid;
+            private long steamId;
 
             [Fact]
             public async Task PlayerNotFound_ReturnsNotFound()
@@ -442,24 +271,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsPlayerEntry()
             {
                 // Arrange
-                lbid = 234265;
-                steamId = 1;
-                var entry = new Entry
-                {
-                    LeaderboardId = lbid,
-                    Leaderboard = new Leaderboard
-                    {
-                        LeaderboardId = lbid,
-                        Product = new Product(0, "", ""),
-                        Mode = new Mode(0, "", ""),
-                        Run = new Run(0, "", ""),
-                        Character = new Character(0, "", ""),
-                    },
-                    SteamId = steamId,
-                    Player = new Player { SteamId = steamId },
-                    Replay = new Replay(),
-                };
-                mockDb.Entries.Add(entry);
+                lbid = 742526;
+                steamId = 76561198097897774;
 
                 // Act
                 var result = await controller.GetPlayerEntry(lbid, steamId);
@@ -472,30 +285,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReplayFound_AddsReplayInformation()
             {
                 // Arrange
-                lbid = 234265;
-                steamId = 1;
-                var entry = new Entry
-                {
-                    LeaderboardId = lbid,
-                    Leaderboard = new Leaderboard
-                    {
-                        LeaderboardId = lbid,
-                        Product = new Product(0, "", ""),
-                        Mode = new Mode(0, "", ""),
-                        Run = new Run(0, "", ""),
-                        Character = new Character(0, "", ""),
-                    },
-                    SteamId = steamId,
-                    Player = new Player { SteamId = steamId },
-                    ReplayId = 234,
-                    Replay = new Replay
-                    {
-                        ReplayId = 234,
-                        Version = 74,
-                        KilledBy = "BOMB",
-                    },
-                };
-                mockDb.Entries.Add(entry);
+                lbid = 740000;
+                steamId = 76561198078776790;
 
                 // Act
                 var result = await controller.GetPlayerEntry(lbid, steamId);
@@ -504,16 +295,21 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<EntryDTO>>(result);
                 var contentResult = (OkNegotiatedContentResult<EntryDTO>)result;
                 var content = contentResult.Content;
-                Assert.Equal(74, content.Version);
-                Assert.Equal("BOMB", content.KilledBy);
+                Assert.Equal(75, content.Version);
+                Assert.Equal("BLOOD MAGIC", content.KilledBy);
             }
         }
 
         public class GetPlayerDailyEntriesMethod : PlayersControllerTests
         {
-            protected long steamId;
-            protected LeaderboardIdParams leaderboardIds = new LeaderboardIdParams();
-            protected Products products = new Products(LeaderboardCategories.Products.Select(p => p.Name));
+            public GetPlayerDailyEntriesMethod(MockDatabaseFixture fixture) : base(fixture)
+            {
+                products = new Products(fixture.Products.Select(p => p.Name));
+            }
+
+            private long steamId;
+            private readonly LeaderboardIdParams leaderboardIds = new LeaderboardIdParams();
+            private readonly Products products;
 
             [Fact]
             public async Task PlayerNotFound_ReturnsNotFound()
@@ -532,8 +328,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsPlayerEntries()
             {
                 // Arrange
-                var steamId = 76561197960481221;
-                mockDb.Players.Add(new Player { SteamId = steamId });
+                var steamId = 76561198063289187;
 
                 // Act
                 var result = await controller.GetPlayerDailyEntries(steamId, leaderboardIds, products);
@@ -545,8 +340,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class GetPlayerDailyEntryMethod : PlayersControllerTests
         {
-            protected int lbid;
-            protected long steamId;
+            public GetPlayerDailyEntryMethod(MockDatabaseFixture fixture) : base(fixture) { }
+
+            private int lbid;
+            private long steamId;
 
             [Fact]
             public async Task PlayerNotFound_ReturnsNotFound()
@@ -566,21 +363,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReturnsPlayerEntry()
             {
                 // Arrange
-                lbid = 234265;
-                steamId = 1;
-                var entry = new DailyEntry
-                {
-                    LeaderboardId = lbid,
-                    Leaderboard = new DailyLeaderboard
-                    {
-                        LeaderboardId = lbid,
-                        Product = new Product(0, "", ""),
-                    },
-                    SteamId = steamId,
-                    Player = new Player { SteamId = steamId },
-                    Replay = new Replay(),
-                };
-                mockDb.DailyEntries.Add(entry);
+                lbid = 1751947;
+                steamId = 76561198025462847;
 
                 // Act
                 var result = await controller.GetPlayerDailyEntry(lbid, steamId);
@@ -593,27 +377,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public async Task ReplayFound_AddsReplayInformation()
             {
                 // Arrange
-                lbid = 234265;
-                steamId = 1;
-                var entry = new DailyEntry
-                {
-                    LeaderboardId = lbid,
-                    Leaderboard = new DailyLeaderboard
-                    {
-                        LeaderboardId = lbid,
-                        Product = new Product(0, "", ""),
-                    },
-                    SteamId = steamId,
-                    Player = new Player { SteamId = steamId },
-                    ReplayId = 234,
-                    Replay = new Replay
-                    {
-                        ReplayId = 234,
-                        Version = 74,
-                        KilledBy = "BOMB",
-                    },
-                };
-                mockDb.DailyEntries.Add(entry);
+                lbid = 628864;
+                steamId = 76561198097906515;
 
                 // Act
                 var result = await controller.GetPlayerDailyEntry(lbid, steamId);
@@ -622,13 +387,15 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<DailyEntryDTO>>(result);
                 var contentResult = (OkNegotiatedContentResult<DailyEntryDTO>)result;
                 var content = contentResult.Content;
-                Assert.Equal(74, content.Version);
-                Assert.Equal("BOMB", content.KilledBy);
+                Assert.Equal(44, content.Version);
+                Assert.Equal("BLACK SKELETON", content.KilledBy);
             }
         }
 
         public class DisposeMethod : PlayersControllerTests
         {
+            public DisposeMethod(MockDatabaseFixture fixture) : base(fixture) { }
+
             [Fact]
             public void DisposesDb()
             {
@@ -636,7 +403,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 controller.Dispose();
 
                 // Assert
-                mockDb.MockDb.Verify(d => d.Dispose(), Times.Once);
+                mockDb.Verify(d => d.Dispose(), Times.Once);
             }
 
             [Fact]
@@ -647,7 +414,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 controller.Dispose();
 
                 // Assert
-                mockDb.MockDb.Verify(d => d.Dispose(), Times.Once);
+                mockDb.Verify(d => d.Dispose(), Times.Once);
             }
         }
 

@@ -433,7 +433,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                         where e.SteamId == steamId
                         where products.Contains(e.Leaderboard.Product.Name)
                         select e;
-            if (lbids.Any()) { query = query.Where(e => lbids.Contains(e.Leaderboard.LeaderboardId)); }
+            if (lbids.Any()) { query = query.Where(e => lbids.Contains(e.LeaderboardId)); }
             if (production != null) { query = query.Where(e => e.Leaderboard.IsProduction == production); }
 
             var total = await query.CountAsync(cancellationToken);

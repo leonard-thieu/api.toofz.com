@@ -175,8 +175,7 @@
     <Compile Include="IntegrationTestsBase.cs" />
     <Compile Include="IQueryableExtensionsTests.cs" />
     <Compile Include="IReturnsExtensions.cs" />
-    <Compile Include="LeaderboardCategories.cs" />
-    <Compile Include="MockLeaderboardsContext.cs" />
+    <Compile Include="MockDatabaseFixture.cs" />
     <Compile Include="StorageHelper.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="ValueProviderResultExtensionsTests.cs" />

@@ -22,6 +22,7 @@ using Xunit.Sdk;
 namespace toofz.NecroDancer.Web.Api.Tests
 {
     [Trait("Category", "Uses OWIN self hosting")]
+    [Trait("Category", "Uses SQL Server")]
     [Collection(IntegrationTestsCollection.Name)]
     public abstract class IntegrationTestsBase : IDisposable
     {
