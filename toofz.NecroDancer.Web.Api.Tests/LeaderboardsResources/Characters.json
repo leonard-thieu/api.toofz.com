@@ -1,0 +1,87 @@
+[
+  {
+    "CharacterId": -4,
+    "Name": "all-characters-amplified",
+    "DisplayName": "All Characters (Amplified)"
+  },
+  {
+    "CharacterId": -3,
+    "Name": "all-characters",
+    "DisplayName": "All Characters"
+  },
+  {
+    "CharacterId": -2,
+    "Name": "story-mode",
+    "DisplayName": "Story Mode"
+  },
+  {
+    "CharacterId": 0,
+    "Name": "cadence",
+    "DisplayName": "Cadence"
+  },
+  {
+    "CharacterId": 1,
+    "Name": "melody",
+    "DisplayName": "Melody"
+  },
+  {
+    "CharacterId": 2,
+    "Name": "aria",
+    "DisplayName": "Aria"
+  },
+  {
+    "CharacterId": 3,
+    "Name": "dorian",
+    "DisplayName": "Dorian"
+  },
+  {
+    "CharacterId": 4,
+    "Name": "eli",
+    "DisplayName": "Eli"
+  },
+  {
+    "CharacterId": 5,
+    "Name": "monk",
+    "DisplayName": "Monk"
+  },
+  {
+    "CharacterId": 6,
+    "Name": "dove",
+    "DisplayName": "Dove"
+  },
+  {
+    "CharacterId": 7,
+    "Name": "coda",
+    "DisplayName": "Coda"
+  },
+  {
+    "CharacterId": 8,
+    "Name": "bolt",
+    "DisplayName": "Bolt"
+  },
+  {
+    "CharacterId": 9,
+    "Name": "bard",
+    "DisplayName": "Bard"
+  },
+  {
+    "CharacterId": 10,
+    "Name": "nocturna",
+    "DisplayName": "Nocturna"
+  },
+  {
+    "CharacterId": 11,
+    "Name": "diamond",
+    "DisplayName": "Diamond"
+  },
+  {
+    "CharacterId": 12,
+    "Name": "mary",
+    "DisplayName": "Mary"
+  },
+  {
+    "CharacterId": 13,
+    "Name": "tempo",
+    "DisplayName": "Tempo"
+  }
+]

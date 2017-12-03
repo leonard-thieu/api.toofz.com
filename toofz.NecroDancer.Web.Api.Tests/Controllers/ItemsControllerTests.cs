@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Moq;
@@ -9,6 +8,7 @@ using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
@@ -467,61 +467,36 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class IntegrationTests : IntegrationTestsBase
         {
+            public IntegrationTests(IntegrationTestsFixture fixture, ITestOutputHelper output) : base(fixture, output) { }
+
             [Fact]
             public async Task GetItemsMethod()
             {
-                // Arrange
-                var mockDb = new Mock<INecroDancerContext>();
-                var db = mockDb.Object;
-                var dbItems = new FakeDbSet<Item>(Items);
-                mockDb.Setup(x => x.Items).Returns(dbItems);
-                Kernel.Rebind<INecroDancerContext>().ToConstant(db);
-
-                // Act
-                var response = await Server.HttpClient.GetAsync("/items");
-                var content = await response.Content.ReadAsStringAsync();
+                // Arrange -> Act
+                var response = await server.HttpClient.GetAsync("/items");
 
                 // Assert
-                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                Assert.Equal(Resources.GetItems, content, ignoreLineEndingDifferences: true);
+                await RespondsWithAsync(response, Resources.GetItems);
             }
 
             [Fact]
             public async Task GetItemsByCategoryMethod()
             {
-                // Arrange
-                var mockDb = new Mock<INecroDancerContext>();
-                var db = mockDb.Object;
-                var dbItems = new FakeDbSet<Item>(Items);
-                mockDb.Setup(x => x.Items).Returns(dbItems);
-                Kernel.Rebind<INecroDancerContext>().ToConstant(db);
-
-                // Act
-                var response = await Server.HttpClient.GetAsync("/items/armor");
-                var content = await response.Content.ReadAsStringAsync();
+                // Arrange -> Act
+                var response = await server.HttpClient.GetAsync("/items/armor");
 
                 // Assert
-                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                Assert.Equal(Resources.GetItemsByCategory, content, ignoreLineEndingDifferences: true);
+                await RespondsWithAsync(response, Resources.GetItemsByCategory);
             }
 
             [Fact]
             public async Task GetItemsBySubcategoryMethod()
             {
-                // Arrange
-                var mockDb = new Mock<INecroDancerContext>();
-                var db = mockDb.Object;
-                var dbItems = new FakeDbSet<Item>(Items);
-                mockDb.Setup(x => x.Items).Returns(dbItems);
-                Kernel.Rebind<INecroDancerContext>().ToConstant(db);
-
-                // Act
-                var response = await Server.HttpClient.GetAsync("/items/weapons/bows");
-                var content = await response.Content.ReadAsStringAsync();
+                // Arrange -> Act
+                var response = await server.HttpClient.GetAsync("/items/weapons/bows");
 
                 // Assert
-                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                Assert.Equal(Resources.GetItemsBySubcategory, content, ignoreLineEndingDifferences: true);
+                await RespondsWithAsync(response, Resources.GetItemsBySubcategory);
             }
         }
     }

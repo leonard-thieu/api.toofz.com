@@ -1,55 +1,847 @@
 {
   "player": {
-    "id": "1",
-    "updated_at": null,
-    "display_name": "Leonard",
-    "avatar": null
+    "id": "76561197976996341",
+    "updated_at": "2017-12-01T01:56:26.79Z",
+    "display_name": "JP73",
+    "avatar": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/fe/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb.jpg"
   },
-  "total": 1,
+  "total": 19,
   "entries": [
     {
       "leaderboard": {
-        "id": 739999,
-        "updated_at": null,
-        "name": null,
-        "display_name": null,
-        "production": false,
-        "product": "classic",
+        "id": 2047569,
+        "updated_at": "2017-12-01T02:57:26.483Z",
+        "name": "DLC HARDCORE_PROD",
+        "display_name": "Cadence Score (Amplified)",
+        "production": true,
+        "product": "amplified",
         "_product": {
           "id": 1,
-          "name": "classic",
-          "display_name": "Classic"
+          "name": "amplified",
+          "display_name": "Amplified"
         },
         "mode": "standard",
         "_mode": {
-          "id": 1,
+          "id": 0,
           "name": "standard",
           "display_name": "Standard"
         },
         "run": "score",
         "_run": {
-          "id": 1,
+          "id": 0,
           "name": "score",
           "display_name": "Score"
         },
         "character": "cadence",
         "_character": {
-          "id": 1,
+          "id": 0,
           "name": "cadence",
           "display_name": "Cadence"
         },
         "coOp": false,
         "customMusic": false,
-        "total": 0
+        "total": 52
       },
-      "rank": 0,
-      "score": 0,
+      "rank": 111,
+      "score": 14952,
       "end": {
-        "zone": 0,
-        "level": 0
+        "zone": 5,
+        "level": 6
+      },
+      "killed_by": "SHOPKEEPER",
+      "version": 94
+    },
+    {
+      "leaderboard": {
+        "id": 2047515,
+        "updated_at": "2017-12-01T02:57:26.593Z",
+        "name": "DLC HARDCORE Diamond_PROD",
+        "display_name": "Diamond Score (Amplified)",
+        "production": true,
+        "product": "amplified",
+        "_product": {
+          "id": 1,
+          "name": "amplified",
+          "display_name": "Amplified"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "score",
+        "_run": {
+          "id": 0,
+          "name": "score",
+          "display_name": "Score"
+        },
+        "character": "diamond",
+        "_character": {
+          "id": 11,
+          "name": "diamond",
+          "display_name": "Diamond"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 32
+      },
+      "rank": 62,
+      "score": 9133,
+      "end": {
+        "zone": 5,
+        "level": 6
+      },
+      "killed_by": null,
+      "version": 93
+    },
+    {
+      "leaderboard": {
+        "id": 2047749,
+        "updated_at": "2017-12-01T02:57:27.573Z",
+        "name": "DLC HARDCORE Mary_PROD",
+        "display_name": "Mary Score (Amplified)",
+        "production": true,
+        "product": "amplified",
+        "_product": {
+          "id": 1,
+          "name": "amplified",
+          "display_name": "Amplified"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "score",
+        "_run": {
+          "id": 0,
+          "name": "score",
+          "display_name": "Score"
+        },
+        "character": "mary",
+        "_character": {
+          "id": 12,
+          "name": "mary",
+          "display_name": "Mary"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 48
+      },
+      "rank": 782,
+      "score": 1112,
+      "end": {
+        "zone": 2,
+        "level": 3
       },
       "killed_by": null,
       "version": null
+    },
+    {
+      "leaderboard": {
+        "id": 2047718,
+        "updated_at": "2017-12-01T02:57:24.723Z",
+        "name": "DLC HARDCORE Tempo_PROD",
+        "display_name": "Tempo Score (Amplified)",
+        "production": true,
+        "product": "amplified",
+        "_product": {
+          "id": 1,
+          "name": "amplified",
+          "display_name": "Amplified"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "score",
+        "_run": {
+          "id": 0,
+          "name": "score",
+          "display_name": "Score"
+        },
+        "character": "tempo",
+        "_character": {
+          "id": 13,
+          "name": "tempo",
+          "display_name": "Tempo"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 48
+      },
+      "rank": 4279,
+      "score": 49,
+      "end": {
+        "zone": 1,
+        "level": 1
+      },
+      "killed_by": "LIGHT MINOTAUR",
+      "version": 93
+    },
+    {
+      "leaderboard": {
+        "id": 2047626,
+        "updated_at": "2017-12-01T02:57:27.157Z",
+        "name": "DLC SPEEDRUN_PROD",
+        "display_name": "Cadence Speed (Amplified)",
+        "production": true,
+        "product": "amplified",
+        "_product": {
+          "id": 1,
+          "name": "amplified",
+          "display_name": "Amplified"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "speed",
+        "_run": {
+          "id": 1,
+          "name": "speed",
+          "display_name": "Speed"
+        },
+        "character": "cadence",
+        "_character": {
+          "id": 0,
+          "name": "cadence",
+          "display_name": "Cadence"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 36
+      },
+      "rank": 1746,
+      "score": 98200930,
+      "end": {
+        "zone": 5,
+        "level": 6
+      },
+      "killed_by": "SHOPKEEPER",
+      "version": 94
+    },
+    {
+      "leaderboard": {
+        "id": 2047607,
+        "updated_at": "2017-12-01T02:57:27.467Z",
+        "name": "DLC SPEEDRUN Diamond_PROD",
+        "display_name": "Diamond Speed (Amplified)",
+        "production": true,
+        "product": "amplified",
+        "_product": {
+          "id": 1,
+          "name": "amplified",
+          "display_name": "Amplified"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "speed",
+        "_run": {
+          "id": 1,
+          "name": "speed",
+          "display_name": "Speed"
+        },
+        "character": "diamond",
+        "_character": {
+          "id": 11,
+          "name": "diamond",
+          "display_name": "Diamond"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 25
+      },
+      "rank": 1560,
+      "score": 98111754,
+      "end": {
+        "zone": 5,
+        "level": 6
+      },
+      "killed_by": null,
+      "version": 93
+    },
+    {
+      "leaderboard": {
+        "id": 741312,
+        "updated_at": "2017-12-01T02:57:22.573Z",
+        "name": "HARDCORE All Chars_PROD",
+        "display_name": "All Characters Score",
+        "production": true,
+        "product": "classic",
+        "_product": {
+          "id": 0,
+          "name": "classic",
+          "display_name": "Classic"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "score",
+        "_run": {
+          "id": 0,
+          "name": "score",
+          "display_name": "Score"
+        },
+        "character": "all-characters",
+        "_character": {
+          "id": -3,
+          "name": "all-characters",
+          "display_name": "All Characters"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 47
+      },
+      "rank": 4857,
+      "score": 291,
+      "end": {
+        "zone": 2,
+        "level": 1
+      },
+      "killed_by": null,
+      "version": null
+    },
+    {
+      "leaderboard": {
+        "id": 739795,
+        "updated_at": "2017-12-01T02:57:14.233Z",
+        "name": "HARDCORE Bard_PROD",
+        "display_name": "Bard Score",
+        "production": true,
+        "product": "classic",
+        "_product": {
+          "id": 0,
+          "name": "classic",
+          "display_name": "Classic"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "score",
+        "_run": {
+          "id": 0,
+          "name": "score",
+          "display_name": "Score"
+        },
+        "character": "bard",
+        "_character": {
+          "id": 9,
+          "name": "bard",
+          "display_name": "Bard"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 79
+      },
+      "rank": 665,
+      "score": 8639,
+      "end": {
+        "zone": 4,
+        "level": 6
+      },
+      "killed_by": "DARK MINOTAUR",
+      "version": 75
+    },
+    {
+      "leaderboard": {
+        "id": 741400,
+        "updated_at": "2017-12-01T02:57:24.13Z",
+        "name": "HARDCORE Bolt_PROD",
+        "display_name": "Bolt Score",
+        "production": true,
+        "product": "classic",
+        "_product": {
+          "id": 0,
+          "name": "classic",
+          "display_name": "Classic"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "score",
+        "_run": {
+          "id": 0,
+          "name": "score",
+          "display_name": "Score"
+        },
+        "character": "bolt",
+        "_character": {
+          "id": 8,
+          "name": "bolt",
+          "display_name": "Bolt"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 58
+      },
+      "rank": 5002,
+      "score": 108,
+      "end": {
+        "zone": 1,
+        "level": 2
+      },
+      "killed_by": "DARK MINOTAUR",
+      "version": 75
+    },
+    {
+      "leaderboard": {
+        "id": 739999,
+        "updated_at": "2017-12-01T02:57:15.027Z",
+        "name": "HARDCORE_PROD",
+        "display_name": "Cadence Score",
+        "production": true,
+        "product": "classic",
+        "_product": {
+          "id": 0,
+          "name": "classic",
+          "display_name": "Classic"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "score",
+        "_run": {
+          "id": 0,
+          "name": "score",
+          "display_name": "Score"
+        },
+        "character": "cadence",
+        "_character": {
+          "id": 0,
+          "name": "cadence",
+          "display_name": "Cadence"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 100
+      },
+      "rank": 1159,
+      "score": 7736,
+      "end": {
+        "zone": 4,
+        "level": 6
+      },
+      "killed_by": null,
+      "version": 75
+    },
+    {
+      "leaderboard": {
+        "id": 741117,
+        "updated_at": "2017-12-01T02:57:21.997Z",
+        "name": "HARDCORE Dorian_PROD",
+        "display_name": "Dorian Score",
+        "production": true,
+        "product": "classic",
+        "_product": {
+          "id": 0,
+          "name": "classic",
+          "display_name": "Classic"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "score",
+        "_run": {
+          "id": 0,
+          "name": "score",
+          "display_name": "Score"
+        },
+        "character": "dorian",
+        "_character": {
+          "id": 3,
+          "name": "dorian",
+          "display_name": "Dorian"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 65
+      },
+      "rank": 6152,
+      "score": 175,
+      "end": {
+        "zone": 1,
+        "level": 3
+      },
+      "killed_by": null,
+      "version": null
+    },
+    {
+      "leaderboard": {
+        "id": 741328,
+        "updated_at": "2017-12-01T02:57:21.59Z",
+        "name": "HARDCORE DOVE_PROD",
+        "display_name": "Dove Score",
+        "production": true,
+        "product": "classic",
+        "_product": {
+          "id": 0,
+          "name": "classic",
+          "display_name": "Classic"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "score",
+        "_run": {
+          "id": 0,
+          "name": "score",
+          "display_name": "Score"
+        },
+        "character": "dove",
+        "_character": {
+          "id": 6,
+          "name": "dove",
+          "display_name": "Dove"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 78
+      },
+      "rank": 8312,
+      "score": 165,
+      "end": {
+        "zone": 3,
+        "level": 3
+      },
+      "killed_by": "YETI",
+      "version": 75
+    },
+    {
+      "leaderboard": {
+        "id": 739792,
+        "updated_at": "2017-12-01T02:57:14.453Z",
+        "name": "HARDCORE Eli_PROD",
+        "display_name": "Eli Score",
+        "production": true,
+        "product": "classic",
+        "_product": {
+          "id": 0,
+          "name": "classic",
+          "display_name": "Classic"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "score",
+        "_run": {
+          "id": 0,
+          "name": "score",
+          "display_name": "Score"
+        },
+        "character": "eli",
+        "_character": {
+          "id": 4,
+          "name": "eli",
+          "display_name": "Eli"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 75
+      },
+      "rank": 7305,
+      "score": 682,
+      "end": {
+        "zone": 4,
+        "level": 6
+      },
+      "killed_by": null,
+      "version": null
+    },
+    {
+      "leaderboard": {
+        "id": 740390,
+        "updated_at": "2017-12-01T02:57:20.997Z",
+        "name": "HARDCORE Melody_PROD",
+        "display_name": "Melody Score",
+        "production": true,
+        "product": "classic",
+        "_product": {
+          "id": 0,
+          "name": "classic",
+          "display_name": "Classic"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "score",
+        "_run": {
+          "id": 0,
+          "name": "score",
+          "display_name": "Score"
+        },
+        "character": "melody",
+        "_character": {
+          "id": 1,
+          "name": "melody",
+          "display_name": "Melody"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 90
+      },
+      "rank": 10071,
+      "score": 2386,
+      "end": {
+        "zone": 4,
+        "level": 6
+      },
+      "killed_by": "YELLOW ARMADILLO",
+      "version": 75
+    },
+    {
+      "leaderboard": {
+        "id": 742526,
+        "updated_at": "2017-12-01T02:57:24.287Z",
+        "name": "HARDCORE Monk_PROD",
+        "display_name": "Monk Score",
+        "production": true,
+        "product": "classic",
+        "_product": {
+          "id": 0,
+          "name": "classic",
+          "display_name": "Classic"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "score",
+        "_run": {
+          "id": 0,
+          "name": "score",
+          "display_name": "Score"
+        },
+        "character": "monk",
+        "_character": {
+          "id": 5,
+          "name": "monk",
+          "display_name": "Monk"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 74
+      },
+      "rank": 5150,
+      "score": 612,
+      "end": {
+        "zone": 2,
+        "level": 1
+      },
+      "killed_by": "VOW OF POVERTY",
+      "version": 75
+    },
+    {
+      "leaderboard": {
+        "id": 739796,
+        "updated_at": "2017-12-01T02:57:15.777Z",
+        "name": "SPEEDRUN Bard_PROD",
+        "display_name": "Bard Speed",
+        "production": true,
+        "product": "classic",
+        "_product": {
+          "id": 0,
+          "name": "classic",
+          "display_name": "Classic"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "speed",
+        "_run": {
+          "id": 1,
+          "name": "speed",
+          "display_name": "Speed"
+        },
+        "character": "bard",
+        "_character": {
+          "id": 9,
+          "name": "bard",
+          "display_name": "Bard"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 59
+      },
+      "rank": 8679,
+      "score": 98616942,
+      "end": {
+        "zone": 4,
+        "level": 6
+      },
+      "killed_by": "DARK MINOTAUR",
+      "version": 75
+    },
+    {
+      "leaderboard": {
+        "id": 740000,
+        "updated_at": "2017-12-01T02:57:17.477Z",
+        "name": "SPEEDRUN_PROD",
+        "display_name": "Cadence Speed",
+        "production": true,
+        "product": "classic",
+        "_product": {
+          "id": 0,
+          "name": "classic",
+          "display_name": "Classic"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "speed",
+        "_run": {
+          "id": 1,
+          "name": "speed",
+          "display_name": "Speed"
+        },
+        "character": "cadence",
+        "_character": {
+          "id": 0,
+          "name": "cadence",
+          "display_name": "Cadence"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 92
+      },
+      "rank": 3053,
+      "score": 99125281,
+      "end": {
+        "zone": 4,
+        "level": 6
+      },
+      "killed_by": "BLUE DRAGON",
+      "version": 75
+    },
+    {
+      "leaderboard": {
+        "id": 740397,
+        "updated_at": "2017-12-01T02:57:21.56Z",
+        "name": "SPEEDRUN Melody_PROD",
+        "display_name": "Melody Speed",
+        "production": true,
+        "product": "classic",
+        "_product": {
+          "id": 0,
+          "name": "classic",
+          "display_name": "Classic"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "speed",
+        "_run": {
+          "id": 1,
+          "name": "speed",
+          "display_name": "Speed"
+        },
+        "character": "melody",
+        "_character": {
+          "id": 1,
+          "name": "melody",
+          "display_name": "Melody"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 80
+      },
+      "rank": 8012,
+      "score": 98479765,
+      "end": {
+        "zone": 4,
+        "level": 6
+      },
+      "killed_by": "YELLOW ARMADILLO",
+      "version": 75
+    },
+    {
+      "leaderboard": {
+        "id": 740363,
+        "updated_at": "2017-12-01T02:57:19.867Z",
+        "name": "HARDCORE SEEDED_PROD",
+        "display_name": "Cadence Seeded Score",
+        "production": true,
+        "product": "classic",
+        "_product": {
+          "id": 0,
+          "name": "classic",
+          "display_name": "Classic"
+        },
+        "mode": "standard",
+        "_mode": {
+          "id": 0,
+          "name": "standard",
+          "display_name": "Standard"
+        },
+        "run": "seeded-score",
+        "_run": {
+          "id": 2,
+          "name": "seeded-score",
+          "display_name": "Seeded Score"
+        },
+        "character": "cadence",
+        "_character": {
+          "id": 0,
+          "name": "cadence",
+          "display_name": "Cadence"
+        },
+        "coOp": false,
+        "customMusic": false,
+        "total": 57
+      },
+      "rank": 2148,
+      "score": 1950,
+      "end": {
+        "zone": 4,
+        "level": 2
+      },
+      "killed_by": "FIREBALL",
+      "version": 75
     }
   ]
 }

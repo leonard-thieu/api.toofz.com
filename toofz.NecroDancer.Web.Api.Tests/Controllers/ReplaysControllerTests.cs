@@ -2,12 +2,12 @@
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Moq;
-using Ninject;
 using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
@@ -100,22 +100,16 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class IntegrationTests : IntegrationTestsBase
         {
+            public IntegrationTests(IntegrationTestsFixture fixture, ITestOutputHelper output) : base(fixture, output) { }
+
             [Fact]
             public async Task GetReplaysMethod()
             {
-                // Arrange
-                var db = Kernel.Get<ILeaderboardsContext>();
-                var mockDb = Mock.Get(db);
-                var replays = Replays;
-                var dbReplays = new FakeDbSet<Replay>(replays);
-                mockDb.Setup(d => d.Replays).Returns(dbReplays);
-
-                // Act
-                var response = await Server.HttpClient.GetAsync("/replays");
-                var content = await response.Content.ReadAsStringAsync();
+                // Arrange -> Act
+                var response = await server.HttpClient.GetAsync("/replays?version=75");
 
                 // Assert
-                Assert.Equal(Resources.GetReplays, content, ignoreLineEndingDifferences: true);
+                await RespondsWithAsync(response, Resources.GetReplays);
             }
         }
     }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Moq;
@@ -9,6 +8,7 @@ using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
@@ -312,42 +312,26 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class IntegrationTests : IntegrationTestsBase
         {
+            public IntegrationTests(IntegrationTestsFixture fixture, ITestOutputHelper output) : base(fixture, output) { }
+
             [Fact]
             public async Task GetEnemiesMethod()
             {
-                // Arrange
-                var mockDb = new Mock<INecroDancerContext>();
-                var db = mockDb.Object;
-                var dbEnemies = new FakeDbSet<Enemy>(Enemies);
-                mockDb.SetupGet(d => d.Enemies).Returns(dbEnemies);
-                Kernel.Rebind<INecroDancerContext>().ToConstant(db);
-
-                // Act
-                var response = await Server.HttpClient.GetAsync("/enemies");
-                var content = await response.Content.ReadAsStringAsync();
+                // Arrange -> Act
+                var response = await server.HttpClient.GetAsync("/enemies");
 
                 // Assert
-                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                Assert.Equal(Resources.GetEnemies, content, ignoreLineEndingDifferences: true);
+                await RespondsWithAsync(response, Resources.GetEnemies);
             }
 
             [Fact]
             public async Task GetEnemiesByAttributeMethod()
             {
-                // Arrange
-                var mockDb = new Mock<INecroDancerContext>();
-                var db = mockDb.Object;
-                var dbEnemies = new FakeDbSet<Enemy>(Enemies);
-                mockDb.SetupGet(d => d.Enemies).Returns(dbEnemies);
-                Kernel.Rebind<INecroDancerContext>().ToConstant(db);
-
-                // Act
-                var response = await Server.HttpClient.GetAsync("/enemies/boss");
-                var content = await response.Content.ReadAsStringAsync();
+                // Arrange -> Act
+                var response = await server.HttpClient.GetAsync("/enemies/boss");
 
                 // Assert
-                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                Assert.Equal(Resources.GetEnemiesByAttribute, content, ignoreLineEndingDifferences: true);
+                await RespondsWithAsync(response, Resources.GetEnemiesByAttribute);
             }
         }
     }

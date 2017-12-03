@@ -1,26 +1,705 @@
 {
-  "total": 3,
+  "total": 32536,
   "replays": [
     {
-      "id": "25094445621522262",
+      "id": "23989221207437736",
       "error": null,
       "seed": null,
-      "version": null,
+      "version": 75,
+      "killed_by": "BLACK ARMORED SKELETON"
+    },
+    {
+      "id": "23989221207703107",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "WIGHT"
+    },
+    {
+      "id": "23989316642522232",
+      "error": null,
+      "seed": null,
+      "version": 75,
       "killed_by": null
     },
     {
-      "id": "25094445622197065",
+      "id": "23989316642616799",
       "error": null,
       "seed": null,
-      "version": null,
+      "version": 75,
       "killed_by": null
     },
     {
-      "id": "25094445622344966",
+      "id": "23989316642978863",
       "error": null,
       "seed": null,
-      "version": null,
+      "version": 75,
+      "killed_by": "BLACK ARMORED SKELETON"
+    },
+    {
+      "id": "23989403671236637",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLUE DRAGON"
+    },
+    {
+      "id": "23989403671503587",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "HOTCOAL"
+    },
+    {
+      "id": "23989403673664446",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "GREEN BANSHEE"
+    },
+    {
+      "id": "23989403675118205",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "YETI"
+    },
+    {
+      "id": "23989403676176566",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "DARK MINOTAUR"
+    },
+    {
+      "id": "23989403679136523",
+      "error": null,
+      "seed": null,
+      "version": 75,
       "killed_by": null
+    },
+    {
+      "id": "23989403680210279",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "PURPLE MUSHROOM"
+    },
+    {
+      "id": "23989403681403614",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BOMB"
+    },
+    {
+      "id": "23989403683226011",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BOMB"
+    },
+    {
+      "id": "23989403683360622",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "DARK GOLEM"
+    },
+    {
+      "id": "23989403685657200",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "WHITE ARMADILLO"
+    },
+    {
+      "id": "23989403685910459",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "TRAP WALLS"
+    },
+    {
+      "id": "23989752512646309",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "SHOPKEEPER"
+    },
+    {
+      "id": "23989752514641104",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BOMB"
+    },
+    {
+      "id": "23989752516250308",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": null
+    },
+    {
+      "id": "23989752520041104",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLACK SKELETON KNIGHT"
+    },
+    {
+      "id": "23989752520331433",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLUE BANSHEE"
+    },
+    {
+      "id": "23989752522843044",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLUE BANSHEE"
+    },
+    {
+      "id": "23989752524100356",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLACK BAT"
+    },
+    {
+      "id": "23989752527891986",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLOOD SHOVEL"
+    },
+    {
+      "id": "23989752527985995",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "SHOPKEEPER GHOST"
+    },
+    {
+      "id": "23990199381326753",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "SHOPKEEPER"
+    },
+    {
+      "id": "23990199382012318",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "OGRE"
+    },
+    {
+      "id": "23990199384672903",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "SHOPKEEPER"
+    },
+    {
+      "id": "23990199385968877",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLADEMASTER"
+    },
+    {
+      "id": "23990199386638104",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "RED DRAGON"
+    },
+    {
+      "id": "23990199390030951",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BOMB"
+    },
+    {
+      "id": "23990199390893088",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": null
+    },
+    {
+      "id": "23990199392470114",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "WRAITH"
+    },
+    {
+      "id": "25115121113736304",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLUE BANSHEE"
+    },
+    {
+      "id": "25115121114793627",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "YELLOW DIREBAT"
+    },
+    {
+      "id": "25115121116102724",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "YETI"
+    },
+    {
+      "id": "25115121116265305",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "NEON WARLOCK"
+    },
+    {
+      "id": "25115216735114652",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLOOD SHOVEL"
+    },
+    {
+      "id": "25115216736583135",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": null
+    },
+    {
+      "id": "25115216737621688",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": null
+    },
+    {
+      "id": "25115216737666655",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "RED LICH"
+    },
+    {
+      "id": "25115303578441313",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": null
+    },
+    {
+      "id": "25115303579484262",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "WHITE ARMORED SKELETON"
+    },
+    {
+      "id": "25115303580795533",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "DEAD RINGER"
+    },
+    {
+      "id": "25115303581772230",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BROWN DIREBAT"
+    },
+    {
+      "id": "25115303582662456",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "SHOPKEEPER"
+    },
+    {
+      "id": "25115303583468811",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "YELLOW SKELETON"
+    },
+    {
+      "id": "25115303583587270",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": null
+    },
+    {
+      "id": "25115303585723883",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "YELLOW SKELETON"
+    },
+    {
+      "id": "25115303585746755",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLACK ARMORED SKELETON"
+    },
+    {
+      "id": "25115303586106074",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": null
+    },
+    {
+      "id": "25115303586264149",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "OOZE GOLEM"
+    },
+    {
+      "id": "25115303587630660",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "FIREBALL"
+    },
+    {
+      "id": "25115303587646093",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": null
+    },
+    {
+      "id": "25115303589276370",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLACK SKELETON KNIGHT"
+    },
+    {
+      "id": "25115303590285894",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "FIRE SLIME"
+    },
+    {
+      "id": "25115303590600881",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLUE BAT"
+    },
+    {
+      "id": "25115303590653082",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLACK SKELETON"
+    },
+    {
+      "id": "25115303592777303",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "SHOPKEEPER"
+    },
+    {
+      "id": "25115303592779212",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "ORANGE SLIME"
+    },
+    {
+      "id": "25115303593778479",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "GREEN DRAGON"
+    },
+    {
+      "id": "25115303593965564",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "YELLOW SKELETON"
+    },
+    {
+      "id": "25115303594152621",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLACK SKELETON"
+    },
+    {
+      "id": "25115303596737932",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "YELLOW SKELETON MAGE"
+    },
+    {
+      "id": "25115303597247373",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "DEATH METAL"
+    },
+    {
+      "id": "25115303597696377",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": null
+    },
+    {
+      "id": "25115303598440271",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLUE DRAGON"
+    },
+    {
+      "id": "25115303599971831",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLACK ARMORED SKELETON"
+    },
+    {
+      "id": "25115303600363688",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "DARK MINOTAUR"
+    },
+    {
+      "id": "25115303600840688",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLACK SKELETON KNIGHT"
+    },
+    {
+      "id": "25115303601641597",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "HARPY"
+    },
+    {
+      "id": "25115303602084989",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "SHOPKEEPER"
+    },
+    {
+      "id": "25115303604054117",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLOOD DEBT"
+    },
+    {
+      "id": "25115303604701220",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "CORAL RIFF"
+    },
+    {
+      "id": "25115303605211906",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "KING CONGA"
+    },
+    {
+      "id": "25115303605703363",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "SPIDER"
+    },
+    {
+      "id": "25115303606093328",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "RED BAT"
+    },
+    {
+      "id": "25115948692529131",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "DEAD RINGER"
+    },
+    {
+      "id": "25115948693537719",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLOOD SHOVEL"
+    },
+    {
+      "id": "25115948694749885",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "YELLOW SKELETON"
+    },
+    {
+      "id": "25115948695420302",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "CONGA LINE"
+    },
+    {
+      "id": "25115948698270234",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "DARK GOLEM"
+    },
+    {
+      "id": "25115948698792543",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": null
+    },
+    {
+      "id": "25115948698852985",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "ICE SLIME"
+    },
+    {
+      "id": "25115948701161190",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLACK SKELETON"
+    },
+    {
+      "id": "25115948702104181",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": null
+    },
+    {
+      "id": "25115948702141193",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BOMB"
+    },
+    {
+      "id": "25115948703033789",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": null
+    },
+    {
+      "id": "25115948703942060",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "RED BAT"
+    },
+    {
+      "id": "25115948705773891",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": null
+    },
+    {
+      "id": "25115948706667362",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": null
+    },
+    {
+      "id": "25115948707258911",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "GREEN DRAGON"
+    },
+    {
+      "id": "25116344296260712",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "DEAD RINGER"
+    },
+    {
+      "id": "26239834577273368",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": null
+    },
+    {
+      "id": "26239834580125933",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLACK SKELETON"
+    },
+    {
+      "id": "26239834581149619",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "DARK MINOTAUR"
+    },
+    {
+      "id": "26239834583593835",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "GHOST"
+    },
+    {
+      "id": "26239834584164290",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "BLUE SLIME"
+    },
+    {
+      "id": "26239834584932444",
+      "error": null,
+      "seed": null,
+      "version": 75,
+      "killed_by": "RED DRAGON"
     }
   ]
 }

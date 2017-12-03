@@ -1,0 +1,12 @@
+[
+  {
+    "ProductId": 0,
+    "Name": "classic",
+    "DisplayName": "Classic"
+  },
+  {
+    "ProductId": 1,
+    "Name": "amplified",
+    "DisplayName": "Amplified"
+  }
+]

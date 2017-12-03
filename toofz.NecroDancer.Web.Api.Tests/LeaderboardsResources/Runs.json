@@ -1,0 +1,27 @@
+[
+  {
+    "RunId": 0,
+    "Name": "score",
+    "DisplayName": "Score"
+  },
+  {
+    "RunId": 1,
+    "Name": "speed",
+    "DisplayName": "Speed"
+  },
+  {
+    "RunId": 2,
+    "Name": "seeded-score",
+    "DisplayName": "Seeded Score"
+  },
+  {
+    "RunId": 3,
+    "Name": "seeded-speed",
+    "DisplayName": "Seeded Speed"
+  },
+  {
+    "RunId": 4,
+    "Name": "deathless",
+    "DisplayName": "Deathless"
+  }
+]

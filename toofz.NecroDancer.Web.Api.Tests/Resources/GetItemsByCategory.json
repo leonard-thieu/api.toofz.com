@@ -1,11 +1,74 @@
 {
-  "total": 1,
+  "total": 10,
   "items": [
+    {
+      "name": "armor_chainmail",
+      "display_name": "Chainmail",
+      "slot": "body",
+      "unlock": 2,
+      "cost": 60
+    },
+    {
+      "name": "armor_gi",
+      "display_name": "Karate Gi",
+      "slot": "body",
+      "unlock": 3,
+      "cost": 40
+    },
     {
       "name": "armor_glass",
       "display_name": "Glass Armor",
       "slot": "body",
       "unlock": 4,
+      "cost": 50
+    },
+    {
+      "name": "armor_heavyglass",
+      "display_name": "Heavy Glass Armor",
+      "slot": "body",
+      "unlock": 5,
+      "cost": 300
+    },
+    {
+      "name": "armor_heavyplate",
+      "display_name": "Heavy Plate",
+      "slot": "body",
+      "unlock": 7,
+      "cost": 400
+    },
+    {
+      "name": "armor_leather",
+      "display_name": "Leather Armor",
+      "slot": "body",
+      "unlock": null,
+      "cost": 20
+    },
+    {
+      "name": "armor_obsidian",
+      "display_name": "Obsidian Armor",
+      "slot": "body",
+      "unlock": 3,
+      "cost": 100
+    },
+    {
+      "name": "armor_platemail",
+      "display_name": "Plate Armor",
+      "slot": "body",
+      "unlock": 3,
+      "cost": 200
+    },
+    {
+      "name": "armor_platemail_dorian",
+      "display_name": "Plate Armor",
+      "slot": "body",
+      "unlock": null,
+      "cost": 200
+    },
+    {
+      "name": "armor_quartz",
+      "display_name": "Quartz Armor",
+      "slot": "body",
+      "unlock": 2,
       "cost": 50
     }
   ]

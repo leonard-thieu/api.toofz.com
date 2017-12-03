@@ -1,6 +1,41 @@
 {
-  "total": 21,
+  "total": 291,
   "items": [
+    {
+      "name": "addchest_black",
+      "display_name": "+1 Black Chest per Run",
+      "slot": null,
+      "unlock": 4,
+      "cost": null
+    },
+    {
+      "name": "addchest_red",
+      "display_name": "+1 Red Chest per Run",
+      "slot": null,
+      "unlock": 1,
+      "cost": null
+    },
+    {
+      "name": "addchest_white",
+      "display_name": "+1 Purple Chest per Run",
+      "slot": null,
+      "unlock": 2,
+      "cost": null
+    },
+    {
+      "name": "armor_chainmail",
+      "display_name": "Chainmail",
+      "slot": "body",
+      "unlock": 2,
+      "cost": 60
+    },
+    {
+      "name": "armor_gi",
+      "display_name": "Karate Gi",
+      "slot": "body",
+      "unlock": 3,
+      "cost": 40
+    },
     {
       "name": "armor_glass",
       "display_name": "Glass Armor",
@@ -9,67 +44,32 @@
       "cost": 50
     },
     {
-      "name": "feet_ballet_shoes",
-      "display_name": "Ballet Shoes",
-      "slot": "feet",
-      "unlock": null,
-      "cost": 25
-    },
-    {
-      "name": "food_1",
-      "display_name": "Apple",
-      "slot": "action",
-      "unlock": null,
-      "cost": 10
-    },
-    {
-      "name": "head_blast_helm",
-      "display_name": "Blast Helm",
-      "slot": "head",
+      "name": "armor_heavyglass",
+      "display_name": "Heavy Glass Armor",
+      "slot": "body",
       "unlock": 5,
-      "cost": 60
+      "cost": 300
     },
     {
-      "name": "misc_heart_container",
-      "display_name": "Heart Container",
-      "slot": null,
+      "name": "armor_heavyplate",
+      "display_name": "Heavy Plate",
+      "slot": "body",
+      "unlock": 7,
+      "cost": 400
+    },
+    {
+      "name": "armor_leather",
+      "display_name": "Leather Armor",
+      "slot": "body",
       "unlock": null,
-      "cost": 50
-    },
-    {
-      "name": "ring_becoming",
-      "display_name": "Ring of Becoming",
-      "slot": "ring",
-      "unlock": 5,
-      "cost": 100
-    },
-    {
-      "name": "scroll_earthquake",
-      "display_name": "Earthquake Scroll",
-      "slot": "action",
-      "unlock": 3,
       "cost": 20
     },
     {
-      "name": "spell_bomb",
-      "display_name": "Bomb Spell",
-      "slot": "spell",
-      "unlock": 6,
-      "cost": 150
-    },
-    {
-      "name": "spell_fireball",
-      "display_name": "Fireball Spell",
-      "slot": "spell",
-      "unlock": 1,
-      "cost": 50
-    },
-    {
-      "name": "torch_1",
-      "display_name": "Torch",
-      "slot": "torch",
-      "unlock": null,
-      "cost": 3
+      "name": "armor_obsidian",
+      "display_name": "Obsidian Armor",
+      "slot": "body",
+      "unlock": 3,
+      "cost": 100
     }
   ]
 }

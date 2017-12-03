@@ -1,12 +1,93 @@
 {
-  "total": 1,
+  "total": 37,
   "enemies": [
     {
-      "name": "necrodancer",
+      "name": "bishop",
       "type": 1,
-      "display_name": "The Necrodancer",
-      "health": 6,
+      "display_name": "Bishop",
+      "health": 1,
+      "damage": 2,
+      "beats_per_move": 4,
+      "drops": 2
+    },
+    {
+      "name": "bishop",
+      "type": 2,
+      "display_name": "Red Bishop",
+      "health": 2,
+      "damage": 2,
+      "beats_per_move": 4,
+      "drops": 2
+    },
+    {
+      "name": "conductor",
+      "type": 1,
+      "display_name": "The Conductor",
+      "health": 5,
+      "damage": 4,
+      "beats_per_move": 1,
+      "drops": 0
+    },
+    {
+      "name": "conductor_battery",
+      "type": 1,
+      "display_name": "Conductor Battery",
+      "health": 1,
+      "damage": 1,
+      "beats_per_move": 1,
+      "drops": 0
+    },
+    {
+      "name": "conductor_prop",
+      "type": 1,
+      "display_name": "Conductor Prop",
+      "health": 1,
+      "damage": 1,
+      "beats_per_move": 1,
+      "drops": 0
+    },
+    {
+      "name": "conductor_prop",
+      "type": 2,
+      "display_name": "Conductor Prop",
+      "health": 1,
+      "damage": 1,
+      "beats_per_move": 1,
+      "drops": 0
+    },
+    {
+      "name": "conductor_prop",
+      "type": 3,
+      "display_name": "Conductor Prop",
+      "health": 1,
+      "damage": 1,
+      "beats_per_move": 1,
+      "drops": 0
+    },
+    {
+      "name": "conductor_prop",
+      "type": 4,
+      "display_name": "Conductor Prop",
+      "health": 1,
+      "damage": 1,
+      "beats_per_move": 1,
+      "drops": 0
+    },
+    {
+      "name": "coralriff",
+      "type": 1,
+      "display_name": "Coral Riff",
+      "health": 3,
       "damage": 3,
+      "beats_per_move": 1,
+      "drops": 0
+    },
+    {
+      "name": "dead_ringer",
+      "type": 1,
+      "display_name": "Dead Ringer",
+      "health": 2,
+      "damage": 4,
       "beats_per_move": 2,
       "drops": 0
     }

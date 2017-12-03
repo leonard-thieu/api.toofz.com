@@ -1,61 +1,61 @@
 {
   "player": {
-    "id": "2",
-    "updated_at": null,
-    "display_name": "Julianna",
-    "avatar": null
+    "id": "76561198044686391",
+    "updated_at": "2017-11-30T22:22:08.957Z",
+    "display_name": "zqxinran",
+    "avatar": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/19/19880b87345afb204779862d69fca74bd85bb4c7.jpg"
   },
   "total": 2,
   "entries": [
     {
       "leaderboard": {
-        "id": 739796,
-        "updated_at": null,
-        "name": null,
-        "display_name": null,
-        "production": false,
+        "id": 742742,
+        "updated_at": "2017-12-01T02:53:29.457Z",
+        "name": "23/4/2015_PROD",
+        "display_name": "Daily (2015-04-23)",
+        "production": true,
         "product": "classic",
         "_product": {
-          "id": 1,
+          "id": 0,
           "name": "classic",
           "display_name": "Classic"
         },
-        "date": "0001-01-01T00:00:00Z",
-        "total": 0
+        "date": "2015-04-23T00:00:00Z",
+        "total": 3
       },
-      "rank": 0,
-      "score": 0,
+      "rank": 39,
+      "score": 918,
       "end": {
-        "zone": 0,
-        "level": 0
+        "zone": 3,
+        "level": 4
       },
       "killed_by": null,
       "version": null
     },
     {
       "leaderboard": {
-        "id": 739999,
-        "updated_at": null,
-        "name": null,
-        "display_name": null,
-        "production": false,
-        "product": "classic",
+        "id": 1705585,
+        "updated_at": "2017-12-01T02:43:29.807Z",
+        "name": "DLC 17/8/2017_PROD",
+        "display_name": "Daily (2017-08-17) (Amplified)",
+        "production": true,
+        "product": "amplified",
         "_product": {
           "id": 1,
-          "name": "classic",
-          "display_name": "Classic"
+          "name": "amplified",
+          "display_name": "Amplified"
         },
-        "date": "0001-01-01T00:00:00Z",
-        "total": 0
+        "date": "2017-08-17T00:00:00Z",
+        "total": 40
       },
-      "rank": 0,
-      "score": 0,
+      "rank": 221,
+      "score": 888,
       "end": {
-        "zone": 0,
-        "level": 0
+        "zone": 3,
+        "level": 2
       },
-      "killed_by": null,
-      "version": null
+      "killed_by": "FIRE CAULDRON MIMIC",
+      "version": 94
     }
   ]
 }

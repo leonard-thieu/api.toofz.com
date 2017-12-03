@@ -1,49 +1,49 @@
 {
   "leaderboard": {
     "id": 739999,
-    "updated_at": null,
-    "name": null,
-    "display_name": null,
-    "production": false,
+    "updated_at": "2017-12-01T02:57:15.027Z",
+    "name": "HARDCORE_PROD",
+    "display_name": "Cadence Score",
+    "production": true,
     "product": "classic",
     "_product": {
-      "id": 1,
+      "id": 0,
       "name": "classic",
       "display_name": "Classic"
     },
     "mode": "standard",
     "_mode": {
-      "id": 1,
+      "id": 0,
       "name": "standard",
       "display_name": "Standard"
     },
     "run": "score",
     "_run": {
-      "id": 1,
+      "id": 0,
       "name": "score",
       "display_name": "Score"
     },
     "character": "cadence",
     "_character": {
-      "id": 1,
+      "id": 0,
       "name": "cadence",
       "display_name": "Cadence"
     },
     "coOp": false,
     "customMusic": false,
-    "total": 0
+    "total": 100
   },
   "player": {
-    "id": "2",
-    "updated_at": null,
-    "display_name": "Julianna",
-    "avatar": null
+    "id": "76561197999613276",
+    "updated_at": "2017-12-01T01:45:59.373Z",
+    "display_name": "Rhythm",
+    "avatar": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/19/19cd70495f0dbe6b2462e1a0c1b63677634f81ed.jpg"
   },
-  "rank": 0,
-  "score": 0,
+  "rank": 3410,
+  "score": 5097,
   "end": {
-    "zone": 0,
-    "level": 0
+    "zone": 4,
+    "level": 6
   },
   "killed_by": null,
   "version": null

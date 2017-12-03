@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 6,
   "items": [
     {
       "name": "weapon_blood_bow",
@@ -7,6 +7,41 @@
       "slot": "weapon",
       "unlock": null,
       "cost": 250
+    },
+    {
+      "name": "weapon_bow",
+      "display_name": "Bow",
+      "slot": "weapon",
+      "unlock": null,
+      "cost": 150
+    },
+    {
+      "name": "weapon_glass_bow",
+      "display_name": "Glass Bow",
+      "slot": "weapon",
+      "unlock": null,
+      "cost": 400
+    },
+    {
+      "name": "weapon_golden_bow",
+      "display_name": "Golden Bow",
+      "slot": "weapon",
+      "unlock": null,
+      "cost": 300
+    },
+    {
+      "name": "weapon_obsidian_bow",
+      "display_name": "Obsidian Bow",
+      "slot": "weapon",
+      "unlock": null,
+      "cost": 600
+    },
+    {
+      "name": "weapon_titanium_bow",
+      "display_name": "Titanium Bow",
+      "slot": "weapon",
+      "unlock": null,
+      "cost": 400
     }
   ]
 }

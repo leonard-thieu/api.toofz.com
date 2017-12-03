@@ -1,0 +1,32 @@
+[
+  {
+    "ModeId": 0,
+    "Name": "standard",
+    "DisplayName": "Standard"
+  },
+  {
+    "ModeId": 1,
+    "Name": "no-return",
+    "DisplayName": "No Return"
+  },
+  {
+    "ModeId": 2,
+    "Name": "hard",
+    "DisplayName": "Hard"
+  },
+  {
+    "ModeId": 3,
+    "Name": "phasing",
+    "DisplayName": "Phasing"
+  },
+  {
+    "ModeId": 4,
+    "Name": "randomizer",
+    "DisplayName": "Randomizer"
+  },
+  {
+    "ModeId": 5,
+    "Name": "mystery",
+    "DisplayName": "Mystery"
+  }
+]

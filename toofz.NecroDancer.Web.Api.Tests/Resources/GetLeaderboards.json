@@ -1,12 +1,1406 @@
 {
-  "total": 1,
+  "total": 178,
   "leaderboards": [
     {
-      "id": 0,
-      "updated_at": null,
-      "name": null,
-      "display_name": null,
-      "production": false,
+      "id": 2047616,
+      "updated_at": "2017-12-01T02:57:25.72Z",
+      "name": "DLC HARDCORE All Chars_PROD",
+      "display_name": "All Characters Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "all-characters",
+      "_character": {
+        "id": -3,
+        "name": "all-characters",
+        "display_name": "All Characters"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 3
+    },
+    {
+      "id": 2047387,
+      "updated_at": "2017-12-01T02:57:24.49Z",
+      "name": "DLC HARDCORE All Chars DLC_PROD",
+      "display_name": "All Characters (Amplified) Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "all-characters-amplified",
+      "_character": {
+        "id": -4,
+        "name": "all-characters-amplified",
+        "display_name": "All Characters (Amplified)"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 3
+    },
+    {
+      "id": 2047440,
+      "updated_at": "2017-12-01T02:57:22.633Z",
+      "name": "DLC SPEEDRUN All Chars DLC_PROD",
+      "display_name": "All Characters (Amplified) Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "all-characters-amplified",
+      "_character": {
+        "id": -4,
+        "name": "all-characters-amplified",
+        "display_name": "All Characters (Amplified)"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047493,
+      "updated_at": "2017-12-01T02:57:25.237Z",
+      "name": "DLC HARDCORE Aria_PROD",
+      "display_name": "Aria Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "aria",
+      "_character": {
+        "id": 2,
+        "name": "aria",
+        "display_name": "Aria"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 34
+    },
+    {
+      "id": 2045741,
+      "updated_at": "2017-12-01T02:57:24.957Z",
+      "name": "DLC HARDCORE Aria MYSTERY_PROD",
+      "display_name": "Aria Mystery Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "mystery",
+      "_mode": {
+        "id": 5,
+        "name": "mystery",
+        "display_name": "Mystery"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "aria",
+      "_character": {
+        "id": 2,
+        "name": "aria",
+        "display_name": "Aria"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2019483,
+      "updated_at": "2017-12-01T02:57:25.627Z",
+      "name": "DLC HARDCORE Aria PHASING_PROD",
+      "display_name": "Aria Phasing Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "aria",
+      "_character": {
+        "id": 2,
+        "name": "aria",
+        "display_name": "Aria"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 3
+    },
+    {
+      "id": 2040656,
+      "updated_at": "2017-12-01T02:57:22.883Z",
+      "name": "DLC HARDCORE Aria RANDOMIZER_PROD",
+      "display_name": "Aria Randomizer Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "aria",
+      "_character": {
+        "id": 2,
+        "name": "aria",
+        "display_name": "Aria"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 3
+    },
+    {
+      "id": 2047968,
+      "updated_at": "2017-12-01T02:57:24.88Z",
+      "name": "DLC HARDCORE Aria NO RETURN_PROD",
+      "display_name": "Aria No Return Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "no-return",
+      "_mode": {
+        "id": 1,
+        "name": "no-return",
+        "display_name": "No Return"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "aria",
+      "_character": {
+        "id": 2,
+        "name": "aria",
+        "display_name": "Aria"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2048147,
+      "updated_at": "2017-12-01T02:57:23.99Z",
+      "name": "DLC HARDCORE Aria HARD_PROD",
+      "display_name": "Aria Hard Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "hard",
+      "_mode": {
+        "id": 2,
+        "name": "hard",
+        "display_name": "Hard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "aria",
+      "_character": {
+        "id": 2,
+        "name": "aria",
+        "display_name": "Aria"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2047597,
+      "updated_at": "2017-12-01T02:57:25.847Z",
+      "name": "DLC SPEEDRUN Aria_PROD",
+      "display_name": "Aria Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "aria",
+      "_character": {
+        "id": 2,
+        "name": "aria",
+        "display_name": "Aria"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 9
+    },
+    {
+      "id": 2049457,
+      "updated_at": "2017-12-01T02:57:25.067Z",
+      "name": "DLC HARDCORE SEEDED Aria PHASING_PROD",
+      "display_name": "Aria Phasing Seeded Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "aria",
+      "_character": {
+        "id": 2,
+        "name": "aria",
+        "display_name": "Aria"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2049459,
+      "updated_at": "2017-12-01T02:57:26.08Z",
+      "name": "DLC HARDCORE SEEDED Aria MYSTERY_PROD",
+      "display_name": "Aria Mystery Seeded Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "mystery",
+      "_mode": {
+        "id": 5,
+        "name": "mystery",
+        "display_name": "Mystery"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "aria",
+      "_character": {
+        "id": 2,
+        "name": "aria",
+        "display_name": "Aria"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2049087,
+      "updated_at": "2017-12-01T02:57:27.013Z",
+      "name": "DLC HARDCORE Aria DEATHLESS_PROD",
+      "display_name": "Aria Deathless (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "deathless",
+      "_run": {
+        "id": 4,
+        "name": "deathless",
+        "display_name": "Deathless"
+      },
+      "character": "aria",
+      "_character": {
+        "id": 2,
+        "name": "aria",
+        "display_name": "Aria"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047639,
+      "updated_at": "2017-12-01T02:57:26.717Z",
+      "name": "DLC HARDCORE Bard NO RETURN_PROD",
+      "display_name": "Bard No Return Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "no-return",
+      "_mode": {
+        "id": 1,
+        "name": "no-return",
+        "display_name": "No Return"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2045589,
+      "updated_at": "2017-12-01T02:57:25.907Z",
+      "name": "DLC HARDCORE Bard MYSTERY_PROD",
+      "display_name": "Bard Mystery Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "mystery",
+      "_mode": {
+        "id": 5,
+        "name": "mystery",
+        "display_name": "Mystery"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 5
+    },
+    {
+      "id": 2047380,
+      "updated_at": "2017-12-01T02:57:24.63Z",
+      "name": "DLC HARDCORE Bard HARD_PROD",
+      "display_name": "Bard Hard Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "hard",
+      "_mode": {
+        "id": 2,
+        "name": "hard",
+        "display_name": "Hard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 3
+    },
+    {
+      "id": 2047522,
+      "updated_at": "2017-12-01T02:57:23.833Z",
+      "name": "DLC HARDCORE Bard_PROD",
+      "display_name": "Bard Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 19
+    },
+    {
+      "id": 2040612,
+      "updated_at": "2017-12-01T02:57:24.707Z",
+      "name": "DLC HARDCORE Bard PHASING_PROD",
+      "display_name": "Bard Phasing Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 5
+    },
+    {
+      "id": 2041617,
+      "updated_at": "2017-12-01T02:57:26.67Z",
+      "name": "DLC HARDCORE Bard RANDOMIZER_PROD",
+      "display_name": "Bard Randomizer Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 7
+    },
+    {
+      "id": 2041610,
+      "updated_at": "2017-12-01T02:57:25.83Z",
+      "name": "DLC SPEEDRUN Bard RANDOMIZER_PROD",
+      "display_name": "Bard Randomizer Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 5
+    },
+    {
+      "id": 2045621,
+      "updated_at": "2017-12-01T02:57:25.127Z",
+      "name": "DLC SPEEDRUN Bard MYSTERY_PROD",
+      "display_name": "Bard Mystery Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "mystery",
+      "_mode": {
+        "id": 5,
+        "name": "mystery",
+        "display_name": "Mystery"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2041663,
+      "updated_at": "2017-12-01T02:57:23.833Z",
+      "name": "DLC SPEEDRUN Bard PHASING_PROD",
+      "display_name": "Bard Phasing Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 4
+    },
+    {
+      "id": 2047596,
+      "updated_at": "2017-12-01T02:57:26.203Z",
+      "name": "DLC SPEEDRUN Bard_PROD",
+      "display_name": "Bard Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 12
+    },
+    {
+      "id": 2048459,
+      "updated_at": "2017-12-01T02:57:26.733Z",
+      "name": "DLC SPEEDRUN Bard NO RETURN_PROD",
+      "display_name": "Bard No Return Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "no-return",
+      "_mode": {
+        "id": 1,
+        "name": "no-return",
+        "display_name": "No Return"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2048188,
+      "updated_at": "2017-12-01T02:57:26.843Z",
+      "name": "DLC SPEEDRUN Bard HARD_PROD",
+      "display_name": "Bard Hard Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "hard",
+      "_mode": {
+        "id": 2,
+        "name": "hard",
+        "display_name": "Hard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047677,
+      "updated_at": "2017-12-01T02:57:25.987Z",
+      "name": "DLC HARDCORE SEEDED Bard_PROD",
+      "display_name": "Bard Seeded Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047487,
+      "updated_at": "2017-12-01T02:57:27.043Z",
+      "name": "DLC HARDCORE Bard DEATHLESS_PROD",
+      "display_name": "Bard Deathless (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "deathless",
+      "_run": {
+        "id": 4,
+        "name": "deathless",
+        "display_name": "Deathless"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047555,
+      "updated_at": "2017-12-01T02:57:27.373Z",
+      "name": "DLC HARDCORE Bolt_PROD",
+      "display_name": "Bolt Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "bolt",
+      "_character": {
+        "id": 8,
+        "name": "bolt",
+        "display_name": "Bolt"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 21
+    },
+    {
+      "id": 2042240,
+      "updated_at": "2017-12-01T02:57:24.473Z",
+      "name": "DLC HARDCORE Bolt RANDOMIZER_PROD",
+      "display_name": "Bolt Randomizer Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "bolt",
+      "_character": {
+        "id": 8,
+        "name": "bolt",
+        "display_name": "Bolt"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 3
+    },
+    {
+      "id": 2041620,
+      "updated_at": "2017-12-01T02:57:26.95Z",
+      "name": "DLC HARDCORE Bolt PHASING_PROD",
+      "display_name": "Bolt Phasing Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "bolt",
+      "_character": {
+        "id": 8,
+        "name": "bolt",
+        "display_name": "Bolt"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2041622,
+      "updated_at": "2017-12-01T02:57:24.503Z",
+      "name": "DLC SPEEDRUN Bolt PHASING_PROD",
+      "display_name": "Bolt Phasing Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "bolt",
+      "_character": {
+        "id": 8,
+        "name": "bolt",
+        "display_name": "Bolt"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047619,
+      "updated_at": "2017-12-01T02:57:25.097Z",
+      "name": "DLC SPEEDRUN Bolt_PROD",
+      "display_name": "Bolt Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "bolt",
+      "_character": {
+        "id": 8,
+        "name": "bolt",
+        "display_name": "Bolt"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 7
+    },
+    {
+      "id": 2047569,
+      "updated_at": "2017-12-01T02:57:26.483Z",
+      "name": "DLC HARDCORE_PROD",
+      "display_name": "Cadence Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 52
+    },
+    {
+      "id": 2047388,
+      "updated_at": "2017-12-01T02:57:25.517Z",
+      "name": "DLC HARDCORE PHASING_PROD",
+      "display_name": "Cadence Phasing Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 19
+    },
+    {
+      "id": 2047548,
+      "updated_at": "2017-12-01T02:57:26.547Z",
+      "name": "DLC HARDCORE NO RETURN_PROD",
+      "display_name": "Cadence No Return Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "no-return",
+      "_mode": {
+        "id": 1,
+        "name": "no-return",
+        "display_name": "No Return"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 20
+    },
+    {
+      "id": 2047413,
+      "updated_at": "2017-12-01T02:57:25.367Z",
+      "name": "DLC HARDCORE HARD_PROD",
+      "display_name": "Cadence Hard Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "hard",
+      "_mode": {
+        "id": 2,
+        "name": "hard",
+        "display_name": "Hard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 13
+    },
+    {
+      "id": 2038541,
+      "updated_at": "2017-12-01T02:57:26.937Z",
+      "name": "DLC HARDCORE MYSTERY_PROD",
+      "display_name": "Cadence Mystery Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "mystery",
+      "_mode": {
+        "id": 5,
+        "name": "mystery",
+        "display_name": "Mystery"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 26
+    },
+    {
+      "id": 2040588,
+      "updated_at": "2017-12-01T02:57:24.94Z",
+      "name": "DLC HARDCORE RANDOMIZER_PROD",
+      "display_name": "Cadence Randomizer Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 29
+    },
+    {
+      "id": 2047461,
+      "updated_at": "2017-12-01T02:57:24.66Z",
+      "name": "DLC SPEEDRUN RANDOMIZER_PROD",
+      "display_name": "Cadence Randomizer Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 17
+    },
+    {
+      "id": 2047434,
+      "updated_at": "2017-12-01T02:57:23.397Z",
+      "name": "DLC SPEEDRUN PHASING_PROD",
+      "display_name": "Cadence Phasing Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 10
+    },
+    {
+      "id": 2047409,
+      "updated_at": "2017-12-01T02:57:26.997Z",
+      "name": "DLC SPEEDRUN MYSTERY_PROD",
+      "display_name": "Cadence Mystery Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "mystery",
+      "_mode": {
+        "id": 5,
+        "name": "mystery",
+        "display_name": "Mystery"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 10
+    },
+    {
+      "id": 2047626,
+      "updated_at": "2017-12-01T02:57:27.157Z",
+      "name": "DLC SPEEDRUN_PROD",
+      "display_name": "Cadence Speed (Amplified)",
+      "production": true,
       "product": "amplified",
       "_product": {
         "id": 1,
@@ -33,7 +1427,4631 @@
       },
       "coOp": false,
       "customMusic": false,
-      "total": 0
+      "total": 36
+    },
+    {
+      "id": 2047692,
+      "updated_at": "2017-12-01T02:57:25.16Z",
+      "name": "DLC SPEEDRUN NO RETURN_PROD",
+      "display_name": "Cadence No Return Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "no-return",
+      "_mode": {
+        "id": 1,
+        "name": "no-return",
+        "display_name": "No Return"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 10
+    },
+    {
+      "id": 2047849,
+      "updated_at": "2017-12-01T02:57:27.467Z",
+      "name": "DLC SPEEDRUN HARD_PROD",
+      "display_name": "Cadence Hard Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "hard",
+      "_mode": {
+        "id": 2,
+        "name": "hard",
+        "display_name": "Hard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 5
+    },
+    {
+      "id": 2047675,
+      "updated_at": "2017-12-01T02:57:27.327Z",
+      "name": "DLC HARDCORE SEEDED_PROD",
+      "display_name": "Cadence Seeded Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 10
+    },
+    {
+      "id": 2047466,
+      "updated_at": "2017-12-01T02:57:26.033Z",
+      "name": "DLC HARDCORE SEEDED RANDOMIZER_PROD",
+      "display_name": "Cadence Randomizer Seeded Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047674,
+      "updated_at": "2017-12-01T02:57:27.403Z",
+      "name": "DLC SEEDED SPEEDRUN_PROD",
+      "display_name": "Cadence Seeded Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-speed",
+      "_run": {
+        "id": 3,
+        "name": "seeded-speed",
+        "display_name": "Seeded Speed"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 6
+    },
+    {
+      "id": 2047527,
+      "updated_at": "2017-12-01T02:57:23.04Z",
+      "name": "DLC HARDCORE DEATHLESS_PROD",
+      "display_name": "Cadence Deathless (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "deathless",
+      "_run": {
+        "id": 4,
+        "name": "deathless",
+        "display_name": "Deathless"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 5
+    },
+    {
+      "id": 2047645,
+      "updated_at": "2017-12-01T02:57:23.507Z",
+      "name": "DLC HARDCORE Coda_PROD",
+      "display_name": "Coda Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "coda",
+      "_character": {
+        "id": 7,
+        "name": "coda",
+        "display_name": "Coda"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2047515,
+      "updated_at": "2017-12-01T02:57:26.593Z",
+      "name": "DLC HARDCORE Diamond_PROD",
+      "display_name": "Diamond Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "diamond",
+      "_character": {
+        "id": 11,
+        "name": "diamond",
+        "display_name": "Diamond"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 32
+    },
+    {
+      "id": 2047521,
+      "updated_at": "2017-12-01T02:57:25.393Z",
+      "name": "DLC HARDCORE Diamond NO RETURN_PROD",
+      "display_name": "Diamond No Return Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "no-return",
+      "_mode": {
+        "id": 1,
+        "name": "no-return",
+        "display_name": "No Return"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "diamond",
+      "_character": {
+        "id": 11,
+        "name": "diamond",
+        "display_name": "Diamond"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2041184,
+      "updated_at": "2017-12-01T02:57:24.397Z",
+      "name": "DLC HARDCORE Diamond RANDOMIZER_PROD",
+      "display_name": "Diamond Randomizer Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "diamond",
+      "_character": {
+        "id": 11,
+        "name": "diamond",
+        "display_name": "Diamond"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2041193,
+      "updated_at": "2017-12-01T02:57:24.223Z",
+      "name": "DLC HARDCORE Diamond MYSTERY_PROD",
+      "display_name": "Diamond Mystery Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "mystery",
+      "_mode": {
+        "id": 5,
+        "name": "mystery",
+        "display_name": "Mystery"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "diamond",
+      "_character": {
+        "id": 11,
+        "name": "diamond",
+        "display_name": "Diamond"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2047664,
+      "updated_at": "2017-12-01T02:57:25.97Z",
+      "name": "DLC SPEEDRUN Diamond RANDOMIZER_PROD",
+      "display_name": "Diamond Randomizer Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "diamond",
+      "_character": {
+        "id": 11,
+        "name": "diamond",
+        "display_name": "Diamond"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2047607,
+      "updated_at": "2017-12-01T02:57:27.467Z",
+      "name": "DLC SPEEDRUN Diamond_PROD",
+      "display_name": "Diamond Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "diamond",
+      "_character": {
+        "id": 11,
+        "name": "diamond",
+        "display_name": "Diamond"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 25
+    },
+    {
+      "id": 2047859,
+      "updated_at": "2017-12-01T02:57:27.293Z",
+      "name": "DLC SPEEDRUN Diamond NO RETURN_PROD",
+      "display_name": "Diamond No Return Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "no-return",
+      "_mode": {
+        "id": 1,
+        "name": "no-return",
+        "display_name": "No Return"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "diamond",
+      "_character": {
+        "id": 11,
+        "name": "diamond",
+        "display_name": "Diamond"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2048484,
+      "updated_at": "2017-12-01T02:57:26.703Z",
+      "name": "DLC HARDCORE Dorian RANDOMIZER_PROD",
+      "display_name": "Dorian Randomizer Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "dorian",
+      "_character": {
+        "id": 3,
+        "name": "dorian",
+        "display_name": "Dorian"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2048576,
+      "updated_at": "2017-12-01T02:57:26.997Z",
+      "name": "DLC HARDCORE Dorian HARD_PROD",
+      "display_name": "Dorian Hard Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "hard",
+      "_mode": {
+        "id": 2,
+        "name": "hard",
+        "display_name": "Hard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "dorian",
+      "_character": {
+        "id": 3,
+        "name": "dorian",
+        "display_name": "Dorian"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047587,
+      "updated_at": "2017-12-01T02:57:23.367Z",
+      "name": "DLC HARDCORE Dorian_PROD",
+      "display_name": "Dorian Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "dorian",
+      "_character": {
+        "id": 3,
+        "name": "dorian",
+        "display_name": "Dorian"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 10
+    },
+    {
+      "id": 2047422,
+      "updated_at": "2017-12-01T02:57:23.927Z",
+      "name": "DLC HARDCORE Dorian PHASING_PROD",
+      "display_name": "Dorian Phasing Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "dorian",
+      "_character": {
+        "id": 3,
+        "name": "dorian",
+        "display_name": "Dorian"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047424,
+      "updated_at": "2017-12-01T02:57:25.937Z",
+      "name": "DLC HARDCORE Dorian MYSTERY_PROD",
+      "display_name": "Dorian Mystery Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "mystery",
+      "_mode": {
+        "id": 5,
+        "name": "mystery",
+        "display_name": "Mystery"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "dorian",
+      "_character": {
+        "id": 3,
+        "name": "dorian",
+        "display_name": "Dorian"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2052471,
+      "updated_at": "2017-12-01T02:57:26.687Z",
+      "name": "DLC SPEEDRUN Dorian HARD_PROD",
+      "display_name": "Dorian Hard Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "hard",
+      "_mode": {
+        "id": 2,
+        "name": "hard",
+        "display_name": "Hard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "dorian",
+      "_character": {
+        "id": 3,
+        "name": "dorian",
+        "display_name": "Dorian"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2049678,
+      "updated_at": "2017-12-01T02:57:25.097Z",
+      "name": "DLC SPEEDRUN Dorian MYSTERY_PROD",
+      "display_name": "Dorian Mystery Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "mystery",
+      "_mode": {
+        "id": 5,
+        "name": "mystery",
+        "display_name": "Mystery"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "dorian",
+      "_character": {
+        "id": 3,
+        "name": "dorian",
+        "display_name": "Dorian"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2048572,
+      "updated_at": "2017-12-01T02:57:26.033Z",
+      "name": "DLC SPEEDRUN Dorian PHASING_PROD",
+      "display_name": "Dorian Phasing Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "dorian",
+      "_character": {
+        "id": 3,
+        "name": "dorian",
+        "display_name": "Dorian"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2049135,
+      "updated_at": "2017-12-01T02:57:26.437Z",
+      "name": "DLC SPEEDRUN Dorian RANDOMIZER_PROD",
+      "display_name": "Dorian Randomizer Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "dorian",
+      "_character": {
+        "id": 3,
+        "name": "dorian",
+        "display_name": "Dorian"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047783,
+      "updated_at": "2017-12-01T02:57:27.187Z",
+      "name": "DLC SPEEDRUN Dorian_PROD",
+      "display_name": "Dorian Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "dorian",
+      "_character": {
+        "id": 3,
+        "name": "dorian",
+        "display_name": "Dorian"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 5
+    },
+    {
+      "id": 2047745,
+      "updated_at": "2017-12-01T02:57:26Z",
+      "name": "DLC HARDCORE DOVE RANDOMIZER_PROD",
+      "display_name": "Dove Randomizer Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "dove",
+      "_character": {
+        "id": 6,
+        "name": "dove",
+        "display_name": "Dove"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2041655,
+      "updated_at": "2017-12-01T02:57:25.033Z",
+      "name": "DLC HARDCORE DOVE PHASING_PROD",
+      "display_name": "Dove Phasing Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "dove",
+      "_character": {
+        "id": 6,
+        "name": "dove",
+        "display_name": "Dove"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 3
+    },
+    {
+      "id": 2047599,
+      "updated_at": "2017-12-01T02:57:26.797Z",
+      "name": "DLC HARDCORE DOVE_PROD",
+      "display_name": "Dove Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "dove",
+      "_character": {
+        "id": 6,
+        "name": "dove",
+        "display_name": "Dove"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 13
+    },
+    {
+      "id": 2041652,
+      "updated_at": "2017-12-01T02:57:24.21Z",
+      "name": "DLC SPEEDRUN DOVE PHASING_PROD",
+      "display_name": "Dove Phasing Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "dove",
+      "_character": {
+        "id": 6,
+        "name": "dove",
+        "display_name": "Dove"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 1811409,
+      "updated_at": "2017-12-01T02:57:23.99Z",
+      "name": "DLC SPEEDRUN DOVE NO RETURN_PROD",
+      "display_name": "Dove No Return Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "no-return",
+      "_mode": {
+        "id": 1,
+        "name": "no-return",
+        "display_name": "No Return"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "dove",
+      "_character": {
+        "id": 6,
+        "name": "dove",
+        "display_name": "Dove"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2048040,
+      "updated_at": "2017-12-01T02:57:26.22Z",
+      "name": "DLC SPEEDRUN DOVE_PROD",
+      "display_name": "Dove Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "dove",
+      "_character": {
+        "id": 6,
+        "name": "dove",
+        "display_name": "Dove"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 5
+    },
+    {
+      "id": 2047880,
+      "updated_at": "2017-12-01T02:57:26.703Z",
+      "name": "DLC HARDCORE Eli MYSTERY_PROD",
+      "display_name": "Eli Mystery Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "mystery",
+      "_mode": {
+        "id": 5,
+        "name": "mystery",
+        "display_name": "Mystery"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "eli",
+      "_character": {
+        "id": 4,
+        "name": "eli",
+        "display_name": "Eli"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2052001,
+      "updated_at": "2017-12-01T02:57:26.717Z",
+      "name": "DLC HARDCORE Eli HARD_PROD",
+      "display_name": "Eli Hard Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "hard",
+      "_mode": {
+        "id": 2,
+        "name": "hard",
+        "display_name": "Hard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "eli",
+      "_character": {
+        "id": 4,
+        "name": "eli",
+        "display_name": "Eli"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2039281,
+      "updated_at": "2017-12-01T02:57:24.053Z",
+      "name": "DLC HARDCORE Eli PHASING_PROD",
+      "display_name": "Eli Phasing Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "eli",
+      "_character": {
+        "id": 4,
+        "name": "eli",
+        "display_name": "Eli"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047651,
+      "updated_at": "2017-12-01T02:57:25.69Z",
+      "name": "DLC HARDCORE Eli_PROD",
+      "display_name": "Eli Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "eli",
+      "_character": {
+        "id": 4,
+        "name": "eli",
+        "display_name": "Eli"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 11
+    },
+    {
+      "id": 2047560,
+      "updated_at": "2017-12-01T02:57:25.533Z",
+      "name": "DLC HARDCORE Eli RANDOMIZER_PROD",
+      "display_name": "Eli Randomizer Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "eli",
+      "_character": {
+        "id": 4,
+        "name": "eli",
+        "display_name": "Eli"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2047703,
+      "updated_at": "2017-12-01T02:57:26.61Z",
+      "name": "DLC SPEEDRUN Eli_PROD",
+      "display_name": "Eli Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "eli",
+      "_character": {
+        "id": 4,
+        "name": "eli",
+        "display_name": "Eli"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 5
+    },
+    {
+      "id": 2039279,
+      "updated_at": "2017-12-01T02:57:24.473Z",
+      "name": "DLC SPEEDRUN Eli PHASING_PROD",
+      "display_name": "Eli Phasing Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "eli",
+      "_character": {
+        "id": 4,
+        "name": "eli",
+        "display_name": "Eli"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2052105,
+      "updated_at": "2017-12-01T02:57:28.113Z",
+      "name": "DLC SPEEDRUN Eli HARD_PROD",
+      "display_name": "Eli Hard Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "hard",
+      "_mode": {
+        "id": 2,
+        "name": "hard",
+        "display_name": "Hard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "eli",
+      "_character": {
+        "id": 4,
+        "name": "eli",
+        "display_name": "Eli"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2049486,
+      "updated_at": "2017-12-01T02:57:26.78Z",
+      "name": "DLC SPEEDRUN Eli RANDOMIZER_PROD",
+      "display_name": "Eli Randomizer Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "eli",
+      "_character": {
+        "id": 4,
+        "name": "eli",
+        "display_name": "Eli"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2048518,
+      "updated_at": "2017-12-01T02:57:27.03Z",
+      "name": "DLC SPEEDRUN Eli MYSTERY_PROD",
+      "display_name": "Eli Mystery Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "mystery",
+      "_mode": {
+        "id": 5,
+        "name": "mystery",
+        "display_name": "Mystery"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "eli",
+      "_character": {
+        "id": 4,
+        "name": "eli",
+        "display_name": "Eli"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047749,
+      "updated_at": "2017-12-01T02:57:27.573Z",
+      "name": "DLC HARDCORE Mary_PROD",
+      "display_name": "Mary Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "mary",
+      "_character": {
+        "id": 12,
+        "name": "mary",
+        "display_name": "Mary"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 48
+    },
+    {
+      "id": 2047846,
+      "updated_at": "2017-12-01T02:57:26.093Z",
+      "name": "DLC HARDCORE Mary PHASING_PROD",
+      "display_name": "Mary Phasing Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "mary",
+      "_character": {
+        "id": 12,
+        "name": "mary",
+        "display_name": "Mary"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047847,
+      "updated_at": "2017-12-01T02:57:26.81Z",
+      "name": "DLC HARDCORE Mary RANDOMIZER_PROD",
+      "display_name": "Mary Randomizer Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "mary",
+      "_character": {
+        "id": 12,
+        "name": "mary",
+        "display_name": "Mary"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2002224,
+      "updated_at": "2017-12-01T02:57:24.69Z",
+      "name": "DLC SPEEDRUN Mary_PROD",
+      "display_name": "Mary Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "mary",
+      "_character": {
+        "id": 12,
+        "name": "mary",
+        "display_name": "Mary"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 10
+    },
+    {
+      "id": 2039747,
+      "updated_at": "2017-12-01T02:57:23.383Z",
+      "name": "DLC HARDCORE Melody RANDOMIZER_PROD",
+      "display_name": "Melody Randomizer Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 3
+    },
+    {
+      "id": 2047584,
+      "updated_at": "2017-12-01T02:57:23.96Z",
+      "name": "DLC HARDCORE Melody NO RETURN_PROD",
+      "display_name": "Melody No Return Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "no-return",
+      "_mode": {
+        "id": 1,
+        "name": "no-return",
+        "display_name": "No Return"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2047565,
+      "updated_at": "2017-12-01T02:57:26.36Z",
+      "name": "DLC HARDCORE Melody_PROD",
+      "display_name": "Melody Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 16
+    },
+    {
+      "id": 2044975,
+      "updated_at": "2017-12-01T02:57:24.457Z",
+      "name": "DLC HARDCORE Melody MYSTERY_PROD",
+      "display_name": "Melody Mystery Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "mystery",
+      "_mode": {
+        "id": 5,
+        "name": "mystery",
+        "display_name": "Mystery"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2041701,
+      "updated_at": "2017-12-01T02:57:23.103Z",
+      "name": "DLC HARDCORE Melody PHASING_PROD",
+      "display_name": "Melody Phasing Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2047925,
+      "updated_at": "2017-12-01T02:57:26.483Z",
+      "name": "DLC HARDCORE Melody HARD_PROD",
+      "display_name": "Melody Hard Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "hard",
+      "_mode": {
+        "id": 2,
+        "name": "hard",
+        "display_name": "Hard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2053043,
+      "updated_at": "2017-12-01T02:57:27.373Z",
+      "name": "DLC SPEEDRUN Melody NO RETURN_PROD",
+      "display_name": "Melody No Return Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "no-return",
+      "_mode": {
+        "id": 1,
+        "name": "no-return",
+        "display_name": "No Return"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2041694,
+      "updated_at": "2017-12-01T02:57:24.737Z",
+      "name": "DLC SPEEDRUN Melody PHASING_PROD",
+      "display_name": "Melody Phasing Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2047653,
+      "updated_at": "2017-12-01T02:57:25.55Z",
+      "name": "DLC SPEEDRUN Melody MYSTERY_PROD",
+      "display_name": "Melody Mystery Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "mystery",
+      "_mode": {
+        "id": 5,
+        "name": "mystery",
+        "display_name": "Mystery"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047682,
+      "updated_at": "2017-12-01T02:57:26.657Z",
+      "name": "DLC SPEEDRUN Melody_PROD",
+      "display_name": "Melody Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 9
+    },
+    {
+      "id": 2039748,
+      "updated_at": "2017-12-01T02:57:25.143Z",
+      "name": "DLC SPEEDRUN Melody RANDOMIZER_PROD",
+      "display_name": "Melody Randomizer Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2050981,
+      "updated_at": "2017-12-01T02:57:27.543Z",
+      "name": "DLC HARDCORE SEEDED Melody_PROD",
+      "display_name": "Melody Seeded Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2051016,
+      "updated_at": "2017-12-01T02:57:26.967Z",
+      "name": "DLC SEEDED SPEEDRUN Melody_PROD",
+      "display_name": "Melody Seeded Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-speed",
+      "_run": {
+        "id": 3,
+        "name": "seeded-speed",
+        "display_name": "Seeded Speed"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2048097,
+      "updated_at": "2017-12-01T02:57:27.293Z",
+      "name": "DLC HARDCORE Melody DEATHLESS_PROD",
+      "display_name": "Melody Deathless (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "deathless",
+      "_run": {
+        "id": 4,
+        "name": "deathless",
+        "display_name": "Deathless"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047617,
+      "updated_at": "2017-12-01T02:57:26.373Z",
+      "name": "DLC HARDCORE Monk RANDOMIZER_PROD",
+      "display_name": "Monk Randomizer Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "monk",
+      "_character": {
+        "id": 5,
+        "name": "monk",
+        "display_name": "Monk"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047642,
+      "updated_at": "2017-12-01T02:57:24.613Z",
+      "name": "DLC HARDCORE Monk_PROD",
+      "display_name": "Monk Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "monk",
+      "_character": {
+        "id": 5,
+        "name": "monk",
+        "display_name": "Monk"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 11
+    },
+    {
+      "id": 2047702,
+      "updated_at": "2017-12-01T02:57:27.123Z",
+      "name": "DLC SPEEDRUN Monk_PROD",
+      "display_name": "Monk Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "monk",
+      "_character": {
+        "id": 5,
+        "name": "monk",
+        "display_name": "Monk"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 3
+    },
+    {
+      "id": 2048191,
+      "updated_at": "2017-12-01T02:57:27.48Z",
+      "name": "DLC HARDCORE SEEDED Monk_PROD",
+      "display_name": "Monk Seeded Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "monk",
+      "_character": {
+        "id": 5,
+        "name": "monk",
+        "display_name": "Monk"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2041674,
+      "updated_at": "2017-12-01T02:57:25.61Z",
+      "name": "DLC HARDCORE Nocturna PHASING_PROD",
+      "display_name": "Nocturna Phasing Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "nocturna",
+      "_character": {
+        "id": 10,
+        "name": "nocturna",
+        "display_name": "Nocturna"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 6
+    },
+    {
+      "id": 2045542,
+      "updated_at": "2017-12-01T02:57:25.267Z",
+      "name": "DLC HARDCORE Nocturna MYSTERY_PROD",
+      "display_name": "Nocturna Mystery Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "mystery",
+      "_mode": {
+        "id": 5,
+        "name": "mystery",
+        "display_name": "Mystery"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "nocturna",
+      "_character": {
+        "id": 10,
+        "name": "nocturna",
+        "display_name": "Nocturna"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 5
+    },
+    {
+      "id": 2044879,
+      "updated_at": "2017-12-01T02:57:24.817Z",
+      "name": "DLC HARDCORE Nocturna RANDOMIZER_PROD",
+      "display_name": "Nocturna Randomizer Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "nocturna",
+      "_character": {
+        "id": 10,
+        "name": "nocturna",
+        "display_name": "Nocturna"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 8
+    },
+    {
+      "id": 2047556,
+      "updated_at": "2017-12-01T02:57:27.03Z",
+      "name": "DLC HARDCORE Nocturna NO RETURN_PROD",
+      "display_name": "Nocturna No Return Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "no-return",
+      "_mode": {
+        "id": 1,
+        "name": "no-return",
+        "display_name": "No Return"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "nocturna",
+      "_character": {
+        "id": 10,
+        "name": "nocturna",
+        "display_name": "Nocturna"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2047540,
+      "updated_at": "2017-12-01T02:57:25.563Z",
+      "name": "DLC HARDCORE Nocturna_PROD",
+      "display_name": "Nocturna Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "nocturna",
+      "_character": {
+        "id": 10,
+        "name": "nocturna",
+        "display_name": "Nocturna"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 60
+    },
+    {
+      "id": 2038424,
+      "updated_at": "2017-12-01T02:57:26.437Z",
+      "name": "DLC HARDCORE Nocturna HARD_PROD",
+      "display_name": "Nocturna Hard Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "hard",
+      "_mode": {
+        "id": 2,
+        "name": "hard",
+        "display_name": "Hard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "nocturna",
+      "_character": {
+        "id": 10,
+        "name": "nocturna",
+        "display_name": "Nocturna"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 23
+    },
+    {
+      "id": 2047528,
+      "updated_at": "2017-12-01T02:57:24.987Z",
+      "name": "DLC SPEEDRUN Nocturna HARD_PROD",
+      "display_name": "Nocturna Hard Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "hard",
+      "_mode": {
+        "id": 2,
+        "name": "hard",
+        "display_name": "Hard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "nocturna",
+      "_character": {
+        "id": 10,
+        "name": "nocturna",
+        "display_name": "Nocturna"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 17
+    },
+    {
+      "id": 2041693,
+      "updated_at": "2017-12-01T02:57:25.067Z",
+      "name": "DLC SPEEDRUN Nocturna PHASING_PROD",
+      "display_name": "Nocturna Phasing Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "nocturna",
+      "_character": {
+        "id": 10,
+        "name": "nocturna",
+        "display_name": "Nocturna"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2045853,
+      "updated_at": "2017-12-01T02:57:23.15Z",
+      "name": "DLC SPEEDRUN Nocturna RANDOMIZER_PROD",
+      "display_name": "Nocturna Randomizer Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "nocturna",
+      "_character": {
+        "id": 10,
+        "name": "nocturna",
+        "display_name": "Nocturna"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 4
+    },
+    {
+      "id": 2047608,
+      "updated_at": "2017-12-01T02:57:27.03Z",
+      "name": "DLC SPEEDRUN Nocturna MYSTERY_PROD",
+      "display_name": "Nocturna Mystery Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "mystery",
+      "_mode": {
+        "id": 5,
+        "name": "mystery",
+        "display_name": "Mystery"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "nocturna",
+      "_character": {
+        "id": 10,
+        "name": "nocturna",
+        "display_name": "Nocturna"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 3
+    },
+    {
+      "id": 2047762,
+      "updated_at": "2017-12-01T02:57:26.39Z",
+      "name": "DLC SPEEDRUN Nocturna_PROD",
+      "display_name": "Nocturna Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "nocturna",
+      "_character": {
+        "id": 10,
+        "name": "nocturna",
+        "display_name": "Nocturna"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 39
+    },
+    {
+      "id": 2047563,
+      "updated_at": "2017-12-01T02:57:25.503Z",
+      "name": "DLC HARDCORE SEEDED Nocturna_PROD",
+      "display_name": "Nocturna Seeded Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "nocturna",
+      "_character": {
+        "id": 10,
+        "name": "nocturna",
+        "display_name": "Nocturna"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047592,
+      "updated_at": "2017-12-01T02:57:25.067Z",
+      "name": "DLC SEEDED SPEEDRUN Nocturna_PROD",
+      "display_name": "Nocturna Seeded Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-speed",
+      "_run": {
+        "id": 3,
+        "name": "seeded-speed",
+        "display_name": "Seeded Speed"
+      },
+      "character": "nocturna",
+      "_character": {
+        "id": 10,
+        "name": "nocturna",
+        "display_name": "Nocturna"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047756,
+      "updated_at": "2017-12-01T02:57:26.047Z",
+      "name": "DLC HARDCORE Nocturna DEATHLESS_PROD",
+      "display_name": "Nocturna Deathless (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "deathless",
+      "_run": {
+        "id": 4,
+        "name": "deathless",
+        "display_name": "Deathless"
+      },
+      "character": "nocturna",
+      "_character": {
+        "id": 10,
+        "name": "nocturna",
+        "display_name": "Nocturna"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 2047568,
+      "updated_at": "2017-12-01T02:57:24.957Z",
+      "name": "DLC HARDCORE Story Mode_PROD",
+      "display_name": "Story Mode Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "story-mode",
+      "_character": {
+        "id": -2,
+        "name": "story-mode",
+        "display_name": "Story Mode"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 14
+    },
+    {
+      "id": 2047666,
+      "updated_at": "2017-12-01T02:57:26.797Z",
+      "name": "DLC SPEEDRUN Story Mode_PROD",
+      "display_name": "Story Mode Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "story-mode",
+      "_character": {
+        "id": -2,
+        "name": "story-mode",
+        "display_name": "Story Mode"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 3
+    },
+    {
+      "id": 2047732,
+      "updated_at": "2017-12-01T02:57:26.453Z",
+      "name": "DLC HARDCORE Tempo RANDOMIZER_PROD",
+      "display_name": "Tempo Randomizer Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "randomizer",
+      "_mode": {
+        "id": 4,
+        "name": "randomizer",
+        "display_name": "Randomizer"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "tempo",
+      "_character": {
+        "id": 13,
+        "name": "tempo",
+        "display_name": "Tempo"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 3
+    },
+    {
+      "id": 2047718,
+      "updated_at": "2017-12-01T02:57:24.723Z",
+      "name": "DLC HARDCORE Tempo_PROD",
+      "display_name": "Tempo Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "tempo",
+      "_character": {
+        "id": 13,
+        "name": "tempo",
+        "display_name": "Tempo"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 48
+    },
+    {
+      "id": 2047722,
+      "updated_at": "2017-12-01T02:57:23.82Z",
+      "name": "DLC HARDCORE Tempo PHASING_PROD",
+      "display_name": "Tempo Phasing Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "phasing",
+      "_mode": {
+        "id": 3,
+        "name": "phasing",
+        "display_name": "Phasing"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "tempo",
+      "_character": {
+        "id": 13,
+        "name": "tempo",
+        "display_name": "Tempo"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2047746,
+      "updated_at": "2017-12-01T02:57:26.81Z",
+      "name": "DLC HARDCORE Tempo HARD_PROD",
+      "display_name": "Tempo Hard Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "hard",
+      "_mode": {
+        "id": 2,
+        "name": "hard",
+        "display_name": "Hard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "tempo",
+      "_character": {
+        "id": 13,
+        "name": "tempo",
+        "display_name": "Tempo"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 2047724,
+      "updated_at": "2017-12-01T02:57:25.923Z",
+      "name": "DLC SPEEDRUN Tempo_PROD",
+      "display_name": "Tempo Speed (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "tempo",
+      "_character": {
+        "id": 13,
+        "name": "tempo",
+        "display_name": "Tempo"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 16
+    },
+    {
+      "id": 2047792,
+      "updated_at": "2017-12-01T02:57:26.997Z",
+      "name": "DLC HARDCORE SEEDED Tempo_PROD",
+      "display_name": "Tempo Seeded Score (Amplified)",
+      "production": true,
+      "product": "amplified",
+      "_product": {
+        "id": 1,
+        "name": "amplified",
+        "display_name": "Amplified"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "tempo",
+      "_character": {
+        "id": 13,
+        "name": "tempo",
+        "display_name": "Tempo"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 741312,
+      "updated_at": "2017-12-01T02:57:22.573Z",
+      "name": "HARDCORE All Chars_PROD",
+      "display_name": "All Characters Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "all-characters",
+      "_character": {
+        "id": -3,
+        "name": "all-characters",
+        "display_name": "All Characters"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 47
+    },
+    {
+      "id": 742307,
+      "updated_at": "2017-12-01T02:57:23.523Z",
+      "name": "SPEEDRUN All Chars_PROD",
+      "display_name": "All Characters Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "all-characters",
+      "_character": {
+        "id": -3,
+        "name": "all-characters",
+        "display_name": "All Characters"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 4
+    },
+    {
+      "id": 741115,
+      "updated_at": "2017-12-01T02:57:22.073Z",
+      "name": "HARDCORE Aria_PROD",
+      "display_name": "Aria Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "aria",
+      "_character": {
+        "id": 2,
+        "name": "aria",
+        "display_name": "Aria"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 84
+    },
+    {
+      "id": 741114,
+      "updated_at": "2017-12-01T02:57:20.327Z",
+      "name": "SPEEDRUN Aria_PROD",
+      "display_name": "Aria Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "aria",
+      "_character": {
+        "id": 2,
+        "name": "aria",
+        "display_name": "Aria"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 26
+    },
+    {
+      "id": 745465,
+      "updated_at": "2017-12-01T02:57:21.87Z",
+      "name": "HARDCORE SEEDED Aria_PROD",
+      "display_name": "Aria Seeded Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "aria",
+      "_character": {
+        "id": 2,
+        "name": "aria",
+        "display_name": "Aria"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 13
+    },
+    {
+      "id": 745562,
+      "updated_at": "2017-12-01T02:57:24.443Z",
+      "name": "SEEDED SPEEDRUN Aria_PROD",
+      "display_name": "Aria Seeded Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-speed",
+      "_run": {
+        "id": 3,
+        "name": "seeded-speed",
+        "display_name": "Seeded Speed"
+      },
+      "character": "aria",
+      "_character": {
+        "id": 2,
+        "name": "aria",
+        "display_name": "Aria"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 745472,
+      "updated_at": "2017-12-01T02:57:23.897Z",
+      "name": "HARDCORE Aria DEATHLESS_PROD",
+      "display_name": "Aria Deathless",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "deathless",
+      "_run": {
+        "id": 4,
+        "name": "deathless",
+        "display_name": "Deathless"
+      },
+      "character": "aria",
+      "_character": {
+        "id": 2,
+        "name": "aria",
+        "display_name": "Aria"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 11
+    },
+    {
+      "id": 739795,
+      "updated_at": "2017-12-01T02:57:14.233Z",
+      "name": "HARDCORE Bard_PROD",
+      "display_name": "Bard Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 79
+    },
+    {
+      "id": 739796,
+      "updated_at": "2017-12-01T02:57:15.777Z",
+      "name": "SPEEDRUN Bard_PROD",
+      "display_name": "Bard Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 59
+    },
+    {
+      "id": 740370,
+      "updated_at": "2017-12-01T02:57:20.81Z",
+      "name": "HARDCORE SEEDED Bard_PROD",
+      "display_name": "Bard Seeded Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 16
+    },
+    {
+      "id": 740372,
+      "updated_at": "2017-12-01T02:57:19.783Z",
+      "name": "SEEDED SPEEDRUN Bard_PROD",
+      "display_name": "Bard Seeded Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-speed",
+      "_run": {
+        "id": 3,
+        "name": "seeded-speed",
+        "display_name": "Seeded Speed"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 9
+    },
+    {
+      "id": 740959,
+      "updated_at": "2017-12-01T02:57:21.653Z",
+      "name": "HARDCORE Bard DEATHLESS_PROD",
+      "display_name": "Bard Deathless",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "deathless",
+      "_run": {
+        "id": 4,
+        "name": "deathless",
+        "display_name": "Deathless"
+      },
+      "character": "bard",
+      "_character": {
+        "id": 9,
+        "name": "bard",
+        "display_name": "Bard"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 9
+    },
+    {
+      "id": 741400,
+      "updated_at": "2017-12-01T02:57:24.13Z",
+      "name": "HARDCORE Bolt_PROD",
+      "display_name": "Bolt Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "bolt",
+      "_character": {
+        "id": 8,
+        "name": "bolt",
+        "display_name": "Bolt"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 58
+    },
+    {
+      "id": 741112,
+      "updated_at": "2017-12-01T02:57:21.607Z",
+      "name": "SPEEDRUN Bolt_PROD",
+      "display_name": "Bolt Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "bolt",
+      "_character": {
+        "id": 8,
+        "name": "bolt",
+        "display_name": "Bolt"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 19
+    },
+    {
+      "id": 745761,
+      "updated_at": "2017-12-01T02:57:24.66Z",
+      "name": "HARDCORE SEEDED Bolt_PROD",
+      "display_name": "Bolt Seeded Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "bolt",
+      "_character": {
+        "id": 8,
+        "name": "bolt",
+        "display_name": "Bolt"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 749064,
+      "updated_at": "2017-12-01T02:57:22.727Z",
+      "name": "SEEDED SPEEDRUN Bolt_PROD",
+      "display_name": "Bolt Seeded Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-speed",
+      "_run": {
+        "id": 3,
+        "name": "seeded-speed",
+        "display_name": "Seeded Speed"
+      },
+      "character": "bolt",
+      "_character": {
+        "id": 8,
+        "name": "bolt",
+        "display_name": "Bolt"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 745467,
+      "updated_at": "2017-12-01T02:57:23.943Z",
+      "name": "HARDCORE Bolt DEATHLESS_PROD",
+      "display_name": "Bolt Deathless",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "deathless",
+      "_run": {
+        "id": 4,
+        "name": "deathless",
+        "display_name": "Deathless"
+      },
+      "character": "bolt",
+      "_character": {
+        "id": 8,
+        "name": "bolt",
+        "display_name": "Bolt"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 7
+    },
+    {
+      "id": 739999,
+      "updated_at": "2017-12-01T02:57:15.027Z",
+      "name": "HARDCORE_PROD",
+      "display_name": "Cadence Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 100
+    },
+    {
+      "id": 740000,
+      "updated_at": "2017-12-01T02:57:17.477Z",
+      "name": "SPEEDRUN_PROD",
+      "display_name": "Cadence Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 92
+    },
+    {
+      "id": 740363,
+      "updated_at": "2017-12-01T02:57:19.867Z",
+      "name": "HARDCORE SEEDED_PROD",
+      "display_name": "Cadence Seeded Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 57
+    },
+    {
+      "id": 742635,
+      "updated_at": "2017-12-01T02:57:23.087Z",
+      "name": "SEEDED SPEEDRUN_PROD",
+      "display_name": "Cadence Seeded Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-speed",
+      "_run": {
+        "id": 3,
+        "name": "seeded-speed",
+        "display_name": "Seeded Speed"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 20
+    },
+    {
+      "id": 741677,
+      "updated_at": "2017-12-01T02:57:22.573Z",
+      "name": "HARDCORE DEATHLESS_PROD",
+      "display_name": "Cadence Deathless",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "deathless",
+      "_run": {
+        "id": 4,
+        "name": "deathless",
+        "display_name": "Deathless"
+      },
+      "character": "cadence",
+      "_character": {
+        "id": 0,
+        "name": "cadence",
+        "display_name": "Cadence"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 58
+    },
+    {
+      "id": 741119,
+      "updated_at": "2017-12-01T02:57:23.04Z",
+      "name": "HARDCORE Coda_PROD",
+      "display_name": "Coda Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "coda",
+      "_character": {
+        "id": 7,
+        "name": "coda",
+        "display_name": "Coda"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 3
+    },
+    {
+      "id": 741120,
+      "updated_at": "2017-12-01T02:57:21.607Z",
+      "name": "SPEEDRUN Coda_PROD",
+      "display_name": "Coda Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "coda",
+      "_character": {
+        "id": 7,
+        "name": "coda",
+        "display_name": "Coda"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 742305,
+      "updated_at": "2017-12-01T02:57:23.367Z",
+      "name": "HARDCORE SEEDED Coda_PROD",
+      "display_name": "Coda Seeded Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "coda",
+      "_character": {
+        "id": 7,
+        "name": "coda",
+        "display_name": "Coda"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 742569,
+      "updated_at": "2017-12-01T02:57:23.04Z",
+      "name": "HARDCORE Coda DEATHLESS_PROD",
+      "display_name": "Coda Deathless",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "deathless",
+      "_run": {
+        "id": 4,
+        "name": "deathless",
+        "display_name": "Deathless"
+      },
+      "character": "coda",
+      "_character": {
+        "id": 7,
+        "name": "coda",
+        "display_name": "Coda"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 2
+    },
+    {
+      "id": 741117,
+      "updated_at": "2017-12-01T02:57:21.997Z",
+      "name": "HARDCORE Dorian_PROD",
+      "display_name": "Dorian Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "dorian",
+      "_character": {
+        "id": 3,
+        "name": "dorian",
+        "display_name": "Dorian"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 65
+    },
+    {
+      "id": 741116,
+      "updated_at": "2017-12-01T02:57:23.727Z",
+      "name": "SPEEDRUN Dorian_PROD",
+      "display_name": "Dorian Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "dorian",
+      "_character": {
+        "id": 3,
+        "name": "dorian",
+        "display_name": "Dorian"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 33
+    },
+    {
+      "id": 745771,
+      "updated_at": "2017-12-01T02:57:23.117Z",
+      "name": "HARDCORE SEEDED Dorian_PROD",
+      "display_name": "Dorian Seeded Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "dorian",
+      "_character": {
+        "id": 3,
+        "name": "dorian",
+        "display_name": "Dorian"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 4
+    },
+    {
+      "id": 746203,
+      "updated_at": "2017-12-01T02:57:24.443Z",
+      "name": "SEEDED SPEEDRUN Dorian_PROD",
+      "display_name": "Dorian Seeded Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-speed",
+      "_run": {
+        "id": 3,
+        "name": "seeded-speed",
+        "display_name": "Seeded Speed"
+      },
+      "character": "dorian",
+      "_character": {
+        "id": 3,
+        "name": "dorian",
+        "display_name": "Dorian"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 745492,
+      "updated_at": "2017-12-01T02:57:25.563Z",
+      "name": "HARDCORE Dorian DEATHLESS_PROD",
+      "display_name": "Dorian Deathless",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "deathless",
+      "_run": {
+        "id": 4,
+        "name": "deathless",
+        "display_name": "Deathless"
+      },
+      "character": "dorian",
+      "_character": {
+        "id": 3,
+        "name": "dorian",
+        "display_name": "Dorian"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 3
+    },
+    {
+      "id": 741328,
+      "updated_at": "2017-12-01T02:57:21.59Z",
+      "name": "HARDCORE DOVE_PROD",
+      "display_name": "Dove Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "dove",
+      "_character": {
+        "id": 6,
+        "name": "dove",
+        "display_name": "Dove"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 78
+    },
+    {
+      "id": 741329,
+      "updated_at": "2017-12-01T02:57:23.973Z",
+      "name": "SPEEDRUN DOVE_PROD",
+      "display_name": "Dove Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "dove",
+      "_character": {
+        "id": 6,
+        "name": "dove",
+        "display_name": "Dove"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 46
+    },
+    {
+      "id": 745549,
+      "updated_at": "2017-12-01T02:57:26.81Z",
+      "name": "HARDCORE SEEDED DOVE_PROD",
+      "display_name": "Dove Seeded Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "dove",
+      "_character": {
+        "id": 6,
+        "name": "dove",
+        "display_name": "Dove"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 13
+    },
+    {
+      "id": 745516,
+      "updated_at": "2017-12-01T02:57:25.937Z",
+      "name": "SEEDED SPEEDRUN DOVE_PROD",
+      "display_name": "Dove Seeded Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-speed",
+      "_run": {
+        "id": 3,
+        "name": "seeded-speed",
+        "display_name": "Seeded Speed"
+      },
+      "character": "dove",
+      "_character": {
+        "id": 6,
+        "name": "dove",
+        "display_name": "Dove"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 743127,
+      "updated_at": "2017-12-01T02:57:25.003Z",
+      "name": "HARDCORE DOVE DEATHLESS_PROD",
+      "display_name": "Dove Deathless",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "deathless",
+      "_run": {
+        "id": 4,
+        "name": "deathless",
+        "display_name": "Deathless"
+      },
+      "character": "dove",
+      "_character": {
+        "id": 6,
+        "name": "dove",
+        "display_name": "Dove"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 6
+    },
+    {
+      "id": 739792,
+      "updated_at": "2017-12-01T02:57:14.453Z",
+      "name": "HARDCORE Eli_PROD",
+      "display_name": "Eli Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "eli",
+      "_character": {
+        "id": 4,
+        "name": "eli",
+        "display_name": "Eli"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 75
+    },
+    {
+      "id": 741122,
+      "updated_at": "2017-12-01T02:57:22.557Z",
+      "name": "SPEEDRUN Eli_PROD",
+      "display_name": "Eli Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "eli",
+      "_character": {
+        "id": 4,
+        "name": "eli",
+        "display_name": "Eli"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 48
+    },
+    {
+      "id": 745638,
+      "updated_at": "2017-12-01T02:57:23.927Z",
+      "name": "HARDCORE SEEDED Eli_PROD",
+      "display_name": "Eli Seeded Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "eli",
+      "_character": {
+        "id": 4,
+        "name": "eli",
+        "display_name": "Eli"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 10
+    },
+    {
+      "id": 745791,
+      "updated_at": "2017-12-01T02:57:24.257Z",
+      "name": "SEEDED SPEEDRUN Eli_PROD",
+      "display_name": "Eli Seeded Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-speed",
+      "_run": {
+        "id": 3,
+        "name": "seeded-speed",
+        "display_name": "Seeded Speed"
+      },
+      "character": "eli",
+      "_character": {
+        "id": 4,
+        "name": "eli",
+        "display_name": "Eli"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 1
+    },
+    {
+      "id": 745486,
+      "updated_at": "2017-12-01T02:57:24.053Z",
+      "name": "HARDCORE Eli DEATHLESS_PROD",
+      "display_name": "Eli Deathless",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "deathless",
+      "_run": {
+        "id": 4,
+        "name": "deathless",
+        "display_name": "Deathless"
+      },
+      "character": "eli",
+      "_character": {
+        "id": 4,
+        "name": "eli",
+        "display_name": "Eli"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 3
+    },
+    {
+      "id": 740390,
+      "updated_at": "2017-12-01T02:57:20.997Z",
+      "name": "HARDCORE Melody_PROD",
+      "display_name": "Melody Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 90
+    },
+    {
+      "id": 740397,
+      "updated_at": "2017-12-01T02:57:21.56Z",
+      "name": "SPEEDRUN Melody_PROD",
+      "display_name": "Melody Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 80
+    },
+    {
+      "id": 743251,
+      "updated_at": "2017-12-01T02:57:24.21Z",
+      "name": "HARDCORE SEEDED Melody_PROD",
+      "display_name": "Melody Seeded Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 9
+    },
+    {
+      "id": 745776,
+      "updated_at": "2017-12-01T02:57:25.08Z",
+      "name": "SEEDED SPEEDRUN Melody_PROD",
+      "display_name": "Melody Seeded Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-speed",
+      "_run": {
+        "id": 3,
+        "name": "seeded-speed",
+        "display_name": "Seeded Speed"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 3
+    },
+    {
+      "id": 742624,
+      "updated_at": "2017-12-01T02:57:24.537Z",
+      "name": "HARDCORE Melody DEATHLESS_PROD",
+      "display_name": "Melody Deathless",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "deathless",
+      "_run": {
+        "id": 4,
+        "name": "deathless",
+        "display_name": "Deathless"
+      },
+      "character": "melody",
+      "_character": {
+        "id": 1,
+        "name": "melody",
+        "display_name": "Melody"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 16
+    },
+    {
+      "id": 742526,
+      "updated_at": "2017-12-01T02:57:24.287Z",
+      "name": "HARDCORE Monk_PROD",
+      "display_name": "Monk Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "monk",
+      "_character": {
+        "id": 5,
+        "name": "monk",
+        "display_name": "Monk"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 74
+    },
+    {
+      "id": 741638,
+      "updated_at": "2017-12-01T02:57:22.96Z",
+      "name": "SPEEDRUN Monk_PROD",
+      "display_name": "Monk Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "monk",
+      "_character": {
+        "id": 5,
+        "name": "monk",
+        "display_name": "Monk"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 31
+    },
+    {
+      "id": 745413,
+      "updated_at": "2017-12-01T02:57:24.35Z",
+      "name": "HARDCORE SEEDED Monk_PROD",
+      "display_name": "Monk Seeded Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "seeded-score",
+      "_run": {
+        "id": 2,
+        "name": "seeded-score",
+        "display_name": "Seeded Score"
+      },
+      "character": "monk",
+      "_character": {
+        "id": 5,
+        "name": "monk",
+        "display_name": "Monk"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 8
+    },
+    {
+      "id": 745487,
+      "updated_at": "2017-12-01T02:57:24.52Z",
+      "name": "HARDCORE Monk DEATHLESS_PROD",
+      "display_name": "Monk Deathless",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "deathless",
+      "_run": {
+        "id": 4,
+        "name": "deathless",
+        "display_name": "Deathless"
+      },
+      "character": "monk",
+      "_character": {
+        "id": 5,
+        "name": "monk",
+        "display_name": "Monk"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 5
+    },
+    {
+      "id": 740154,
+      "updated_at": "2017-12-01T02:57:17.677Z",
+      "name": "HARDCORE Story Mode_PROD",
+      "display_name": "Story Mode Score",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "score",
+      "_run": {
+        "id": 0,
+        "name": "score",
+        "display_name": "Score"
+      },
+      "character": "story-mode",
+      "_character": {
+        "id": -2,
+        "name": "story-mode",
+        "display_name": "Story Mode"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 59
+    },
+    {
+      "id": 742250,
+      "updated_at": "2017-12-01T02:57:21.637Z",
+      "name": "SPEEDRUN Story Mode_PROD",
+      "display_name": "Story Mode Speed",
+      "production": true,
+      "product": "classic",
+      "_product": {
+        "id": 0,
+        "name": "classic",
+        "display_name": "Classic"
+      },
+      "mode": "standard",
+      "_mode": {
+        "id": 0,
+        "name": "standard",
+        "display_name": "Standard"
+      },
+      "run": "speed",
+      "_run": {
+        "id": 1,
+        "name": "speed",
+        "display_name": "Speed"
+      },
+      "character": "story-mode",
+      "_character": {
+        "id": -2,
+        "name": "story-mode",
+        "display_name": "Story Mode"
+      },
+      "coOp": false,
+      "customMusic": false,
+      "total": 7
     }
   ]
 }

@@ -3,12 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Moq;
-using Ninject;
 using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
@@ -239,22 +239,16 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class IntegrationTests : IntegrationTestsBase
         {
+            public IntegrationTests(IntegrationTestsFixture fixture, ITestOutputHelper output) : base(fixture, output) { }
+
             [Fact]
             public async Task GetLeaderboards()
             {
-                // Arrange
-                var db = Kernel.Get<ILeaderboardsContext>();
-                var mockDb = Mock.Get(db);
-                var dbLeaderboards = new FakeDbSet<Leaderboard>(Leaderboards);
-                mockDb.Setup(d => d.Leaderboards).Returns(dbLeaderboards);
-                Kernel.Rebind<ILeaderboardsContext>().ToConstant(db);
-
-                // Act
-                var response = await Server.HttpClient.GetAsync("/leaderboards");
-                var content = await response.Content.ReadAsStringAsync();
+                // Arrange -> Act
+                var response = await server.HttpClient.GetAsync("/leaderboards");
 
                 // Assert
-                Assert.Equal(Resources.GetLeaderboards, content, ignoreLineEndingDifferences: true);
+                await RespondsWithAsync(response, Resources.GetLeaderboards);
             }
         }
     }

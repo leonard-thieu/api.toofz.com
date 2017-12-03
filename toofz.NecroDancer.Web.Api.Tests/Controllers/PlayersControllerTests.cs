@@ -3,12 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Moq;
-using Ninject;
 using toofz.NecroDancer.Leaderboards;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 {
@@ -653,191 +653,86 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class IntegrationTests : IntegrationTestsBase
         {
+            public IntegrationTests(IntegrationTestsFixture fixture, ITestOutputHelper output) : base(fixture, output) { }
+
             [Fact]
             public async Task GetPlayers()
             {
-                // Arrange
-                var db = Kernel.Get<ILeaderboardsContext>();
-                var mockDb = Mock.Get(db);
-                var dbPlayers = new FakeDbSet<Player>(Players);
-                mockDb.Setup(d => d.Players).Returns(dbPlayers);
-
-                // Act
-                var response = await Server.HttpClient.GetAsync("/players?q=St");
+                // Arrange -> Act
+                var response = await server.HttpClient.GetAsync("/players?q=m");
 
                 // Assert
-                await AssertHelpers.RespondsWithAsync(response, Resources.GetPlayers);
+                await RespondsWithAsync(response, Resources.GetPlayers);
             }
 
             [Fact]
             public async Task GetPlayer()
             {
-                // Arrange
-                var db = Kernel.Get<ILeaderboardsContext>();
-                var mockDb = Mock.Get(db);
-                var mockDbPlayers = new FakeDbSet<Player>(Players);
-                var dbPlayers = new FakeDbSet<Player>(Players);
-                mockDb.Setup(d => d.Players).Returns(dbPlayers);
-
-                // Act
-                var response = await Server.HttpClient.GetAsync("/players/1");
+                // Arrange -> Act
+                var response = await server.HttpClient.GetAsync("/players/76561198036838485");
 
                 // Assert
-                await AssertHelpers.RespondsWithAsync(response, Resources.GetPlayer);
+                await RespondsWithAsync(response, Resources.GetPlayer);
             }
 
             [Fact]
             public async Task GetPlayerEntries()
             {
-                // Arrange
-                var db = Kernel.Get<ILeaderboardsContext>();
-                var mockDb = Mock.Get(db);
-                var players = Players;
-                var dbPlayers = new FakeDbSet<Player>(players);
-                mockDb.Setup(d => d.Players).Returns(dbPlayers);
-                var dbLeaderboards = new FakeDbSet<Leaderboard>();
-                mockDb.Setup(d => d.Leaderboards).Returns(dbLeaderboards);
-                var entries = from p in players
-                              from e in p.Entries
-                              select e;
-                var dbEntries = new FakeDbSet<Entry>(entries);
-                mockDb.Setup(d => d.Entries).Returns(dbEntries);
-                var dbReplays = new FakeDbSet<Replay>();
-                mockDb.Setup(d => d.Replays).Returns(dbReplays);
-
-                // Act
-                var response = await Server.HttpClient.GetAsync("/players/1/entries");
+                // Arrange -> Act
+                var response = await server.HttpClient.GetAsync("/players/76561197976996341/entries");
 
                 // Assert
-                await AssertHelpers.RespondsWithAsync(response, Resources.GetPlayerEntries);
+                await RespondsWithAsync(response, Resources.GetPlayerEntries);
             }
 
             [Fact]
             public async Task GetPlayerEntriesFilteredByLbids()
             {
-                // Arrange
-                var db = Kernel.Get<ILeaderboardsContext>();
-                var mockDb = Mock.Get(db);
-                var players = Players;
-                var dbPlayers = new FakeDbSet<Player>(Players);
-                mockDb.Setup(d => d.Players).Returns(dbPlayers);
-                var leaderboards = from p in players
-                                   from e in p.Entries
-                                   select e.Leaderboard;
-                var dbLeaderboards = new FakeDbSet<Leaderboard>(leaderboards);
-                mockDb.Setup(d => d.Leaderboards).Returns(dbLeaderboards);
-                var entries = from p in players
-                              from e in p.Entries
-                              select e;
-                var dbEntries = new FakeDbSet<Entry>(entries);
-                mockDb.Setup(d => d.Entries).Returns(dbEntries);
-                var dbReplays = new FakeDbSet<Replay>();
-                mockDb.Setup(d => d.Replays).Returns(dbReplays);
-
-                // Act
-                var response = await Server.HttpClient.GetAsync("/players/2/entries?lbids=739796,739999");
+                // Arrange -> Act
+                var response = await server.HttpClient.GetAsync("/players/76561197999613276/entries?lbids=739999,2047515");
 
                 // Assert
-                await AssertHelpers.RespondsWithAsync(response, Resources.GetPlayerEntriesFilteredByLbids);
+                await RespondsWithAsync(response, Resources.GetPlayerEntriesFilteredByLbids);
             }
 
             [Fact]
             public async Task GetPlayerEntry()
             {
-                // Arrange
-                var db = Kernel.Get<ILeaderboardsContext>();
-                var mockDb = Mock.Get(db);
-                var players = Players;
-                var entries = from p in players
-                              from e in p.Entries
-                              select e;
-                var dbEntries = new FakeDbSet<Entry>(entries);
-                mockDb.Setup(d => d.Entries).Returns(dbEntries);
-                var dbReplays = new FakeDbSet<Replay>();
-                mockDb.Setup(d => d.Replays).Returns(dbReplays);
-
-                // Act
-                var response = await Server.HttpClient.GetAsync("/players/2/entries/739999");
+                // Arrange -> Act
+                var response = await server.HttpClient.GetAsync("/players/76561197999613276/entries/739999");
 
                 // Assert
-                await AssertHelpers.RespondsWithAsync(response, Resources.GetPlayerEntry);
+                await RespondsWithAsync(response, Resources.GetPlayerEntry);
             }
 
             [Fact]
             public async Task GetPlayerDailyEntries()
             {
-                // Arrange
-                var db = Kernel.Get<ILeaderboardsContext>();
-                var mockDb = Mock.Get(db);
-                var players = Players;
-                var dbPlayers = new FakeDbSet<Player>(players);
-                mockDb.Setup(d => d.Players).Returns(dbPlayers);
-                var dbLeaderboards = new FakeDbSet<DailyLeaderboard>();
-                mockDb.Setup(d => d.DailyLeaderboards).Returns(dbLeaderboards);
-                var entries = from p in players
-                              from e in p.DailyEntries
-                              select e;
-                var dbEntries = new FakeDbSet<DailyEntry>(entries);
-                mockDb.Setup(d => d.DailyEntries).Returns(dbEntries);
-                var dbReplays = new FakeDbSet<Replay>();
-                mockDb.Setup(d => d.Replays).Returns(dbReplays);
-
-                // Act
-                var response = await Server.HttpClient.GetAsync("/players/1/entries/dailies");
+                // Arrange -> Act
+                var response = await server.HttpClient.GetAsync("/players/76561198044686391/entries/dailies");
 
                 // Assert
-                await AssertHelpers.RespondsWithAsync(response, Resources.GetPlayerDailyEntries);
+                await RespondsWithAsync(response, Resources.GetPlayerDailyEntries);
             }
 
             [Fact]
             public async Task GetPlayerDailyEntriesFilteredByLbids()
             {
-                // Arrange
-                var db = Kernel.Get<ILeaderboardsContext>();
-                var mockDb = Mock.Get(db);
-                var players = Players;
-                var dbPlayers = new FakeDbSet<Player>(players);
-                mockDb.Setup(d => d.Players).Returns(dbPlayers);
-                var leaderboards = from p in players
-                                   from e in p.DailyEntries
-                                   select e.Leaderboard;
-                var dbLeaderboards = new FakeDbSet<DailyLeaderboard>(leaderboards);
-                mockDb.Setup(d => d.DailyLeaderboards).Returns(dbLeaderboards);
-                var entries = from p in players
-                              from e in p.DailyEntries
-                              select e;
-                var dbEntries = new FakeDbSet<DailyEntry>(entries);
-                mockDb.Setup(d => d.DailyEntries).Returns(dbEntries);
-                var dbReplays = new FakeDbSet<Replay>();
-                mockDb.Setup(d => d.Replays).Returns(dbReplays);
-
-                // Act
-                var response = await Server.HttpClient.GetAsync("/players/2/entries/dailies?lbids=739796,739999");
+                // Arrange -> Act
+                var response = await server.HttpClient.GetAsync("/players/76561198044686391/entries/dailies?lbids=742742,1705585");
 
                 // Assert
-                await AssertHelpers.RespondsWithAsync(response, Resources.GetPlayerDailyEntriesFilteredByLbids);
+                await RespondsWithAsync(response, Resources.GetPlayerDailyEntriesFilteredByLbids);
             }
 
             [Fact]
             public async Task GetPlayerDailyEntry()
             {
-                // Arrange
-                var db = Kernel.Get<ILeaderboardsContext>();
-                var mockDb = Mock.Get(db);
-                var players = Players;
-                var entries = from p in players
-                              from e in p.DailyEntries
-                              select e;
-                var dbEntries = new FakeDbSet<DailyEntry>(entries);
-                mockDb.Setup(d => d.DailyEntries).Returns(dbEntries);
-                var dbReplays = new FakeDbSet<Replay>();
-                mockDb.Setup(d => d.Replays).Returns(dbReplays);
-
-                // Act
-                var response = await Server.HttpClient.GetAsync("/players/2/entries/dailies/739999");
+                // Arrange -> Act
+                var response = await server.HttpClient.GetAsync("/players/76561198044686391/entries/dailies/742742");
 
                 // Assert
-                await AssertHelpers.RespondsWithAsync(response, Resources.GetPlayerDailyEntry);
+                await RespondsWithAsync(response, Resources.GetPlayerDailyEntry);
             }
         }
     }
