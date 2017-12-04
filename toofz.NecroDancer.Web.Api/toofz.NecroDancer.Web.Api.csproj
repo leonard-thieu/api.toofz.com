@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -7,28 +7,24 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{538C3CD9-BE40-4CD6-AEC8-4B7C07EC4CE7}</ProjectGuid>
+    <ProjectGuid>{E12701AD-3E9F-4663-8C69-48584BA48B1F}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>toofz.NecroDancer.Web.Api</RootNamespace>
     <AssemblyName>toofz.NecroDancer.Web.Api</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <ApplicationInsightsResourceId>/subscriptions/c9ac3656-5d47-43ae-89ce-777d29f47fe4/resourcegroups/toofz/providers/microsoft.insights/components/api.toofz.com</ApplicationInsightsResourceId>
-    <ApplicationInsightsAnnotationResourceId>/subscriptions/c9ac3656-5d47-43ae-89ce-777d29f47fe4/resourcegroups/toofz/providers/microsoft.insights/components/api.toofz.com</ApplicationInsightsAnnotationResourceId>
-    <Use64BitIISExpress />
-    <TargetFrameworkProfile />
-    <GenerateBuildInfoConfigFile>true</GenerateBuildInfoConfigFile>
-    <IncludeServerNameInBuildInfo>true</IncludeServerNameInBuildInfo>
+    <LangVersion>latest</LangVersion>
+    <DocumentationFile>App_Data/XmlDocument.xml</DocumentationFile>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,49 +34,33 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>App_Data/XmlDocument.xml</DocumentationFile>
-    <NoWarn>1591</NoWarn>
-    <LangVersion>7.1</LangVersion>
-    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Production|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>App_Data/XmlDocument.xml</DocumentationFile>
-    <NoWarn>1591</NoWarn>
-    <LangVersion>7.1</LangVersion>
-    <CodeAnalysisRuleSet />
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Production|AnyCPU'">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>App_Data/XmlDocument.xml</DocumentationFile>
-    <NoWarn>1591</NoWarn>
-    <LangVersion>7.1</LangVersion>
-    <CodeAnalysisRuleSet />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.Web">
       <Version>2.4.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.AspNet.Mvc">
-      <Version>5.2.3</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNet.WebApi">
       <Version>5.2.3</Version>
@@ -91,29 +71,14 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.HelpPage">
       <Version>5.2.3</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.AspNet.WebApi.Owin">
-      <Version>5.2.3</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
       <Version>1.0.8</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Owin">
-      <Version>3.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Owin.Host.SystemWeb">
-      <Version>3.1.0</Version>
     </PackageReference>
     <PackageReference Include="Ninject.Web.WebApi.WebHost">
       <Version>3.3.0</Version>
     </PackageReference>
-    <PackageReference Include="Owin">
-      <Version>1.0.0</Version>
-    </PackageReference>
     <PackageReference Include="System.Linq.Dynamic">
       <Version>1.0.7</Version>
-    </PackageReference>
-    <PackageReference Include="toofz.NecroDancer">
-      <Version>5.0.4</Version>
     </PackageReference>
     <PackageReference Include="toofz.NecroDancer.Data">
       <Version>8.0.5</Version>
@@ -129,9 +94,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-    <Content Include="Service References\Application Insights\ConnectedService.json" />
-    <None Include="Properties\PublishProfiles\api.toofz.com - Web Deploy.pubxml" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="App_Data\XmlDocument.xml" />
     <Content Include="Config\AppSettings.config" />
@@ -163,7 +125,6 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\ObjectGenerator.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
-    <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ComplexTypeModelDescription.cshtml" />
@@ -179,13 +140,12 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\Samples.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\SimpleTypeModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TextSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Index.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\HelpPage\Views\Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Areas\HelpPage\Views\Web.config" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\HelpPageAreaRegistration.cs" />
     <Compile Include="Areas\HelpPage\HelpPageConfigurationExtensions.cs" />
@@ -198,7 +158,9 @@
     <Compile Include="Controllers\LeaderboardsController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Controllers\ReplaysController.cs" />
+    <Compile Include="Infrastructure\AiExceptionLogger.cs" />
     <Compile Include="Infrastructure\AiHandleErrorAttribute.cs" />
+    <Compile Include="Infrastructure\BrowserJsonFormatter.cs" />
     <Compile Include="Infrastructure\CharactersBinder.cs" />
     <Compile Include="Infrastructure\CommaSeparatedValuesBinder.cs" />
     <Compile Include="Infrastructure\EnemyAttributeBinder.cs" />
@@ -257,12 +219,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />
-    <Compile Include="Infrastructure\AiExceptionLogger.cs" />
-    <Compile Include="Infrastructure\BrowserJsonFormatter.cs" />
-    <Compile Include="Helper.cs" />
-    <Compile Include="IQueryableExtensions.cs" />
-    <Compile Include="Startup.cs" />
-    <Compile Include="ValueProviderResultExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -278,15 +234,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Compile Include="Helper.cs" />
+    <Compile Include="IQueryableExtensions.cs" />
+    <Compile Include="ValueProviderResultExtensions.cs" />
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Web.Production.config">
       <DependentUpon>Web.config</DependentUpon>
-      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -386,6 +342,9 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">

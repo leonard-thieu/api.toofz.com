@@ -131,7 +131,7 @@
     <value>..\Resources\GetItemsByCategory.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="GetItemsBySubcategory" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\getitemsbysubcategory.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Resources\GetItemsBySubcategory.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="GetLeaderboards" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GetLeaderboards.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
