@@ -237,7 +237,9 @@
     <Compile Include="Helper.cs" />
     <Compile Include="IQueryableExtensions.cs" />
     <Compile Include="ValueProviderResultExtensions.cs" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
