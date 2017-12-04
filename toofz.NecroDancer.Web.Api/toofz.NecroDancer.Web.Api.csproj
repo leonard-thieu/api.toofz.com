@@ -118,11 +118,8 @@
     <PackageReference Include="toofz.NecroDancer.Data">
       <Version>8.0.5</Version>
     </PackageReference>
-    <PackageReference Include="toofz.NecroDancer.Leaderboards">
-      <Version>19.0.2</Version>
-    </PackageReference>
     <PackageReference Include="toofz.NecroDancer.Leaderboards.Data">
-      <Version>12.2.3</Version>
+      <Version>13.4.1</Version>
     </PackageReference>
     <PackageReference Include="toofz.RemoveServerHeader">
       <Version>1.0.1</Version>
