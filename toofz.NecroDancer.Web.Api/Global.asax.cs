@@ -9,7 +9,7 @@ using Microsoft.ApplicationInsights.Extensibility;
 namespace toofz.NecroDancer.Web.Api
 {
     /// <summary>
-    /// The web API application.
+    /// The ASP.NET Web API application.
     /// </summary>
     public class WebApiApplication : HttpApplication
     {
