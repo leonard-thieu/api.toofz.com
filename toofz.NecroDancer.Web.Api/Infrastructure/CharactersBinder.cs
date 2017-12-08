@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api.Infrastructure
@@ -8,7 +8,7 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
     {
         public CharactersBinder(IEnumerable<string> characters)
         {
-            this.characters = characters ?? throw new ArgumentNullException(nameof(characters));
+            this.characters = characters.ToList();
         }
 
         private readonly IEnumerable<string> characters;

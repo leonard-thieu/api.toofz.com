@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http.Controllers;
 using System.Web.Http.Metadata.Providers;
 using System.Web.Http.ModelBinding;
@@ -15,19 +14,6 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
     {
         public class Constructor
         {
-            [DisplayFact(nameof(ArgumentNullException))]
-            public void LeaderboardCategoriesIsNull_ThrowsArgumentNullException()
-            {
-                // Arrange
-                IEnumerable<string> values = null;
-
-                // Act -> Assert
-                Assert.Throws<ArgumentNullException>(() =>
-                {
-                    new RunsBinder(values);
-                });
-            }
-
             [DisplayFact(nameof(RunsBinder))]
             public void ReturnsRunsBinder()
             {

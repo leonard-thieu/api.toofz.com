@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using toofz.NecroDancer.Web.Api.Models;
 
 namespace toofz.NecroDancer.Web.Api.Infrastructure
@@ -8,7 +8,7 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
     {
         public ModesBinder(IEnumerable<string> modes)
         {
-            this.modes = modes ?? throw new ArgumentNullException(nameof(modes));
+            this.modes = modes.ToList();
         }
 
         private readonly IEnumerable<string> modes;

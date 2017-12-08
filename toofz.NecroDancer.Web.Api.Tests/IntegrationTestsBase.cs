@@ -31,7 +31,6 @@ namespace toofz.NecroDancer.Web.Api.Tests
             this.output = output;
 
             kernel.Unbind<HttpConfiguration>();
-            NinjectWebCommon.RegisterServices(kernel);
 
             kernel.Rebind<string>()
                   .ToMethod(c => StorageHelper.GetDatabaseConnectionString(nameof(NecroDancerContext)))
@@ -52,7 +51,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
         }
 
         protected readonly ITestOutputHelper output;
-        private readonly IKernel kernel = new StandardKernel();
+        private readonly IKernel kernel = NinjectWebCommon.CreateKernel();
         protected readonly TestServer server;
 
         public void Dispose()

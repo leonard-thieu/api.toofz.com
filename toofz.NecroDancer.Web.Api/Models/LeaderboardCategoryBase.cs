@@ -8,8 +8,8 @@ namespace toofz.NecroDancer.Web.Api.Models
     {
         protected LeaderboardCategoryBase(IEnumerable<string> values)
         {
-            if (values == null)
-                throw new ArgumentNullException(nameof(values));
+            // Sanity check
+            // An improperly initialized database can provide empty values.
             if (!values.Any())
                 throw new ArgumentException($"'{nameof(values)}' does not contain any values.", nameof(values));
 

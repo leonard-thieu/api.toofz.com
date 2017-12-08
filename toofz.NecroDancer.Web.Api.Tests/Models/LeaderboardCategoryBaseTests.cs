@@ -11,19 +11,6 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
     {
         public class Constructor
         {
-            [DisplayFact(nameof(ArgumentNullException))]
-            public void CategoryIsNull_ThrowsArgumentNullException()
-            {
-                // Arrange
-                IEnumerable<string> values = null;
-
-                // Act -> Assert
-                Assert.Throws<ArgumentNullException>(() =>
-                {
-                    new LeaderboardCategoryBaseAdapter(values);
-                });
-            }
-
             [DisplayFact(nameof(ArgumentException))]
             public void CategoryIsEmpty_ThrowsArgumentException()
             {

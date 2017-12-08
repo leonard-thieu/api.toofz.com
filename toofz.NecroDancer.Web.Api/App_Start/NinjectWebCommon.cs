@@ -43,7 +43,7 @@ namespace toofz.NecroDancer.Web.Api
         /// Creates the kernel that will manage your application.
         /// </summary>
         /// <returns>The created kernel.</returns>
-        private static IKernel CreateKernel()
+        internal static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
             try
@@ -65,7 +65,7 @@ namespace toofz.NecroDancer.Web.Api
         /// Load your modules or register your services here!
         /// </summary>
         /// <param name="kernel">The kernel.</param>
-        internal static void RegisterServices(IKernel kernel)
+        private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<TelemetryClient>()
                   .ToConstant(WebApiApplication.TelemetryClient);
@@ -109,9 +109,7 @@ namespace toofz.NecroDancer.Web.Api
         {
             using (var db = c.Kernel.Get<ILeaderboardsContext>())
             {
-                var products = db.Products.Select(p => p.Name).ToList();
-
-                return new ProductsBinder(products);
+                return new ProductsBinder(db.Products.Select(p => p.Name));
             }
         }
 
@@ -119,9 +117,7 @@ namespace toofz.NecroDancer.Web.Api
         {
             using (var db = c.Kernel.Get<ILeaderboardsContext>())
             {
-                var modes = db.Modes.Select(p => p.Name).ToList();
-
-                return new ModesBinder(modes);
+                return new ModesBinder(db.Modes.Select(p => p.Name));
             }
         }
 
@@ -129,9 +125,7 @@ namespace toofz.NecroDancer.Web.Api
         {
             using (var db = c.Kernel.Get<ILeaderboardsContext>())
             {
-                var runs = db.Runs.Select(p => p.Name).ToList();
-
-                return new RunsBinder(runs);
+                return new RunsBinder(db.Runs.Select(p => p.Name));
             }
         }
 
@@ -139,9 +133,7 @@ namespace toofz.NecroDancer.Web.Api
         {
             using (var db = c.Kernel.Get<ILeaderboardsContext>())
             {
-                var characters = db.Characters.Select(p => p.Name).ToList();
-
-                return new CharactersBinder(characters);
+                return new CharactersBinder(db.Characters.Select(p => p.Name));
             }
         }
     }
