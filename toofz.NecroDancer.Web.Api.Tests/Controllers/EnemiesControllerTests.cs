@@ -24,7 +24,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class Constructor
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -44,7 +44,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private readonly EnemiesPagination pagination = new EnemiesPagination();
 
-            [Fact]
+            [DisplayFact]
             public async Task ReturnsOk()
             {
                 // Arrange -> Act
@@ -54,7 +54,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<EnemiesEnvelope>>(result);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task ReturnsEnemies()
             {
                 // Arrange -> Act
@@ -66,7 +66,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.Equal(10, contentEnemies.Count());
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task ResultsAreOrderedByElemenyNameThenByType()
             {
                 // Arrange -> Act
@@ -103,7 +103,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 }, contentEnemies.Select(e => e.Type));
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task LimitIsLessThanResultsCount_ReturnsLimitResults()
             {
                 // Arrange
@@ -118,7 +118,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.Equal(2, contentEnemies.Count());
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task OffsetIsSpecified_ReturnsOffsetResults()
             {
                 // Arrange
@@ -142,7 +142,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private readonly EnemiesPagination pagination = new EnemiesPagination();
 
-            [Theory]
+            [DisplayTheory]
             [InlineData("boss")]
             [InlineData("bounce-on-movement-fail")]
             [InlineData("floating")]
@@ -160,7 +160,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<EnemiesEnvelope>>(result);
             }
 
-            [Theory]
+            [DisplayTheory]
             [InlineData("boss", "bishop", 1)]
             [InlineData("floating", "banshee", 1)]
             [InlineData("ignore-liquids", "tarmonster", 1)]
@@ -186,7 +186,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             public DisposeMethod(MockDatabaseFixture fixture) : base(fixture) { }
 
-            [Fact]
+            [DisplayFact]
             public void DisposesDb()
             {
                 // Arrange -> Act
@@ -196,7 +196,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Verify(d => d.Dispose(), Times.Once);
             }
 
-            [Fact]
+            [DisplayFact]
             public void DisposeMoreThanOnce_DisposesDbOnlyOnce()
             {
                 // Arrange -> Act
@@ -212,8 +212,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             public IntegrationTests(IntegrationTestsFixture fixture, ITestOutputHelper output) : base(fixture, output) { }
 
-            [Fact]
-            public async Task GetEnemiesMethod()
+            [DisplayFact]
+            public async Task GetEnemies()
             {
                 // Arrange -> Act
                 var response = await server.HttpClient.GetAsync("/enemies");
@@ -222,8 +222,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 await RespondsWithAsync(response, Resources.GetEnemies);
             }
 
-            [Fact]
-            public async Task GetEnemiesByAttributeMethod()
+            [DisplayFact]
+            public async Task GetEnemiesByAttribute()
             {
                 // Arrange -> Act
                 var response = await server.HttpClient.GetAsync("/enemies/boss");

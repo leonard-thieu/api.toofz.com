@@ -11,7 +11,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
     {
         public class Constructor
         {
-            [Fact]
+            [DisplayFact(nameof(ArgumentNullException))]
             public void CategoryIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
@@ -24,7 +24,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 });
             }
 
-            [Fact]
+            [DisplayFact(nameof(ArgumentException))]
             public void CategoryIsEmpty_ThrowsArgumentException()
             {
                 // Arrange
@@ -37,7 +37,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 });
             }
 
-            [Fact]
+            [DisplayFact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -62,7 +62,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
             private IEnumerable<string> values;
             private LeaderboardCategoryBase leaderboardCategory;
 
-            [Fact]
+            [DisplayFact(nameof(ArgumentException))]
             public void ItemIsNotValid_ThrowsArgumentException()
             {
                 // Arrange
@@ -75,7 +75,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 });
             }
 
-            [Fact]
+            [DisplayFact]
             public void ItemIsValid_AddsItem()
             {
                 // Arrange
@@ -92,7 +92,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
 
         public class GetDefaults
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsDefaults()
             {
                 // Arrange
@@ -109,7 +109,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
 
         public class GetEnumeratorMethod
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsEnumerator()
             {
                 // Arrange
@@ -126,7 +126,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
 
         public class IEnumerable_GetEnumeratorMethod
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsEnumerator()
             {
                 // Arrange

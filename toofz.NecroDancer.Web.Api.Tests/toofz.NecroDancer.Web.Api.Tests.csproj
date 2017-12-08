@@ -54,6 +54,9 @@
     <PackageReference Include="toofz.FakeDbSet">
       <Version>1.1.5</Version>
     </PackageReference>
+    <PackageReference Include="toofz.Xunit">
+      <Version>1.0.6</Version>
+    </PackageReference>
     <PackageReference Include="xunit.assert">
       <Version>2.3.1</Version>
     </PackageReference>

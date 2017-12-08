@@ -11,7 +11,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
     {
         public class OrderByMethod
         {
-            [Fact]
+            [DisplayFact(nameof(ArgumentNullException))]
             public void SourceIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
@@ -22,11 +22,11 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 // Act -> Assert
                 Assert.Throws<ArgumentNullException>(() =>
                 {
-                    IQueryableExtensions.OrderBy(source, keySelectorMap, sort);
+                    source.OrderBy(keySelectorMap, sort);
                 });
             }
 
-            [Fact]
+            [DisplayFact(nameof(ArgumentNullException))]
             public void KeySelectorMapIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
@@ -37,11 +37,11 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 // Act -> Assert
                 Assert.Throws<ArgumentNullException>(() =>
                 {
-                    IQueryableExtensions.OrderBy(source, keySelectorMap, sort);
+                    source.OrderBy(keySelectorMap, sort);
                 });
             }
 
-            [Fact]
+            [DisplayFact]
             public void SortIsNull_ReturnsSource()
             {
                 // Arrange
@@ -50,13 +50,13 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 IEnumerable<string> sort = null;
 
                 // Act
-                var ordered = IQueryableExtensions.OrderBy(source, keySelectorMap, sort);
+                var ordered = source.OrderBy(keySelectorMap, sort);
 
                 // Assert
                 Assert.Same(source, ordered);
             }
 
-            [Fact]
+            [DisplayFact]
             public void SortIsEmpty_ReturnsSource()
             {
                 // Arrange
@@ -65,13 +65,13 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 var sort = new List<string>();
 
                 // Act
-                var ordered = IQueryableExtensions.OrderBy(source, keySelectorMap, sort);
+                var ordered = source.OrderBy(keySelectorMap, sort);
 
                 // Assert
                 Assert.Same(source, ordered);
             }
 
-            [Fact]
+            [DisplayFact]
             public void ReturnsQueryableWithOrdering()
             {
                 // Arrange
@@ -83,7 +83,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 var sort = new List<string> { "option" };
 
                 // Act
-                var ordered = IQueryableExtensions.OrderBy(source, keySelectorMap, sort);
+                var ordered = source.OrderBy(keySelectorMap, sort);
 
                 // Assert
                 Assert.NotSame(source, ordered);
@@ -92,7 +92,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
 
         public class PageMethod
         {
-            [Fact]
+            [DisplayFact(nameof(ArgumentNullException))]
             public void SourceIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
@@ -106,7 +106,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 });
             }
 
-            [Fact]
+            [DisplayFact(nameof(ArgumentNullException))]
             public void PaginationIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
@@ -120,7 +120,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 });
             }
 
-            [Fact]
+            [DisplayFact]
             public void ReturnsQueryable()
             {
                 // Arrange

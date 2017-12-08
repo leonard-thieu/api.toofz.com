@@ -31,7 +31,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             private IValueProvider valueProvider;
             private ModelBindingContext bindingContext;
 
-            [Fact]
+            [DisplayFact]
             public void CategoryIsInvalid_AddsModelError()
             {
                 // Arrange
@@ -44,7 +44,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.Equal(1, bindingContext.ModelState.Count);
             }
 
-            [Fact]
+            [DisplayFact]
             public void CategoryIsInvalid_ReturnsFalse()
             {
                 // Arrange
@@ -57,7 +57,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.False(success);
             }
 
-            [Fact]
+            [DisplayFact]
             public void WeaponsSubcategoryIsInvalid_AddsModelError()
             {
                 // Arrange
@@ -71,7 +71,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.Equal(1, bindingContext.ModelState.Count);
             }
 
-            [Fact]
+            [DisplayFact]
             public void WeaponsSubcategoryIsInvalid_ReturnsFalse()
             {
                 // Arrange
@@ -85,7 +85,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.False(success);
             }
 
-            [Fact]
+            [DisplayFact]
             public void ChestSubcategoryIsInvalid_AddsModelError()
             {
                 // Arrange
@@ -99,7 +99,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.Equal(1, bindingContext.ModelState.Count);
             }
 
-            [Fact]
+            [DisplayFact]
             public void ChestSubcategoryIsInvalid_ReturnsFalse()
             {
                 // Arrange
@@ -113,7 +113,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.False(success);
             }
 
-            [Theory]
+            [DisplayTheory]
             [InlineData("weapons", "bows")]
             [InlineData("weapons", "broadswords")]
             [InlineData("weapons", "cats")]
@@ -143,7 +143,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.Equal(subcategory, filter.Subcategory);
             }
 
-            [Theory]
+            [DisplayTheory]
             [InlineData("weapons", "bows")]
             [InlineData("weapons", "broadswords")]
             [InlineData("weapons", "cats")]

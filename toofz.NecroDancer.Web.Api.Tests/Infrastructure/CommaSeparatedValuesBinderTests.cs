@@ -15,7 +15,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
     {
         public class Constructor
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsInstance()
             {
                 // Arrange -> Act
@@ -56,7 +56,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             private ModelBindingContext bindingContext;
             private Mock<IValueProvider> mockValueProvider;
 
-            [Fact]
+            [DisplayFact]
             public void ValueIsNull_SetsModelWithDefaultValues()
             {
                 // Arrange
@@ -73,7 +73,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.Equal(expected, actual);
             }
 
-            [Fact]
+            [DisplayFact]
             public void ValueIsNull_ReturnsTrue()
             {
                 // Arrange
@@ -88,7 +88,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.True(canBind);
             }
 
-            [Fact]
+            [DisplayFact]
             public void ValueIsValidCommaSeparatedValues_SetsModelWithValues()
             {
                 // Arrange
@@ -105,7 +105,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.Equal(expected, actual);
             }
 
-            [Fact]
+            [DisplayFact]
             public void ValueIsValidCommaSeparatedValues_ReturnsTrue()
             {
                 // Arrange
@@ -118,7 +118,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.True(canBind);
             }
 
-            [Fact]
+            [DisplayFact]
             public void ValueContainsInvalidValues_AddsModelErrorsForInvalidValues()
             {
                 // Arrange
@@ -133,7 +133,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.Equal(1, modelState.Errors.Count);
             }
 
-            [Fact]
+            [DisplayFact]
             public void ValueContainsInvalidValues_ReturnsFalse()
             {
                 // Arrange

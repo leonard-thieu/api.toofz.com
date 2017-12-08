@@ -30,7 +30,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             private IValueProvider valueProvider;
             private ModelBindingContext bindingContext;
 
-            [Fact]
+            [DisplayFact]
             public void ValueIsInvalid_AddsModelError()
             {
                 // Arrange
@@ -43,7 +43,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.Equal(1, bindingContext.ModelState.Count);
             }
 
-            [Fact]
+            [DisplayFact]
             public void ValueIsInvalid_ReturnsFalse()
             {
                 // Arrange
@@ -56,7 +56,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.False(success);
             }
 
-            [Theory]
+            [DisplayTheory]
             [InlineData("boss")]
             [InlineData("bounce-on-movement-fail")]
             [InlineData("floating")]
@@ -77,7 +77,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.Equal(attribute, bindingContext.Model);
             }
 
-            [Theory]
+            [DisplayTheory]
             [InlineData("boss")]
             [InlineData("bounce-on-movement-fail")]
             [InlineData("floating")]

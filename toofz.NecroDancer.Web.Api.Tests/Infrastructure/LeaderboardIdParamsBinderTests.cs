@@ -13,7 +13,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
     {
         public class Constructor
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsInstance()
             {
                 // Arrange -> Act
@@ -26,7 +26,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
         public class GetModelMethod
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsModel()
             {
                 // Arrange

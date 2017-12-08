@@ -15,7 +15,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
     {
         public class Constructor
         {
-            [Fact]
+            [DisplayFact(nameof(ArgumentNullException))]
             public void LeaderboardCategoriesIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
@@ -28,7 +28,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 });
             }
 
-            [Fact]
+            [DisplayFact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -44,7 +44,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
         public class GetModelMethod
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsModel()
             {
                 // Arrange

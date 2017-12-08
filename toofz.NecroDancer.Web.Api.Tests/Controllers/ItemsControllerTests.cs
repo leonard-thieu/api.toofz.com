@@ -24,7 +24,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class Constructor
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -44,7 +44,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private readonly ItemsPagination pagination = new ItemsPagination();
 
-            [Fact]
+            [DisplayFact]
             public async Task ReturnsOk()
             {
                 // Arrange -> Act
@@ -54,7 +54,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<ItemsEnvelope>>(result);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task ReturnsItems()
             {
                 // Arrange -> Act
@@ -66,7 +66,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.Equal(10, contentItems.Count());
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task ReturnsItemsOrderedByElementName()
             {
                 // Arrange -> Act
@@ -79,7 +79,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.Equal("addchest_black", first.Name);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task LimitIsLessThanResultsCount_ReturnsLimitResults()
             {
                 // Arrange
@@ -94,7 +94,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.Equal(2, contentItems.Count());
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task OffsetIsSpecified_ReturnsOffsetResults()
             {
                 // Arrange
@@ -117,7 +117,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private readonly ItemsPagination pagination = new ItemsPagination();
 
-            [Theory]
+            [DisplayTheory]
             [InlineData("armor")]
             [InlineData("consumable")]
             [InlineData("feet")]
@@ -137,7 +137,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<ItemsEnvelope>>(result);
             }
 
-            [Theory]
+            [DisplayTheory]
             [InlineData("armor", "armor_chainmail")]
             [InlineData("consumable", "misc_heart_container")]
             [InlineData("feet", "feet_ballet_shoes")]
@@ -167,7 +167,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private readonly ItemsPagination pagination = new ItemsPagination();
 
-            [Theory]
+            [DisplayTheory]
             [InlineData("weapons", "bows")]
             [InlineData("weapons", "broadswords")]
             [InlineData("weapons", "cats")]
@@ -196,7 +196,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<ItemsEnvelope>>(result);
             }
 
-            [Theory]
+            [DisplayTheory]
             [InlineData("weapons", "bows", "weapon_blood_bow")]
             [InlineData("weapons", "broadswords", "weapon_blood_broadsword")]
             [InlineData("weapons", "cats", "weapon_blood_cat")]
@@ -233,7 +233,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             public DisposeMethod(MockDatabaseFixture fixture) : base(fixture) { }
 
-            [Fact]
+            [DisplayFact]
             public void DisposesDb()
             {
                 // Arrange -> Act
@@ -243,7 +243,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Verify(d => d.Dispose(), Times.Once);
             }
 
-            [Fact]
+            [DisplayFact]
             public void DisposeMoreThanOnce_DisposesDbOnlyOnce()
             {
                 // Arrange -> Act
@@ -259,8 +259,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             public IntegrationTests(IntegrationTestsFixture fixture, ITestOutputHelper output) : base(fixture, output) { }
 
-            [Fact]
-            public async Task GetItemsMethod()
+            [DisplayFact]
+            public async Task GetItems()
             {
                 // Arrange -> Act
                 var response = await server.HttpClient.GetAsync("/items");
@@ -269,8 +269,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 await RespondsWithAsync(response, Resources.GetItems);
             }
 
-            [Fact]
-            public async Task GetItemsByCategoryMethod()
+            [DisplayFact]
+            public async Task GetItemsByCategory()
             {
                 // Arrange -> Act
                 var response = await server.HttpClient.GetAsync("/items/armor");
@@ -279,8 +279,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 await RespondsWithAsync(response, Resources.GetItemsByCategory);
             }
 
-            [Fact]
-            public async Task GetItemsBySubcategoryMethod()
+            [DisplayFact]
+            public async Task GetItemsBySubcategory()
             {
                 // Arrange -> Act
                 var response = await server.HttpClient.GetAsync("/items/weapons/bows");

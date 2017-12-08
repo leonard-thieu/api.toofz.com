@@ -25,7 +25,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class Constructor
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -46,7 +46,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             private readonly PlayersPagination pagination = new PlayersPagination();
             private readonly PlayersSortParams sort = new PlayersSortParams();
 
-            [Fact]
+            [DisplayFact]
             public async Task LimitIsLessThanResultsCount_ReturnsLimitResults()
             {
                 // Arrange
@@ -66,7 +66,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 }, players.Select(p => p.Id));
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task OffsetIsSpecified_ReturnsOffsetResults()
             {
                 // Arrange
@@ -104,7 +104,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 }, players.Select(p => p.Id));
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task SortIsSpecified_ReturnsSortedResults()
             {
                 // Arrange
@@ -142,7 +142,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 }, players.Select(p => p.Id));
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task QIsSpecified_ReturnsFilteredPlayers()
             {
                 // Arrange
@@ -161,7 +161,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 }, players.Select(p => p.Id));
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task QIsNotSpecified_ReturnsPlayers()
             {
                 // Arrange -> Act
@@ -181,7 +181,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private long steamId;
 
-            [Fact]
+            [DisplayFact]
             public async Task PlayerNotFound_ReturnsNotFound()
             {
                 // Arrange
@@ -194,7 +194,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsAssignableFrom<NotFoundResult>(result);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task ReturnsPlayerEntries()
             {
                 // Arrange
@@ -219,7 +219,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             private readonly LeaderboardIdParams lbids = new LeaderboardIdParams();
             private readonly Products products;
 
-            [Fact]
+            [DisplayFact]
             public async Task PlayerNotFound_ReturnsNotFound()
             {
                 // Arrange
@@ -232,7 +232,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsAssignableFrom<NotFoundResult>(result);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task ReturnsPlayerEntries()
             {
                 // Arrange
@@ -253,7 +253,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             private int lbid;
             private long steamId;
 
-            [Fact]
+            [DisplayFact]
             public async Task PlayerNotFound_ReturnsNotFound()
             {
                 // Arrange
@@ -267,7 +267,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsAssignableFrom<NotFoundResult>(result);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task ReturnsPlayerEntry()
             {
                 // Arrange
@@ -281,7 +281,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<EntryDTO>>(result);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task ReplayFound_AddsReplayInformation()
             {
                 // Arrange
@@ -311,7 +311,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             private readonly LeaderboardIdParams leaderboardIds = new LeaderboardIdParams();
             private readonly Products products;
 
-            [Fact]
+            [DisplayFact]
             public async Task PlayerNotFound_ReturnsNotFound()
             {
                 // Arrange
@@ -324,7 +324,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsAssignableFrom<NotFoundResult>(result);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task ReturnsPlayerEntries()
             {
                 // Arrange
@@ -345,7 +345,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             private int lbid;
             private long steamId;
 
-            [Fact]
+            [DisplayFact]
             public async Task PlayerNotFound_ReturnsNotFound()
             {
                 // Arrange
@@ -359,7 +359,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsAssignableFrom<NotFoundResult>(result);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task ReturnsPlayerEntry()
             {
                 // Arrange
@@ -373,7 +373,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsAssignableFrom<OkNegotiatedContentResult<DailyEntryDTO>>(result);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task ReplayFound_AddsReplayInformation()
             {
                 // Arrange
@@ -396,7 +396,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             public DisposeMethod(MockDatabaseFixture fixture) : base(fixture) { }
 
-            [Fact]
+            [DisplayFact]
             public void DisposesDb()
             {
                 // Arrange -> Act
@@ -406,7 +406,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Verify(d => d.Dispose(), Times.Once);
             }
 
-            [Fact]
+            [DisplayFact]
             public void DisposesMoreThanOnce_OnlyDisposesDbOnce()
             {
                 // Arrange -> Act
@@ -422,7 +422,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             public IntegrationTests(IntegrationTestsFixture fixture, ITestOutputHelper output) : base(fixture, output) { }
 
-            [Fact]
+            [DisplayFact]
             public async Task GetPlayers()
             {
                 // Arrange -> Act
@@ -432,7 +432,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 await RespondsWithAsync(response, Resources.GetPlayers);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task GetPlayer()
             {
                 // Arrange -> Act
@@ -442,7 +442,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 await RespondsWithAsync(response, Resources.GetPlayer);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task GetPlayerEntries()
             {
                 // Arrange -> Act
@@ -452,7 +452,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 await RespondsWithAsync(response, Resources.GetPlayerEntries);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task GetPlayerEntriesFilteredByLbids()
             {
                 // Arrange -> Act
@@ -462,7 +462,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 await RespondsWithAsync(response, Resources.GetPlayerEntriesFilteredByLbids);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task GetPlayerEntry()
             {
                 // Arrange -> Act
@@ -472,7 +472,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 await RespondsWithAsync(response, Resources.GetPlayerEntry);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task GetPlayerDailyEntries()
             {
                 // Arrange -> Act
@@ -482,7 +482,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 await RespondsWithAsync(response, Resources.GetPlayerDailyEntries);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task GetPlayerDailyEntriesFilteredByLbids()
             {
                 // Arrange -> Act
@@ -492,7 +492,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 await RespondsWithAsync(response, Resources.GetPlayerDailyEntriesFilteredByLbids);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task GetPlayerDailyEntry()
             {
                 // Arrange -> Act

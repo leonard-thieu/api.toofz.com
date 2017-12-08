@@ -27,7 +27,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class Constructor
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -45,7 +45,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             public GetLeaderboardsMethod(MockDatabaseFixture fixture) : base(fixture) { }
 
-            [Fact]
+            [DisplayFact]
             public async Task ReturnsLeaderboards()
             {
                 // Arrange
@@ -68,7 +68,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private readonly LeaderboardsPagination pagination = new LeaderboardsPagination();
 
-            [Fact]
+            [DisplayFact]
             public async Task LeaderboardNotFound_ReturnsNotFound()
             {
                 // Arrange
@@ -81,7 +81,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsAssignableFrom<NotFoundResult>(actionResult);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task ReturnsLeaderboardEntries()
             {
                 // Arrange
@@ -101,7 +101,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private readonly LeaderboardsPagination pagination = new LeaderboardsPagination();
 
-            [Fact]
+            [DisplayFact]
             public async Task ReturnsDailyLeaderboards()
             {
                 // Arrange
@@ -121,7 +121,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private readonly LeaderboardsPagination pagination = new LeaderboardsPagination();
 
-            [Fact]
+            [DisplayFact]
             public async Task DailyLeaderboardNotFound_ReturnsNotFound()
             {
                 // Arrange
@@ -134,7 +134,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 Assert.IsAssignableFrom<NotFoundResult>(actionResult);
             }
 
-            [Fact]
+            [DisplayFact]
             public async Task ReturnsDailyLeaderboardEntries()
             {
                 // Arrange
@@ -152,7 +152,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             public DisposeMethod(MockDatabaseFixture fixture) : base(fixture) { }
 
-            [Fact]
+            [DisplayFact]
             public void DisposesDb()
             {
                 // Arrange -> Act
@@ -162,7 +162,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Verify(d => d.Dispose(), Times.Once);
             }
 
-            [Fact]
+            [DisplayFact]
             public void DisposesMoreThanOnce_OnlyDisposesDbOnce()
             {
                 // Arrange -> Act
@@ -178,7 +178,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             public IntegrationTests(IntegrationTestsFixture fixture, ITestOutputHelper output) : base(fixture, output) { }
 
-            [Fact]
+            [DisplayFact]
             public async Task GetLeaderboards()
             {
                 // Arrange -> Act

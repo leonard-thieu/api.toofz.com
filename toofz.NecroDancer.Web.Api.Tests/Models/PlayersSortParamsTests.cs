@@ -9,7 +9,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
     {
         public class Constructor
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsInstance()
             {
                 // Arrange -> Act
@@ -22,7 +22,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
 
         public class ConvertMethod
         {
-            [Theory]
+            [DisplayTheory]
             [InlineData("id")]
             [InlineData("display_name")]
             [InlineData("updated_at")]
@@ -44,7 +44,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 Assert.Equal(item, item2);
             }
 
-            [Fact]
+            [DisplayFact(nameof(ArgumentException))]
             public void ItemIsInvalid_ThrowsArgumentException()
             {
                 // Arrange
@@ -62,7 +62,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
 
         public class GetDefaultsMethod
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsDefaults()
             {
                 // Arrange

@@ -9,7 +9,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
     {
         public class ConvertToMethod
         {
-            [Fact]
+            [DisplayFact(nameof(ArgumentNullException))]
             public void ResultIsNull_ThrowsArgumentNullException()
             {
                 // Arrange
@@ -18,11 +18,11 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 // Act -> Assert
                 Assert.Throws<ArgumentNullException>(() =>
                 {
-                    ValueProviderResultExtensions.ConvertTo<object>(result);
+                    result.ConvertTo<object>();
                 });
             }
 
-            [Fact]
+            [DisplayFact]
             public void ValueIsConvertibleToType_ReturnsValueAsType()
             {
                 // Arrange
@@ -35,7 +35,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
                 Assert.Equal(15, value);
             }
 
-            [Fact]
+            [DisplayFact]
             public void ValueIsNotConvertibleToType_ReturnsDefaultOfType()
             {
                 // Arrange

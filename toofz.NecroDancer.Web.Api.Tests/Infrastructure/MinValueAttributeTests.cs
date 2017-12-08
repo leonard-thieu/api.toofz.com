@@ -7,7 +7,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
     {
         public class IsValid
         {
-            [Fact]
+            [DisplayFact]
             public void LessThanMin_ReturnsFalse()
             {
                 // Arrange
@@ -21,7 +21,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.False(result);
             }
 
-            [Theory]
+            [DisplayTheory]
             [InlineData(5)]
             [InlineData(32)]
             public void GreaterThanEqualMin_ReturnsTrue(int value)

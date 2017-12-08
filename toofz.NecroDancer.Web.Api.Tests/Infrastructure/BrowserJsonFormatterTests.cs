@@ -10,7 +10,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
     {
         public class Constructor
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -23,7 +23,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.IsAssignableFrom<BrowserJsonFormatter>(formatter);
             }
 
-            [Fact]
+            [DisplayFact]
             public void SetsSerializerSettings()
             {
                 // Arrange
@@ -36,7 +36,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.Same(serializerSettings, formatter.SerializerSettings);
             }
 
-            [Fact]
+            [DisplayFact]
             public void AddsTextHtmlToSupportedMediaTypes()
             {
                 // Arrange
@@ -52,7 +52,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
         public class SetDefaultContentHeadersMethod
         {
-            [Fact]
+            [DisplayFact]
             public void SetsContentTypeOnHeadersToApplicationJson()
             {
                 // Arrange

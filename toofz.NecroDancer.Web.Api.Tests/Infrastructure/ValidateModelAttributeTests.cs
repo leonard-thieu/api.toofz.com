@@ -11,7 +11,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
     {
         public class Constructor
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsInstance()
             {
                 // Arrange -> Act
@@ -24,7 +24,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
         public class OnActionExecutingMethod
         {
-            [Fact]
+            [DisplayFact]
             public void ModelStateIsValid_DoesNotSetResponse()
             {
                 // Arrange
@@ -38,7 +38,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.Null(actionContext.Response);
             }
 
-            [Fact]
+            [DisplayFact]
             public void ModelStateIsInvalid_SetsErrorResponse()
             {
                 // Arrange

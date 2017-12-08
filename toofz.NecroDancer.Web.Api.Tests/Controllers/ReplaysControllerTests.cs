@@ -24,7 +24,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class Constructor
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsInstance()
             {
                 // Arrange
@@ -44,7 +44,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private readonly ReplaysPagination pagination = new ReplaysPagination();
 
-            [Fact]
+            [DisplayFact]
             public async Task ReturnsReplays()
             {
                 // Arrange -> Act
@@ -59,7 +59,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             public DisposeMethod(MockDatabaseFixture fixture) : base(fixture) { }
 
-            [Fact]
+            [DisplayFact]
             public void DisposesDb()
             {
                 // Arrange -> Act
@@ -69,7 +69,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 mockDb.Verify(d => d.Dispose(), Times.Once);
             }
 
-            [Fact]
+            [DisplayFact]
             public void DisposesMoreThanOnce_OnlyDisposesDbOnce()
             {
                 // Arrange -> Act
@@ -85,8 +85,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
         {
             public IntegrationTests(IntegrationTestsFixture fixture, ITestOutputHelper output) : base(fixture, output) { }
 
-            [Fact]
-            public async Task GetReplaysMethod()
+            [DisplayFact]
+            public async Task GetReplays()
             {
                 // Arrange -> Act
                 var response = await server.HttpClient.GetAsync("/replays?version=75");

@@ -9,7 +9,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
     {
         public class Constructor
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsInstance()
             {
                 // Arrange -> Act
@@ -22,7 +22,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
 
         public class ConvertMethod
         {
-            [Fact]
+            [DisplayFact]
             public void ItemIsValid_AddsConvertedItem()
             {
                 // Arrange
@@ -37,8 +37,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 Assert.Equal(2047616, item2);
             }
 
-            [Fact]
-            public void ItemIsInvalid_Throws()
+            [DisplayFact(nameof(FormatException))]
+            public void ItemIsInvalid_ThrowsFormatException()
             {
                 // Arrange
                 var lbids = new LeaderboardIdParams();
@@ -54,7 +54,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
 
         public class GetDefaultsMethod
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsDefaults()
             {
                 // Arrange

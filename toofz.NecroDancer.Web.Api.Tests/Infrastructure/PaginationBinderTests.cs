@@ -37,8 +37,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             private ModelBindingContext bindingContext;
             private Mock<IValueProvider> mockValueProvider;
 
-            [Fact]
-            public void OffsetValueIsNull_SetsModelWithDefaultOFfsetValueAndReturnsTrue()
+            [DisplayFact]
+            public void OffsetValueIsNull_SetsModelWithDefaultOffsetValueAndReturnsTrue()
             {
                 // Arrange
                 mockValueProvider.Setup(v => v.GetValue("offset")).Returns((ValueProviderResult)null);
@@ -53,7 +53,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.True(canBind);
             }
 
-            [Fact]
+            [DisplayFact]
             public void OffsetValueIsANumber_SetsModelWithOffsetValueAndReturnsTrue()
             {
                 // Arrange
@@ -69,7 +69,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.True(canBind);
             }
 
-            [Fact]
+            [DisplayFact]
             public void OffsetValueIsNotANumber_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
@@ -85,7 +85,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.True(canBind);
             }
 
-            [Fact(Skip = "Determine how to properly set up for testing validation.")]
+            [DisplayFact(Skip = "Determine how to properly set up for testing validation.")]
             public void OffsetValueIsLessThanMin_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
@@ -101,7 +101,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.True(canBind);
             }
 
-            [Fact(Skip = "Determine how to properly set up for testing validation.")]
+            [DisplayFact(Skip = "Determine how to properly set up for testing validation.")]
             public void OffsetValueIsMoreThanMax_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
@@ -117,7 +117,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.True(canBind);
             }
 
-            [Fact]
+            [DisplayFact]
             public void LimitValueIsNull_SetsModelWithDefaultLimitValueAndReturnsTrue()
             {
                 // Arrange
@@ -133,7 +133,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.True(canBind);
             }
 
-            [Fact]
+            [DisplayFact]
             public void LimitValueIsANumber_SetsModelWithLimitValueAndReturnsTrue()
             {
                 // Arrange
@@ -149,7 +149,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.True(canBind);
             }
 
-            [Fact]
+            [DisplayFact]
             public void LimitValueIsNotANumber_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
@@ -165,7 +165,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.True(canBind);
             }
 
-            [Fact(Skip = "Determine how to properly set up for testing validation.")]
+            [DisplayFact(Skip = "Determine how to properly set up for testing validation.")]
             public void LimitValueIsLessThanMin_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
@@ -181,7 +181,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.True(canBind);
             }
 
-            [Fact(Skip = "Determine how to properly set up for testing validation.")]
+            [DisplayFact(Skip = "Determine how to properly set up for testing validation.")]
             public void LimitValueIsMoreThanMax_AddsModelErrorAndReturnsTrue()
             {
                 // Arrange
@@ -197,7 +197,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.True(canBind);
             }
 
-            [Fact]
+            [DisplayFact]
             public void OffsetValueAndLimitValueAreNull_SetsModelWithDefaultValuesAndReturnsTrue()
             {
                 // Arrange

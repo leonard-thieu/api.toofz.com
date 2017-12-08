@@ -10,7 +10,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
     {
         public class Constructor
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsInstance()
             {
                 // Arrange -> Act
@@ -23,7 +23,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
 
         public class AddMethod
         {
-            [Fact]
+            [DisplayFact]
             public void AddsItem()
             {
                 // Arrange
@@ -41,7 +41,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
 
         public class AddDefaultsMethod
         {
-            [Fact]
+            [DisplayFact]
             public void AddsDefaults()
             {
                 // Arrange
@@ -59,7 +59,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
 
         public class GetEnumeratorMethod
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsEnumerator()
             {
                 // Arrange
@@ -75,7 +75,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
 
         public class IEnumerable_GetEnumeratorMethod
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsEnumerator()
             {
                 // Arrange

@@ -8,7 +8,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
     {
         public class Constructor
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsInstance()
             {
                 // Arrange -> Act
@@ -21,7 +21,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class IndexMethod
         {
-            [Fact]
+            [DisplayFact]
             public void ReturnsRedirect()
             {
                 // Arrange
