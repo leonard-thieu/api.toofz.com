@@ -28,8 +28,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 });
             }
 
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(ProductsBinder))]
+            public void ReturnsProductsBinder()
             {
                 // Arrange
                 var products = new List<string>();
@@ -44,8 +44,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
         public class GetModelMethod
         {
-            [DisplayFact]
-            public void ReturnsModel()
+            [DisplayFact(nameof(Products))]
+            public void ReturnsProducts()
             {
                 // Arrange
                 var products = new[] { "classic" };

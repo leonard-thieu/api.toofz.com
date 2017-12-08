@@ -37,8 +37,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 });
             }
 
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(LeaderboardCategoryBase))]
+            public void ReturnsLeaderboardCategoryBase()
             {
                 // Arrange
                 var values = new[] { "myValue1" };

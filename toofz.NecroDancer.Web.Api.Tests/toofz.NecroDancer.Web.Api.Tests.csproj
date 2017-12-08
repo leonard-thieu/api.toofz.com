@@ -55,7 +55,7 @@
       <Version>1.1.5</Version>
     </PackageReference>
     <PackageReference Include="toofz.Xunit">
-      <Version>1.0.6</Version>
+      <Version>1.0.8</Version>
     </PackageReference>
     <PackageReference Include="xunit.assert">
       <Version>2.3.1</Version>
@@ -131,10 +131,10 @@
     <None Include="Resources\GetLeaderboards.json" />
     <None Include="Resources\GetPlayer.json" />
     <None Include="Resources\GetPlayerDailyEntries.json" />
-    <None Include="Resources\GetPlayerDailyEntriesFilteredByLbids.json" />
+    <None Include="Resources\GetPlayerDailyEntriesFilteredByLeaderboardIds.json" />
     <None Include="Resources\GetPlayerDailyEntry.json" />
     <None Include="Resources\GetPlayerEntries.json" />
-    <None Include="Resources\GetPlayerEntriesFilteredByLbids.json" />
+    <None Include="Resources\GetPlayerEntriesFilteredByLeaderboardIds.json" />
     <None Include="Resources\GetPlayerEntry.json" />
     <None Include="Resources\GetPlayers.json" />
     <None Include="Resources\GetReplays.json" />

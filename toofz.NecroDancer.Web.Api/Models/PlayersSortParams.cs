@@ -8,9 +8,9 @@ namespace toofz.NecroDancer.Web.Api.Models
     [ModelBinder(BinderType = typeof(PlayersSortParamsBinder))]
     public sealed class PlayersSortParams : CommaSeparatedValues<string>
     {
-        protected override string Convert(string item)
+        protected override string Convert(string property)
         {
-            switch (item)
+            switch (property)
             {
                 case "id":
                 case "display_name":
@@ -20,9 +20,9 @@ namespace toofz.NecroDancer.Web.Api.Models
                 case "-display_name":
                 case "-updated_at":
                 case "-entries":
-                    return item;
+                    return property;
                 default:
-                    throw new ArgumentException($"'{item}' is not a valid property to sort by.");
+                    throw new ArgumentException($"'{property}' is not a valid property to sort by.");
             }
         }
 

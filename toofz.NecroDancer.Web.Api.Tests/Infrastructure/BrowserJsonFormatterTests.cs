@@ -10,8 +10,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
     {
         public class Constructor
         {
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(BrowserJsonFormatter))]
+            public void ReturnsBrowserJsonFormatter()
             {
                 // Arrange
                 var serializerSettings = new JsonSerializerSettings();
@@ -36,7 +36,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.Same(serializerSettings, formatter.SerializerSettings);
             }
 
-            [DisplayFact]
+            [Fact(DisplayName = "Add text/html to supported media types")]
             public void AddsTextHtmlToSupportedMediaTypes()
             {
                 // Arrange
@@ -52,7 +52,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
         public class SetDefaultContentHeadersMethod
         {
-            [DisplayFact]
+            [Fact(DisplayName = "Sets content type on headers to application/json")]
             public void SetsContentTypeOnHeadersToApplicationJson()
             {
                 // Arrange

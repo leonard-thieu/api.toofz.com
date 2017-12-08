@@ -15,8 +15,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
     {
         public class Constructor
         {
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(CommaSeparatedValuesBinder<string>))]
+            public void ReturnsCommaSeparatedValuesBinder()
             {
                 // Arrange -> Act
                 var binder = new CommaSeparatedValuesBinderAdapter();

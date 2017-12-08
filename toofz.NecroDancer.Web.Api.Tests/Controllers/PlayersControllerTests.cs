@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Moq;
@@ -25,8 +26,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class Constructor
         {
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(PlayersController))]
+            public void ReturnsPlayersController()
             {
                 // Arrange
                 var db = new LeaderboardsContext();
@@ -181,8 +182,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private long steamId;
 
-            [DisplayFact]
-            public async Task PlayerNotFound_ReturnsNotFound()
+            [DisplayFact(nameof(HttpStatusCode.NotFound))]
+            public async Task PlayerCouldNotBeFound_ReturnsNotFound()
             {
                 // Arrange
                 steamId = 1;
@@ -219,8 +220,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             private readonly LeaderboardIdParams lbids = new LeaderboardIdParams();
             private readonly Products products;
 
-            [DisplayFact]
-            public async Task PlayerNotFound_ReturnsNotFound()
+            [DisplayFact(nameof(HttpStatusCode.NotFound))]
+            public async Task PlayerCouldNotBeFound_ReturnsNotFound()
             {
                 // Arrange
                 steamId = 1;
@@ -253,8 +254,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             private int lbid;
             private long steamId;
 
-            [DisplayFact]
-            public async Task PlayerNotFound_ReturnsNotFound()
+            [DisplayFact(nameof(HttpStatusCode.NotFound))]
+            public async Task PlayerCouldNotBeFound_ReturnsNotFound()
             {
                 // Arrange
                 lbid = 234265;
@@ -311,8 +312,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             private readonly LeaderboardIdParams leaderboardIds = new LeaderboardIdParams();
             private readonly Products products;
 
-            [DisplayFact]
-            public async Task PlayerNotFound_ReturnsNotFound()
+            [DisplayFact(nameof(HttpStatusCode.NotFound))]
+            public async Task PlayerCouldNotBeFound_ReturnsNotFound()
             {
                 // Arrange
                 steamId = 1;
@@ -345,8 +346,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             private int lbid;
             private long steamId;
 
-            [DisplayFact]
-            public async Task PlayerNotFound_ReturnsNotFound()
+            [DisplayFact(nameof(HttpStatusCode.NotFound))]
+            public async Task PlayerCouldNotBeFound_ReturnsNotFound()
             {
                 // Arrange
                 lbid = 234265;
@@ -453,13 +454,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
 
             [DisplayFact]
-            public async Task GetPlayerEntriesFilteredByLbids()
+            public async Task GetPlayerEntriesFilteredByLeaderboardIds()
             {
                 // Arrange -> Act
                 var response = await server.HttpClient.GetAsync("/players/76561197999613276/entries?lbids=739999,2047515");
 
                 // Assert
-                await RespondsWithAsync(response, Resources.GetPlayerEntriesFilteredByLbids);
+                await RespondsWithAsync(response, Resources.GetPlayerEntriesFilteredByLeaderboardIds);
             }
 
             [DisplayFact]
@@ -483,13 +484,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
 
             [DisplayFact]
-            public async Task GetPlayerDailyEntriesFilteredByLbids()
+            public async Task GetPlayerDailyEntriesFilteredByLeaderboardIds()
             {
                 // Arrange -> Act
                 var response = await server.HttpClient.GetAsync("/players/76561198044686391/entries/dailies?lbids=742742,1705585");
 
                 // Assert
-                await RespondsWithAsync(response, Resources.GetPlayerDailyEntriesFilteredByLbids);
+                await RespondsWithAsync(response, Resources.GetPlayerDailyEntriesFilteredByLeaderboardIds);
             }
 
             [DisplayFact]

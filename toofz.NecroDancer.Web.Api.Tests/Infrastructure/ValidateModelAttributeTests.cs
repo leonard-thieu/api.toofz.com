@@ -11,8 +11,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
     {
         public class Constructor
         {
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(ValidateModelAttribute))]
+            public void ReturnsValidateModelAttribute()
             {
                 // Arrange -> Act
                 var validate = new ValidateModelAttribute();

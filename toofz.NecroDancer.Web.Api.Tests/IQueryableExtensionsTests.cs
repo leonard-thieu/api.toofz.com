@@ -72,7 +72,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
             }
 
             [DisplayFact]
-            public void ReturnsQueryableWithOrdering()
+            public void ReturnsOrderedQuery()
             {
                 // Arrange
                 var source = (new List<string>()).AsQueryable();
@@ -121,7 +121,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
             }
 
             [DisplayFact]
-            public void ReturnsQueryable()
+            public void ReturnsQuery()
             {
                 // Arrange
                 var source = (new List<string>()).AsQueryable();

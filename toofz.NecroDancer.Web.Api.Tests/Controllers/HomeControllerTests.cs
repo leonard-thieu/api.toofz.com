@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Net;
+using System.Web.Mvc;
 using toofz.NecroDancer.Web.Api.Controllers;
 using Xunit;
 
@@ -8,8 +9,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
     {
         public class Constructor
         {
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(HomeController))]
+            public void ReturnsHomeController()
             {
                 // Arrange -> Act
                 var controller = new HomeController();
@@ -21,7 +22,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class IndexMethod
         {
-            [DisplayFact]
+            [DisplayFact(nameof(HttpStatusCode.Redirect))]
             public void ReturnsRedirect()
             {
                 // Arrange

@@ -10,8 +10,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
     {
         public class Constructor
         {
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(CommaSeparatedValues<string>))]
+            public void ReturnsCommaSeparatedValues()
             {
                 // Arrange -> Act
                 var csv = new CommaSeparatedValuesAdapter();
@@ -73,20 +73,23 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
             }
         }
 
-        public class IEnumerable_GetEnumeratorMethod
+        public class IEnumerableTests
         {
-            [DisplayFact]
-            public void ReturnsEnumerator()
+            public class GetEnumeratorMethod
             {
-                // Arrange
-                var csv = new CommaSeparatedValuesAdapter();
-                var enumerable = (IEnumerable)csv;
+                [DisplayFact]
+                public void ReturnsEnumerator()
+                {
+                    // Arrange
+                    var csv = new CommaSeparatedValuesAdapter();
+                    var enumerable = (IEnumerable)csv;
 
-                // Act
-                var enumerator = enumerable.GetEnumerator();
+                    // Act
+                    var enumerator = enumerable.GetEnumerator();
 
-                // Assert
-                Assert.IsAssignableFrom<IEnumerator>(enumerator);
+                    // Assert
+                    Assert.IsAssignableFrom<IEnumerator>(enumerator);
+                }
             }
         }
 

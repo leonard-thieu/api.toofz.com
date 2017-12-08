@@ -318,9 +318,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///        &quot;display_name&quot;: &quot;Daily (2015-04-23)&quot;,
         ///        &quot;production&quot;: tr [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string GetPlayerDailyEntriesFilteredByLbids {
+        internal static string GetPlayerDailyEntriesFilteredByLeaderboardIds {
             get {
-                return ResourceManager.GetString("GetPlayerDailyEntriesFilteredByLbids", resourceCulture);
+                return ResourceManager.GetString("GetPlayerDailyEntriesFilteredByLeaderboardIds", resourceCulture);
             }
         }
         
@@ -395,9 +395,9 @@ namespace toofz.NecroDancer.Web.Api.Tests.Properties {
         ///        &quot;display_name&quot;: &quot;Diamond Score (Amplified)&quot;,
         ///        [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string GetPlayerEntriesFilteredByLbids {
+        internal static string GetPlayerEntriesFilteredByLeaderboardIds {
             get {
-                return ResourceManager.GetString("GetPlayerEntriesFilteredByLbids", resourceCulture);
+                return ResourceManager.GetString("GetPlayerEntriesFilteredByLeaderboardIds", resourceCulture);
             }
         }
         

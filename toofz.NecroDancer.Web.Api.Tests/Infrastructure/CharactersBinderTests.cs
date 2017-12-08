@@ -28,8 +28,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 });
             }
 
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(CharactersBinder))]
+            public void ReturnsCharactersBinder()
             {
                 // Arrange
                 var characters = new List<string>();
@@ -44,8 +44,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
         public class GetModelMethod
         {
-            [DisplayFact]
-            public void ReturnsModel()
+            [DisplayFact(nameof(Characters))]
+            public void ReturnsCharacters()
             {
                 // Arrange
                 var characters = new[] { "cadence" };

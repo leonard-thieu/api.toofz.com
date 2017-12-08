@@ -15,25 +15,25 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var value = 6;
 
                 // Act
-                var result = maxValueAttribute.IsValid(value);
+                var isValid = maxValueAttribute.IsValid(value);
 
                 // Assert
-                Assert.False(result);
+                Assert.False(isValid);
             }
 
             [DisplayTheory]
             [InlineData(5)]
             [InlineData(1)]
-            public void LessThanEqualMax_ReturnsTrue(int value)
+            public void LessThanOrEqualMax_ReturnsTrue(int value)
             {
                 // Arrange
                 var maxValueAttribute = new MaxValueAttribute(5);
 
                 // Act
-                var result = maxValueAttribute.IsValid(value);
+                var isValid = maxValueAttribute.IsValid(value);
 
                 // Assert
-                Assert.True(result);
+                Assert.True(isValid);
             }
         }
     }

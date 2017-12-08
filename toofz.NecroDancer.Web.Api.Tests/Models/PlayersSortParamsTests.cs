@@ -9,8 +9,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
     {
         public class Constructor
         {
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(PlayersSortParams))]
+            public void ReturnsPlayersSortParams()
             {
                 // Arrange -> Act
                 var sort = new PlayersSortParams();
@@ -31,30 +31,29 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
             [InlineData("-display_name")]
             [InlineData("-updated_at")]
             [InlineData("-entries")]
-            public void ItemIsValid_AddsItem(string item)
+            public void PropertyIsValid_AddsProperty(string property)
             {
                 // Arrange
                 var sort = new PlayersSortParams();
 
                 // Act
-                sort.Add(item);
+                sort.Add(property);
 
                 // Assert
-                var item2 = sort.First();
-                Assert.Equal(item, item2);
+                Assert.Equal(property, sort.Last());
             }
 
             [DisplayFact(nameof(ArgumentException))]
-            public void ItemIsInvalid_ThrowsArgumentException()
+            public void PropertyIsInvalid_ThrowsArgumentException()
             {
                 // Arrange
                 var sort = new PlayersSortParams();
-                var item = "myInvalidItem";
+                var property = "myInvalidProperty";
 
                 // Act -> Assert
                 var ex = Assert.Throws<ArgumentException>(() =>
                 {
-                    sort.Add(item);
+                    sort.Add(property);
                 });
                 Assert.Null(ex.ParamName);
             }
@@ -72,9 +71,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
                 sort.AddDefaults();
 
                 // Assert
-                var expected = new[] { "-entries", "display_name", "id" };
-                var actual = sort.ToArray();
-                Assert.Equal(expected, actual);
+                Assert.Equal(new[] { "-entries", "display_name", "id" }, sort);
             }
         }
     }

@@ -15,25 +15,25 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 var value = -1;
 
                 // Act
-                var result = minValueAttribute.IsValid(value);
+                var isValid = minValueAttribute.IsValid(value);
 
                 // Assert
-                Assert.False(result);
+                Assert.False(isValid);
             }
 
             [DisplayTheory]
             [InlineData(5)]
             [InlineData(32)]
-            public void GreaterThanEqualMin_ReturnsTrue(int value)
+            public void GreaterThanOrEqualMin_ReturnsTrue(int value)
             {
                 // Arrange
                 var minValueAttribute = new MinValueAttribute(5);
 
                 // Act
-                var result = minValueAttribute.IsValid(value);
+                var isValid = minValueAttribute.IsValid(value);
 
                 // Assert
-                Assert.True(result);
+                Assert.True(isValid);
             }
         }
     }

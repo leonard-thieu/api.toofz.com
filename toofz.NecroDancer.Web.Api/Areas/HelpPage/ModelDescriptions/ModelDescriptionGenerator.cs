@@ -70,13 +70,13 @@ namespace toofz.NecroDancer.Web.Api.Areas.HelpPage.ModelDescriptions
             { typeof(MinValueAttribute), a =>
                 {
                     MinValueAttribute max = (MinValueAttribute)a;
-                    return String.Format(CultureInfo.CurrentCulture, "Min value is {0}", max.Minimum);
+                    return String.Format(CultureInfo.CurrentCulture, "Min value is {0}", max.Min);
                 }
             },
             { typeof(MaxValueAttribute), a =>
                 {
                     MaxValueAttribute max = (MaxValueAttribute)a;
-                    return String.Format(CultureInfo.CurrentCulture, "Max value is {0}", max.Maximum);
+                    return String.Format(CultureInfo.CurrentCulture, "Max value is {0}", max.Max);
                 }
             },
         };

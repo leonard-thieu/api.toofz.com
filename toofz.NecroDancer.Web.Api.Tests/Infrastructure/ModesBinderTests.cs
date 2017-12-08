@@ -28,8 +28,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 });
             }
 
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(ModesBinder))]
+            public void ReturnsModesBinder()
             {
                 // Arrange
                 var values = new List<string>();
@@ -44,8 +44,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
         public class GetModelMethod
         {
-            [DisplayFact]
-            public void ReturnsModel()
+            [DisplayFact(nameof(Modes))]
+            public void ReturnsModes()
             {
                 // Arrange
                 var values = new[] { "standard" };

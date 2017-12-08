@@ -28,8 +28,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 });
             }
 
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(RunsBinder))]
+            public void ReturnsRunsBinder()
             {
                 // Arrange
                 var values = new List<string>();
@@ -44,8 +44,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
         public class GetModelMethod
         {
-            [DisplayFact]
-            public void ReturnsModel()
+            [DisplayFact(nameof(Runs))]
+            public void ReturnsRuns()
             {
                 // Arrange
                 var values = new[] { "speed" };

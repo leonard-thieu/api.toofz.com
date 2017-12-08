@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Moq;
@@ -27,8 +28,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class Constructor
         {
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(LeaderboardsController))]
+            public void ReturnsLeaderboardsController()
             {
                 // Arrange
                 var db = Mock.Of<ILeaderboardsContext>();
@@ -68,8 +69,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private readonly LeaderboardsPagination pagination = new LeaderboardsPagination();
 
-            [DisplayFact]
-            public async Task LeaderboardNotFound_ReturnsNotFound()
+            [DisplayFact(nameof(HttpStatusCode.NotFound))]
+            public async Task LeaderboardCouldNotBeFound_ReturnsNotFound()
             {
                 // Arrange
                 var lbid = 0;
@@ -121,8 +122,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private readonly LeaderboardsPagination pagination = new LeaderboardsPagination();
 
-            [DisplayFact]
-            public async Task DailyLeaderboardNotFound_ReturnsNotFound()
+            [DisplayFact(nameof(HttpStatusCode.NotFound))]
+            public async Task DailyLeaderboardCouldNotBeFound_ReturnsNotFound()
             {
                 // Arrange
                 var lbid = 0;

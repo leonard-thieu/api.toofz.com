@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Moq;
@@ -25,8 +26,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class Constructor
         {
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(ItemsController))]
+            public void ReturnsItemsController()
             {
                 // Arrange
                 var db = Mock.Of<NecroDancerContext>();
@@ -45,8 +46,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private readonly ItemsPagination pagination = new ItemsPagination();
 
-            [DisplayFact]
-            public async Task ReturnsOk()
+            [DisplayFact(nameof(HttpStatusCode.OK))]
+            public async Task ReturnsOK()
             {
                 // Arrange -> Act
                 var result = await controller.GetItems(pagination);
@@ -118,7 +119,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private readonly ItemsPagination pagination = new ItemsPagination();
 
-            [DisplayTheory]
+            [DisplayTheory(nameof(HttpStatusCode.OK))]
             [InlineData("armor")]
             [InlineData("consumable")]
             [InlineData("feet")]
@@ -129,7 +130,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             [InlineData("spells")]
             [InlineData("torches")]
             [InlineData("weapons")]
-            public async Task ReturnsOk(string category)
+            public async Task ReturnsOK(string category)
             {
                 // Arrange -> Act
                 var result = await controller.GetItemsByCategory(pagination, category);
@@ -168,7 +169,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private readonly ItemsPagination pagination = new ItemsPagination();
 
-            [DisplayTheory]
+            [DisplayTheory(nameof(HttpStatusCode.OK))]
             [InlineData("weapons", "bows")]
             [InlineData("weapons", "broadswords")]
             [InlineData("weapons", "cats")]
@@ -183,7 +184,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             [InlineData("chest", "purple")]
             [InlineData("chest", "black")]
             [InlineData("chest", "mimic")]
-            public async Task ReturnsOk(string category, string subcategory)
+            public async Task ReturnsOK(string category, string subcategory)
             {
                 // Arrange
                 var filter = new ItemSubcategoryFilter

@@ -13,8 +13,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
     {
         public class Constructor
         {
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(LeaderboardIdParamsBinder))]
+            public void ReturnsLeaderboardIdParamsBinder()
             {
                 // Arrange -> Act
                 var binder = new LeaderboardIdParamsBinder();
@@ -26,8 +26,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
         public class GetModelMethod
         {
-            [DisplayFact]
-            public void ReturnsModel()
+            [DisplayFact(nameof(LeaderboardIdParams))]
+            public void ReturnsLeaderboardIdParams()
             {
                 // Arrange
                 var binder = new LeaderboardIdParamsBinder();

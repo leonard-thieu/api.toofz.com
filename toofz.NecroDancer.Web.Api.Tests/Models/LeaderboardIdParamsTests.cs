@@ -9,45 +9,44 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
     {
         public class Constructor
         {
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(LeaderboardIdParams))]
+            public void ReturnsLeaderboardIdParams()
             {
                 // Arrange -> Act
-                var lbids = new LeaderboardIdParams();
+                var leaderboardIdParams = new LeaderboardIdParams();
 
                 // Assert
-                Assert.IsAssignableFrom<LeaderboardIdParams>(lbids);
+                Assert.IsAssignableFrom<LeaderboardIdParams>(leaderboardIdParams);
             }
         }
 
         public class ConvertMethod
         {
-            [DisplayFact]
-            public void ItemIsValid_AddsConvertedItem()
+            [DisplayFact(nameof(Int32))]
+            public void LeaderboardIdIsValid_AddsLeaderboardIdAsInt32()
             {
                 // Arrange
-                var lbids = new LeaderboardIdParams();
-                var item = "2047616";
+                var leaderboardIdParams = new LeaderboardIdParams();
+                var leaderboardId = "2047616";
 
                 // Act
-                lbids.Add(item);
+                leaderboardIdParams.Add(leaderboardId);
 
                 // Assert
-                var item2 = lbids.First();
-                Assert.Equal(2047616, item2);
+                Assert.Equal(2047616, leaderboardIdParams.Last());
             }
 
             [DisplayFact(nameof(FormatException))]
-            public void ItemIsInvalid_ThrowsFormatException()
+            public void LeaderboardIdIsInvalid_ThrowsFormatException()
             {
                 // Arrange
-                var lbids = new LeaderboardIdParams();
-                var item = "a";
+                var leaderboardIdParams = new LeaderboardIdParams();
+                var leaderboardId = "a";
 
                 // Act -> Assert
                 Assert.Throws<FormatException>(() =>
                 {
-                    lbids.Add(item);
+                    leaderboardIdParams.Add(leaderboardId);
                 });
             }
         }
@@ -58,13 +57,13 @@ namespace toofz.NecroDancer.Web.Api.Tests.Models
             public void ReturnsDefaults()
             {
                 // Arrange
-                var lbids = new LeaderboardIdParams();
+                var leaderboardIdParams = new LeaderboardIdParams();
 
                 // Act
-                lbids.AddDefaults();
+                leaderboardIdParams.AddDefaults();
 
                 // Assert
-                Assert.False(lbids.Any());
+                Assert.Empty(leaderboardIdParams);
             }
         }
     }

@@ -13,8 +13,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
     {
         public class Constructor
         {
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(PlayersSortParamsBinder))]
+            public void ReturnsPlayersSortParamsBinder()
             {
                 // Arrange -> Act
                 var binder = new PlayersSortParamsBinder();
@@ -26,8 +26,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
 
         public class GetModelMethod
         {
-            [DisplayFact]
-            public void ReturnsModel()
+            [DisplayFact(nameof(PlayersSortParams))]
+            public void ReturnsPlayersSortParams()
             {
                 // Arrange
                 var binder = new PlayersSortParamsBinder();

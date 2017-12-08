@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Moq;
@@ -25,8 +26,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class Constructor
         {
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(EnemiesController))]
+            public void ReturnsEnemiesController()
             {
                 // Arrange
                 var db = Mock.Of<INecroDancerContext>();
@@ -45,8 +46,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private readonly EnemiesPagination pagination = new EnemiesPagination();
 
-            [DisplayFact]
-            public async Task ReturnsOk()
+            [DisplayFact(nameof(HttpStatusCode.OK))]
+            public async Task ReturnsOK()
             {
                 // Arrange -> Act
                 var result = await controller.GetEnemies(pagination);
@@ -78,28 +79,16 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
                 var contentEnemies = contentResult.Content.Enemies;
                 Assert.Equal(new[]
                 {
-                    "armadillo",
-                    "armadillo",
-                    "armadillo",
-                    "armoredskeleton",
-                    "armoredskeleton",
-                    "armoredskeleton",
-                    "armoredskeleton",
-                    "banshee",
-                    "banshee",
+                    "armadillo", "armadillo", "armadillo",
+                    "armoredskeleton", "armoredskeleton", "armoredskeleton", "armoredskeleton",
+                    "banshee", "banshee",
                     "bat",
                 }, contentEnemies.Select(e => e.Name));
                 Assert.Equal(new[]
                 {
-                    1,
-                    2,
-                    3,
-                    1,
-                    2,
-                    3,
-                    4,
-                    1,
-                    2,
+                    1, 2, 3,
+                    1, 2, 3, 4,
+                    1, 2,
                     1,
                 }, contentEnemies.Select(e => e.Type));
             }
@@ -143,7 +132,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
             private readonly EnemiesPagination pagination = new EnemiesPagination();
 
-            [DisplayTheory]
+            [DisplayTheory(nameof(HttpStatusCode.OK))]
             [InlineData("boss")]
             [InlineData("bounce-on-movement-fail")]
             [InlineData("floating")]
@@ -152,7 +141,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             [InlineData("is-monkey-like")]
             [InlineData("massive")]
             [InlineData("miniboss")]
-            public async Task ReturnsOk(string attribute)
+            public async Task ReturnsOK(string attribute)
             {
                 // Arrange -> Act
                 var result = await controller.GetEnemiesByAttribute(pagination, attribute);

@@ -24,8 +24,8 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
 
         public class Constructor
         {
-            [DisplayFact]
-            public void ReturnsInstance()
+            [DisplayFact(nameof(ReplaysController))]
+            public void ReturnsReplaysController()
             {
                 // Arrange
                 var db = Mock.Of<ILeaderboardsContext>();

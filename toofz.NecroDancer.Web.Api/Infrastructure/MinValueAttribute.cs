@@ -5,18 +5,18 @@ namespace toofz.NecroDancer.Web.Api.Infrastructure
 {
     internal sealed class MinValueAttribute : ValidationAttribute
     {
-        public MinValueAttribute(int minimum)
+        public MinValueAttribute(int min)
         {
-            Minimum = minimum;
+            Min = min;
         }
 
-        public int Minimum { get; }
+        public int Min { get; }
 
         public override bool IsValid(object value)
         {
             var other = Convert.ToInt32(value);
 
-            return other >= Minimum;
+            return other >= Min;
         }
     }
 }
