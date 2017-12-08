@@ -13,7 +13,7 @@ using Ninject;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Owin;
-using toofz.NecroDancer.Leaderboards;
+using toofz.Data;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
 using Xunit;
 using Xunit.Abstractions;

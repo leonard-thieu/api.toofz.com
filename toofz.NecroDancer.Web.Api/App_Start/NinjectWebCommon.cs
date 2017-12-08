@@ -7,7 +7,7 @@ using Ninject;
 using Ninject.Activation;
 using Ninject.Web.Common;
 using Ninject.Web.Common.WebHost;
-using toofz.NecroDancer.Leaderboards;
+using toofz.Data;
 using toofz.NecroDancer.Web.Api;
 using toofz.NecroDancer.Web.Api.Infrastructure;
 using WebActivatorEx;

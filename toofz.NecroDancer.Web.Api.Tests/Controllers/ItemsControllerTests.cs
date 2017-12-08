@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Web.Http.Results;
 using Moq;
+using toofz.Data;
 using toofz.NecroDancer.Web.Api.Controllers;
 using toofz.NecroDancer.Web.Api.Models;
 using toofz.NecroDancer.Web.Api.Tests.Properties;

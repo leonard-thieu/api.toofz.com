@@ -2,7 +2,7 @@
 using System.Linq;
 using Moq;
 using Newtonsoft.Json;
-using toofz.NecroDancer.Leaderboards;
+using toofz.Data;
 using toofz.NecroDancer.Web.Api.Tests.Properties;
 using Xunit;
 
