@@ -4,7 +4,7 @@ using System.Web.Http.ValueProviders;
 namespace toofz.NecroDancer.Web.Api
 {
     /// <summary>
-    /// Provides extension methods for <see cref="ValueProviderResult"/>.
+    /// Contains extension methods for <see cref="ValueProviderResult"/>.
     /// </summary>
     internal static class ValueProviderResultExtensions
     {

@@ -195,8 +195,7 @@ namespace toofz.NecroDancer.Web.Api.Controllers
         /// </param>
         protected override void Dispose(bool disposing)
         {
-            if (disposed)
-                return;
+            if (disposed) { return; }
 
             if (disposing)
             {
