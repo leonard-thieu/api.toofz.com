@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Linq.Dynamic;
 using toofz.NecroDancer.Web.Api.Models;
@@ -48,15 +47,14 @@ namespace toofz.NecroDancer.Web.Api
             this IQueryable<T> source,
             IPagination pagination)
         {
+            // TODO: Verify if this is still true for EF Core.
             // Using properties of a non-mapped object prevents a query from being cached.
             var offset = pagination.Offset;
             var limit = pagination.Limit;
 
-            // Query plans are not parameterized when using the constant overloads for Skip/Take.
-            // Using lambda overloads for Skip/Take allows reusing the same query plan for different values.
             return source
-                .Skip(() => offset)
-                .Take(() => limit);
+                .Skip(offset)
+                .Take(limit);
         }
     }
 }

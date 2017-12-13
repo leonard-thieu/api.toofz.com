@@ -1,11 +1,11 @@
-﻿using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using toofz.Data;
 using toofz.NecroDancer.Data;
 using toofz.NecroDancer.Web.Api.Infrastructure;

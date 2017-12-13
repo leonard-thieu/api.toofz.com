@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Configuration;
+using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -22,7 +24,7 @@ namespace toofz.NecroDancer.Web.Api
         /// </summary>
         protected void Application_Start()
         {
-            TelemetryConfiguration.Active.InstrumentationKey = Helper.GetInstrumentationKey();
+            TelemetryConfiguration.Active.InstrumentationKey = GetInstrumentationKey();
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
@@ -30,6 +32,15 @@ namespace toofz.NecroDancer.Web.Api
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             MvcHandler.DisableMvcResponseHeader = true;
+        }
+
+        private static string GetInstrumentationKey()
+        {
+            const string InstrumentationKeyName = nameof(TelemetryConfiguration.InstrumentationKey);
+
+            return Environment.GetEnvironmentVariable($"toofzApi{InstrumentationKeyName}", EnvironmentVariableTarget.Machine) ??
+                   ConfigurationManager.AppSettings[InstrumentationKeyName] ??
+                   "";
         }
     }
 }

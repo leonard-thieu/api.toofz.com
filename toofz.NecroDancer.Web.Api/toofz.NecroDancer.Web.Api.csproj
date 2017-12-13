@@ -84,7 +84,7 @@
       <Version>2.3.1</Version>
     </PackageReference>
     <PackageReference Include="toofz.Data">
-      <Version>9.0.0</Version>
+      <Version>10.0.3</Version>
     </PackageReference>
     <PackageReference Include="toofz.RemoveServerHeader">
       <Version>1.0.1</Version>
@@ -105,8 +105,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Config\AppSettings.config" />
-    <Content Include="Config\ConnectionStrings.config" />
+    <Content Include="Config\AppSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Config\ConnectionStrings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Global.asax" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -247,7 +251,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fingerprint.cs" />
-    <Compile Include="Helper.cs" />
     <Compile Include="IQueryableExtensions.cs" />
     <Compile Include="ValueProviderResultExtensions.cs" />
   </ItemGroup>

@@ -17,11 +17,10 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
     {
         public PlayersControllerTests(MockDatabaseFixture fixture)
         {
-            mockDb = fixture.CreateMockLeaderboardsContext();
-            controller = new PlayersController(mockDb.Object);
+            var db = fixture.CreateNecroDancerContext();
+            controller = new PlayersController(db);
         }
 
-        private readonly Mock<ILeaderboardsContext> mockDb;
         private readonly PlayersController controller;
 
         public class Constructor
@@ -30,7 +29,7 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             public void ReturnsPlayersController()
             {
                 // Arrange
-                var db = new LeaderboardsContext();
+                var db = new NecroDancerContext();
 
                 // Act
                 var controller = new PlayersController(db);
@@ -393,9 +392,15 @@ namespace toofz.NecroDancer.Web.Api.Tests.Controllers
             }
         }
 
-        public class DisposeMethod : PlayersControllerTests
+        public class DisposeMethod
         {
-            public DisposeMethod(MockDatabaseFixture fixture) : base(fixture) { }
+            public DisposeMethod()
+            {
+                controller = new PlayersController(mockDb.Object);
+            }
+
+            private readonly Mock<ILeaderboardsContext> mockDb = new Mock<ILeaderboardsContext>();
+            private readonly PlayersController controller;
 
             [DisplayFact]
             public void DisposesDb()
