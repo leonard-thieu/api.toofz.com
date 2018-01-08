@@ -1,5 +1,7 @@
-﻿using System.Web.Http.Metadata;
+﻿using System.Collections.Generic;
+using System.Web.Http.Metadata;
 using System.Web.Http.Metadata.Providers;
+using Newtonsoft.Json;
 
 namespace toofz.NecroDancer.Web.Api.Tests
 {
@@ -10,6 +12,12 @@ namespace toofz.NecroDancer.Web.Api.Tests
             var provider = new EmptyModelMetadataProvider();
 
             return provider.GetMetadataForType(null, typeof(T));
+        }
+
+        public static IEnumerable<T> ReadJsonArray<T>(string json)
+            where T : class
+        {
+            return JsonConvert.DeserializeObject<IEnumerable<T>>(json);
         }
     }
 }

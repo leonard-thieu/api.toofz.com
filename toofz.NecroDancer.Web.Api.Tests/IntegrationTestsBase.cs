@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Owin.Testing;
 using Newtonsoft.Json;
 using Ninject;
@@ -14,7 +14,6 @@ using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Owin;
 using toofz.Data;
-using toofz.NecroDancer.Web.Api.Tests.Properties;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
@@ -32,13 +31,16 @@ namespace toofz.NecroDancer.Web.Api.Tests
 
             kernel.Unbind<HttpConfiguration>();
 
-            kernel.Rebind<string>()
-                  .ToMethod(c => StorageHelper.GetDatabaseConnectionString(nameof(NecroDancerContext)))
-                  .WhenInjectedInto<NecroDancerContext>();
+            kernel.Rebind<DbContextOptions<NecroDancerContext>>()
+                  .ToMethod(c =>
+                  {
+                      var connectionString = StorageHelper.GetDatabaseConnectionString(Constants.NecroDancerContextName);
 
-            kernel.Rebind<string>()
-                  .ToMethod(c => StorageHelper.GetDatabaseConnectionString(nameof(LeaderboardsContext)))
-                  .WhenInjectedInto<LeaderboardsContext>();
+                      return new DbContextOptionsBuilder<NecroDancerContext>()
+                        .UseSqlServer(connectionString)
+                        .Options;
+                  })
+                  .WhenInjectedInto<NecroDancerContext>();
 
             server = TestServer.Create(app =>
             {
@@ -54,6 +56,8 @@ namespace toofz.NecroDancer.Web.Api.Tests
         private readonly IKernel kernel = NinjectWebCommon.CreateKernel();
         protected readonly TestServer server;
 
+        #region IDisposable Implementation
+
         public void Dispose()
         {
             Dispose(true);
@@ -63,10 +67,12 @@ namespace toofz.NecroDancer.Web.Api.Tests
         {
             if (disposing)
             {
-                server?.Dispose();
+                server.Dispose();
                 kernel.Dispose();
             }
         }
+
+        #endregion
 
         public async Task RespondsWithAsync(
             HttpResponseMessage response,
@@ -135,68 +141,34 @@ namespace toofz.NecroDancer.Web.Api.Tests
 
     public class IntegrationTestsFixture : IDisposable
     {
-        public IntegrationTestsFixture()
+        private static NecroDancerContext InitializeContext()
         {
-            NecroDancerDb = new NecroDancerContext(StorageHelper.GetDatabaseConnectionString(nameof(NecroDancerContext)));
-            NecroDancerDb.Database.Delete(); // Make sure it really dropped - needed for dirty database
-            Database.SetInitializer(new TestNecroDancerContextDatabaseInitializer());
-            NecroDancerDb.Database.Initialize(force: true);
+            var connectionString = StorageHelper.GetDatabaseConnectionString(Constants.NecroDancerContextName);
+            var options = new DbContextOptionsBuilder<NecroDancerContext>()
+                .UseSqlServer(connectionString)
+                .Options;
 
-            LeaderboardsDb = new LeaderboardsContext(StorageHelper.GetDatabaseConnectionString(nameof(LeaderboardsContext)));
-            LeaderboardsDb.Database.Delete(); // Make sure it really dropped - needed for dirty database
-            Database.SetInitializer(new TestLeaderboardsContextDatabaseInitializer());
-            LeaderboardsDb.Database.Initialize(force: true);
+            using (var context = new NecroDancerContext(options))
+            {
+                context.Database.EnsureDeleted();
+                context.Database.Migrate();
+                context.EnsureSeedData();
+            }
+
+            return new NecroDancerContext(options);
         }
 
-        public NecroDancerContext NecroDancerDb { get; }
-        public LeaderboardsContext LeaderboardsDb { get; }
+        public IntegrationTestsFixture()
+        {
+            Context = InitializeContext();
+        }
+
+        public NecroDancerContext Context { get; }
 
         public void Dispose()
         {
-            LeaderboardsDb?.Database.Delete();
-            NecroDancerDb?.Database.Delete();
-        }
-
-        private sealed class TestNecroDancerContextDatabaseInitializer : CreateDatabaseIfNotExists<NecroDancerContext>
-        {
-            protected override void Seed(NecroDancerContext context)
-            {
-                var items = JsonConvert.DeserializeObject<IEnumerable<Data.Item>>(NecroDancerResources.Items);
-                context.Items.AddRange(items);
-                var enemies = JsonConvert.DeserializeObject<IEnumerable<Data.Enemy>>(NecroDancerResources.Enemies);
-                context.Enemies.AddRange(enemies);
-
-                context.SaveChanges();
-            }
-        }
-
-        private sealed class TestLeaderboardsContextDatabaseInitializer : CreateDatabaseIfNotExists<LeaderboardsContext>
-        {
-            protected override void Seed(LeaderboardsContext context)
-            {
-                var products = JsonConvert.DeserializeObject<IEnumerable<Product>>(LeaderboardsResources.Products);
-                context.Products.AddRange(products);
-                var modes = JsonConvert.DeserializeObject<IEnumerable<Mode>>(LeaderboardsResources.Modes);
-                context.Modes.AddRange(modes);
-                var runs = JsonConvert.DeserializeObject<IEnumerable<Run>>(LeaderboardsResources.Runs);
-                context.Runs.AddRange(runs);
-                var characters = JsonConvert.DeserializeObject<IEnumerable<Character>>(LeaderboardsResources.Characters);
-                context.Characters.AddRange(characters);
-                var leaderboards = JsonConvert.DeserializeObject<IEnumerable<Leaderboard>>(LeaderboardsResources.Leaderboards);
-                context.Leaderboards.AddRange(leaderboards);
-                var entries = JsonConvert.DeserializeObject<IEnumerable<Entry>>(LeaderboardsResources.Entries);
-                context.Entries.AddRange(entries);
-                var dailyLeaderboards = JsonConvert.DeserializeObject<IEnumerable<DailyLeaderboard>>(LeaderboardsResources.DailyLeaderboards);
-                context.DailyLeaderboards.AddRange(dailyLeaderboards);
-                var dailyEntries = JsonConvert.DeserializeObject<IEnumerable<DailyEntry>>(LeaderboardsResources.DailyEntries);
-                context.DailyEntries.AddRange(dailyEntries);
-                var players = JsonConvert.DeserializeObject<IEnumerable<Player>>(LeaderboardsResources.Players);
-                context.Players.AddRange(players);
-                var replays = JsonConvert.DeserializeObject<IEnumerable<Replay>>(LeaderboardsResources.Replays);
-                context.Replays.AddRange(replays);
-
-                context.SaveChanges();
-            }
+            Context.Database.EnsureDeleted();
+            Context.Dispose();
         }
     }
 

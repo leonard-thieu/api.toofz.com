@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Web.Http.ExceptionHandling;
 using Microsoft.ApplicationInsights;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Activation;
@@ -73,17 +74,13 @@ namespace toofz.NecroDancer.Web.Api
             kernel.Bind<IExceptionLogger>()
                   .To<AiExceptionLogger>();
 
-            kernel.Bind<string>()
-                  .ToMethod(GetNecroDancerContextConnectionString)
+            kernel.Bind<DbContextOptions<NecroDancerContext>>()
+                  .ToMethod(GetNecroDancerContextOptions)
                   .WhenInjectedInto<NecroDancerContext>();
             kernel.Bind<INecroDancerContext>()
                   .To<NecroDancerContext>();
-
-            kernel.Bind<string>()
-                  .ToMethod(GetLeaderboardsContextConnectionString)
-                  .WhenInjectedInto<LeaderboardsContext>();
             kernel.Bind<ILeaderboardsContext>()
-                  .To<LeaderboardsContext>();
+                  .To<NecroDancerContext>();
 
             kernel.Bind<ProductsBinder>()
                   .ToMethod(GetProductsBinder);
@@ -95,14 +92,13 @@ namespace toofz.NecroDancer.Web.Api
                   .ToMethod(GetCharactersBinder);
         }
 
-        private static string GetNecroDancerContextConnectionString(IContext c)
+        private static DbContextOptions<NecroDancerContext> GetNecroDancerContextOptions(IContext c)
         {
-            return Helper.GetDatabaseConnectionString(nameof(NecroDancerContext));
-        }
+            var connectionString = StorageHelper.GetDatabaseConnectionString(nameof(NecroDancerContext));
 
-        private static string GetLeaderboardsContextConnectionString(IContext c)
-        {
-            return Helper.GetDatabaseConnectionString(nameof(LeaderboardsContext));
+            return new DbContextOptionsBuilder<NecroDancerContext>()
+              .UseSqlServer(connectionString)
+              .Options;
         }
 
         private static ProductsBinder GetProductsBinder(IContext c)
