@@ -32,7 +32,7 @@ build:
   
 test_script:
   - ps: |
-      $projectPath = Resolve-Path .\toofz.NecroDancer.Web.Api.Tests\toofz.NecroDancer.Web.Api.Tests.csproj
+      $projectPath = Resolve-Path .\test\toofz.NecroDancer.Web.Api.Tests\toofz.NecroDancer.Web.Api.Tests.csproj
       msbuild $projectPath /nologo /verbosity:minimal /target:Test
 
 deploy:

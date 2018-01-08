@@ -71,7 +71,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\toofz.NecroDancer.Web.Api\toofz.NecroDancer.Web.Api.csproj">
+    <ProjectReference Include="..\..\src\toofz.NecroDancer.Web.Api\toofz.NecroDancer.Web.Api.csproj">
       <Project>{e12701ad-3e9f-4663-8c69-48584ba48b1f}</Project>
       <Name>toofz.NecroDancer.Web.Api</Name>
     </ProjectReference>
