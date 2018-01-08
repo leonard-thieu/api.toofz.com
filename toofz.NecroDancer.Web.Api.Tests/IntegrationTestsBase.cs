@@ -90,10 +90,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
                     httpError = httpError.InnerException;
                 }
             }
-            catch (JsonSerializationException)
-            {
-                output.WriteLine(content);
-            }
+            catch (JsonSerializationException) { }
 
             var messages = new List<object>();
 
