@@ -1,182 +1,59 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{09512305-6F9C-4BCA-B851-C2652B064978}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>toofz.NecroDancer.Web.Api.Tests</RootNamespace>
-    <AssemblyName>toofz.NecroDancer.Web.Api.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>net461</TargetFramework>
     <LangVersion>latest</LangVersion>
+    <Configurations>Debug;Release;Production</Configurations>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Production|AnyCPU'">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Production\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.0.1" />
+    <PackageReference Include="Microsoft.Owin.Testing" Version="3.1.0" />
+    <PackageReference Include="Moq" Version="4.7.145" />
+    <PackageReference Include="Ninject.Web.WebApi.OwinHost" Version="3.3.0" />
+    <PackageReference Include="toofz.Build" Version="2.3.1" />
+    <PackageReference Include="toofz.Xunit" Version="1.0.8" />
+    <PackageReference Include="xunit.assert" Version="2.3.1" />
+    <PackageReference Include="xunit.core" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory">
-      <Version>2.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Owin.Testing">
-      <Version>3.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="Moq">
-      <Version>4.7.145</Version>
-    </PackageReference>
-    <PackageReference Include="Ninject.Web.WebApi.OwinHost">
-      <Version>3.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="toofz.Build">
-      <Version>2.3.1</Version>
-    </PackageReference>
-    <PackageReference Include="toofz.Xunit">
-      <Version>1.0.8</Version>
-    </PackageReference>
-    <PackageReference Include="xunit.assert">
-      <Version>2.3.1</Version>
-    </PackageReference>
-    <PackageReference Include="xunit.core">
-      <Version>2.3.1</Version>
-    </PackageReference>
-    <PackageReference Include="xunit.runner.visualstudio">
-      <Version>2.3.1</Version>
-    </PackageReference>
+    <ProjectReference Include="..\..\src\toofz.NecroDancer.Web.Api\toofz.NecroDancer.Web.Api.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\..\src\toofz.NecroDancer.Web.Api\toofz.NecroDancer.Web.Api.csproj">
-      <Project>{e12701ad-3e9f-4663-8c69-48584ba48b1f}</Project>
-      <Name>toofz.NecroDancer.Web.Api</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\LeaderboardsResources.resx">
+    <EmbeddedResource Update="Properties\LeaderboardsResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LeaderboardsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\LeaderboardsResources.Designer.cs">
+    <Compile Update="Properties\LeaderboardsResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LeaderboardsResources.resx</DependentUpon>
     </Compile>
-    <None Include="LeaderboardsResources\Characters.json" />
-    <None Include="LeaderboardsResources\DailyEntries.json" />
-    <None Include="LeaderboardsResources\DailyLeaderboards.json" />
-    <None Include="LeaderboardsResources\Entries.json" />
-    <None Include="LeaderboardsResources\Leaderboards.json" />
-    <None Include="LeaderboardsResources\Modes.json" />
-    <None Include="LeaderboardsResources\Players.json" />
-    <None Include="LeaderboardsResources\Products.json" />
-    <None Include="LeaderboardsResources\Replays.json" />
-    <None Include="LeaderboardsResources\Runs.json" />
   </ItemGroup>
+
   <ItemGroup>
-    <EmbeddedResource Include="Properties\NecroDancerResources.resx">
+    <EmbeddedResource Update="Properties\NecroDancerResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>NecroDancerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\NecroDancerResources.Designer.cs">
+    <Compile Update="Properties\NecroDancerResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NecroDancerResources.resx</DependentUpon>
     </Compile>
-    <None Include="NecroDancerResources\Enemies.json" />
-    <None Include="NecroDancerResources\Items.json" />
   </ItemGroup>
+
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Update="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Resources\GetEnemies.json" />
-    <None Include="Resources\GetEnemiesByAttribute.json" />
-    <None Include="Resources\GetItems.json" />
-    <None Include="Resources\GetItemsByCategory.json" />
-    <None Include="Resources\GetItemsBySubcategory.json" />
-    <None Include="Resources\GetLeaderboards.json" />
-    <None Include="Resources\GetPlayer.json" />
-    <None Include="Resources\GetPlayerDailyEntries.json" />
-    <None Include="Resources\GetPlayerDailyEntriesFilteredByLeaderboardIds.json" />
-    <None Include="Resources\GetPlayerDailyEntry.json" />
-    <None Include="Resources\GetPlayerEntries.json" />
-    <None Include="Resources\GetPlayerEntriesFilteredByLeaderboardIds.json" />
-    <None Include="Resources\GetPlayerEntry.json" />
-    <None Include="Resources\GetPlayers.json" />
-    <None Include="Resources\GetReplays.json" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Controllers\EnemiesControllerTests.cs" />
-    <Compile Include="Controllers\HomeControllerTests.cs" />
-    <Compile Include="Controllers\ItemsControllerTests.cs" />
-    <Compile Include="Controllers\LeaderboardsControllerTests.cs" />
-    <Compile Include="Controllers\PlayersControllerTests.cs" />
-    <Compile Include="Controllers\ReplaysControllerTests.cs" />
-    <Compile Include="Infrastructure\BrowserJsonFormatterTests.cs" />
-    <Compile Include="Infrastructure\CharactersBinderTests.cs" />
-    <Compile Include="Infrastructure\CommaSeparatedValuesBinderTests.cs" />
-    <Compile Include="Infrastructure\EnemyAttributeBinderTests.cs" />
-    <Compile Include="Infrastructure\ItemCategoryBinderTests.cs" />
-    <Compile Include="Infrastructure\ItemSubcategoryFilterBinderTests.cs" />
-    <Compile Include="Infrastructure\LeaderboardIdParamsBinderTests.cs" />
-    <Compile Include="Infrastructure\MaxValueAttributeTests.cs" />
-    <Compile Include="Infrastructure\MinValueAttributeTests.cs" />
-    <Compile Include="Infrastructure\ModesBinderTests.cs" />
-    <Compile Include="Infrastructure\PaginationBinderTests.cs" />
-    <Compile Include="Infrastructure\PlayersSortParamsBinderTests.cs" />
-    <Compile Include="Infrastructure\ProductsBinderTests.cs" />
-    <Compile Include="Infrastructure\RunsBinderTests.cs" />
-    <Compile Include="Infrastructure\ValidateModelAttributeTests.cs" />
-    <Compile Include="Models\CommaSeparatedValuesTests.cs" />
-    <Compile Include="Models\LeaderboardCategoryBaseTests.cs" />
-    <Compile Include="Models\LeaderboardIdParamsTests.cs" />
-    <Compile Include="Models\PlayersSortParamsTests.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="ContextUtil.cs" />
-    <Compile Include="NecroDancerContextExtensions.cs" />
-    <Compile Include="IntegrationTestsBase.cs" />
-    <Compile Include="IQueryableExtensionsTests.cs" />
-    <Compile Include="IReturnsExtensions.cs" />
-    <Compile Include="MockDatabaseFixture.cs" />
-    <Compile Include="Util.cs" />
-    <Compile Include="ValueProviderResultExtensionsTests.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
