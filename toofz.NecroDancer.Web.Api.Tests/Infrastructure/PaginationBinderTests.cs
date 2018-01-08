@@ -85,38 +85,6 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
                 Assert.True(canBind);
             }
 
-            [DisplayFact(Skip = "Determine how to properly set up for testing validation.")]
-            public void OffsetValueIsLessThanMin_AddsModelErrorAndReturnsTrue()
-            {
-                // Arrange
-                mockValueProvider.Setup(v => v.GetValue("offset")).ReturnsValueProviderResult(int.MinValue);
-
-                // Act
-                var canBind = binder.BindModel(actionContext, bindingContext);
-
-                // Assert
-                var hasErrors = bindingContext.ModelState.TryGetValue("offset", out var modelState);
-                Assert.True(hasErrors);
-                Assert.Equal(1, modelState.Errors.Count);
-                Assert.True(canBind);
-            }
-
-            [DisplayFact(Skip = "Determine how to properly set up for testing validation.")]
-            public void OffsetValueIsMoreThanMax_AddsModelErrorAndReturnsTrue()
-            {
-                // Arrange
-                mockValueProvider.Setup(v => v.GetValue("offset")).ReturnsValueProviderResult(int.MaxValue);
-
-                // Act
-                var canBind = binder.BindModel(actionContext, bindingContext);
-
-                // Assert
-                var hasErrors = bindingContext.ModelState.TryGetValue("offset", out var modelState);
-                Assert.True(hasErrors);
-                Assert.Equal(1, modelState.Errors.Count);
-                Assert.True(canBind);
-            }
-
             [DisplayFact]
             public void LimitValueIsNull_SetsModelWithDefaultLimitValueAndReturnsTrue()
             {
@@ -154,38 +122,6 @@ namespace toofz.NecroDancer.Web.Api.Tests.Infrastructure
             {
                 // Arrange
                 mockValueProvider.Setup(v => v.GetValue("limit")).ReturnsValueProviderResult("ten");
-
-                // Act
-                var canBind = binder.BindModel(actionContext, bindingContext);
-
-                // Assert
-                var hasErrors = bindingContext.ModelState.TryGetValue("limit", out var modelState);
-                Assert.True(hasErrors);
-                Assert.Equal(1, modelState.Errors.Count);
-                Assert.True(canBind);
-            }
-
-            [DisplayFact(Skip = "Determine how to properly set up for testing validation.")]
-            public void LimitValueIsLessThanMin_AddsModelErrorAndReturnsTrue()
-            {
-                // Arrange
-                mockValueProvider.Setup(v => v.GetValue("limit")).ReturnsValueProviderResult(int.MinValue);
-
-                // Act
-                var canBind = binder.BindModel(actionContext, bindingContext);
-
-                // Assert
-                var hasErrors = bindingContext.ModelState.TryGetValue("limit", out var modelState);
-                Assert.True(hasErrors);
-                Assert.Equal(1, modelState.Errors.Count);
-                Assert.True(canBind);
-            }
-
-            [DisplayFact(Skip = "Determine how to properly set up for testing validation.")]
-            public void LimitValueIsMoreThanMax_AddsModelErrorAndReturnsTrue()
-            {
-                // Arrange
-                mockValueProvider.Setup(v => v.GetValue("limit")).ReturnsValueProviderResult(int.MaxValue);
 
                 // Act
                 var canBind = binder.BindModel(actionContext, bindingContext);
