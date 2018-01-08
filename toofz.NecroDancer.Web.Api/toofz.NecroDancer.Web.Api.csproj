@@ -80,6 +80,9 @@
     <PackageReference Include="System.Linq.Dynamic">
       <Version>1.0.7</Version>
     </PackageReference>
+    <PackageReference Include="toofz.Build">
+      <Version>2.3.1</Version>
+    </PackageReference>
     <PackageReference Include="toofz.Data">
       <Version>9.0.0</Version>
     </PackageReference>
@@ -249,7 +252,7 @@
     <Compile Include="ValueProviderResultExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-  	<Content Include="images\**\*.*" />
+    <Content Include="images\**\*.*" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

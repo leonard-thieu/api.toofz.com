@@ -1,13 +1,17 @@
-version: 3.5.12.{build}
+version: $(VersionPrefix).{build}
 image: Visual Studio 2017
 
-branches:
-  only:
-    - master
+skip_branch_with_pr: true
+skip_commits:
+  files:
+    - LICENSE
+    - README.md
 configuration:
   - Production
 environment:
-  PROJECT: toofz.NecroDancer.Web.Api
+  VersionPrefix: 0.0.0
+  VersionSuffix: dev
+  FileVersion: '%APPVEYOR_BUILD_VERSION%'
 notifications:
   - provider: Slack
     incoming_webhook:
@@ -15,23 +19,21 @@ notifications:
 assembly_info:
   patch: true
   file: AssemblyInfo.cs
-  assembly_version: $(appveyor_build_version)
-
-install:
-  - nuget update -Self
-  - git clone https://github.com/leonard-thieu/toofz-build.git Scripts
+  assembly_version: $(VersionPrefix)
+  assembly_file_version: $(APPVEYOR_BUILD_VERSION)
+  assembly_informational_version: $(VersionPrefix)-$(VersionSuffix)
 
 before_build:
-  - appveyor-retry nuget restore -Verbosity quiet
+  - nuget restore -Verbosity quiet
 build:
-  project: $(PROJECT).sln
+  project: toofz.NecroDancer.Web.Api.sln
   publish_wap: true
-  verbosity: minimal
-
+  verbosity: quiet
+  
 test_script:
-  - ps: .\Scripts\Test-Project.ps1
-after_test:
-  - ps: .\Scripts\Submit-CodeCoverageResults.ps1
+  - ps: |
+      $projectPath = Resolve-Path .\toofz.NecroDancer.Web.Api.Tests\toofz.NecroDancer.Web.Api.Tests.csproj
+      msbuild $projectPath /nologo /verbosity:minimal /target:Test
 
 deploy:
   - provider: Environment
