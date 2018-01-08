@@ -110,6 +110,7 @@ namespace toofz.NecroDancer.Web.Api.Tests
             catch (Exception ex)
             {
                 messages.Add(ex);
+                output.WriteLine(content);
             }
 
             if (messages.Any())
