@@ -22,6 +22,7 @@ Information about other projects that support **toofz** can be found in the [met
 ### Dependencies
 
 * [toofz Leaderboards Service](https://github.com/leonard-thieu/leaderboards-service)
+* [toofz Daily Leaderboards Service](https://github.com/leonard-thieu/daily-leaderboards-service)
 * [toofz Players Service](https://github.com/leonard-thieu/players-service)
 * [toofz Replays Service](https://github.com/leonard-thieu/replays-service)
 * [toofz NecroDancer Core](https://github.com/leonard-thieu/toofz-necrodancer-core)
