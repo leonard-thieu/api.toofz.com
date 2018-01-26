@@ -10,7 +10,7 @@
     <PackageReference Include="Microsoft.Owin.Testing" Version="3.1.0" />
     <PackageReference Include="Moq" Version="4.7.145" />
     <PackageReference Include="Ninject.Web.WebApi.OwinHost" Version="3.3.0" />
-    <PackageReference Include="toofz.Build" Version="2.3.1" />
+    <PackageReference Include="toofz.Build" Version="2.4.1" />
     <PackageReference Include="toofz.Xunit" Version="1.0.8" />
     <PackageReference Include="xunit.assert" Version="2.3.1" />
     <PackageReference Include="xunit.core" Version="2.3.1" />
