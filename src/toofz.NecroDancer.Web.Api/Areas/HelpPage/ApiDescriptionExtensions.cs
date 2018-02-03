@@ -1,10 +1,7 @@
 using System;
-using System.Linq;
 using System.Text;
 using System.Web;
-using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Http.Filters;
 
 namespace toofz.NecroDancer.Web.Api.Areas.HelpPage
 {
@@ -38,15 +35,6 @@ namespace toofz.NecroDancer.Web.Api.Areas.HelpPage
                 friendlyPath.AppendFormat("_{0}", queryKeyString.Replace('.', '-'));
             }
             return friendlyPath.ToString();
-        }
-
-        public static bool AuthorizationRequired(this ApiDescription description)
-        {
-            var actionDescriptor = description.ActionDescriptor;
-            var isAnonymous = actionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any() ||
-                              actionDescriptor.ControllerDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any();
-
-            return !isAnonymous && actionDescriptor.GetFilterPipeline().Where(f => f.Instance is IAuthorizationFilter).Any();
         }
 
         public static string GetSimpleRequestPath(this ApiDescription description)

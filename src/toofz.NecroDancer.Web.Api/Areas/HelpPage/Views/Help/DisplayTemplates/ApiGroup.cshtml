@@ -23,10 +23,6 @@
         {
             <tr>
                 <td class="api-name">
-                    @if (api.AuthorizationRequired())
-                    {
-                        <span class="glyphicon glyphicon-lock" data-toggle="tooltip" title="Authorized users only"></span>
-                    }
                     <a href="@Url.Action("Api", "Help", new { apiId = api.GetFriendlyId() })">@api.HttpMethod.Method @api.GetSimpleRequestPath()</a>
                 </td>
                 <td class="api-documentation">

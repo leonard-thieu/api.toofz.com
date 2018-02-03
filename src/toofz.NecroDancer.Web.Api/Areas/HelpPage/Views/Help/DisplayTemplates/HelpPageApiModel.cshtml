@@ -7,10 +7,6 @@
     ApiDescription description = Model.ApiDescription;
 }
 <h1>
-    @if (description.AuthorizationRequired())
-    {
-        <span class="glyphicon glyphicon-lock" data-toggle="tooltip" title="Authorized users only"></span>
-    }
     @description.HttpMethod.Method @description.GetSimpleRequestPath()
 </h1>
 <div>
