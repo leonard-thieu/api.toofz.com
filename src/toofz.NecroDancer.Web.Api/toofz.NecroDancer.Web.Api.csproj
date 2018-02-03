@@ -250,7 +250,6 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fingerprint.cs" />
     <Compile Include="IQueryableExtensions.cs" />
     <Compile Include="ValueProviderResultExtensions.cs" />
   </ItemGroup>
