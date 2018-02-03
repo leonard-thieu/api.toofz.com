@@ -111,6 +111,7 @@
     <Content Include="Config\ConnectionStrings.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -243,7 +244,6 @@
     <Compile Include="Models\ReplaysPagination.cs" />
     <Compile Include="Models\RunDTO.cs" />
     <Compile Include="Models\Runs.cs" />
-    <Content Include="Views\Shared\_FaviconPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -253,9 +253,6 @@
     <Compile Include="Fingerprint.cs" />
     <Compile Include="IQueryableExtensions.cs" />
     <Compile Include="ValueProviderResultExtensions.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="images\**\*.*" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
