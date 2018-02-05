@@ -33,7 +33,11 @@ build:
 test_script:
   - ps: |
       $projectPath = Resolve-Path .\test\toofz.NecroDancer.Web.Api.Tests\toofz.NecroDancer.Web.Api.Tests.csproj
-      msbuild $projectPath /nologo /verbosity:minimal /target:Test
+      msbuild $projectPath /nologo /verbosity:minimal `
+          /target:Rebuild `
+          /target:Test `
+          /property:Configuration=Coverage `
+          /property:DebugType=full
 
 deploy:
   - provider: Environment
