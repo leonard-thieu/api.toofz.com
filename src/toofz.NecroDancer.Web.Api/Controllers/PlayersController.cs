@@ -200,13 +200,15 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             var query = from e in db.Entries.AsNoTracking()
                         where e.SteamId == steamId
                         where products.Contains(e.Leaderboard.Product.Name)
-                        let l = e.Leaderboard
-                        orderby l.Product.ProductId descending, l.Mode.ModeId, l.Run.RunId, l.Character.Name
                         select e;
             if (lbids.Any()) { query = query.Where(e => lbids.Contains(e.Leaderboard.LeaderboardId)); }
             if (production != null) { query = query.Where(e => e.Leaderboard.IsProduction == production); }
             if (coOp != null) { query = query.Where(e => e.Leaderboard.IsCoOp == coOp); }
             if (customMusic != null) { query = query.Where(e => e.Leaderboard.IsCustomMusic == customMusic); }
+            query = from e in query
+                    let l = e.Leaderboard
+                    orderby l.Product.ProductId descending, l.Mode.ModeId, l.Run.RunId, l.Character.Name
+                    select e;
 
             var total = await query.CountAsync(cancellationToken);
             var entries = await (from e in query

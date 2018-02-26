@@ -75,16 +75,18 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             bool? customMusic = null,
             CancellationToken cancellationToken = default)
         {
-            IQueryable<Leaderboard> query = from l in db.Leaderboards.AsNoTracking()
-                                            where products.Contains(l.Product.Name)
-                                            where modes.Contains(l.Mode.Name)
-                                            where runs.Contains(l.Run.Name)
-                                            where characters.Contains(l.Character.Name)
-                                            orderby l.Product.ProductId descending, l.Character.Name, l.RunId
-                                            select l;
+            var query = from l in db.Leaderboards.AsNoTracking()
+                        where products.Contains(l.Product.Name)
+                        where modes.Contains(l.Mode.Name)
+                        where runs.Contains(l.Run.Name)
+                        where characters.Contains(l.Character.Name)
+                        select l;
             if (production != null) { query = query.Where(l => l.IsProduction == production); }
             if (coOp != null) { query = query.Where(l => l.IsCoOp == coOp); }
             if (customMusic != null) { query = query.Where(l => l.IsCustomMusic == customMusic); }
+            query = from l in query
+                    orderby l.Product.ProductId descending, l.Character.Name, l.RunId
+                    select l;
 
             var total = await query.CountAsync(cancellationToken);
             var leaderboards = await (from l in query
@@ -276,12 +278,14 @@ namespace toofz.NecroDancer.Web.Api.Controllers
             bool? production = null,
             CancellationToken cancellationToken = default)
         {
-            IQueryable<DailyLeaderboard> query = from l in db.DailyLeaderboards.AsNoTracking()
-                                                 where products.Contains(l.Product.Name)
-                                                 orderby l.Date descending, l.ProductId descending, l.IsProduction descending
-                                                 select l;
+            var query = from l in db.DailyLeaderboards.AsNoTracking()
+                        where products.Contains(l.Product.Name)
+                        select l;
             if (date != null) { query = query.Where(l => l.Date == date); }
             if (production != null) { query = query.Where(l => l.IsProduction == production); }
+            query = from l in query
+                    orderby l.Date descending, l.ProductId descending, l.IsProduction descending
+                    select l;
 
             var total = await query.CountAsync(cancellationToken);
             var leaderboards = await (from l in query
