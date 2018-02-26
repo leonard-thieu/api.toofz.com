@@ -9,8 +9,8 @@ skip_commits:
 configuration:
   - Production
 environment:
-  VersionPrefix: 0.0.0
-  VersionSuffix: dev
+  VersionPrefix: 3.5.13
+  VersionSuffix: 
   FileVersion: '%APPVEYOR_BUILD_VERSION%'
 notifications:
   - provider: Slack
@@ -21,7 +21,7 @@ assembly_info:
   file: AssemblyInfo.cs
   assembly_version: $(VersionPrefix)
   assembly_file_version: $(APPVEYOR_BUILD_VERSION)
-  assembly_informational_version: $(VersionPrefix)-$(VersionSuffix)
+  assembly_informational_version: $(VersionPrefix)$(VersionSuffix)
 
 before_build:
   - nuget restore -Verbosity quiet
