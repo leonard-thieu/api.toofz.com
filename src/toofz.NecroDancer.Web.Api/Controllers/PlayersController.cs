@@ -435,6 +435,10 @@ namespace toofz.NecroDancer.Web.Api.Controllers
                         select e;
             if (lbids.Any()) { query = query.Where(e => lbids.Contains(e.LeaderboardId)); }
             if (production != null) { query = query.Where(e => e.Leaderboard.IsProduction == production); }
+            query = from e in query
+                    let l = e.Leaderboard
+                    orderby l.Date descending, l.ProductId descending, l.IsProduction
+                    select e;
 
             var total = await query.CountAsync(cancellationToken);
             var entries = await (from e in query

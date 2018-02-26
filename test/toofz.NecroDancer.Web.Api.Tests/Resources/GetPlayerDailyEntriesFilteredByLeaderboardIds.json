@@ -9,31 +9,6 @@
   "entries": [
     {
       "leaderboard": {
-        "id": 742742,
-        "updated_at": "2017-12-01T02:53:29.457Z",
-        "name": "23/4/2015_PROD",
-        "display_name": "Daily (2015-04-23)",
-        "production": true,
-        "product": "classic",
-        "_product": {
-          "id": 0,
-          "name": "classic",
-          "display_name": "Classic"
-        },
-        "date": "2015-04-23T00:00:00Z",
-        "total": 3
-      },
-      "rank": 39,
-      "score": 918,
-      "end": {
-        "zone": 3,
-        "level": 4
-      },
-      "killed_by": null,
-      "version": null
-    },
-    {
-      "leaderboard": {
         "id": 1705585,
         "updated_at": "2017-12-01T02:43:29.807Z",
         "name": "DLC 17/8/2017_PROD",
@@ -56,6 +31,31 @@
       },
       "killed_by": "FIRE CAULDRON MIMIC",
       "version": 94
+    },
+    {
+      "leaderboard": {
+        "id": 742742,
+        "updated_at": "2017-12-01T02:53:29.457Z",
+        "name": "23/4/2015_PROD",
+        "display_name": "Daily (2015-04-23)",
+        "production": true,
+        "product": "classic",
+        "_product": {
+          "id": 0,
+          "name": "classic",
+          "display_name": "Classic"
+        },
+        "date": "2015-04-23T00:00:00Z",
+        "total": 3
+      },
+      "rank": 39,
+      "score": 918,
+      "end": {
+        "zone": 3,
+        "level": 4
+      },
+      "killed_by": null,
+      "version": null
     }
   ]
 }
